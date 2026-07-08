@@ -1,0 +1,139 @@
+[
+  {
+    "id": "core.character.wu_nanhai",
+    "name": "吴南海",
+    "summary": "重视粮食、农庄、安置和地方生产共同体，倾向先让人活下来。",
+    "recommendedForNewPlayers": true,
+    "tendencies": {
+      "agriculture": 5,
+      "civil": 2,
+      "security": 1,
+      "planning": 3,
+      "council": 2,
+      "trade": 1,
+      "technology": 1,
+      "pragmatism": 4,
+      "coercion": 1,
+      "charisma": 3,
+      "caution": 4,
+      "ambition": 2,
+      "compromise": 3,
+      "discipline": 2
+    },
+    "pressureBias": {
+      "personal_pressure": 1,
+      "faction_alarm": 3,
+      "violence_risk": 0,
+      "legitimacy": 1
+    }
+  },
+  {
+    "id": "core.character.wu_de",
+    "name": "邬德",
+    "summary": "擅长俘虏治理、基层组织和制度化动员，容易形成自己的组织网络。",
+    "tendencies": {
+      "agriculture": 2,
+      "civil": 5,
+      "security": 2,
+      "planning": 2,
+      "council": 2,
+      "trade": 1,
+      "technology": 1,
+      "pragmatism": 4,
+      "coercion": 2,
+      "charisma": 4,
+      "caution": 3,
+      "ambition": 3,
+      "compromise": 3,
+      "discipline": 4
+    },
+    "pressureBias": {
+      "personal_pressure": 1,
+      "faction_alarm": 3,
+      "violence_risk": 1,
+      "legitimacy": 1
+    }
+  },
+  {
+    "id": "core.character.bei_wei",
+    "name": "北炜",
+    "summary": "优先考虑侦察、警戒、治安和外部威胁，解决问题时更相信控制力。",
+    "tendencies": {
+      "agriculture": 1,
+      "civil": 1,
+      "security": 5,
+      "planning": 2,
+      "council": 1,
+      "trade": 1,
+      "technology": 2,
+      "pragmatism": 3,
+      "coercion": 4,
+      "charisma": 1,
+      "caution": 4,
+      "ambition": 3,
+      "compromise": 1,
+      "discipline": 5
+    },
+    "pressureBias": {
+      "personal_pressure": 1,
+      "faction_alarm": 2,
+      "violence_risk": 4,
+      "legitimacy": 1
+    }
+  },
+  {
+    "id": "core.character.ma_qianzhu",
+    "name": "马千瞩",
+    "summary": "倾向用计划、指标和工业优先级组织临高，把临时营地推向长期秩序。",
+    "tendencies": {
+      "agriculture": 2,
+      "civil": 2,
+      "security": 2,
+      "planning": 5,
+      "council": 3,
+      "trade": 2,
+      "technology": 4,
+      "pragmatism": 3,
+      "coercion": 2,
+      "charisma": 2,
+      "caution": 3,
+      "ambition": 4,
+      "compromise": 2,
+      "discipline": 4
+    },
+    "pressureBias": {
+      "personal_pressure": 3,
+      "faction_alarm": 2,
+      "violence_risk": 1,
+      "legitimacy": 1
+    }
+  },
+  {
+    "id": "core.character.wen_desi",
+    "name": "文德嗣",
+    "summary": "关注授权、程序、背锅和元老院平衡，适合在多方撕扯中维持合法性。",
+    "recommendedForNewPlayers": true,
+    "tendencies": {
+      "agriculture": 2,
+      "civil": 3,
+      "security": 2,
+      "planning": 3,
+      "council": 5,
+      "trade": 2,
+      "technology": 2,
+      "pragmatism": 3,
+      "coercion": 2,
+      "charisma": 3,
+      "caution": 4,
+      "ambition": 2,
+      "compromise": 5,
+      "discipline": 3
+    },
+    "pressureBias": {
+      "personal_pressure": 4,
+      "faction_alarm": 2,
+      "violence_risk": 1,
+      "legitimacy": 3
+    }
+  }
+]
