@@ -106,6 +106,8 @@ export class Game {
     this.lastDrawnCardId = null;
     /** 倒台后待放的专属结局卡（先于继任呈现） */
     this.epilogueQueued = null;
+    /** 前任结局对继任者的开局影响（结局反哺继任） */
+    this.pendingInherit = null;
     /** 调试模式：UI 显示隐藏数值与调试工具（不影响引擎逻辑） */
     this.debug = false;
     this.log = [];
@@ -289,6 +291,12 @@ export class Game {
     const result = applyEffects(option.effects, { state: this.state, forces: this.forces });
     const after = this.pillars();
 
+    // 结局反哺继任：前任的结局在继任者开局留下痕迹（软禁的旧部寒心、被杀的军中不安……）
+    if (holder.type === "succession" && this.pendingInherit) {
+      applyEffects(this.pendingInherit, { state: this.state, forces: this.forces });
+      this.pendingInherit = null;
+    }
+
     // 倒台卡特殊规则：只有真正下台才消耗该卡；强行续任后压力仍在，倒台会再次逼近
     const refusedDownfall = holder.type === "downfall" && !option.effects?.stepDown;
     if (!refusedDownfall) this.usedCards.add(holder.id);
@@ -384,6 +392,7 @@ export class Game {
     let fateLabel = null;
     if (fate) {
       fateLabel = fate.fateLabel || null;
+      this.pendingInherit = fate.inherit || null;
       this.epilogueQueued = {
         id: `EPILOGUE-${ruler.id}-${this.day}`,
         pool: "core",
@@ -646,6 +655,7 @@ export class Game {
       cardSeen: { ...this.cardSeen },
       lastDrawnCardId: this.lastDrawnCardId,
       epilogueQueued: this.epilogueQueued,
+      pendingInherit: this.pendingInherit,
       debug: this.debug,
       gameOverReason: this.gameOverReason,
       state: this.state.snapshot(),
@@ -672,6 +682,7 @@ export class Game {
     this.cardSeen = { ...(data.cardSeen || {}) };
     this.lastDrawnCardId = data.lastDrawnCardId ?? null;
     this.epilogueQueued = data.epilogueQueued ?? null;
+    this.pendingInherit = data.pendingInherit ?? null;
     this.debug = Boolean(data.debug);
     this.gameOverReason = data.gameOverReason ?? null;
     this.state.restore(data.state);

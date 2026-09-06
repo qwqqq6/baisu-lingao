@@ -940,5 +940,81 @@
         "line": "老爷，家书——走了小半年才到，问的还是穿越前那些事。……他看完，一个人在河滩坐到天黑。"
       }
     ]
+  },
+  {
+    "id": "CORE-016",
+    "pool": "core",
+    "series": "politics.council",
+    "type": "benefit",
+    "title": "大会的背书",
+    "source": {
+      "kind": "force",
+      "id": "council",
+      "name": "扩大会议"
+    },
+    "tags": [
+      "会议",
+      "政治"
+    ],
+    "requires": [
+      {
+        "force": "council",
+        "metric": "influence",
+        "gte": 50
+      },
+      {
+        "force": "council",
+        "metric": "satisfaction",
+        "gte": 55
+      }
+    ],
+    "excludes": [],
+    "weight": 20,
+    "lines": [
+      {
+        "who": "常委委员",
+        "line": "首长，大会刚议完——您提名的几个总办人选，全票通过。决议原文我带来了，落款盖着九个章。"
+      },
+      {
+        "who": "值班秘书",
+        "line": "九个章，一个都不缺。上回可没有这待遇。"
+      }
+    ],
+    "options": {
+      "left": {
+        "id": "shou_beishu",
+        "label": "收下决议，当众谢过各位委员。",
+        "hint": "背书到位，底气也到位",
+        "effects": {
+          "stats": {
+            "council": 4
+          },
+          "personal": {
+            "personal_pressure": -2
+          },
+          "forces": {
+            "council": {
+              "influence": 3,
+              "satisfaction": 3
+            }
+          }
+        }
+      },
+      "right": {
+        "id": "zhi_xie_bu_ling",
+        "label": "谢谢大会。章，一个也不能多盖。",
+        "hint": "缰绳不松",
+        "effects": {
+          "stats": {
+            "council": 1
+          },
+          "forces": {
+            "council": {
+              "satisfaction": -2
+            }
+          }
+        }
+      }
+    }
   }
 ]

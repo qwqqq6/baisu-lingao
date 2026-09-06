@@ -170,7 +170,8 @@ export const fixtureCharacters = [
     "flaw": { "name": "护短", "desc": "d", "everyDays": 6, "personal": { "faction_alarm": 2 } },
     "fates": {
       "default": { "title": "卸任", "fateLabel": "闲居", "option": "阅。", "text": "闲居呈文。" },
-      "impeach": { "title": "软禁", "fateLabel": "软禁于农庄旧宅", "option": "阅。", "text": "软禁呈文。" },
+      "impeach": { "title": "软禁", "fateLabel": "软禁于农庄旧宅", "option": "阅。", "text": "软禁呈文。",
+                   "inherit": { "personal": { "faction_alarm": 3 }, "forces": { "farm": { "satisfaction": -5 } } } },
     },
     "succession": {
       "baseWeight": 8,

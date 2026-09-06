@@ -1263,5 +1263,89 @@
         "line": "俘虏营那晚过后，营里传了好几个版本——夜半点名啦，被拿走的没影啦。我请示：开个全营大会，把话说明白。"
       }
     ]
+  },
+  {
+    "id": "CIV-012",
+    "pool": "civil",
+    "series": "civil.captives",
+    "type": "benefit",
+    "title": "基层的献礼",
+    "source": {
+      "kind": "force",
+      "id": "naturalized",
+      "name": "归化民组织"
+    },
+    "tags": [
+      "组织",
+      "民政"
+    ],
+    "requires": [
+      {
+        "force": "naturalized",
+        "metric": "influence",
+        "gte": 50
+      },
+      {
+        "force": "naturalized",
+        "metric": "satisfaction",
+        "gte": 55
+      }
+    ],
+    "excludes": [],
+    "weight": 20,
+    "lines": [
+      {
+        "who": "里正",
+        "line": "首长，各里凑了一份献礼：结余的工分粮八石、草鞋八十双，还有——各里自筹的巡逻队，往后夜里不用您的人了。"
+      },
+      {
+        "who": "民政干事",
+        "line": "他们自己把治安管起来了。这话听着，是喜也是忧。"
+      }
+    ],
+    "options": {
+      "left": {
+        "id": "shou_xianli",
+        "label": "收下。告诉各里，执委会记着这份情。",
+        "hint": "人心与渗透一起来的",
+        "effects": {
+          "stats": {
+            "people": 3,
+            "livelihood": 1
+          },
+          "personal": {
+            "faction_alarm": 3
+          },
+          "forces": {
+            "naturalized": {
+              "influence": 4,
+              "satisfaction": 3
+            }
+          }
+        }
+      },
+      "right": {
+        "id": "tui_liang_liuxun",
+        "label": "粮收下，巡逻队并入保卫组。",
+        "hint": "好处照给，兵权归公",
+        "effects": {
+          "stats": {
+            "people": 1,
+            "military": 2
+          },
+          "personal": {
+            "faction_alarm": -1
+          },
+          "forces": {
+            "naturalized": {
+              "satisfaction": -3
+            },
+            "guard": {
+              "satisfaction": 2
+            }
+          }
+        }
+      }
+    }
   }
 ]

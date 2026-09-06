@@ -277,6 +277,9 @@ export function registerTests(t) {
     g.choose("left"); g.nextTurn(); // 接受继任
     assert.notEqual(g.rulerId, "none", "继任完成");
     assert.notEqual(g.rulerId, "wunanhai", "继任者不是前任");
+    // 结局反哺继任：前任被软禁——派系警惕减半后 +3，农庄满意度 -5 落在继任开局
+    assert.equal(g.state.get("ruler.pressure_faction"), 36, "65 减半 33 + 结局反哺 3");
+    assert.equal(g.forces.metric("farm", "satisfaction"), 65, "70 - 结局反哺 5");
   });
 
   t("流程：崩局即终局", () => {
