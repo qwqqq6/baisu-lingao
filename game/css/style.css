@@ -85,6 +85,41 @@ h1, h2, h3 { font-weight: 700; letter-spacing: 0.05em; }
 .title-buttons .btn { min-width: 230px; padding: 12px 0; font-size: 16px; letter-spacing: 0.3em; text-indent: 0.3em; transition: transform 0.15s ease, box-shadow 0.15s ease; }
 .title-buttons .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(43, 38, 32, 0.22); }
 
+/* ---------- 头像 / 对话气泡 / 调试面板 ---------- */
+.avatar { position: relative; width: 44px; height: 44px; border-radius: 8px; overflow: hidden; flex: none;
+  background: linear-gradient(160deg, var(--paper-dark), #cbb98d);
+  display: inline-flex; align-items: center; justify-content: center;
+  border: 1px solid var(--line); }
+.avatar-fallback { font-weight: 700; color: var(--seal-dark); font-size: 18px; }
+.avatar img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.char-head { display: flex; gap: 12px; align-items: center; margin-bottom: 8px; }
+
+.dialog { display: flex; flex-direction: column; gap: 10px; margin: 10px 0 14px; }
+.dialog-line { display: flex; gap: 10px; align-items: flex-start; }
+.dialog-who { flex: none; min-width: 58px; text-align: right; font-size: 12.5px; color: var(--gold); padding-top: 8px; }
+.dialog-bubble { flex: 1; background: #fff9; border: 1px solid var(--line); border-radius: 0 10px 10px 10px; padding: 8px 12px; font-size: 14.5px; line-height: 1.9; }
+
+.debug-panel { background: #2b2620; color: #e8dfc8; border-radius: 8px; padding: 10px 14px; font-size: 12.5px; margin-bottom: 10px; }
+.debug-panel h4 { margin: 0 0 6px; font-size: 13px; color: #e8b64c; letter-spacing: 0.2em; }
+.debug-bar { display: flex; justify-content: space-between; padding: 2px 0; border-bottom: 1px dashed #4a4234; }
+.debug-forces { margin-top: 6px; line-height: 1.8; color: #cfc4a6; }
+.debug-actions { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 8px; }
+.debug-actions .btn { font-size: 12px; padding: 3px 10px; }
+
+.btn-file { display: inline-flex; align-items: center; cursor: pointer; }
+
+@media (prefers-reduced-motion: reduce) {
+  .flag, .flag-slice, .ember, .title-inner, .card { animation: none !important; }
+  .toast, .option { transition: none !important; }
+}
+
+@media (max-width: 560px) {
+  #app { padding: 10px; }
+  .game-title { font-size: 40px; }
+  .option { padding: 14px; }
+  .toolbar .btn { padding: 10px 14px; }
+}
+
 /* ---------- 开局 ---------- */
 .start { padding: 24px 8px; }
 .start-head h1 { font-size: 34px; margin: 8px 0; text-align: center; color: var(--seal-dark); }

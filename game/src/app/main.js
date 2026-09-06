@@ -3,9 +3,9 @@
  */
 
 import { loadOfficialContent } from "../engine/content.js";
-import { hasSave } from "../engine/save.js";
+import { hasSave, saveGame } from "../engine/save.js";
 import { Game } from "./game.js";
-import { ui } from "./ui.js";
+import { isDebugOn, setDebugOn, ui } from "./ui.js";
 
 let content;
 let game;
@@ -16,9 +16,61 @@ function handlers() {
     onAbility: () => useAbility(),
     onSave: () => doSave(),
     onLoad: () => doLoad(),
+    onExportSave: () => exportSave(),
+    onImportFile: (file) => importSaveFile(file),
+    onDebugToggle: () => toggleDebug(),
+    onDebugAction: (kind) => debugAction(kind),
     onHelp: () => ui.showHelp(),
     onRestart: () => restart(),
   };
+}
+
+function exportSave() {
+  try {
+    const data = JSON.stringify(game.serialize(), null, 2);
+    const blob = new Blob([data], { type: "application/json" });
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = `lingqi-save-第${game.day}天.json`;
+    a.click();
+    URL.revokeObjectURL(a.href);
+    ui.toast("存档已导出");
+  } catch (err) {
+    ui.toast("导出失败：" + (err && err.message || err));
+  }
+}
+
+function importSaveFile(file) {
+  if (!file) return;
+  file.text()
+    .then((text) => {
+      const data = JSON.parse(text);
+      if (!data || data.version !== 1 || !data.state) throw new Error("不是有效的存档文件");
+      saveGame(data);
+      doLoad();
+    })
+    .catch((err) => ui.toast("导入失败：" + (err && err.message || err)));
+}
+
+function toggleDebug() {
+  game.setDebug(!game.debug);
+  setDebugOn(game.debug);
+  ui.toast(game.debug ? "调试模式已开启" : "调试模式已关闭");
+  ui.renderMain(game, handlers());
+}
+
+function debugAction(kind) {
+  if (kind === "skip5") {
+    game.debugSkipDays(5);
+    ui.toast("时间快进 5 天");
+  } else if (kind === "legitimacy") {
+    game.debugBumpLegitimacy();
+    ui.toast("合法性 -20");
+  } else {
+    game.debugBump(kind);
+    ui.toast("压力 +20");
+  }
+  if (game.currentCard) ui.renderMain(game, handlers());
 }
 
 function advanceOrRender() {
@@ -105,7 +157,8 @@ async function boot() {
     return;
   }
 
-  // 标题页：继续 / 开始 / 说明
+  // 标题页：继续 / 开始 / 调试 / 说明
+  if (new URLSearchParams(location.search).has("debug")) setDebugOn(true);
   game = new Game(content);
   window.__game = game; // 调试句柄
   showTitle();
@@ -118,6 +171,10 @@ function showTitle() {
       if (!startFromSave()) showTitle();
     },
     onStart: () => startNew(),
+    onDebugToggle: () => {
+      setDebugOn(!isDebugOn());
+      showTitle();
+    },
     onHelp: () => ui.showHelp(),
   });
 }
@@ -126,8 +183,10 @@ function startNew() {
   game = new Game(content);
   window.__game = game;
   game.resetRuntime();
+  game.setDebug(isDebugOn());
   ui.renderStart(content.characters, (characterId) => {
     game.newGame(characterId);
+    game.setDebug(isDebugOn());
     if (!advanceOrRender()) return;
   });
 }

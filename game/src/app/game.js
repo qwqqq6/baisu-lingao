@@ -106,6 +106,8 @@ export class Game {
     this.lastDrawnCardId = null;
     /** 倒台后待放的专属结局卡（先于继任呈现） */
     this.epilogueQueued = null;
+    /** 调试模式：UI 显示隐藏数值与调试工具（不影响引擎逻辑） */
+    this.debug = false;
     this.log = [];
   }
 
@@ -520,6 +522,31 @@ export class Game {
     return { people: "民望", livelihood: "生计", military: "军务", council: "元老院" };
   }
 
+  setDebug(on) {
+    this.debug = Boolean(on);
+  }
+
+  /** 调试工具：跳过若干天（触发阶段报告/计时器等） */
+  debugSkipDays(n) {
+    this.advanceDays(Math.max(1, n));
+  }
+
+  /** 调试工具：直接抬高某项隐藏压力（legitimacy 为减） */
+  debugBump(kind) {
+    const map = {
+      personal: "ruler.pressure_personal",
+      faction: "ruler.pressure_faction",
+      violence: "ruler.pressure_violence",
+    };
+    const id = map[kind];
+    if (!id) return;
+    this.state.apply({ id, op: "add", value: 20 });
+  }
+
+  debugBumpLegitimacy() {
+    this.state.apply({ id: "ruler.legitimacy", op: "add", value: -20 });
+  }
+
   describeChanges(before, after, effects) {
     // 批牍体反馈：一行四柱增减 + 至多一条隐晦注脚
     const names = this.pillarNames();
@@ -619,6 +646,7 @@ export class Game {
       cardSeen: { ...this.cardSeen },
       lastDrawnCardId: this.lastDrawnCardId,
       epilogueQueued: this.epilogueQueued,
+      debug: this.debug,
       gameOverReason: this.gameOverReason,
       state: this.state.snapshot(),
       forces: this.forces.snapshot(),
@@ -644,6 +672,7 @@ export class Game {
     this.cardSeen = { ...(data.cardSeen || {}) };
     this.lastDrawnCardId = data.lastDrawnCardId ?? null;
     this.epilogueQueued = data.epilogueQueued ?? null;
+    this.debug = Boolean(data.debug);
     this.gameOverReason = data.gameOverReason ?? null;
     this.state.restore(data.state);
     this.forces.restore(data.forces);

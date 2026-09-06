@@ -1,0 +1,65 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "卡牌",
+  "type": "object",
+  "required": ["id", "pool", "series", "type", "title", "source", "tags", "requires", "excludes", "weight", "options"],
+  "anyOf": [
+    { "required": ["text"] },
+    { "required": ["lines"] }
+  ],
+  "properties": {
+    "id": { "type": "string", "pattern": "^[A-Z0-9\\-]+$" },
+    "pool": { "type": "string" },
+    "series": { "type": "string" },
+    "type": { "type": "string", "enum": ["opening", "key", "daily", "crisis", "price", "benefit", "backlash", "omen", "downfall", "legacy", "cleanup", "exclusive", "succession"] },
+    "title": { "type": "string", "minLength": 1 },
+    "source": {
+      "type": "object",
+      "required": ["kind", "name"],
+      "properties": {
+        "kind": { "type": "string" },
+        "id": { "type": "string" },
+        "name": { "type": "string" }
+      }
+    },
+    "tags": { "type": "array", "items": { "type": "string" } },
+    "requires": { "type": "array" },
+    "excludes": { "type": "array" },
+    "weight": { "type": "number" },
+    "text": { "type": "string", "minLength": 1 },
+    "lines": {
+      "type": "array",
+      "description": "对话体（v2 内容规范）：who 为说话者名衔，line 为台词",
+      "items": {
+        "type": "object",
+        "required": ["who", "line"],
+        "properties": {
+          "who": { "type": "string", "minLength": 1 },
+          "line": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "options": {
+      "type": "object",
+      "required": ["left"],
+      "properties": {
+        "left": { "$ref": "#/definitions/option" },
+        "right": { "$ref": "#/definitions/option" }
+      }
+    },
+    "variants": { "type": "array", "items": { "type": "object" } }
+  },
+  "definitions": {
+    "option": {
+      "type": "object",
+      "required": ["id", "label", "effects"],
+      "properties": {
+        "id": { "type": "string", "pattern": "^[a-z0-9_]+$" },
+        "label": { "type": "string", "minLength": 1 },
+        "hint": { "type": "string" },
+        "followups": { "type": "array", "items": { "type": "string" } },
+        "effects": { "type": "object" }
+      }
+    }
+  }
+}

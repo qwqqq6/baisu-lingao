@@ -23,6 +23,13 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 CONTENT = ROOT / "game" / "content" / "official"
 
+# 可选深度校验：安装 jsonschema 后自动启用（pip install jsonschema）
+try:
+    import jsonschema
+    HAS_JSONSCHEMA = True
+except ImportError:
+    HAS_JSONSCHEMA = False
+
 STATE_ID_RE = re.compile(r"^[a-z][a-z0-9_]*(\.[a-z0-9_]+)+$")
 CARD_ID_RE = re.compile(r"^[A-Z0-9\-]+$")
 
@@ -195,8 +202,11 @@ def main():
                 warnings.append(f"卡牌 {cid} 的 pool 与系列 pool 不一致")
             if not card.get("title"):
                 fail(rel, f"卡牌 {cid} 缺少 title")
-            if not card.get("text"):
-                fail(rel, f"卡牌 {cid} 缺少 text")
+            if not card.get("text") and not card.get("lines"):
+                fail(rel, f"卡牌 {cid} 缺少 text（呈文）或 lines（对话）")
+            for i, ln in enumerate(card.get("lines") or []):
+                if not isinstance(ln, dict) or not ln.get("who") or not ln.get("line"):
+                    fail(rel, f"卡牌 {cid} 的 lines[{i}] 必须含 who 与 line")
             options = card.get("options") or {}
             if "left" not in options or "right" not in options:
                 fail(rel, f"卡牌 {cid} 必须包含左右两个选项")
@@ -268,6 +278,22 @@ def main():
 
     print("=" * 60)
     print(f"状态定义：{len(states)}  势力：{len(forces)}  系列：{len(series)}  人物：{len(characters)}  卡牌：{len(cards)}")
+    print(f"JSON Schema 深度校验：{'已启用' if HAS_JSONSCHEMA else '跳过（pip install jsonschema 后启用）'}")
+    if HAS_JSONSCHEMA:
+        schema_dir = CONTENT.parent.parent / "schemas"
+        try:
+            card_schema = json.loads((schema_dir / "card.schema.json").read_text(encoding="utf-8"))
+            state_schema = json.loads((schema_dir / "state.schema.json").read_text(encoding="utf-8"))
+            v_card = jsonschema.Draft7Validator(card_schema)
+            v_state = jsonschema.Draft7Validator(state_schema)
+            for st in states:
+                for err in sorted(v_state.iter_errors(st), key=lambda e: e.path):
+                    errors.append(f"states: 状态 {st.get('id')} schema：{err.message}")
+            for c in cards:
+                for err in sorted(v_card.iter_errors(c), key=lambda e: e.path):
+                    errors.append(f"cards: 卡牌 {c.get('id')} schema：{err.message}")
+        except Exception as exc:  # noqa: BLE001
+            warnings.append(f"schema 校验器异常，已跳过：{exc}")
     print("=" * 60)
     for warning in warnings:
         print(f"[警告] {warning}")

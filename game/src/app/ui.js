@@ -61,6 +61,31 @@ function h(tag, attrs = {}, ...children) {
   return el;
 }
 
+const DEBUG_KEY = "lingqi-debug";
+
+export function isDebugOn() {
+  try { return localStorage.getItem(DEBUG_KEY) === "1"; } catch { return false; }
+}
+
+export function setDebugOn(on) {
+  try { localStorage.setItem(DEBUG_KEY, on ? "1" : "0"); } catch { /* 忽略 */ }
+}
+
+/** 头像：优先读 assets/portraits/<id>.png，加载失败回落首字剪影 */
+function avatarEl(id, name) {
+  const wrap = h("span", { class: "avatar", title: name },
+    h("span", { class: "avatar-fallback" }, (name || "?").slice(0, 1)));
+  const img = h("img", { src: `./assets/portraits/${id || "unknown"}.png`, alt: name || "" });
+  img.addEventListener("error", () => img.remove());
+  wrap.append(img);
+  return wrap;
+}
+
+function avatarElForName(game, name) {
+  const character = game.characterManager.characters.find((c) => c.name === name);
+  return avatarEl(character ? character.id : null, name);
+}
+
 export const ui = {
   /** 内容加载失败提示 */
   showError(message, hint) {
@@ -110,6 +135,7 @@ export const ui = {
           h("div", { class: "title-buttons" },
             opts.hasSave ? h("button", { class: "btn", onclick: opts.onContinue }, "继续上次") : null,
             h("button", { class: "btn", onclick: opts.onStart }, "开始游戏"),
+            h("button", { class: "btn ghost", onclick: opts.onDebugToggle }, `调试模式：${isDebugOn() ? "开" : "关"}`),
             h("button", { class: "btn ghost", onclick: opts.onHelp }, "玩法说明")
           )
         )
@@ -130,8 +156,11 @@ export const ui = {
         h("div", { class: "char-grid" },
           characters.map((character) =>
             h("button", { class: "char-card", onclick: () => onSelect(character.id) },
-              h("div", { class: "char-name" }, character.name),
-              h("div", { class: "char-route" }, character.route, character.title ? ` · ${character.title}` : ""),
+              h("div", { class: "char-head" },
+                avatarEl(character.id, character.name),
+                h("div", {},
+                  h("div", { class: "char-name" }, character.name),
+                  h("div", { class: "char-route" }, character.route, character.title ? ` · ${character.title}` : ""))),
               h("div", { class: "char-line" }, h("span", { class: "char-key" }, "性格："), character.personality.join("、")),
               h("div", { class: "char-line" }, h("span", { class: "char-key" }, "擅长："), character.strengths),
               h("div", { class: "char-line" }, h("span", { class: "char-key" }, "风险："), character.risks),
@@ -162,6 +191,26 @@ export const ui = {
         );
       })
     );
+
+    const debugPanels = game.debug ? h("div", { class: "debug-panel" },
+      h("h4", {}, "调试面板"),
+      h("div", { class: "debug-bar" }, h("span", {}, "风声"), h("span", {}, String(game.state.get("core.wind")))),
+      h("div", { class: "debug-bar" }, h("span", {}, "个人压力"), h("span", {}, String(game.state.get("ruler.pressure_personal")))),
+      h("div", { class: "debug-bar" }, h("span", {}, "派系警惕"), h("span", {}, String(game.state.get("ruler.pressure_faction")))),
+      h("div", { class: "debug-bar" }, h("span", {}, "暴力风险"), h("span", {}, String(game.state.get("ruler.pressure_violence")))),
+      h("div", { class: "debug-bar" }, h("span", {}, "合法性"), h("span", {}, String(game.state.get("ruler.legitimacy")))),
+      h("div", { class: "debug-forces" },
+        game.forces.definitions.filter((d) => game.forces.isUnlocked(d.id)).map((d) =>
+          h("div", {}, `「${d.name}」 影响力${game.forces.metric(d.id, "influence")} · 满意${game.forces.metric(d.id, "satisfaction")} · 敌意${game.forces.metric(d.id, "hostility")}`))
+      ),
+      h("div", { class: "debug-actions" },
+        h("button", { class: "btn ghost", onclick: () => handlers.onDebugAction("skip5") }, "跳5天"),
+        h("button", { class: "btn ghost", onclick: () => handlers.onDebugAction("personal") }, "压力+20"),
+        h("button", { class: "btn ghost", onclick: () => handlers.onDebugAction("faction") }, "警惕+20"),
+        h("button", { class: "btn ghost", onclick: () => handlers.onDebugAction("violence") }, "暴力+20"),
+        h("button", { class: "btn ghost", onclick: () => handlers.onDebugAction("legitimacy") }, "合法性-20")
+      )
+    ) : null;
 
     const header = h("header", { class: "topbar" },
       h("div", { class: "topbar-title" }, "临高启明 · 执政者"),
@@ -197,6 +246,11 @@ export const ui = {
         : null,
       h("button", { class: "btn ghost", onclick: handlers.onSave }, "存档"),
       h("button", { class: "btn ghost", onclick: handlers.onLoad }, "读档"),
+      h("button", { class: "btn ghost", onclick: handlers.onExportSave }, "导出存档"),
+      h("label", { class: "btn ghost btn-file" }, "导入存档",
+        h("input", { type: "file", accept: "application/json,.json", style: "display:none",
+          onchange: (e) => handlers.onImportFile(e.target.files && e.target.files[0]) })),
+      h("button", { class: "btn ghost", onclick: handlers.onDebugToggle }, `调试：${game.debug ? "开" : "关"}`),
       h("button", { class: "btn ghost", onclick: handlers.onHelp }, "玩法说明"),
       h("button", { class: "btn danger ghost", onclick: handlers.onRestart }, "重新开始")
     );
@@ -205,7 +259,7 @@ export const ui = {
       h("div", { class: "layout" },
         header,
         h("div", { class: "main-grid" },
-          h("div", { class: "left-col" }, pillars, feedback, cardArea),
+          h("div", { class: "left-col" }, pillars, debugPanels, feedback, cardArea),
           h("div", { class: "right-col" }, logArea)
         ),
         toolbar
@@ -242,14 +296,25 @@ export const ui = {
       meta.reasons?.length
         ? h("ul", { class: "card-reasons" }, meta.reasons.map((reason) => h("li", {}, reason)))
         : null,
-      h("p", { class: "card-text" }, card.text),
+      Array.isArray(card.lines) && card.lines.length
+        ? h("div", { class: "dialog" },
+            card.lines.map((l) => h("div", { class: "dialog-line" },
+              avatarElForName(game, l.who),
+              h("div", { class: "dialog-body" },
+                h("div", { class: "dialog-who" }, l.who),
+                h("div", { class: "dialog-bubble" }, l.line)))))
+        : h("p", { class: "card-text" }, card.text),
       card.hintExtra ? h("p", { class: "card-hint-extra" }, card.hintExtra) : null,
       h("div", { class: "option-divider" }, h("span", {}, "批示")),
       h("div", { class: "card-options" },
         ["left", "right"].map((side) => {
           const option = card.options?.[side];
           if (!option) return null;
-          return h("button", { class: "option", onclick: () => handlers.onChoose(side) },
+          return h("button", {
+            class: "option",
+            title: game.debug && option.effects ? JSON.stringify(option.effects) : undefined,
+            onclick: () => handlers.onChoose(side),
+          },
             h("div", { class: "option-label" }, h("span", { class: "pyin" }, "批"), option.label),
             option.hint ? h("div", { class: "option-hint" }, option.hint) : null
           );

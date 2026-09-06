@@ -1,0 +1,20 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "状态定义",
+  "type": "object",
+  "required": ["id", "name", "type", "default", "visibility", "mutability"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^[a-z][a-z0-9_]*(\\.[a-z0-9_]+)+$" },
+    "name": { "type": "string", "minLength": 1 },
+    "type": { "type": "string", "enum": ["boolean", "counter", "level", "enum", "timer", "set"] },
+    "scope": { "type": "string" },
+    "default": {},
+    "visibility": { "type": "string", "enum": ["public", "hinted", "hidden"] },
+    "mutability": { "type": "string", "enum": ["reversible", "immutable", "terminal"] },
+    "min": { "type": "number" },
+    "max": { "type": "number" },
+    "values": { "type": "array", "items": { "type": "string" } },
+    "tags": { "type": "array", "items": { "type": "string" } },
+    "desc": { "type": "string" }
+  }
+}
