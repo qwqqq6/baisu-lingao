@@ -4,10 +4,9 @@
  */
 
 const BASE = "./content/official";
-const CACHE = "?v=1"; // 内容缓存纪元，改动内容包时递增
 
 async function fetchJson(path) {
-  const res = await fetch(path + CACHE);
+  const res = await fetch(path, { cache: "no-store" });
   if (!res.ok) throw new Error(`加载失败 ${path}: ${res.status}`);
   return res.json();
 }

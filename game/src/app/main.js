@@ -2,10 +2,10 @@
  * 入口：加载内容包 → 恢复存档或进入开局选人 → 驱动回合循环。
  */
 
-import { loadOfficialContent } from "../engine/content.js?v=1";
-import { hasSave } from "../engine/save.js?v=1";
-import { Game } from "./game.js?v=1";
-import { ui } from "./ui.js?v=1";
+import { loadOfficialContent } from "../engine/content.js";
+import { hasSave } from "../engine/save.js";
+import { Game } from "./game.js";
+import { ui } from "./ui.js";
 
 let content;
 let game;

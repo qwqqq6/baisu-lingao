@@ -3,7 +3,7 @@
  * 谁在什么局势下适合继任，全部写在人物卡（characters/core.json）的 succession 定义里。
  */
 
-import { matchesWithContext, weightedPick } from "./state.js?v=1";
+import { matchesWithContext, weightedPick } from "./state.js";
 
 export class CharacterManager {
   /** @type {Array<object>} 人物定义 */

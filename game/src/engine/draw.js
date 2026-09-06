@@ -6,7 +6,7 @@
  * 4. 应用最匹配的一个变体（人物替换选项 / 额外提示）。
  */
 
-import { matchesWithContext, weightedPick } from "./state.js?v=1";
+import { matchesWithContext, weightedPick } from "./state.js";
 
 /** 卡牌类型优先级：数字越小越优先（对应文档第 8 节的优先级表）。 */
 export const TYPE_PRIORITY = {

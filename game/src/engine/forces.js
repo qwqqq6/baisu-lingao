@@ -3,7 +3,7 @@
  * 势力通过事件解锁（requires 条件满足后才进入运行时），全部数值不进公开 UI。
  */
 
-import { matchesWithContext } from "./state.js?v=1";
+import { matchesWithContext } from "./state.js";
 
 export class ForcesManager {
   constructor() {

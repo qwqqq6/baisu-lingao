@@ -3,7 +3,7 @@
  * 原生 DOM 操作，不引入任何框架。
  */
 
-import { COLLAPSE_TEXTS } from "./game.js?v=1";
+import { COLLAPSE_TEXTS } from "./game.js";
 
 const TYPE_LABELS = {
   opening: "开局",

@@ -3,19 +3,19 @@
  * 引擎模块保持纯逻辑，这里负责把它们串成一局游戏。
  */
 
-import { StateManager, matchesWithContext } from "../engine/state.js?v=1";
-import { ForcesManager } from "../engine/forces.js?v=1";
-import { CharacterManager } from "../engine/character.js?v=1";
-import { applyEffects, checkCollapse, PILLAR_STATE_IDS } from "../engine/effects.js?v=1";
+import { StateManager, matchesWithContext } from "../engine/state.js";
+import { ForcesManager } from "../engine/forces.js";
+import { CharacterManager } from "../engine/character.js";
+import { applyEffects, checkCollapse, PILLAR_STATE_IDS } from "../engine/effects.js";
 import {
   buildDrawContext,
   availableSeries,
   applySeriesWeight,
   pickCardInSeries,
   applyVariants,
-} from "../engine/draw.js?v=1";
-import { weightedPick } from "../engine/state.js?v=1";
-import { saveGame, loadGame, clearSave } from "../engine/save.js?v=1";
+} from "../engine/draw.js";
+import { weightedPick } from "../engine/state.js";
+import { saveGame, loadGame, clearSave } from "../engine/save.js";
 
 const RECENT_CARDS_LIMIT = 8;
 const RECENT_SERIES_LIMIT = 4;

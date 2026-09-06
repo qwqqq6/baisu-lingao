@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <title>引擎测试运行器</title>
+  <style>
+    body { font-family: system-ui, sans-serif; background: #f5f5f0; color: #222; margin: 24px; }
+    .case { padding: 4px 8px; border-radius: 4px; margin: 2px 0; }
+    .pass { background: #e6f4e6; }
+    .fail { background: #fbe6e6; }
+    .err { color: #a11; font-size: 13px; margin-left: 16px; }
+    h1 { font-size: 20px; }
+    #summary { font-weight: 700; margin: 12px 0; }
+  </style>
+</head>
+<body>
+  <h1>引擎测试</h1>
+  <div id="summary">运行中……</div>
+  <div id="results"></div>
+  <script type="module">
+    import { registerTests } from "./cases.mjs";
+    const results = document.getElementById("results");
+    const summary = document.getElementById("summary");
+    let pass = 0, fail = 0;
+    registerTests(async (name, fn) => {
+      const row = document.createElement("div");
+      row.className = "case";
+      row.textContent = "⏳ " + name;
+      results.append(row);
+      try {
+        await fn();
+        row.className = "case pass";
+        row.textContent = "✔ " + name;
+        pass++;
+      } catch (err) {
+        row.className = "case fail";
+        row.textContent = "✘ " + name;
+        const errLine = document.createElement("div");
+        errLine.className = "err";
+        errLine.textContent = String(err && err.message || err);
+        results.append(errLine);
+        fail++;
+      }
+    });
+    // registerTests 同步注册、异步执行：等待一拍后汇总
+    setTimeout(() => {
+      summary.textContent = `通过 ${pass} / 失败 ${fail}`;
+      summary.style.color = fail ? "#a11" : "#2a2";
+    }, 1500);
+  </script>
+</body>
+</html>
