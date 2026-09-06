@@ -60,13 +60,32 @@ export function availableSeries(seriesDefs, ctx) {
   return defs;
 }
 
-/** 系列权重修正：人物标签、势力状态、停滞、近期重复。 */
+/** 季节天时：对应系列在应季权重上浮（docs 开源化计划 §5.4 季节系统） */
+const SEASON_TAGS = {
+  春: ["农业", "农庄"],
+  夏: ["商贸", "外部", "天灾"],
+  秋: ["农业", "农庄", "商贸"],
+  冬: ["军务", "治安", "保卫"],
+};
+
+function seasonOf(day) {
+  return ["春", "夏", "秋", "冬"][Math.floor((Math.max(1, day) - 1) / 10) % 4];
+}
+
+/** 系列权重修正：人物标签、势力状态、停滞、近期重复、季节天时。 */
 export function applySeriesWeight(series, ctx, runtime) {
   let weight = series.weight || 1;
   const ruler = runtime.characterManager.get(ctx.state.get("ruler.current"));
   if (ruler) {
     const hits = (series.tags || []).filter((tag) => (ruler.tags || []).includes(tag)).length;
     if (hits > 0) weight += 6;
+  }
+  const season = seasonOf(ctx.day);
+  for (const tag of SEASON_TAGS[season] || []) {
+    if ((series.tags || []).includes(tag)) {
+      weight += 3;
+      break;
+    }
   }
   for (const tag of series.tags || []) {
     for (const def of runtime.forces.definitions) {

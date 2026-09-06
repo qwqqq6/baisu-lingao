@@ -159,6 +159,12 @@ async function boot() {
 
   // 标题页：继续 / 开始 / 调试 / 说明
   if (new URLSearchParams(location.search).has("debug")) setDebugOn(true);
+  // 键盘操作：1/← 批左侧，2/→ 批右侧
+  window.addEventListener("keydown", (e) => {
+    if (!game || !game.currentCard || game.gameOverReason) return;
+    if (e.key === "1" || e.key === "ArrowLeft") choose("left");
+    else if (e.key === "2" || e.key === "ArrowRight") choose("right");
+  });
   game = new Game(content);
   window.__game = game; // 调试句柄
   showTitle();

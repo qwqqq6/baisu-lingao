@@ -128,6 +128,11 @@ export class Game {
     return "consolidation";
   }
 
+  /** 季节：每十天一季，影响农事/商贸/军务系列权重（天时系统） */
+  get season() {
+    return ["春", "夏", "秋", "冬"][Math.floor((this.day - 1) / 10) % 4];
+  }
+
   // ---------------------------------------------------------------- 开局
 
   newGame(characterId) {

@@ -216,7 +216,7 @@ export const ui = {
       h("div", { class: "topbar-title" }, "临高启明 · 执政者"),
       h("div", { class: "topbar-info" },
         h("span", { class: "chip" }, `第 ${game.day} 天`),
-        h("span", { class: "chip" }, STAGE_LABELS[game.stage]),
+        h("span", { class: "chip" }, `${STAGE_LABELS[game.stage]} · ${game.season}季`),
         ruler ? h("span", { class: "chip chip-ruler" }, `${ruler.name} · ${ruler.route}`) : h("span", { class: "chip chip-ruler" }, "权位空悬")
       )
     );
