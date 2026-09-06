@@ -1,0 +1,57 @@
+[
+  {
+    "id": "council",
+    "name": "扩大会议",
+    "desc": "执委会与元老们组成的临时权力中枢，一切合法性的来源。",
+    "tags": ["会议", "政治", "合法性"],
+    "initial": { "influence": 45, "satisfaction": 50, "hostility": 10 }
+  },
+  {
+    "id": "locals",
+    "name": "本地村社",
+    "desc": "临高本地的士绅、族老与村社网络。",
+    "tags": ["本地人", "村社", "外交"],
+    "requires": [{ "state": "contact.locals", "equals": true }],
+    "initial": { "influence": 20, "satisfaction": 40, "hostility": 20 }
+  },
+  {
+    "id": "farm",
+    "name": "南海农庄",
+    "desc": "吴南海一手建立的生产样板，粮食与归化民安置的支柱。",
+    "tags": ["农庄", "农业", "生计"],
+    "requires": [{ "state": "farm.established", "equals": true }],
+    "initial": { "influence": 15, "satisfaction": 55, "hostility": 0 }
+  },
+  {
+    "id": "guard",
+    "name": "保卫系统",
+    "desc": "侦察、警戒与治安力量，乱世的刀把子。",
+    "tags": ["军务", "治安", "保卫"],
+    "requires": [{ "state": "security.guard_authorized", "equals": true }],
+    "initial": { "influence": 15, "satisfaction": 50, "hostility": 5 }
+  },
+  {
+    "id": "planning",
+    "name": "计划委员会",
+    "desc": "统筹工业与资源调度的技术官僚集团。",
+    "tags": ["工业", "计划", "资源"],
+    "requires": [{ "state": "planning.committee_established", "equals": true }],
+    "initial": { "influence": 15, "satisfaction": 50, "hostility": 5 }
+  },
+  {
+    "id": "trade",
+    "name": "商贸网络",
+    "desc": "东门市的坐商行商与外贸渠道，也是泄密的口子。",
+    "tags": ["商贸", "市场", "外贸"],
+    "requires": [{ "state": "trade.dongmen_established", "equals": true }],
+    "initial": { "influence": 15, "satisfaction": 50, "hostility": 10 }
+  },
+  {
+    "id": "naturalized",
+    "name": "归化民组织",
+    "desc": "由俘虏与归化民组成的基层网络，只认登记册不认人。",
+    "tags": ["工分", "劳工", "组织", "俘虏", "民政"],
+    "requires": [{ "state": "series.civil_labor", "gte": 2 }],
+    "initial": { "influence": 10, "satisfaction": 45, "hostility": 10 }
+  }
+]

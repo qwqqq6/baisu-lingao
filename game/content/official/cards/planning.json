@@ -1,0 +1,652 @@
+[
+  {
+    "id": "PLAN-001",
+    "pool": "planning",
+    "series": "planning.committee",
+    "type": "key",
+    "title": "马千瞩的三张表",
+    "source": {
+      "kind": "character",
+      "id": "any",
+      "name": "马千瞩"
+    },
+    "tags": [
+      "计划",
+      "工业",
+      "政治"
+    ],
+    "requires": [],
+    "excludes": [
+      {
+        "state": "planning.committee_established",
+        "equals": true
+      }
+    ],
+    "weight": 60,
+    "text": "呈：马千瞩进三表——物资、工时、排期。言：要么立计划委员会，使每斤铁每个工时进表。元老私议：督工要收权。",
+    "options": {
+      "left": {
+        "id": "pipi_chengli",
+        "label": "批准成立计委，三表通发各口",
+        "hint": "把算盘攥成拳头",
+        "effects": {
+          "stats": {
+            "council": 1,
+            "livelihood": -2
+          },
+          "personal": {
+            "faction_alarm": 2
+          },
+          "forces": {
+            "planning": {
+              "influence": 3
+            }
+          },
+          "states": [
+            {
+              "id": "planning.committee_established",
+              "op": "set",
+              "value": true
+            },
+            {
+              "id": "series.planning_committee",
+              "op": "add",
+              "value": 2
+            }
+          ]
+        }
+      },
+      "right": {
+        "id": "zhi_she_tongjichu",
+        "label": "只设统计处，先记账不管事",
+        "hint": "表先画着，权先不交",
+        "effects": {
+          "stats": {
+            "council": 2
+          },
+          "states": [
+            {
+              "id": "series.planning_committee",
+              "op": "add",
+              "value": 1
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "PLAN-002",
+    "pool": "planning",
+    "series": "planning.committee",
+    "type": "daily",
+    "title": "排期表发到各口之后",
+    "source": {
+      "kind": "force",
+      "id": "planning",
+      "name": "计划委员会"
+    },
+    "tags": [
+      "计划",
+      "工业"
+    ],
+    "requires": [
+      {
+        "state": "planning.committee_established",
+        "equals": true
+      }
+    ],
+    "excludes": [],
+    "weight": 12,
+    "text": "呈：排期表发下即炸——农言秧不等人，军言船坞不能停，糖寮言榨季只此一月。计委复：表改可以，先报数据。",
+    "options": {
+      "left": {
+        "id": "an_jiwei_paiqi",
+        "label": "按表执行，特例须计委核",
+        "hint": "总得有人说了算",
+        "effects": {
+          "stats": {
+            "livelihood": -1,
+            "council": -1
+          },
+          "forces": {
+            "planning": {
+              "influence": 3,
+              "satisfaction": 4
+            }
+          }
+        }
+      },
+      "right": {
+        "id": "gekou_zixing_qishi",
+        "label": "各口酌情，月底报备",
+        "hint": "和气是和气了，进度自己长腿跑了",
+        "effects": {
+          "stats": {
+            "livelihood": 1
+          },
+          "forces": {
+            "planning": {
+              "satisfaction": -4
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "PLAN-003",
+    "pool": "planning",
+    "series": "planning.committee",
+    "type": "key",
+    "title": "《第一阶段建设纲要》",
+    "source": {
+      "kind": "force",
+      "id": "planning",
+      "name": "计划委员会"
+    },
+    "tags": [
+      "计划",
+      "工业"
+    ],
+    "requires": [
+      {
+        "state": "planning.committee_established",
+        "equals": true
+      },
+      {
+        "state": "series.planning_committee",
+        "gte": 1
+      }
+    ],
+    "excludes": [],
+    "weight": 25,
+    "text": "呈：《第一阶段建设纲要》——砖窑、轻便铁轨、船坞扩建、高炉备料，人力物力请各口匀让。附批语：宁可这一季苦，不能代代苦。",
+    "options": {
+      "left": {
+        "id": "yadao_yiqie",
+        "label": "重点工程压倒一切",
+        "hint": "集中力量办大事",
+        "effects": {
+          "stats": {
+            "livelihood": -4,
+            "military": 4
+          },
+          "days": 2,
+          "forces": {
+            "planning": {
+              "influence": 5,
+              "satisfaction": 5
+            }
+          },
+          "states": [
+            {
+              "id": "series.planning_committee",
+              "op": "add",
+              "value": 1
+            }
+          ]
+        },
+        "followups": [
+          "PLAN-010"
+        ]
+      },
+      "right": {
+        "id": "junheng_paichan",
+        "label": "砍掉一半项目，均衡排产",
+        "hint": "细水长流",
+        "effects": {
+          "stats": {
+            "livelihood": 2
+          },
+          "forces": {
+            "planning": {
+              "satisfaction": -2
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "PLAN-004",
+    "pool": "planning",
+    "series": "planning.committee",
+    "type": "crisis",
+    "title": "红了一片的月报",
+    "source": {
+      "kind": "force",
+      "id": "planning",
+      "name": "计划委员会"
+    },
+    "tags": [
+      "计划",
+      "危机"
+    ],
+    "requires": [
+      {
+        "state": "planning.committee_established",
+        "equals": true
+      },
+      {
+        "state": "series.planning_committee",
+        "gte": 2
+      }
+    ],
+    "excludes": [],
+    "weight": 30,
+    "text": "急呈：月中盘点红了一片：砖窑欠三成，船坞欠一半，高炉备料无影。计委诿各口不配，各口诟指标闭门造车。",
+    "options": {
+      "left": {
+        "id": "xia_tiabiao_rencuo",
+        "label": "下调指标，公开认错修表",
+        "hint": "认怂，但信用保住了",
+        "effects": {
+          "stats": {
+            "council": 2
+          },
+          "personal": {
+            "personal_pressure": 2
+          },
+          "forces": {
+            "planning": {
+              "satisfaction": -4
+            }
+          }
+        }
+      },
+      "right": {
+        "id": "bi_xiamian_jiaban",
+        "label": "限期赶工，夜间加一班",
+        "hint": "表是死的，人是活的——也是会倒的",
+        "effects": {
+          "stats": {
+            "livelihood": -3,
+            "people": -3
+          },
+          "personal": {
+            "violence_risk": 2
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "PLAN-005",
+    "pool": "planning",
+    "series": "planning.committee",
+    "type": "price",
+    "title": "统购统销",
+    "source": {
+      "kind": "force",
+      "id": "planning",
+      "name": "计划委员会"
+    },
+    "tags": [
+      "计划",
+      "政治",
+      "商贸"
+    ],
+    "requires": [
+      {
+        "force": "planning",
+        "metric": "influence",
+        "gte": 45
+      }
+    ],
+    "excludes": [],
+    "weight": 22,
+    "text": "呈：计委请统购统销——账外一粒米不许有。农委问：糖寮赶榨亦须先报？答：榨季在表上。",
+    "options": {
+      "left": {
+        "id": "jiaochu_tonggou",
+        "label": "交出去：物资尽入总账",
+        "hint": "调度顺了，抱怨也顺路来了",
+        "effects": {
+          "stats": {
+            "livelihood": 3,
+            "council": -4
+          },
+          "personal": {
+            "faction_alarm": 3
+          },
+          "forces": {
+            "planning": {
+              "influence": 5,
+              "satisfaction": 6
+            },
+            "farm": {
+              "satisfaction": -4
+            }
+          }
+        }
+      },
+      "right": {
+        "id": "liu_yishou",
+        "label": "留一手：只做统计，不做调拨",
+        "hint": "想攥全部，先攒够信用",
+        "effects": {
+          "forces": {
+            "planning": {
+              "satisfaction": -5,
+              "hostility": 5
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "PLAN-006",
+    "pool": "planning",
+    "series": "planning.committee",
+    "type": "backlash",
+    "title": "计划债务",
+    "source": {
+      "kind": "force",
+      "id": "planning",
+      "name": "计划委员会"
+    },
+    "tags": [
+      "计划",
+      "危机"
+    ],
+    "requires": [
+      {
+        "force": "planning",
+        "metric": "influence",
+        "gte": 60
+      }
+    ],
+    "excludes": [],
+    "weight": 35,
+    "text": "急呈：欠账滚大，口粮挪保工程，工地夜有怨骂。计委复照旧四字——加大投入，保证完工。附下期更大投入之表。",
+    "options": {
+      "left": {
+        "id": "zaifa_yilun_renwu",
+        "label": "再压一轮任务下去",
+        "hint": "债多不愁，表长不怕",
+        "effects": {
+          "stats": {
+            "livelihood": -5,
+            "people": -3
+          },
+          "personal": {
+            "personal_pressure": 4
+          },
+          "forces": {
+            "planning": {
+              "influence": 3
+            }
+          }
+        }
+      },
+      "right": {
+        "id": "tingdiao_yiban",
+        "label": "停掉一半项目",
+        "hint": "长痛不如短痛。督工会记很久",
+        "effects": {
+          "stats": {
+            "livelihood": 3
+          },
+          "forces": {
+            "planning": {
+              "satisfaction": -6,
+              "hostility": 4
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "PLAN-007",
+    "pool": "planning",
+    "series": "planning.committee",
+    "type": "omen",
+    "title": "大会质询排期",
+    "source": {
+      "kind": "force",
+      "id": "council",
+      "name": "元老院"
+    },
+    "tags": [
+      "计划",
+      "前兆",
+      "会议"
+    ],
+    "requires": [
+      {
+        "force": "planning",
+        "metric": "influence",
+        "gte": 50
+      },
+      {
+        "state": "core.pillar.livelihood",
+        "lte": 45
+      }
+    ],
+    "excludes": [],
+    "weight": 32,
+    "text": "呈：大会质询：计委立项三十六，逾期十九；同期口粮配给减两成。请说明计划与民生之关系。",
+    "options": {
+      "left": {
+        "id": "qinzi_dabian",
+        "label": "亲自到会答辩",
+        "hint": "把账算清楚，把锅接下来",
+        "effects": {
+          "stats": {
+            "council": 2
+          },
+          "personal": {
+            "personal_pressure": 3,
+            "faction_alarm": -2
+          }
+        }
+      },
+      "right": {
+        "id": "rang_jiwei_yingfu",
+        "label": "让计委自己去应付",
+        "hint": "谁的孩子谁抱",
+        "effects": {
+          "forces": {
+            "planning": {
+              "satisfaction": -4
+            }
+          },
+          "personal": {
+            "faction_alarm": 1
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "PLAN-008",
+    "pool": "planning",
+    "series": "planning.committee",
+    "type": "daily",
+    "title": "锄头还是枪头",
+    "source": {
+      "kind": "force",
+      "id": "planning",
+      "name": "计划委员会"
+    },
+    "tags": [
+      "计划",
+      "民生"
+    ],
+    "requires": [
+      {
+        "state": "planning.committee_established",
+        "equals": true
+      }
+    ],
+    "excludes": [],
+    "weight": 12,
+    "text": "呈：每月老题——末一炉铁，打锄头抑或枪头？锄头养人，枪头护家，两言皆有理。铁，只一炉。",
+    "options": {
+      "left": {
+        "id": "baa_minsheng",
+        "label": "打锄头，先保春耕",
+        "hint": "锄头养人",
+        "effects": {
+          "stats": {
+            "livelihood": 3
+          },
+          "forces": {
+            "planning": {
+              "satisfaction": -3
+            }
+          }
+        }
+      },
+      "right": {
+        "id": "bao_gongye",
+        "label": "打枪头，先武装伏波军",
+        "hint": "枪头护家",
+        "effects": {
+          "stats": {
+            "military": 2,
+            "livelihood": -2
+          },
+          "forces": {
+            "planning": {
+              "satisfaction": 3
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "PLAN-009",
+    "pool": "planning",
+    "series": "planning.committee",
+    "type": "benefit",
+    "title": "计委的季度报捷",
+    "source": {
+      "kind": "force",
+      "id": "planning",
+      "name": "计划委员会"
+    },
+    "tags": [
+      "计划",
+      "工业"
+    ],
+    "requires": [
+      {
+        "force": "planning",
+        "metric": "influence",
+        "gte": 50
+      },
+      {
+        "force": "planning",
+        "metric": "satisfaction",
+        "gte": 55
+      }
+    ],
+    "excludes": [],
+    "weight": 20,
+    "text": "呈：计委季报皆捷：砖窑提前竣工出砖翻番，渔船下水，灰口铁胜工部样铁。附新排期表一份，请过目。",
+    "options": {
+      "left": {
+        "id": "zhun_biao_kuojian",
+        "label": "用印：照新表扩产",
+        "hint": "成绩换权限，划算，也心惊",
+        "effects": {
+          "stats": {
+            "military": 3,
+            "livelihood": -1
+          },
+          "forces": {
+            "planning": {
+              "influence": 4,
+              "satisfaction": 3
+            }
+          }
+        }
+      },
+      "right": {
+        "id": "biaoyang_huanyi",
+        "label": "传令表扬，扩产缓议",
+        "hint": "功劳记下，缰绳不松",
+        "effects": {
+          "stats": {
+            "council": 1
+          },
+          "forces": {
+            "planning": {
+              "satisfaction": -2
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "PLAN-010",
+    "pool": "planning",
+    "series": "planning.committee",
+    "type": "key",
+    "title": "第一炉铁",
+    "source": {
+      "kind": "force",
+      "id": "planning",
+      "name": "计划委员会"
+    },
+    "tags": [
+      "工业",
+      "计划"
+    ],
+    "requires": [
+      {
+        "used": "PLAN-003"
+      },
+      {
+        "state": "planning.committee_established",
+        "equals": true
+      }
+    ],
+    "excludes": [],
+    "weight": 30,
+    "text": "呈：高炉出第一炉铁，计一吨半。督工守炉终夜无言，唯令记录。军工请铸炮，农委请打农具，两单并陈。",
+    "options": {
+      "left": {
+        "id": "zhu_pao",
+        "label": "铸炮：先武装伏波军",
+        "hint": "督工亲自盯着翻砂",
+        "effects": {
+          "stats": {
+            "military": 4,
+            "livelihood": -1
+          },
+          "forces": {
+            "planning": {
+              "influence": 3,
+              "satisfaction": 3
+            }
+          }
+        }
+      },
+      "right": {
+        "id": "da_nongju",
+        "label": "打农具：先还农口的账",
+        "hint": "农委等这批锄头等了一季",
+        "effects": {
+          "stats": {
+            "livelihood": 4
+          },
+          "forces": {
+            "planning": {
+              "satisfaction": -2
+            },
+            "farm": {
+              "satisfaction": 4
+            }
+          }
+        }
+      }
+    }
+  }
+]

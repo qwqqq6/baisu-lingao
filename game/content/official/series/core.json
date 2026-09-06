@@ -1,0 +1,90 @@
+[
+  {
+    "id": "politics.council",
+    "name": "元老会议",
+    "pool": "core",
+    "tags": ["会议", "政治", "合法性"],
+    "weight": 10,
+    "requires": [],
+    "excludes": [],
+    "dependsOn": [],
+    "entryCards": ["CORE-001"]
+  },
+  {
+    "id": "external.locals",
+    "name": "本地接触",
+    "pool": "external",
+    "tags": ["本地人", "村社", "外交"],
+    "weight": 9,
+    "requires": [],
+    "excludes": [],
+    "dependsOn": [],
+    "entryCards": ["EXT-001"]
+  },
+  {
+    "id": "farm.nanhai",
+    "name": "南海农庄",
+    "pool": "farm",
+    "tags": ["农庄", "农业", "生计"],
+    "weight": 8,
+    "requires": [{ "state": "contact.locals", "equals": true }],
+    "excludes": [],
+    "dependsOn": ["external.locals"],
+    "entryCards": ["FARM-001"]
+  },
+  {
+    "id": "civil.captives",
+    "name": "俘虏治理",
+    "pool": "civil",
+    "tags": ["俘虏", "民政"],
+    "weight": 8,
+    "requires": [{ "day": { "gte": 3 } }],
+    "excludes": [],
+    "dependsOn": [],
+    "entryCards": ["CIV-001"]
+  },
+  {
+    "id": "civil.labor",
+    "name": "劳工制度",
+    "pool": "civil",
+    "tags": ["工分", "劳工", "组织"],
+    "weight": 7,
+    "requires": [{ "state": "series.civil_captives", "gte": 1 }],
+    "excludes": [],
+    "dependsOn": ["civil.captives"],
+    "entryCards": ["LAB-001"]
+  },
+  {
+    "id": "security.guard",
+    "name": "保卫授权",
+    "pool": "security",
+    "tags": ["军务", "治安", "保卫"],
+    "weight": 8,
+    "requires": [],
+    "excludes": [],
+    "dependsOn": [],
+    "entryCards": ["SEC-001"]
+  },
+  {
+    "id": "planning.committee",
+    "name": "计划委员会",
+    "pool": "planning",
+    "tags": ["工业", "计划", "资源"],
+    "weight": 7,
+    "requires": [{ "any": [{ "day": { "gte": 10 } }, { "ruler": "maqianzhu" }] }],
+    "excludes": [],
+    "dependsOn": [],
+    "entryCards": ["PLAN-001"]
+  },
+  {
+    "id": "trade.dongmen",
+    "name": "东门市",
+    "pool": "trade",
+    "tags": ["商贸", "市场", "外贸"],
+    "weight": 7,
+    "requires": [{ "state": "trade.contact", "equals": true }],
+    "excludes": [],
+    "dependsOn": ["external.locals"],
+    "entryCards": ["TRADE-001"]
+  }
+]

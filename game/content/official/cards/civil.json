@@ -1,0 +1,1168 @@
+[
+  {
+    "id": "CIV-001",
+    "pool": "civil",
+    "series": "civil.captives",
+    "type": "key",
+    "title": "栅栏里关了三十七个俘虏",
+    "source": {
+      "kind": "character",
+      "id": "any",
+      "name": "侦察排"
+    },
+    "tags": [
+      "俘虏",
+      "民政"
+    ],
+    "requires": [],
+    "excludes": [],
+    "weight": 100,
+    "text": "呈：滩头一役俘三十七人，多胁从贫汉，俱伤，日索口粮。看守请示：杀、放、留？",
+    "options": {
+      "left": {
+        "id": "shoubian_gaizao",
+        "label": "收编改造：登记造册，编入训练班",
+        "hint": "民政委员会的老本行",
+        "effects": {
+          "stats": {
+            "people": 2,
+            "livelihood": -2
+          },
+          "states": [
+            {
+              "id": "civil.captives_arrived",
+              "op": "set",
+              "value": true
+            },
+            {
+              "id": "series.civil_captives",
+              "op": "add",
+              "value": 2
+            }
+          ]
+        },
+        "followups": [
+          "CIV-004"
+        ]
+      },
+      "right": {
+        "id": "ganhuo_shushen",
+        "label": "以工代罚：干活赎身",
+        "hint": "力气不能白费",
+        "effects": {
+          "stats": {
+            "livelihood": 3,
+            "military": 2,
+            "people": -1
+          },
+          "states": [
+            {
+              "id": "civil.captives_arrived",
+              "op": "set",
+              "value": true
+            },
+            {
+              "id": "series.civil_captives",
+              "op": "add",
+              "value": 2
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "CIV-002",
+    "pool": "civil",
+    "series": "civil.captives",
+    "type": "daily",
+    "title": "俘虏营的口粮",
+    "source": {
+      "kind": "character",
+      "id": "any",
+      "name": "民政委员会"
+    },
+    "tags": [
+      "俘虏",
+      "生计"
+    ],
+    "requires": [
+      {
+        "state": "civil.captives_arrived",
+        "equals": true
+      }
+    ],
+    "excludes": [],
+    "weight": 12,
+    "text": "呈：俘虏营米缸见底，照此份例五日内必饿死人。营外传言「短毛虐俘」。自家口粮亦按人头。",
+    "options": {
+      "left": {
+        "id": "jian_zijiren_kouliang",
+        "label": "从营口粮里匀出一份",
+        "hint": "众人看在眼里：短毛做事有底线",
+        "effects": {
+          "stats": {
+            "livelihood": -2,
+            "people": 2
+          }
+        }
+      },
+      "right": {
+        "id": "yange_peijie",
+        "label": "严格配给，饿不死即止",
+        "hint": "规矩之内，各安天命",
+        "effects": {
+          "stats": {
+            "livelihood": 1,
+            "people": -2,
+            "military": 1
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "CIV-003",
+    "pool": "civil",
+    "series": "civil.captives",
+    "type": "crisis",
+    "title": "俘虏营炸营了",
+    "source": {
+      "kind": "character",
+      "id": "any",
+      "name": "卫兵"
+    },
+    "tags": [
+      "俘虏",
+      "危机"
+    ],
+    "requires": [
+      {
+        "state": "civil.captives_arrived",
+        "equals": true
+      },
+      {
+        "state": "series.civil_captives",
+        "gte": 1
+      }
+    ],
+    "excludes": [],
+    "weight": 30,
+    "text": "急呈：后半夜俘虏营炸营，拆栅抢刀，数十人奔海。哨兵鸣枪示警，人群挤在第二道壕前，将再动。",
+    "options": {
+      "left": {
+        "id": "mingqiang_yaxiang",
+        "label": "鸣枪弹压，当场格杀带头者",
+        "hint": "快刀。血在滩头也洗得掉",
+        "effects": {
+          "stats": {
+            "military": 3,
+            "people": -2
+          },
+          "personal": {
+            "violence_risk": 4
+          }
+        },
+        "followups": [
+          "CIV-011"
+        ]
+      },
+      "right": {
+        "id": "zhaotou_fenhua",
+        "label": "喊话分化：跟头儿的走，散伙的不杀",
+        "hint": "人群里先是犹豫，然后是一层层松动",
+        "effects": {
+          "stats": {
+            "people": 3
+          },
+          "personal": {
+            "personal_pressure": 2
+          },
+          "states": [
+            {
+              "id": "series.civil_captives",
+              "op": "add",
+              "value": 1
+            }
+          ]
+        },
+        "followups": [
+          "CIV-011"
+        ]
+      }
+    }
+  },
+  {
+    "id": "CIV-004",
+    "pool": "civil",
+    "series": "civil.captives",
+    "type": "key",
+    "title": "俘虏里也有手艺人",
+    "source": {
+      "kind": "character",
+      "id": "any",
+      "name": "民政委员会"
+    },
+    "tags": [
+      "俘虏",
+      "民政",
+      "组织"
+    ],
+    "requires": [
+      {
+        "state": "civil.captives_arrived",
+        "equals": true
+      }
+    ],
+    "excludes": [],
+    "weight": 25,
+    "text": "呈：俘虏登记三日，册出铁匠五、船木匠二、识字者一、曾从军者十一。用其技，防其人——置于何路？",
+    "options": {
+      "left": {
+        "id": "ban_guihua_jiangxisuo",
+        "label": "开办归化讲习班，统一教育",
+        "hint": "磨刀不误砍柴工",
+        "effects": {
+          "stats": {
+            "people": 4
+          },
+          "personal": {
+            "faction_alarm": 2
+          },
+          "states": [
+            {
+              "id": "series.civil_captives",
+              "op": "add",
+              "value": 1
+            }
+          ]
+        },
+        "followups": [
+          "CIV-009"
+        ]
+      },
+      "right": {
+        "id": "zhuanhua_gongjiang",
+        "label": "只留匠人和识字的，其余发赔口粮放归",
+        "hint": "放回去的人，嘴里带话回去",
+        "effects": {
+          "stats": {
+            "people": 2,
+            "council": 1
+          },
+          "wind": 1
+        }
+      }
+    }
+  },
+  {
+    "id": "CIV-005",
+    "pool": "civil",
+    "series": "civil.captives",
+    "type": "daily",
+    "title": "放还是留",
+    "source": {
+      "kind": "character",
+      "id": "any",
+      "name": "民政委员会"
+    },
+    "tags": [
+      "俘虏",
+      "民政"
+    ],
+    "requires": [
+      {
+        "state": "civil.captives_arrived",
+        "equals": true
+      }
+    ],
+    "excludes": [],
+    "weight": 12,
+    "text": "呈：又一批俘虏改造期满。放归者传仁声，留用者修博铺路。两议皆有账可算。",
+    "options": {
+      "left": {
+        "id": "fang_yipi",
+        "label": "放一批，给三天口粮",
+        "hint": "口碑顺着他们的嘴走",
+        "effects": {
+          "stats": {
+            "people": 3
+          },
+          "wind": 1
+        }
+      },
+      "right": {
+        "id": "liu_yong_xiulu",
+        "label": "全部留用，去修博铺到百仞城的路",
+        "hint": "路修到哪儿，兵就到哪儿",
+        "effects": {
+          "stats": {
+            "livelihood": 3,
+            "people": -3
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "CIV-006",
+    "pool": "civil",
+    "series": "civil.captives",
+    "type": "crisis",
+    "title": "一夜跑了十一个",
+    "source": {
+      "kind": "character",
+      "id": "any",
+      "name": "卫兵"
+    },
+    "tags": [
+      "俘虏",
+      "危机",
+      "军务"
+    ],
+    "requires": [
+      {
+        "state": "civil.captives_arrived",
+        "equals": true
+      }
+    ],
+    "excludes": [],
+    "weight": 28,
+    "text": "急呈：一夜逃俘十一人，查系内外勾应——看押归化民受银镯放水。其母病，本人跪营门求饶。",
+    "options": {
+      "left": {
+        "id": "zhuihui_shenchu",
+        "label": "追回，俘虏与内应一并公审",
+        "hint": "杀一儆百，也寒一片心",
+        "effects": {
+          "stats": {
+            "military": 3,
+            "people": -3
+          },
+          "personal": {
+            "violence_risk": 3
+          }
+        }
+      },
+      "right": {
+        "id": "dangzuo_meifasheng",
+        "label": "人不去追，内部悄悄整顿",
+        "hint": "家丑不外扬",
+        "effects": {
+          "stats": {
+            "military": -2,
+            "people": 1
+          },
+          "personal": {
+            "faction_alarm": 2
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "CIV-007",
+    "pool": "civil",
+    "series": "civil.captives",
+    "type": "price",
+    "title": "归化民要立市",
+    "source": {
+      "kind": "force",
+      "id": "naturalized",
+      "name": "归化民组织"
+    },
+    "tags": [
+      "俘虏",
+      "商贸"
+    ],
+    "requires": [
+      {
+        "force": "naturalized",
+        "metric": "influence",
+        "gte": 40
+      },
+      {
+        "state": "trade.dongmen_established",
+        "equals": false
+      }
+    ],
+    "excludes": [],
+    "weight": 22,
+    "text": "呈：归化民匠人行商联名递帖，请立市面、照章纳税。帖尾指印数十，头一个名字，正是俘虏出身。",
+    "options": {
+      "left": {
+        "id": "shangbao_zhiweihui",
+        "label": "上报执委会，正议立市",
+        "hint": "走程序，稳当",
+        "effects": {
+          "stats": {
+            "council": 2,
+            "people": 2
+          },
+          "states": [
+            {
+              "id": "trade.contact",
+              "op": "set",
+              "value": true
+            }
+          ]
+        },
+        "followups": [
+          "TRADE-001"
+        ]
+      },
+      "right": {
+        "id": "rang_tamen_zaideng",
+        "label": "「再等等，营里还没到时候」",
+        "hint": "等来的若是怨气呢",
+        "effects": {
+          "forces": {
+            "naturalized": {
+              "satisfaction": -5
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "CIV-008",
+    "pool": "civil",
+    "series": "civil.captives",
+    "type": "cleanup",
+    "title": "俘虏营的旧账",
+    "source": {
+      "kind": "character",
+      "id": "any",
+      "name": "值班秘书"
+    },
+    "tags": [
+      "俘虏",
+      "继承"
+    ],
+    "requires": [
+      {
+        "state": "history.former_rulers",
+        "exists": true
+      }
+    ],
+    "excludes": [],
+    "weight": 35,
+    "text": "呈：俘虏营旧账——虚报口粮、失踪工钱、账外私放。经手人言皆前任所允，字据无一张。查无可查。",
+    "options": {
+      "left": {
+        "id": "chelu_qingsuan",
+        "label": "彻查到底",
+        "hint": "牵一发动全身",
+        "effects": {
+          "stats": {
+            "council": 2,
+            "people": -1
+          },
+          "personal": {
+            "faction_alarm": 2,
+            "personal_pressure": 2
+          }
+        }
+      },
+      "right": {
+        "id": "huzhe_buzhang",
+        "label": "糊上窟窿，下不为例",
+        "hint": "有些账只能咽下去",
+        "effects": {
+          "stats": {
+            "livelihood": -2
+          },
+          "personal": {
+            "personal_pressure": 3
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "LAB-001",
+    "pool": "civil",
+    "series": "civil.labor",
+    "type": "key",
+    "title": "工分条例",
+    "source": {
+      "kind": "character",
+      "id": "any",
+      "name": "民政委员会"
+    },
+    "tags": [
+      "工分",
+      "劳工",
+      "组织"
+    ],
+    "requires": [
+      {
+        "state": "civil.captives_arrived",
+        "equals": true
+      }
+    ],
+    "excludes": [],
+    "weight": 50,
+    "text": "呈：《工分条例》并附表两张：以工计分、以分领粮。一颁之后，营中数十人生计，皆系于册上一道杠。从严从宽，请示下。",
+    "options": {
+      "left": {
+        "id": "anjian_jigong",
+        "label": "按件计工，逐日核分",
+        "hint": "效率优先，手要硬",
+        "effects": {
+          "stats": {
+            "livelihood": 4,
+            "people": -2
+          },
+          "states": [
+            {
+              "id": "labor.policy",
+              "op": "set",
+              "value": "strict"
+            },
+            {
+              "id": "series.civil_labor",
+              "op": "add",
+              "value": 2
+            }
+          ]
+        }
+      },
+      "right": {
+        "id": "pingjun_fenliang",
+        "label": "分粮从宽，先顾人心",
+        "hint": "温情脉脉，效率平平",
+        "effects": {
+          "stats": {
+            "people": 3,
+            "livelihood": 1
+          },
+          "forces": {
+            "naturalized": {
+              "influence": 2,
+              "satisfaction": 4
+            }
+          },
+          "states": [
+            {
+              "id": "labor.policy",
+              "op": "set",
+              "value": "soft"
+            },
+            {
+              "id": "series.civil_labor",
+              "op": "add",
+              "value": 2
+            }
+          ]
+        },
+        "followups": [
+          "LAB-003"
+        ]
+      }
+    }
+  },
+  {
+    "id": "LAB-002",
+    "pool": "civil",
+    "series": "civil.labor",
+    "type": "daily",
+    "title": "工分吵到了案头",
+    "source": {
+      "kind": "force",
+      "id": "naturalized",
+      "name": "归化民组织"
+    },
+    "tags": [
+      "工分",
+      "劳工"
+    ],
+    "requires": [
+      {
+        "state": "labor.policy",
+        "notEquals": "unset"
+      }
+    ],
+    "excludes": [],
+    "weight": 12,
+    "text": "呈：记分员与工匠头当街相争——报两百车实收一百七，克扣之说哗然。册上一道杠，是一个月的嚼谷。",
+    "options": {
+      "left": {
+        "id": "yanhe_gongfen",
+        "label": "当场复核，翻账重记",
+        "hint": "规矩立信",
+        "effects": {
+          "stats": {
+            "livelihood": 2,
+            "people": -1
+          }
+        }
+      },
+      "right": {
+        "id": "he_yan_yan",
+        "label": "各打五十大板，息事宁人",
+        "hint": "今天的架不吵了，明天的账更糊涂",
+        "effects": {
+          "stats": {
+            "people": 2,
+            "livelihood": -1
+          },
+          "forces": {
+            "naturalized": {
+              "influence": 2
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "LAB-003",
+    "pool": "civil",
+    "series": "civil.labor",
+    "type": "daily",
+    "title": "医务所的呈报",
+    "source": {
+      "kind": "force",
+      "id": "naturalized",
+      "name": "归化民组织"
+    },
+    "tags": [
+      "劳工",
+      "民生"
+    ],
+    "requires": [
+      {
+        "state": "labor.policy",
+        "equals": "soft"
+      }
+    ],
+    "excludes": [],
+    "weight": 12,
+    "text": "呈：医务所报，工地脚气夜盲渐多。请加一顿干饭、发两双草鞋，月耗粮十余石。归化民间已传：营里的饭是公平的。",
+    "options": {
+      "left": {
+        "id": "jia_yidun_ganfan",
+        "label": "准：加干饭，发草鞋",
+        "hint": "十几石粮，买一片死心塌地",
+        "effects": {
+          "stats": {
+            "people": 4,
+            "livelihood": -2
+          },
+          "forces": {
+            "naturalized": {
+              "satisfaction": 4
+            }
+          }
+        }
+      },
+      "right": {
+        "id": "weichi_xianzhuang_laogong",
+        "label": "缓一缓，先记账",
+        "hint": "家底薄，账先挂着",
+        "effects": {
+          "stats": {
+            "people": -1
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "LAB-004",
+    "pool": "civil",
+    "series": "civil.labor",
+    "type": "crisis",
+    "title": "采石场塌了半边",
+    "source": {
+      "kind": "force",
+      "id": "naturalized",
+      "name": "归化民组织"
+    },
+    "tags": [
+      "劳工",
+      "危机"
+    ],
+    "requires": [
+      {
+        "state": "labor.policy",
+        "notEquals": "unset"
+      }
+    ],
+    "excludes": [],
+    "weight": 30,
+    "text": "急呈：采石场塌了半边掌子面，砸毙二人，重伤三人。家属跪哭于管委会门外，归化民默立一片。",
+    "options": {
+      "left": {
+        "id": "houfu_jiashu",
+        "label": "厚抚家属，立下安全章程",
+        "hint": "抚恤从优，章程刻在石头上",
+        "effects": {
+          "stats": {
+            "people": 4,
+            "livelihood": -3
+          },
+          "personal": {
+            "faction_alarm": -1
+          }
+        }
+      },
+      "right": {
+        "id": "jiakuai_jindu_yanguoqu",
+        "label": "加紧赶工，把事压下去",
+        "hint": "纸包不住火",
+        "effects": {
+          "stats": {
+            "people": -4
+          },
+          "personal": {
+            "violence_risk": 3
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "LAB-005",
+    "pool": "civil",
+    "series": "civil.labor",
+    "type": "key",
+    "title": "设里正、组长",
+    "source": {
+      "kind": "character",
+      "id": "any",
+      "name": "民政委员会"
+    },
+    "tags": [
+      "组织",
+      "工分",
+      "政治"
+    ],
+    "requires": [
+      {
+        "state": "series.civil_labor",
+        "gte": 2
+      }
+    ],
+    "excludes": [],
+    "weight": 25,
+    "text": "呈：营地日大，请设里正组长，十户一长，以归化民治归化民。头批十二人名单已拟，皆训练班记名好手。",
+    "options": {
+      "left": {
+        "id": "she_lizheng_zuzhang",
+        "label": "准：设里正、组长，颁委任状",
+        "hint": "层级一立，尾巴也跟着长",
+        "effects": {
+          "stats": {
+            "people": 2
+          },
+          "personal": {
+            "faction_alarm": 3
+          },
+          "forces": {
+            "naturalized": {
+              "influence": 6,
+              "satisfaction": 5
+            }
+          },
+          "states": [
+            {
+              "id": "series.civil_labor",
+              "op": "add",
+              "value": 1
+            }
+          ]
+        },
+        "followups": [
+          "LAB-009"
+        ]
+      },
+      "right": {
+        "id": "you_yuanlao_zhiguan",
+        "label": "不设，元老直接管到底",
+        "hint": "权力不外流。人却只有一双手",
+        "effects": {
+          "stats": {
+            "council": 2
+          },
+          "personal": {
+            "personal_pressure": 2
+          },
+          "forces": {
+            "naturalized": {
+              "satisfaction": -3
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "LAB-006",
+    "pool": "civil",
+    "series": "civil.labor",
+    "type": "price",
+    "title": "基层组织要权",
+    "source": {
+      "kind": "force",
+      "id": "naturalized",
+      "name": "归化民组织"
+    },
+    "tags": [
+      "组织",
+      "政治"
+    ],
+    "requires": [
+      {
+        "force": "naturalized",
+        "metric": "influence",
+        "gte": 45
+      }
+    ],
+    "excludes": [],
+    "weight": 22,
+    "text": "呈：归化民头面人物请领三桩权限——调解纠纷、征派劳役、代收租税。条陈末云「位卑不敢忘营恩」。",
+    "options": {
+      "left": {
+        "id": "fangquan_jiceng",
+        "label": "放权：三桩事交基层办",
+        "hint": "省心。失控也快",
+        "effects": {
+          "stats": {
+            "people": 3,
+            "council": -3
+          },
+          "personal": {
+            "faction_alarm": 4
+          },
+          "forces": {
+            "naturalized": {
+              "influence": 5,
+              "satisfaction": 4
+            }
+          }
+        }
+      },
+      "right": {
+        "id": "shouquan_jinzhang",
+        "label": "驳回，重申报备章程",
+        "hint": "防的就是尾大不掉",
+        "effects": {
+          "personal": {
+            "faction_alarm": -3
+          },
+          "forces": {
+            "naturalized": {
+              "satisfaction": -5,
+              "hostility": 5
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "LAB-007",
+    "pool": "civil",
+    "series": "civil.labor",
+    "type": "backlash",
+    "title": "只认登记册",
+    "source": {
+      "kind": "force",
+      "id": "naturalized",
+      "name": "归化民组织"
+    },
+    "tags": [
+      "组织",
+      "政治",
+      "危机"
+    ],
+    "requires": [
+      {
+        "force": "naturalized",
+        "metric": "influence",
+        "gte": 65
+      }
+    ],
+    "excludes": [],
+    "weight": 35,
+    "text": "呈：实情如此——劳力粮米调度，先过基层组织，再报民政备案。有委员当问「这营里谁在主事」，满座无答。",
+    "options": {
+      "left": {
+        "id": "jieshi_zhengbian",
+        "label": "顺势整编：纳入体系，颁印信",
+        "hint": "水能载舟。先让它有缰绳",
+        "effects": {
+          "stats": {
+            "people": 2,
+            "council": -3
+          },
+          "personal": {
+            "faction_alarm": 5,
+            "personal_pressure": 3
+          },
+          "forces": {
+            "naturalized": {
+              "influence": 4
+            }
+          }
+        }
+      },
+      "right": {
+        "id": "gongkai_qingxi",
+        "label": "公开清洗，撤换头面人物",
+        "hint": "快刀斩乱麻，也斩人心",
+        "effects": {
+          "stats": {
+            "council": 3,
+            "people": -3
+          },
+          "personal": {
+            "personal_pressure": 2
+          },
+          "forces": {
+            "naturalized": {
+              "satisfaction": -8,
+              "hostility": 6
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "LAB-008",
+    "pool": "civil",
+    "series": "civil.labor",
+    "type": "omen",
+    "title": "登记册比军令好使",
+    "source": {
+      "kind": "force",
+      "id": "council",
+      "name": "元老院"
+    },
+    "tags": [
+      "组织",
+      "政治",
+      "前兆"
+    ],
+    "requires": [
+      {
+        "force": "naturalized",
+        "metric": "influence",
+        "gte": 55
+      }
+    ],
+    "excludes": [],
+    "weight": 30,
+    "text": "呈：有元老述其见闻——工地传口谕，管工归化民先问「登记册上写了吗」。满座一笑，笑罢无人接话。",
+    "options": {
+      "left": {
+        "id": "jiaqiang_baobei",
+        "label": "收紧报备：凡代办，先备案",
+        "hint": "把缰绳往回拉一拉",
+        "effects": {
+          "forces": {
+            "naturalized": {
+              "satisfaction": -3
+            }
+          },
+          "personal": {
+            "faction_alarm": -3
+          }
+        }
+      },
+      "right": {
+        "id": "an_shi_bubiao",
+        "label": "笑笑，翻过这一页",
+        "hint": "有些玩笑，当真就晚了",
+        "effects": {
+          "personal": {
+            "faction_alarm": 2
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "CIV-009",
+    "pool": "civil",
+    "series": "civil.captives",
+    "type": "key",
+    "title": "第一个归化民骨干",
+    "source": {
+      "kind": "character",
+      "id": "any",
+      "name": "民政委员会"
+    },
+    "tags": [
+      "俘虏",
+      "组织"
+    ],
+    "requires": [
+      {
+        "used": "CIV-004"
+      }
+    ],
+    "excludes": [],
+    "weight": 28,
+    "text": "呈：讲习班头期结业，最出挑者是俘虏出身的后生：识字，算盘快，敢在人前立言。置于何位？",
+    "options": {
+      "left": {
+        "id": "wei_gongdi_guanguan",
+        "label": "委为工地管工，管三十人",
+        "hint": "归化民管归化民，从此有了头一个",
+        "effects": {
+          "stats": {
+            "people": 2
+          },
+          "personal": {
+            "faction_alarm": 2
+          },
+          "forces": {
+            "naturalized": {
+              "influence": 4,
+              "satisfaction": 4
+            }
+          }
+        }
+      },
+      "right": {
+        "id": "song_wenshufang",
+        "label": "调进文书房，做贴身书办",
+        "hint": "放在眼皮底下，也放在要害上",
+        "effects": {
+          "stats": {
+            "council": 2
+          },
+          "forces": {
+            "naturalized": {
+              "satisfaction": 3
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "LAB-009",
+    "pool": "civil",
+    "series": "civil.labor",
+    "type": "key",
+    "title": "里正的条陈",
+    "source": {
+      "kind": "force",
+      "id": "naturalized",
+      "name": "归化民组织"
+    },
+    "tags": [
+      "组织",
+      "工分"
+    ],
+    "requires": [
+      {
+        "used": "LAB-005"
+      }
+    ],
+    "excludes": [],
+    "weight": 26,
+    "text": "呈：十二里正联名条陈三事：颁《营规》、设夜学、禁夜赌。文粗理顺——「赌风一长，工分都要进当铺」。",
+    "options": {
+      "left": {
+        "id": "ban_yinggui_yexue",
+        "label": "准：颁《营规》，设夜学，禁赌",
+        "hint": "基层自己会要规矩了。这既是好事，也是信号",
+        "effects": {
+          "stats": {
+            "people": 3
+          },
+          "personal": {
+            "faction_alarm": 2
+          },
+          "forces": {
+            "naturalized": {
+              "influence": 3,
+              "satisfaction": 4
+            }
+          },
+          "states": [
+            {
+              "id": "series.civil_labor",
+              "op": "add",
+              "value": 1
+            }
+          ]
+        }
+      },
+      "right": {
+        "id": "bohui_tiaochen",
+        "label": "驳回报备：营规只能出一部",
+        "hint": "规矩攥在手里。里正们的脸面往哪儿搁",
+        "effects": {
+          "stats": {
+            "people": -1
+          },
+          "forces": {
+            "naturalized": {
+              "satisfaction": -4
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "CIV-011",
+    "pool": "civil",
+    "series": "civil.captives",
+    "type": "cleanup",
+    "title": "营里的风言风语",
+    "source": {
+      "kind": "character",
+      "id": "any",
+      "name": "民政委员会"
+    },
+    "tags": [
+      "俘虏",
+      "民政"
+    ],
+    "requires": [
+      {
+        "used": "CIV-003"
+      }
+    ],
+    "excludes": [],
+    "weight": 26,
+    "text": "呈：俘虏营风波后，营中传出数个版本的夜话——夜半点名云云，被拿者不见云云。民政请开大会辟谣。",
+    "options": {
+      "left": {
+        "id": "kaihui_biyao",
+        "label": "开全营大会，把事说透",
+        "hint": "实话实说，包括难听的部分",
+        "effects": {
+          "stats": {
+            "people": 3
+          },
+          "personal": {
+            "personal_pressure": 1
+          }
+        }
+      },
+      "right": {
+        "id": "buyu_lihui",
+        "label": "身正不怕影子斜，不理会",
+        "hint": "传言自己会死。也会自己长",
+        "effects": {
+          "stats": {
+            "people": -2
+          },
+          "personal": {
+            "faction_alarm": 1
+          }
+        }
+      }
+    }
+  }
+]

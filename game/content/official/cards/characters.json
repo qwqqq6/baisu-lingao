@@ -1,0 +1,2462 @@
+[
+  {
+    "id": "CHAR-WNH-OPEN-001",
+    "pool": "core",
+    "series": "politics.council",
+    "type": "opening",
+    "title": "农委会的第一道令",
+    "source": {
+      "kind": "character",
+      "id": "wunanhai",
+      "name": "吴南海"
+    },
+    "tags": [
+      "农业",
+      "民生"
+    ],
+    "requires": [],
+    "excludes": [],
+    "weight": 100,
+    "text": "呈：农委会全体，谨贺首长履新。今百事待举：或请先清丈田亩、清点稻种薯种，立农政之基；或请先办伙房医帐，使开荒之人先饱。第一道政令何出，伏乞批示。",
+    "options": {
+      "left": {
+        "id": "xian_zhangliang_tianmu",
+        "label": "先丈量田亩、清点稻种薯种",
+        "hint": "家底摸清，心里不慌",
+        "effects": {
+          "stats": {
+            "livelihood": 3,
+            "people": 2
+          },
+          "forces": {
+            "farm": {
+              "influence": 2
+            }
+          }
+        }
+      },
+      "right": {
+        "id": "xian_zhua_fulu_yingpan",
+        "label": "先抓伙房：开荒的人先吃饱",
+        "hint": "吃饱了才好说话",
+        "effects": {
+          "stats": {
+            "people": 3
+          },
+          "states": [
+            {
+              "id": "civil.captives_arrived",
+              "op": "set",
+              "value": true
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "CHAR-WNH-BACK-001",
+    "pool": "core",
+    "series": "politics.council",
+    "type": "backlash",
+    "title": "农口、农口",
+    "source": {
+      "kind": "force",
+      "id": "council",
+      "name": "元老院"
+    },
+    "tags": [
+      "农业",
+      "政治"
+    ],
+    "requires": [
+      {
+        "ruler": "wunanhai"
+      },
+      {
+        "force": "farm",
+        "metric": "influence",
+        "gte": 50
+      }
+    ],
+    "excludes": [],
+    "weight": 35,
+    "text": "呈：大会传言——营里一半的粮、七成的归化民，都得先问过农委。话冲着农庄来，更冲着首长来。",
+    "options": {
+      "left": {
+        "id": "ti_nongwei_beishu",
+        "label": "替农委说话",
+        "hint": "护短护到底",
+        "effects": {
+          "personal": {
+            "faction_alarm": 4
+          },
+          "forces": {
+            "farm": {
+              "influence": 4,
+              "satisfaction": 5
+            }
+          }
+        }
+      },
+      "right": {
+        "id": "ziqing_shencha",
+        "label": "自请查农口账目",
+        "hint": "自断一臂，换个清白",
+        "effects": {
+          "personal": {
+            "faction_alarm": -3,
+            "personal_pressure": 3
+          },
+          "forces": {
+            "farm": {
+              "satisfaction": -5
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "CHAR-WNH-FALL-001",
+    "pool": "core",
+    "series": "politics.council",
+    "type": "downfall",
+    "title": "听证会",
+    "source": {
+      "kind": "force",
+      "id": "council",
+      "name": "元老院"
+    },
+    "tags": [
+      "农业",
+      "政治",
+      "倒台"
+    ],
+    "requires": [
+      {
+        "ruler": "wunanhai"
+      },
+      {
+        "state": "ruler.pressure_personal",
+        "gte": 55
+      },
+      {
+        "used": "FARM-007"
+      },
+      {
+        "state": "character.wunanhai.weakened",
+        "equals": false
+      }
+    ],
+    "excludes": [],
+    "weight": 100,
+    "text": "呈：听证终日，质询直抵本身——农庄究竟是执委会的，还是吴某人的？散会无结论，唯见其背影塌了下去。",
+    "options": {
+      "left": {
+        "id": "yinjiu_quzhi",
+        "label": "引咎去职",
+        "hint": "体面下台，来日方长",
+        "effects": {
+          "stats": {
+            "council": 3
+          },
+          "personal": {
+            "faction_alarm": -3
+          },
+          "states": [
+            {
+              "id": "fall.last_reason",
+              "op": "set",
+              "value": "farm_overreach"
+            },
+            {
+              "id": "character.wunanhai.available",
+              "op": "set",
+              "value": false
+            }
+          ],
+          "stepDown": true
+        }
+      },
+      "right": {
+        "id": "laizhe_buzou",
+        "label": "赖着不走",
+        "hint": "强行续任，代价在后头",
+        "effects": {
+          "stats": {
+            "council": -4
+          },
+          "personal": {
+            "faction_alarm": 6,
+            "personal_pressure": 4
+          },
+          "forces": {
+            "farm": {
+              "influence": 4
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "CHAR-WNH-FALL2-001",
+    "pool": "core",
+    "series": "politics.council",
+    "type": "downfall",
+    "title": "二次逼宫",
+    "source": {
+      "kind": "force",
+      "id": "council",
+      "name": "元老院"
+    },
+    "tags": [
+      "农业",
+      "政治",
+      "倒台"
+    ],
+    "requires": [
+      {
+        "ruler": "wunanhai"
+      },
+      {
+        "state": "character.wunanhai.weakened",
+        "equals": true
+      },
+      {
+        "state": "ruler.pressure_faction",
+        "gte": 60
+      }
+    ],
+    "excludes": [],
+    "weight": 100,
+    "text": "呈：上回保下来的人已非当家人：章批不动，粮调不走，通译亦开始绕行。此次联署一行——上次的情分，用完了。",
+    "options": {
+      "left": {
+        "id": "tihui_jiaoyin",
+        "label": "体面交印",
+        "hint": "这一回，没人再保了",
+        "effects": {
+          "stats": {
+            "council": 3
+          },
+          "states": [
+            {
+              "id": "fall.last_reason",
+              "op": "set",
+              "value": "impeach"
+            },
+            {
+              "id": "character.wunanhai.available",
+              "op": "set",
+              "value": false
+            }
+          ],
+          "stepDown": true
+        }
+      },
+      "right": {
+        "id": "gu_yi_yazhen",
+        "label": "再硬一次",
+        "hint": "刀已经架在脖子上了",
+        "effects": {
+          "stats": {
+            "council": -5
+          },
+          "personal": {
+            "faction_alarm": 6,
+            "violence_risk": 4,
+            "personal_pressure": 5
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "CHAR-WNH-LEG-001",
+    "pool": "core",
+    "series": "politics.council",
+    "type": "legacy",
+    "title": "农政系的旧部",
+    "source": {
+      "kind": "force",
+      "id": "farm",
+      "name": "南海农庄"
+    },
+    "tags": [
+      "农业",
+      "继承"
+    ],
+    "requires": [
+      {
+        "state": "history.former_rulers",
+        "includes": "wunanhai"
+      }
+    ],
+    "excludes": [],
+    "weight": 40,
+    "text": "呈：吴公虽去，农政系统犹在——粮秣、安置、春耕，仍经其旧部之手。新执政的条子，在农委会案头总要多躺两日。",
+    "options": {
+      "left": {
+        "id": "rang_jiubu_jixu_guan",
+        "label": "旧部照旧管粮",
+        "hint": "熟手管熟事",
+        "effects": {
+          "stats": {
+            "livelihood": 3
+          },
+          "personal": {
+            "faction_alarm": 2
+          },
+          "forces": {
+            "farm": {
+              "influence": 4,
+              "satisfaction": 4
+            }
+          }
+        }
+      },
+      "right": {
+        "id": "diaoli_hexin_gangwei",
+        "label": "旧部调离要害岗位",
+        "hint": "拔钉子，费锤子",
+        "effects": {
+          "stats": {
+            "council": 1
+          },
+          "personal": {
+            "faction_alarm": -2
+          },
+          "forces": {
+            "farm": {
+              "satisfaction": -4
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "CHAR-WNH-EXCL-001",
+    "pool": "core",
+    "series": "politics.council",
+    "type": "exclusive",
+    "title": "试验田边的傍晚",
+    "source": {
+      "kind": "character",
+      "id": "wunanhai",
+      "name": "吴南海"
+    },
+    "tags": [
+      "农业",
+      "民生"
+    ],
+    "requires": [
+      {
+        "ruler": "wunanhai"
+      },
+      {
+        "state": "farm.established",
+        "equals": true
+      }
+    ],
+    "excludes": [],
+    "weight": 14,
+    "text": "呈：傍晚试验田，首长与归化民老农对答秧水肥，通译不及则比划。归途语人：庄稼不哄人，它长给懂它的人看。",
+    "options": {
+      "left": {
+        "id": "tui_liangzhong",
+        "label": "把新种的稻穗分给各村试种",
+        "hint": "十里八乡都记着这个好",
+        "effects": {
+          "stats": {
+            "people": 3
+          },
+          "forces": {
+            "locals": {
+              "satisfaction": 4
+            },
+            "farm": {
+              "influence": 2
+            }
+          }
+        }
+      },
+      "right": {
+        "id": "nongzhuang_miantui",
+        "label": "让农庄把新法闷头推到底",
+        "hint": "快。也扎眼",
+        "effects": {
+          "stats": {
+            "livelihood": 3,
+            "council": -2
+          },
+          "forces": {
+            "farm": {
+              "influence": 4
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "CHAR-WNH-SUCC-001",
+    "pool": "core",
+    "series": "politics.council",
+    "type": "succession",
+    "title": "农政派被推到台前",
+    "source": {
+      "kind": "force",
+      "id": "council",
+      "name": "元老院"
+    },
+    "tags": [
+      "政治",
+      "继任"
+    ],
+    "requires": [],
+    "excludes": [],
+    "weight": 100,
+    "text": "呈：粮食安置之议压过争吵，大会推吴南海于台前——众皆望其先稳住锅里的饭。",
+    "options": {
+      "left": {
+        "id": "jieshou_linshi_shouquan",
+        "label": "接受临时授权",
+        "hint": "先干起来再说",
+        "effects": {
+          "ruler": "wunanhai",
+          "personal": {
+            "legitimacy": 5,
+            "faction_alarm": 2
+          },
+          "states": [
+            {
+              "id": "ruler.current",
+              "op": "set",
+              "value": "wunanhai"
+            }
+          ]
+        }
+      },
+      "right": {
+        "id": "yaoqiu_kuoda_quanxian",
+        "label": "要求扩大农政权限",
+        "hint": "趁热打铁，也趁势坐大",
+        "effects": {
+          "ruler": "wunanhai",
+          "personal": {
+            "legitimacy": 8,
+            "faction_alarm": 5
+          },
+          "forces": {
+            "farm": {
+              "influence": 4,
+              "satisfaction": 4
+            }
+          },
+          "states": [
+            {
+              "id": "ruler.current",
+              "op": "set",
+              "value": "wunanhai"
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "CHAR-WD-OPEN-001",
+    "pool": "core",
+    "series": "politics.council",
+    "type": "opening",
+    "title": "登记册的第一页",
+    "source": {
+      "kind": "character",
+      "id": "wude",
+      "name": "邬德"
+    },
+    "tags": [
+      "民政",
+      "组织"
+    ],
+    "requires": [],
+    "excludes": [],
+    "weight": 100,
+    "text": "呈：民政委员会同人，谨贺首长履任。营中人口未清，或请即行全员登记、一人一册；或请先立伙房医帐、收拢人心。第一道令自何而落，请示下。",
+    "options": {
+      "left": {
+        "id": "dengji_quan_yingdi",
+        "label": "全员登记，一人一册",
+        "hint": "一册在手，心中有数",
+        "effects": {
+          "stats": {
+            "people": 3
+          },
+          "forces": {
+            "naturalized": {
+              "influence": 2
+            }
+          },
+          "states": [
+            {
+              "id": "series.civil_labor",
+              "op": "add",
+              "value": 1
+            }
+          ]
+        }
+      },
+      "right": {
+        "id": "xian_li_huofang_yizhang",
+        "label": "先立伙房与医帐",
+        "hint": "先救命，再造册",
+        "effects": {
+          "stats": {
+            "livelihood": 3,
+            "people": 2
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "CHAR-WD-BACK-001",
+    "pool": "core",
+    "series": "politics.council",
+    "type": "backlash",
+    "title": "册子比军令好使",
+    "source": {
+      "kind": "force",
+      "id": "council",
+      "name": "元老院"
+    },
+    "tags": [
+      "组织",
+      "政治"
+    ],
+    "requires": [
+      {
+        "ruler": "wude"
+      },
+      {
+        "force": "naturalized",
+        "metric": "influence",
+        "gte": 50
+      }
+    ],
+    "excludes": [],
+    "weight": 35,
+    "text": "呈：有元老拍出报告——劳役征派、粮米配给、婚丧嫁娶，皆先过邬氏登记册。军令出门要打折，他的册子不用。",
+    "options": {
+      "left": {
+        "id": "shunshi_tuixing_baojia",
+        "label": "顺势推行保甲编组",
+        "hint": "网络再密一层",
+        "effects": {
+          "stats": {
+            "people": 2
+          },
+          "personal": {
+            "faction_alarm": 5
+          },
+          "forces": {
+            "naturalized": {
+              "influence": 5
+            }
+          }
+        }
+      },
+      "right": {
+        "id": "shoudiao_bufen_quanxian",
+        "label": "主动收掉部分权限",
+        "hint": "自剪羽翼，以安众心",
+        "effects": {
+          "personal": {
+            "faction_alarm": -3,
+            "personal_pressure": 2
+          },
+          "forces": {
+            "naturalized": {
+              "satisfaction": -5
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "CHAR-WD-FALL-001",
+    "pool": "core",
+    "series": "politics.council",
+    "type": "downfall",
+    "title": "罢免动议",
+    "source": {
+      "kind": "force",
+      "id": "council",
+      "name": "元老院"
+    },
+    "tags": [
+      "政治",
+      "倒台"
+    ],
+    "requires": [
+      {
+        "ruler": "wude"
+      },
+      {
+        "state": "ruler.pressure_faction",
+        "gte": 60
+      },
+      {
+        "used": "LAB-008"
+      },
+      {
+        "state": "character.wude.weakened",
+        "equals": false
+      }
+    ],
+    "excludes": [],
+    "weight": 100,
+    "text": "呈：罢免动议，措辞冷静——以造册为名营私人网络，虽无实证，其势已成。表决前，受过恩者皆低头。",
+    "options": {
+      "left": {
+        "id": "jiaoquan_quzhi",
+        "label": "交权去职，配合审查",
+        "hint": "把册子交出去",
+        "effects": {
+          "stats": {
+            "council": 3
+          },
+          "personal": {
+            "faction_alarm": -3
+          },
+          "states": [
+            {
+              "id": "fall.last_reason",
+              "op": "set",
+              "value": "network_overreach"
+            },
+            {
+              "id": "character.wude.available",
+              "op": "set",
+              "value": false
+            }
+          ],
+          "stepDown": true
+        }
+      },
+      "right": {
+        "id": "lianye_chuanlian",
+        "label": "连夜串联保位",
+        "hint": "网络就是他的刀",
+        "effects": {
+          "stats": {
+            "council": -4
+          },
+          "personal": {
+            "faction_alarm": 5,
+            "personal_pressure": 3
+          },
+          "forces": {
+            "naturalized": {
+              "influence": 4
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "CHAR-WD-FALL2-001",
+    "pool": "core",
+    "series": "politics.council",
+    "type": "downfall",
+    "title": "清洗",
+    "source": {
+      "kind": "force",
+      "id": "council",
+      "name": "元老院"
+    },
+    "tags": [
+      "政治",
+      "倒台"
+    ],
+    "requires": [
+      {
+        "ruler": "wude"
+      },
+      {
+        "state": "character.wude.weakened",
+        "equals": true
+      },
+      {
+        "state": "ruler.pressure_faction",
+        "gte": 65
+      }
+    ],
+    "excludes": [],
+    "weight": 100,
+    "text": "呈：程序委员会不再客气——名单、登记册、基层名册，全部移交审查。邬公只问一句：册子烧不烧？",
+    "options": {
+      "left": {
+        "id": "jiao_ce_zishou",
+        "label": "交册自守，退出核心",
+        "hint": "保人不保权",
+        "effects": {
+          "stats": {
+            "council": 3
+          },
+          "personal": {
+            "faction_alarm": -2
+          },
+          "forces": {
+            "naturalized": {
+              "satisfaction": -6
+            }
+          },
+          "states": [
+            {
+              "id": "fall.last_reason",
+              "op": "set",
+              "value": "purge"
+            },
+            {
+              "id": "character.wude.available",
+              "op": "set",
+              "value": false
+            }
+          ],
+          "stepDown": true
+        }
+      },
+      "right": {
+        "id": "hu_ziwei",
+        "label": "让基层「自发请愿」留任",
+        "hint": "网收回来一次，就再也松不开了",
+        "effects": {
+          "stats": {
+            "council": -5
+          },
+          "personal": {
+            "faction_alarm": 7,
+            "violence_risk": 3,
+            "personal_pressure": 4
+          },
+          "forces": {
+            "naturalized": {
+              "influence": 6
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "CHAR-WD-LEG-001",
+    "pool": "core",
+    "series": "politics.council",
+    "type": "legacy",
+    "title": "归化民还在等他",
+    "source": {
+      "kind": "force",
+      "id": "naturalized",
+      "name": "归化民组织"
+    },
+    "tags": [
+      "组织",
+      "继承"
+    ],
+    "requires": [
+      {
+        "state": "history.former_rulers",
+        "includes": "wude"
+      }
+    ],
+    "excludes": [],
+    "weight": 40,
+    "text": "呈：里正遇事犹言「问邬大人」。新执政之令传至基层，如隔一层窗纸。",
+    "options": {
+      "left": {
+        "id": "anzhong_wenji",
+        "label": "暗中向他问计",
+        "hint": "好用，但难堪",
+        "effects": {
+          "stats": {
+            "people": 2
+          },
+          "personal": {
+            "faction_alarm": 3
+          },
+          "forces": {
+            "naturalized": {
+              "satisfaction": 5,
+              "influence": 3
+            }
+          }
+        }
+      },
+      "right": {
+        "id": "bixian_bujian",
+        "label": "避嫌不见",
+        "hint": "名分要紧",
+        "effects": {
+          "stats": {
+            "council": 1
+          },
+          "forces": {
+            "naturalized": {
+              "satisfaction": -4
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "CHAR-WD-EXCL-001",
+    "pool": "core",
+    "series": "politics.council",
+    "type": "exclusive",
+    "title": "训练班的夜课",
+    "source": {
+      "kind": "character",
+      "id": "wude",
+      "name": "邬德"
+    },
+    "tags": [
+      "组织",
+      "民政"
+    ],
+    "requires": [
+      {
+        "ruler": "wude"
+      },
+      {
+        "state": "civil.captives_arrived",
+        "equals": true
+      }
+    ],
+    "excludes": [],
+    "weight": 14,
+    "text": "呈：训练班夜课，邬德亲讲识字算数与章程。归化民问学此何用，答：将来营里的事，要你们自己管得起来。",
+    "options": {
+      "left": {
+        "id": "ti_ba_ganbu",
+        "label": "从训练班里提一批骨干下基层",
+        "hint": "他的人，越提越多",
+        "effects": {
+          "stats": {
+            "people": 3
+          },
+          "personal": {
+            "faction_alarm": 3
+          },
+          "forces": {
+            "naturalized": {
+              "influence": 5,
+              "satisfaction": 4
+            }
+          }
+        },
+        "followups": [
+          "CHAR-WD-021"
+        ]
+      },
+      "right": {
+        "id": "zengkai_suanxue",
+        "label": "增开算学、测绘两科",
+        "hint": "急用先学，不声张",
+        "effects": {
+          "stats": {
+            "council": 1,
+            "people": 2
+          },
+          "forces": {
+            "naturalized": {
+              "satisfaction": 3
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "CHAR-WD-SUCC-001",
+    "pool": "core",
+    "series": "politics.council",
+    "type": "succession",
+    "title": "民政系统迎来了自己人",
+    "source": {
+      "kind": "force",
+      "id": "council",
+      "name": "元老院"
+    },
+    "tags": [
+      "政治",
+      "继任"
+    ],
+    "requires": [],
+    "excludes": [],
+    "weight": 100,
+    "text": "呈：人心惶惶，总得先安柴米。清点一圈——能使归化民听话、俘虏营不闹、粮册对账者，还是邬德。",
+    "options": {
+      "left": {
+        "id": "linshou_shouquan",
+        "label": "受任于败军之际",
+        "hint": "先把摊子接住",
+        "effects": {
+          "ruler": "wude",
+          "personal": {
+            "legitimacy": 6,
+            "faction_alarm": 3
+          },
+          "states": [
+            {
+              "id": "ruler.current",
+              "op": "set",
+              "value": "wude"
+            }
+          ]
+        }
+      },
+      "right": {
+        "id": "yaoqiu_zhengshi_renming",
+        "label": "要求正式任命与专断之权",
+        "hint": "名不正则言不顺",
+        "effects": {
+          "ruler": "wude",
+          "personal": {
+            "legitimacy": 9,
+            "faction_alarm": 6
+          },
+          "forces": {
+            "naturalized": {
+              "influence": 3
+            }
+          },
+          "states": [
+            {
+              "id": "ruler.current",
+              "op": "set",
+              "value": "wude"
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "CHAR-BW-OPEN-001",
+    "pool": "core",
+    "series": "politics.council",
+    "type": "opening",
+    "title": "警戒条例",
+    "source": {
+      "kind": "character",
+      "id": "beiwei",
+      "name": "北炜"
+    },
+    "tags": [
+      "军务",
+      "治安"
+    ],
+    "requires": [],
+    "excludes": [],
+    "weight": 100,
+    "text": "呈：侦察排谨贺首长掌军。今营防空虚，或请外推哨线半里、重建警戒圈；或请先清营内闲杂人等，以杜内患。何者先行，请批示。",
+    "options": {
+      "left": {
+        "id": "chongjian_jingjiequan",
+        "label": "重建警戒圈，哨线外推半里",
+        "hint": "把敌人挡在哨线之外",
+        "effects": {
+          "stats": {
+            "military": 4,
+            "people": -1
+          },
+          "forces": {
+            "guard": {
+              "influence": 2
+            }
+          }
+        }
+      },
+      "right": {
+        "id": "qingcha_neijian",
+        "label": "先清查营内闲杂人等",
+        "hint": "祸起萧墙",
+        "effects": {
+          "stats": {
+            "military": 2
+          },
+          "personal": {
+            "faction_alarm": 2,
+            "violence_risk": 2
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "CHAR-BW-BACK-001",
+    "pool": "core",
+    "series": "politics.council",
+    "type": "backlash",
+    "title": "保卫组的胃口",
+    "source": {
+      "kind": "force",
+      "id": "council",
+      "name": "元老院"
+    },
+    "tags": [
+      "保卫",
+      "政治"
+    ],
+    "requires": [
+      {
+        "ruler": "beiwei"
+      },
+      {
+        "force": "guard",
+        "metric": "influence",
+        "gte": 50
+      }
+    ],
+    "excludes": [],
+    "weight": 35,
+    "text": "呈：保卫组编制屡扩，又请增设内务纠察。有元老冷问：纠到最后，纠到大会头上么？满座无笑。",
+    "options": {
+      "left": {
+        "id": "zai_yao_yizhongdui",
+        "label": "再要一个中队",
+        "hint": "枪杆子越多越好",
+        "effects": {
+          "stats": {
+            "military": 3,
+            "council": -3
+          },
+          "personal": {
+            "faction_alarm": 4
+          },
+          "forces": {
+            "guard": {
+              "influence": 5
+            }
+          }
+        }
+      },
+      "right": {
+        "id": "anzhu_bupi",
+        "label": "按住不批",
+        "hint": "刀不能无鞘",
+        "effects": {
+          "personal": {
+            "violence_risk": -2,
+            "personal_pressure": 2
+          },
+          "forces": {
+            "guard": {
+              "satisfaction": -5
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "CHAR-BW-FALL-001",
+    "pool": "core",
+    "series": "politics.council",
+    "type": "downfall",
+    "title": "夜路上的黑影",
+    "source": {
+      "kind": "character",
+      "id": "any",
+      "name": "卫兵"
+    },
+    "tags": [
+      "保卫",
+      "倒台"
+    ],
+    "requires": [
+      {
+        "ruler": "beiwei"
+      },
+      {
+        "state": "ruler.pressure_violence",
+        "gte": 65
+      },
+      {
+        "used": "SEC-008"
+      },
+      {
+        "state": "character.beiwei.weakened",
+        "equals": false
+      }
+    ],
+    "excludes": [],
+    "weight": 100,
+    "text": "急呈：自工房归舍土路，红树林中伸出两只手。枪响影散，血仍流了一地——刀口上活下来的人，没躲开刀口。",
+    "options": {
+      "left": {
+        "id": "shangzhong_buzhi",
+        "label": "伤重不治",
+        "hint": "强硬了一辈子，倒在暗处",
+        "effects": {
+          "stats": {
+            "military": 3,
+            "people": -3
+          },
+          "personal": {
+            "violence_risk": 5
+          },
+          "states": [
+            {
+              "id": "fall.last_reason",
+              "op": "set",
+              "value": "assassinate"
+            },
+            {
+              "id": "character.beiwei.dead",
+              "op": "set",
+              "value": true
+            },
+            {
+              "id": "character.beiwei.available",
+              "op": "set",
+              "value": false
+            }
+          ],
+          "stepDown": true
+        }
+      },
+      "right": {
+        "id": "jiaoxing_tanguo",
+        "label": "侥幸逃过，惊魂未定",
+        "hint": "命保住了，胆气漏了",
+        "effects": {
+          "stats": {
+            "military": 3
+          },
+          "personal": {
+            "personal_pressure": 6,
+            "violence_risk": 3
+          },
+          "forces": {
+            "guard": {
+              "influence": 4
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "CHAR-BW-FALL2-001",
+    "pool": "core",
+    "series": "politics.council",
+    "type": "downfall",
+    "title": "兵营的沉默",
+    "source": {
+      "kind": "force",
+      "id": "guard",
+      "name": "保卫组"
+    },
+    "tags": [
+      "保卫",
+      "倒台"
+    ],
+    "requires": [
+      {
+        "ruler": "beiwei"
+      },
+      {
+        "state": "character.beiwei.weakened",
+        "equals": true
+      },
+      {
+        "state": "ruler.pressure_violence",
+        "gte": 70
+      }
+    ],
+    "excludes": [],
+    "weight": 100,
+    "text": "呈：调防批文两驳，军械清册调走备查。连排长串门太勤——强硬的人对付得了明枪，对付不了营中的沉默。",
+    "options": {
+      "left": {
+        "id": "zidong_jiefang",
+        "label": "自动请解兵权",
+        "hint": "把枪放下，人还能站着",
+        "effects": {
+          "stats": {
+            "council": 3,
+            "military": -3
+          },
+          "states": [
+            {
+              "id": "fall.last_reason",
+              "op": "set",
+              "value": "mutiny"
+            },
+            {
+              "id": "character.beiwei.available",
+              "op": "set",
+              "value": false
+            }
+          ],
+          "stepDown": true
+        }
+      },
+      "right": {
+        "id": "qingxi_paizhang",
+        "label": "连夜清洗涉事的连排",
+        "hint": "兵变未必发生，军心一定散了",
+        "effects": {
+          "stats": {
+            "military": -5,
+            "council": -4
+          },
+          "personal": {
+            "violence_risk": 7,
+            "personal_pressure": 5
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "CHAR-BW-LEG-001",
+    "pool": "core",
+    "series": "politics.council",
+    "type": "legacy",
+    "title": "黑名单",
+    "source": {
+      "kind": "force",
+      "id": "guard",
+      "name": "保卫组"
+    },
+    "tags": [
+      "保卫",
+      "继承"
+    ],
+    "requires": [
+      {
+        "state": "history.former_rulers",
+        "includes": "beiwei"
+      }
+    ],
+    "excludes": [],
+    "weight": 40,
+    "text": "呈：档案柜犹锁名单：数百名字，按危险分七等。继任者翻开第一页，即知此遗产之烫手。",
+    "options": {
+      "left": {
+        "id": "baoliu_mingdan",
+        "label": "保留名单，以备外敌",
+        "hint": "防患于未然",
+        "effects": {
+          "stats": {
+            "military": 3
+          },
+          "personal": {
+            "violence_risk": 3
+          },
+          "forces": {
+            "guard": {
+              "satisfaction": 4
+            }
+          }
+        }
+      },
+      "right": {
+        "id": "dangmian_shao_diao",
+        "label": "当众烧掉",
+        "hint": "火光里都是人情",
+        "effects": {
+          "stats": {
+            "people": 2
+          },
+          "personal": {
+            "violence_risk": -5
+          },
+          "forces": {
+            "guard": {
+              "satisfaction": -5
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "CHAR-BW-EXCL-001",
+    "pool": "core",
+    "series": "politics.council",
+    "type": "exclusive",
+    "title": "沙盘",
+    "source": {
+      "kind": "character",
+      "id": "beiwei",
+      "name": "北炜"
+    },
+    "tags": [
+      "军务",
+      "保卫"
+    ],
+    "requires": [
+      {
+        "ruler": "beiwei"
+      },
+      {
+        "state": "security.guard_authorized",
+        "equals": true
+      }
+    ],
+    "excludes": [],
+    "weight": 14,
+    "text": "呈：屋置沙盘——百仞城、博铺、马袅、渡口俱备，夜立半时。问防谁，答：哨线是拿来在有人惦记你之前摆好的。",
+    "options": {
+      "left": {
+        "id": "baopu_paotai",
+        "label": "在博铺起一座炮台",
+        "hint": "海上的事，海上挡",
+        "effects": {
+          "stats": {
+            "military": 4,
+            "livelihood": -2
+          },
+          "wind": -2,
+          "days": 2,
+          "forces": {
+            "guard": {
+              "influence": 3
+            }
+          }
+        }
+      },
+      "right": {
+        "id": "yelu_lianbing",
+        "label": "拉练：全营夜间紧急集合",
+        "hint": "练的是兵，折腾的是所有人",
+        "effects": {
+          "stats": {
+            "military": 5,
+            "people": -2
+          },
+          "personal": {
+            "violence_risk": 2
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "CHAR-BW-SUCC-001",
+    "pool": "core",
+    "series": "politics.council",
+    "type": "succession",
+    "title": "风雨飘摇，需要一个镇得住的人",
+    "source": {
+      "kind": "force",
+      "id": "council",
+      "name": "元老院"
+    },
+    "tags": [
+      "政治",
+      "继任"
+    ],
+    "requires": [],
+    "excludes": [],
+    "weight": 100,
+    "text": "呈：外有强敌，内有流言。老元老一锤定音——让北炜来，至少他的哨线没漏过风。",
+    "options": {
+      "left": {
+        "id": "shouren_yu_weinan",
+        "label": "于危难中受任",
+        "hint": "先把哨线扎紧",
+        "effects": {
+          "ruler": "beiwei",
+          "personal": {
+            "legitimacy": 5
+          },
+          "stats": {
+            "military": 3
+          },
+          "states": [
+            {
+              "id": "ruler.current",
+              "op": "set",
+              "value": "beiwei"
+            }
+          ]
+        }
+      },
+      "right": {
+        "id": "yaoqiu_junshi_ducai",
+        "label": "要求战时专断之权",
+        "hint": "军情紧急，不容掣肘",
+        "effects": {
+          "ruler": "beiwei",
+          "personal": {
+            "legitimacy": 8,
+            "faction_alarm": 5,
+            "violence_risk": 3
+          },
+          "forces": {
+            "guard": {
+              "influence": 4,
+              "satisfaction": 5
+            }
+          },
+          "states": [
+            {
+              "id": "ruler.current",
+              "op": "set",
+              "value": "beiwei"
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "CHAR-MQZ-OPEN-001",
+    "pool": "core",
+    "series": "politics.council",
+    "type": "opening",
+    "title": "计划狂的物资总表",
+    "source": {
+      "kind": "character",
+      "id": "maqianzhu",
+      "name": "马千瞩"
+    },
+    "tags": [
+      "计划",
+      "工业"
+    ],
+    "requires": [],
+    "excludes": [],
+    "weight": 100,
+    "text": "呈：计委同人，谨贺首长视事。各口账目已齐，或请即行物资普查、先成总表；或请先抓一座砖窑、以实绩立信。何先何后，伏候钧裁。",
+    "options": {
+      "left": {
+        "id": "quanyuan_pucha",
+        "label": "全员铺开物资普查",
+        "hint": "磨刀不误砍柴工",
+        "effects": {
+          "stats": {
+            "council": 1,
+            "livelihood": -2
+          },
+          "states": [
+            {
+              "id": "series.planning_committee",
+              "op": "add",
+              "value": 1
+            }
+          ]
+        }
+      },
+      "right": {
+        "id": "xian_zhua_yizhuan_yao",
+        "label": "先抓一座砖窑见效",
+        "hint": "空谈误国，实干兴营",
+        "effects": {
+          "stats": {
+            "livelihood": 2,
+            "military": 1
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "CHAR-MQZ-BACK-001",
+    "pool": "core",
+    "series": "politics.council",
+    "type": "backlash",
+    "title": "指标的影子",
+    "source": {
+      "kind": "force",
+      "id": "council",
+      "name": "元老院"
+    },
+    "tags": [
+      "计划",
+      "政治"
+    ],
+    "requires": [
+      {
+        "ruler": "maqianzhu"
+      },
+      {
+        "force": "planning",
+        "metric": "influence",
+        "gte": 50
+      }
+    ],
+    "excludes": [],
+    "weight": 35,
+    "text": "呈：排期表悬于每个工棚。有委员嘀咕：动一车料调十人皆须对表，表后站的是谁，心里清楚。外号曰「督工的圣旨」。",
+    "options": {
+      "left": {
+        "id": "wei_zhibiao_huhang",
+        "label": "为指标护航",
+        "hint": "计划就是纪律",
+        "effects": {
+          "stats": {
+            "livelihood": -3
+          },
+          "personal": {
+            "violence_risk": 2
+          },
+          "forces": {
+            "planning": {
+              "influence": 4
+            }
+          }
+        }
+      },
+      "right": {
+        "id": "huan_zhibiao_sanyueyue",
+        "label": "指标缓三个月",
+        "hint": "退一步，表就好看些",
+        "effects": {
+          "stats": {
+            "livelihood": 3
+          },
+          "personal": {
+            "personal_pressure": 2
+          },
+          "forces": {
+            "planning": {
+              "satisfaction": -5
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "CHAR-MQZ-FALL-001",
+    "pool": "core",
+    "series": "politics.council",
+    "type": "downfall",
+    "title": "计划失败听证会",
+    "source": {
+      "kind": "force",
+      "id": "council",
+      "name": "元老院"
+    },
+    "tags": [
+      "计划",
+      "政治",
+      "倒台"
+    ],
+    "requires": [
+      {
+        "ruler": "maqianzhu"
+      },
+      {
+        "state": "ruler.pressure_personal",
+        "gte": 55
+      },
+      {
+        "used": "PLAN-007"
+      },
+      {
+        "state": "character.maqianzhu.weakened",
+        "equals": false
+      }
+    ],
+    "excludes": [],
+    "weight": 100,
+    "text": "呈：听证会上，欠账皆归因客观条件不足。质询只一句：当初的表上，为什么不写？门板总表在穿堂风里哗哗作响。",
+    "options": {
+      "left": {
+        "id": "yinjiu_cizhi_jihua",
+        "label": "引咎辞职",
+        "hint": "表算错了，人认账",
+        "effects": {
+          "stats": {
+            "council": 3
+          },
+          "personal": {
+            "faction_alarm": -2
+          },
+          "states": [
+            {
+              "id": "fall.last_reason",
+              "op": "set",
+              "value": "plan_failure"
+            },
+            {
+              "id": "character.maqianzhu.available",
+              "op": "set",
+              "value": false
+            }
+          ],
+          "stepDown": true
+        }
+      },
+      "right": {
+        "id": "na_shuju_yingding",
+        "label": "拿数据硬顶",
+        "hint": "他从来不信自己会错",
+        "effects": {
+          "stats": {
+            "council": -4
+          },
+          "personal": {
+            "faction_alarm": 5,
+            "personal_pressure": 3
+          },
+          "forces": {
+            "planning": {
+              "influence": 3
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "CHAR-MQZ-FALL2-001",
+    "pool": "core",
+    "series": "politics.council",
+    "type": "downfall",
+    "title": "被架空的督工",
+    "source": {
+      "kind": "force",
+      "id": "council",
+      "name": "元老院"
+    },
+    "tags": [
+      "计划",
+      "政治",
+      "倒台"
+    ],
+    "requires": [
+      {
+        "ruler": "maqianzhu"
+      },
+      {
+        "state": "character.maqianzhu.weakened",
+        "equals": true
+      },
+      {
+        "state": "ruler.pressure_personal",
+        "gte": 70
+      }
+    ],
+    "excludes": [],
+    "weight": 100,
+    "text": "呈：调料三道会签，动工两天批文。后进抱不平，他摆手，照旧画没人看的表。直至排期会的通知里，没有他的名字。",
+    "options": {
+      "left": {
+        "id": "cizhi_jishu",
+        "label": "辞去职务，退居技术顾问",
+        "hint": "表留给别人画",
+        "effects": {
+          "stats": {
+            "council": 3
+          },
+          "forces": {
+            "planning": {
+              "satisfaction": -3
+            }
+          },
+          "states": [
+            {
+              "id": "fall.last_reason",
+              "op": "set",
+              "value": "health"
+            },
+            {
+              "id": "character.maqianzhu.available",
+              "op": "set",
+              "value": false
+            }
+          ],
+          "stepDown": true
+        }
+      },
+      "right": {
+        "id": "yueji_shangshu",
+        "label": "越级上书全体大会",
+        "hint": "最后一搏。赢了表在，输了人走",
+        "effects": {
+          "stats": {
+            "council": -5
+          },
+          "personal": {
+            "faction_alarm": 6,
+            "personal_pressure": 5
+          },
+          "forces": {
+            "planning": {
+              "influence": 4
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "CHAR-MQZ-LEG-001",
+    "pool": "core",
+    "series": "politics.council",
+    "type": "legacy",
+    "title": "计委的表还在跑",
+    "source": {
+      "kind": "force",
+      "id": "planning",
+      "name": "计划委员会"
+    },
+    "tags": [
+      "计划",
+      "继承"
+    ],
+    "requires": [
+      {
+        "state": "history.former_rulers",
+        "includes": "maqianzhu"
+      }
+    ],
+    "excludes": [],
+    "weight": 40,
+    "text": "呈：人去表存，按月照发。各口边骂边照表领料——毕竟只有它说得清，下月的铁从哪来、粮往哪去。",
+    "options": {
+      "left": {
+        "id": "rang_jihua_pao_wan",
+        "label": "让计划跑完这一期",
+        "hint": "箭在弦上",
+        "effects": {
+          "stats": {
+            "livelihood": -2
+          },
+          "forces": {
+            "planning": {
+              "influence": 3,
+              "satisfaction": 3
+            }
+          }
+        }
+      },
+      "right": {
+        "id": "dongjie_changbiao",
+        "label": "冻结长表，重新核算",
+        "hint": "推倒重来，代价不小",
+        "effects": {
+          "stats": {
+            "livelihood": 2,
+            "council": 1
+          },
+          "forces": {
+            "planning": {
+              "satisfaction": -5
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "CHAR-MQZ-EXCL-001",
+    "pool": "core",
+    "series": "politics.council",
+    "type": "exclusive",
+    "title": "督工查夜",
+    "source": {
+      "kind": "character",
+      "id": "maqianzhu",
+      "name": "马千瞩"
+    },
+    "tags": [
+      "计划",
+      "工业"
+    ],
+    "requires": [
+      {
+        "ruler": "maqianzhu"
+      },
+      {
+        "state": "planning.committee_established",
+        "equals": true
+      }
+    ],
+    "excludes": [],
+    "weight": 14,
+    "text": "呈：夜十点提灯查棚，窝工偷料糊弄配比者当场记名。归化民背后号「马阎王」，又号「督工」。闻之，令：三号棚灰浆，每日抽验。",
+    "options": {
+      "left": {
+        "id": "yanshi_zhiliang",
+        "label": "立验收制：不合格一律返工",
+        "hint": "工慢了，活硬了",
+        "effects": {
+          "stats": {
+            "livelihood": -1,
+            "military": 3
+          },
+          "forces": {
+            "planning": {
+              "influence": 4,
+              "satisfaction": 3
+            }
+          }
+        }
+      },
+      "right": {
+        "id": "jijiang_gongqi",
+        "label": "超额完工者发双工分",
+        "hint": "大棒之外，也得有胡萝卜",
+        "effects": {
+          "stats": {
+            "livelihood": 2,
+            "people": 2
+          },
+          "forces": {
+            "planning": {
+              "satisfaction": 4
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "CHAR-MQZ-SUCC-001",
+    "pool": "core",
+    "series": "politics.council",
+    "type": "succession",
+    "title": "计委推举了新掌柜",
+    "source": {
+      "kind": "force",
+      "id": "council",
+      "name": "元老院"
+    },
+    "tags": [
+      "政治",
+      "继任"
+    ],
+    "requires": [],
+    "excludes": [],
+    "weight": 100,
+    "text": "呈：烂摊须会算账者。满座唯计委胸有全本账目。或戏言让表来执政，遂请最懂表的人。",
+    "options": {
+      "left": {
+        "id": "jieshi_paiqi_biao",
+        "label": "接过排期表",
+        "hint": "账在胸中",
+        "effects": {
+          "ruler": "maqianzhu",
+          "personal": {
+            "legitimacy": 4
+          },
+          "stats": {
+            "livelihood": -2
+          },
+          "forces": {
+            "planning": {
+              "influence": 3
+            }
+          },
+          "states": [
+            {
+              "id": "ruler.current",
+              "op": "set",
+              "value": "maqianzhu"
+            }
+          ]
+        }
+      },
+      "right": {
+        "id": "yaoqiu_tongchou_quanli",
+        "label": "要求全营统筹之权",
+        "hint": "要办事，先要权",
+        "effects": {
+          "ruler": "maqianzhu",
+          "personal": {
+            "legitimacy": 7,
+            "faction_alarm": 4
+          },
+          "stats": {
+            "livelihood": -3
+          },
+          "forces": {
+            "planning": {
+              "influence": 5,
+              "satisfaction": 5
+            }
+          },
+          "states": [
+            {
+              "id": "ruler.current",
+              "op": "set",
+              "value": "maqianzhu"
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "CHAR-WDS-OPEN-001",
+    "pool": "core",
+    "series": "politics.council",
+    "type": "opening",
+    "title": "老好人的第一次主持",
+    "source": {
+      "kind": "character",
+      "id": "wendsi",
+      "name": "文德嗣"
+    },
+    "tags": [
+      "会议",
+      "政治"
+    ],
+    "requires": [],
+    "excludes": [],
+    "weight": 100,
+    "text": "呈：各口委员谨贺首长主持大会。明日议程未定：或请凡事上会、协商共决；或请先遍访各口、会前通气。请主席示下。",
+    "options": {
+      "left": {
+        "id": "kaihui_dajia_shangliang",
+        "label": "凡事上会，大会商量着办",
+        "hint": "程序是最好的挡箭牌",
+        "effects": {
+          "stats": {
+            "council": 4
+          },
+          "personal": {
+            "faction_alarm": -2,
+            "personal_pressure": 1
+          }
+        }
+      },
+      "right": {
+        "id": "huixia_zhuyi_baihui",
+        "label": "会下逐一拜会",
+        "hint": "功夫在诗外",
+        "effects": {
+          "stats": {
+            "people": 1
+          },
+          "personal": {
+            "faction_alarm": -3,
+            "personal_pressure": 2
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "CHAR-WDS-BACK-001",
+    "pool": "core",
+    "series": "politics.council",
+    "type": "backlash",
+    "title": "背锅侠的账本",
+    "source": {
+      "kind": "force",
+      "id": "council",
+      "name": "元老院"
+    },
+    "tags": [
+      "会议",
+      "政治"
+    ],
+    "requires": [
+      {
+        "ruler": "wendsi"
+      },
+      {
+        "state": "ruler.pressure_faction",
+        "gte": 45
+      }
+    ],
+    "excludes": [],
+    "weight": 35,
+    "text": "呈：又代人受过。归舍对小本发呆——背的锅、压的怨、垫的窟窿已小半本。亲随问几时讨，答：这本账，讨不得。",
+    "options": {
+      "left": {
+        "id": "zai_bei_yici",
+        "label": "再背一次",
+        "hint": "大局为重",
+        "effects": {
+          "stats": {
+            "council": 2
+          },
+          "personal": {
+            "personal_pressure": 5,
+            "faction_alarm": -4
+          }
+        }
+      },
+      "right": {
+        "id": "tanpai_jujue",
+        "label": "摊牌：这锅不背了",
+        "hint": "老好人也有脾气",
+        "effects": {
+          "stats": {
+            "council": -3
+          },
+          "personal": {
+            "faction_alarm": 4,
+            "personal_pressure": -3
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "CHAR-WDS-FALL-001",
+    "pool": "core",
+    "series": "politics.council",
+    "type": "downfall",
+    "title": "扩大会议夺权",
+    "source": {
+      "kind": "force",
+      "id": "council",
+      "name": "元老院"
+    },
+    "tags": [
+      "会议",
+      "政治",
+      "倒台"
+    ],
+    "requires": [
+      {
+        "ruler": "wendsi"
+      },
+      {
+        "state": "ruler.pressure_faction",
+        "gte": 60
+      },
+      {
+        "state": "core.pillar.council",
+        "lte": 35
+      },
+      {
+        "state": "character.wendsi.weakened",
+        "equals": false
+      }
+    ],
+    "excludes": [],
+    "weight": 100,
+    "text": "呈：当场表决——执政授权改由常任委员会代行。环视求一张支持的脸，皆是回避。乃曰：我意已决，服从会议。",
+    "options": {
+      "left": {
+        "id": "timian_jiaoyin",
+        "label": "体面交印",
+        "hint": "输掉位子，不输风度",
+        "effects": {
+          "stats": {
+            "council": 3
+          },
+          "states": [
+            {
+              "id": "fall.last_reason",
+              "op": "set",
+              "value": "council_seizure"
+            },
+            {
+              "id": "character.wendsi.available",
+              "op": "set",
+              "value": false
+            }
+          ],
+          "stepDown": true
+        }
+      },
+      "right": {
+        "id": "dongyong_foujuequan",
+        "label": "动用否决权硬顶",
+        "hint": "最后的权力",
+        "effects": {
+          "stats": {
+            "council": -5
+          },
+          "personal": {
+            "faction_alarm": 6,
+            "violence_risk": 3,
+            "personal_pressure": 5
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "CHAR-WDS-FALL2-001",
+    "pool": "core",
+    "series": "politics.council",
+    "type": "downfall",
+    "title": "傀儡",
+    "source": {
+      "kind": "force",
+      "id": "council",
+      "name": "元老院"
+    },
+    "tags": [
+      "会议",
+      "政治",
+      "倒台"
+    ],
+    "requires": [
+      {
+        "ruler": "wendsi"
+      },
+      {
+        "state": "character.wendsi.weakened",
+        "equals": true
+      },
+      {
+        "state": "ruler.pressure_faction",
+        "gte": 65
+      }
+    ],
+    "excludes": [],
+    "weight": 100,
+    "text": "呈：批文三枚会签，会期由人排，讲稿有人改。名犹文总，实已他人当家。今日一份从未见过的决议上案候签——签否？",
+    "options": {
+      "left": {
+        "id": "qian_zi_tuiwei",
+        "label": "签字，同时请辞",
+        "hint": "最后一件事，按自己的意思办",
+        "effects": {
+          "stats": {
+            "council": 3
+          },
+          "states": [
+            {
+              "id": "fall.last_reason",
+              "op": "set",
+              "value": "council_seizure"
+            },
+            {
+              "id": "character.wendsi.available",
+              "op": "set",
+              "value": false
+            }
+          ],
+          "stepDown": true
+        }
+      },
+      "right": {
+        "id": "juebu_qianzi",
+        "label": "拒绝签字",
+        "hint": "傀儡也有傀儡的骨气",
+        "effects": {
+          "stats": {
+            "council": -5
+          },
+          "personal": {
+            "faction_alarm": 6,
+            "personal_pressure": 6
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "CHAR-WDS-LEG-001",
+    "pool": "core",
+    "series": "politics.council",
+    "type": "legacy",
+    "title": "文总的人情还在",
+    "source": {
+      "kind": "character",
+      "id": "any",
+      "name": "资深元老"
+    },
+    "tags": [
+      "会议",
+      "继承"
+    ],
+    "requires": [
+      {
+        "state": "history.former_rulers",
+        "includes": "wendsi"
+      }
+    ],
+    "excludes": [],
+    "weight": 40,
+    "text": "呈：文总虽去，人情仍在各家账上。会僵之际，辄有人提议：请文总出来说句公道话。",
+    "options": {
+      "left": {
+        "id": "qing_ta_chumian",
+        "label": "请他出面调停",
+        "hint": "人情用一次少一次",
+        "effects": {
+          "stats": {
+            "council": 3
+          },
+          "personal": {
+            "faction_alarm": -3
+          }
+        }
+      },
+      "right": {
+        "id": "rang_ta_xiuxi",
+        "label": "让他好好休息",
+        "hint": "人情要省着用",
+        "effects": {
+          "stats": {
+            "people": 1,
+            "council": -1
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "CHAR-WDS-EXCL-001",
+    "pool": "core",
+    "series": "politics.council",
+    "type": "exclusive",
+    "title": "文总的茶话会",
+    "source": {
+      "kind": "character",
+      "id": "wendsi",
+      "name": "文德嗣"
+    },
+    "tags": [
+      "会议",
+      "政治"
+    ],
+    "requires": [
+      {
+        "ruler": "wendsi"
+      },
+      {
+        "state": "series.politics_council",
+        "gte": 1
+      }
+    ],
+    "excludes": [],
+    "weight": 14,
+    "text": "呈：隔三五日，文总屋中一桌茶，各口实权皆至，不谈正事。茶过三巡，火气自下。新元老问何章程，曰：这不叫章程，叫喝茶。",
+    "options": {
+      "left": {
+        "id": "cha_huajie",
+        "label": "趁茶热，把两桩积怨说开",
+        "hint": "多少架，是茶桌上劝住的",
+        "effects": {
+          "stats": {
+            "council": 3
+          },
+          "personal": {
+            "faction_alarm": -3,
+            "personal_pressure": 1
+          }
+        }
+      },
+      "right": {
+        "id": "mocha_tingfeng",
+        "label": "只倒茶，不打断——听风声",
+        "hint": "醉翁之意不在酒",
+        "effects": {
+          "stats": {
+            "people": 1
+          },
+          "personal": {
+            "personal_pressure": 1
+          },
+          "wind": 1
+        }
+      }
+    }
+  },
+  {
+    "id": "CHAR-WDS-SUCC-001",
+    "pool": "core",
+    "series": "politics.council",
+    "type": "succession",
+    "title": "元老们需要一个挡箭牌",
+    "source": {
+      "kind": "force",
+      "id": "council",
+      "name": "元老院"
+    },
+    "tags": [
+      "政治",
+      "继任"
+    ],
+    "requires": [],
+    "excludes": [],
+    "weight": 100,
+    "text": "呈：夜半不决。或叹：找个谁都能接受的挑担子——出事主席担着，没出事功劳大家的。满座称善。",
+    "options": {
+      "left": {
+        "id": "mianer_shouming",
+        "label": "勉为其难，接下印信",
+        "hint": "躬身入局",
+        "effects": {
+          "ruler": "wendsi",
+          "personal": {
+            "legitimacy": 5,
+            "personal_pressure": 2
+          },
+          "states": [
+            {
+              "id": "ruler.current",
+              "op": "set",
+              "value": "wendsi"
+            }
+          ]
+        }
+      },
+      "right": {
+        "id": "yaoqiu_quanli_zhishu",
+        "label": "要求权责书面明确",
+        "hint": "先小人后君子",
+        "effects": {
+          "ruler": "wendsi",
+          "personal": {
+            "legitimacy": 8,
+            "faction_alarm": -3,
+            "personal_pressure": 3
+          },
+          "forces": {
+            "council": {
+              "satisfaction": 4
+            }
+          },
+          "states": [
+            {
+              "id": "ruler.current",
+              "op": "set",
+              "value": "wendsi"
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "CHAR-WD-021",
+    "pool": "core",
+    "series": "politics.council",
+    "type": "daily",
+    "title": "夜学的灯",
+    "source": {
+      "kind": "character",
+      "id": "wude",
+      "name": "邬德"
+    },
+    "tags": [
+      "组织",
+      "民政"
+    ],
+    "requires": [
+      {
+        "used": "CHAR-WD-EXCL-001"
+      }
+    ],
+    "excludes": [],
+    "weight": 14,
+    "text": "呈：夜学半月，西头草棚夜夜灯亮，娃娃们跟着念「临高」「百仞」。营外闲话渐起——短毛教人认字，是要化我民俗。大办，抑或低调？",
+    "options": {
+      "left": {
+        "id": "kuoda_xuetang",
+        "label": "把夜学办成正经学堂，元老轮流授课",
+        "hint": "灯亮一片，闲话也多一片",
+        "effects": {
+          "stats": {
+            "people": 3,
+            "council": -2
+          },
+          "personal": {
+            "faction_alarm": 3
+          },
+          "forces": {
+            "naturalized": {
+              "satisfaction": 5,
+              "influence": 2
+            }
+          }
+        }
+      },
+      "right": {
+        "id": "disu_yunying",
+        "label": "低调运行，不扩不加",
+        "hint": "灯还亮着，只是没人提",
+        "effects": {
+          "stats": {
+            "people": 1
+          },
+          "personal": {
+            "faction_alarm": -2
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "CHAR-BW-021",
+    "pool": "core",
+    "series": "politics.council",
+    "type": "cleanup",
+    "title": "伏波军的第一座坟",
+    "source": {
+      "kind": "character",
+      "id": "any",
+      "name": "卫兵"
+    },
+    "tags": [
+      "军务",
+      "伏波军"
+    ],
+    "requires": [
+      {
+        "used": "SEC-013"
+      },
+      {
+        "ruler": "beiwei"
+      }
+    ],
+    "excludes": [],
+    "weight": 35,
+    "text": "呈：首阵战报末尾一行小字——一名归化民籍战士腹部中刀，伤重不治。北炜于尸旁久立，云：怎么葬，我说了算。",
+    "options": {
+      "left": {
+        "id": "houzang_libei",
+        "label": "元老亲临执绋，厚葬立碑，抚恤从优",
+        "hint": "全军看着。这一刀抚的是活人的心",
+        "effects": {
+          "stats": {
+            "people": 4,
+            "military": 2
+          },
+          "personal": {
+            "personal_pressure": -2
+          },
+          "forces": {
+            "guard": {
+              "satisfaction": 5
+            },
+            "naturalized": {
+              "satisfaction": 4
+            }
+          }
+        }
+      },
+      "right": {
+        "id": "congjian_anzang",
+        "label": "从简安葬，抚恤照章",
+        "hint": "章是章。兵的心是另一本账",
+        "effects": {
+          "stats": {
+            "people": -2
+          },
+          "forces": {
+            "guard": {
+              "satisfaction": -4
+            }
+          }
+        }
+      }
+    }
+  }
+]

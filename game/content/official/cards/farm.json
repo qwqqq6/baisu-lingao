@@ -1,0 +1,1042 @@
+[
+  {
+    "id": "FARM-001",
+    "pool": "farm",
+    "series": "farm.nanhai",
+    "type": "key",
+    "title": "南海农庄章程",
+    "source": {
+      "kind": "character",
+      "id": "any",
+      "name": "农委会"
+    },
+    "tags": [
+      "农庄",
+      "农业",
+      "生计"
+    ],
+    "requires": [
+      {
+        "state": "contact.locals",
+        "equals": true
+      }
+    ],
+    "excludes": [
+      {
+        "state": "farm.established",
+        "equals": true
+      }
+    ],
+    "weight": 60,
+    "text": "呈：农委会规划——文澜河南岸开水田、坡地种蔗，牛棚谷仓窝棚位置俱已画定，批注「两年自给，五年有余」。人手农具种子皆缺。办大办小，请示下。",
+    "options": {
+      "left": {
+        "id": "quanli_jianzhuang",
+        "label": "照章程全办：水田、蔗田、窝棚一起上",
+        "hint": "动静大，见效也大",
+        "effects": {
+          "stats": {
+            "livelihood": 6,
+            "council": -2
+          },
+          "days": 3,
+          "forces": {
+            "farm": {
+              "influence": 8,
+              "satisfaction": 8
+            }
+          },
+          "states": [
+            {
+              "id": "farm.established",
+              "op": "set",
+              "value": true
+            },
+            {
+              "id": "farm.autonomy_level",
+              "op": "set",
+              "value": 2
+            },
+            {
+              "id": "series.farm_nanhai",
+              "op": "add",
+              "value": 2
+            }
+          ]
+        },
+        "followups": [
+          "FARM-004"
+        ]
+      },
+      "right": {
+        "id": "xiao_guimo_shidian",
+        "label": "先开两百亩试验田",
+        "hint": "步子小，摔不着",
+        "effects": {
+          "stats": {
+            "livelihood": 3
+          },
+          "days": 2,
+          "forces": {
+            "farm": {
+              "influence": 4,
+              "satisfaction": 5
+            }
+          },
+          "states": [
+            {
+              "id": "farm.established",
+              "op": "set",
+              "value": true
+            },
+            {
+              "id": "farm.autonomy_level",
+              "op": "set",
+              "value": 1
+            },
+            {
+              "id": "series.farm_nanhai",
+              "op": "add",
+              "value": 1
+            }
+          ]
+        },
+        "followups": [
+          "FARM-004"
+        ]
+      }
+    },
+    "variants": [
+      {
+        "id": "wunanhai_commune",
+        "kind": "character",
+        "when": {
+          "ruler": "wunanhai",
+          "chance": 0.65,
+          "tagsAny": [
+            "农业",
+            "农庄",
+            "民生"
+          ]
+        },
+        "replaceOption": "right",
+        "option": {
+          "id": "guihuamin_yangban",
+          "label": "顺带建一个归化民新村",
+          "hint": "吴南海的原话：「庄稼不哄人，人心也是」",
+          "effects": {
+            "stats": {
+              "people": 3,
+              "livelihood": 2,
+              "council": -2
+            },
+            "days": 2,
+            "forces": {
+              "farm": {
+                "influence": 5,
+                "satisfaction": 6
+              },
+              "locals": {
+                "satisfaction": 3
+              }
+            },
+            "states": [
+              {
+                "id": "farm.established",
+                "op": "set",
+                "value": true
+              },
+              {
+                "id": "farm.autonomy_level",
+                "op": "set",
+                "value": 1
+              },
+              {
+                "id": "series.farm_nanhai",
+                "op": "add",
+                "value": 1
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "FARM-002",
+    "pool": "farm",
+    "series": "farm.nanhai",
+    "type": "daily",
+    "title": "农忙缺人手",
+    "source": {
+      "kind": "force",
+      "id": "farm",
+      "name": "南海农庄"
+    },
+    "tags": [
+      "农庄",
+      "农业"
+    ],
+    "requires": [
+      {
+        "state": "farm.established",
+        "equals": true
+      }
+    ],
+    "excludes": [],
+    "weight": 12,
+    "text": "呈：秧不等人。庄中缺役一百二十名，或抽俘虏，或雇短工——日结三合米，村人已探头探脑。",
+    "options": {
+      "left": {
+        "id": "choudiao_fulu",
+        "label": "抽俘虏下田，兵押着去",
+        "hint": "力气现成，就是得派人看着",
+        "effects": {
+          "stats": {
+            "livelihood": 3,
+            "people": -1
+          }
+        }
+      },
+      "right": {
+        "id": "guyong_duanggong",
+        "label": "雇本地短工，日结三合米",
+        "hint": "米是自家仓里的，人心是村里的",
+        "effects": {
+          "stats": {
+            "livelihood": 2,
+            "council": -1
+          },
+          "forces": {
+            "locals": {
+              "satisfaction": 3
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "FARM-003",
+    "pool": "farm",
+    "series": "farm.nanhai",
+    "type": "daily",
+    "title": "头一茬稻子进仓了",
+    "source": {
+      "kind": "force",
+      "id": "farm",
+      "name": "南海农庄"
+    },
+    "tags": [
+      "农庄",
+      "农业",
+      "生计"
+    ],
+    "requires": [
+      {
+        "state": "farm.established",
+        "equals": true
+      },
+      {
+        "state": "farm.autonomy_level",
+        "gte": 2
+      }
+    ],
+    "excludes": [],
+    "weight": 12,
+    "text": "呈：新谷入仓，穗粒壮于本地土种。管庄请示：全数入营仓，抑或拨三成与庄中自支、发放工分？",
+    "options": {
+      "left": {
+        "id": "youxian_kouliang",
+        "label": "全数入营仓，按册配给",
+        "hint": "仓廪实，章程也实",
+        "effects": {
+          "stats": {
+            "livelihood": 5,
+            "people": 1
+          },
+          "forces": {
+            "farm": {
+              "satisfaction": 3
+            }
+          }
+        }
+      },
+      "right": {
+        "id": "huan_gengniu",
+        "label": "拨三成给农庄，换牛、换种、发工分",
+        "hint": "庄里的账自己能转起来",
+        "effects": {
+          "stats": {
+            "livelihood": 2
+          },
+          "wind": 1,
+          "forces": {
+            "farm": {
+              "influence": 3,
+              "satisfaction": 4
+            }
+          }
+        }
+      }
+    },
+    "variants": [
+      {
+        "id": "kuozhangqi_fenliang",
+        "kind": "stage",
+        "when": {
+          "conditions": [
+            {
+              "stage": "expansion"
+            }
+          ]
+        },
+        "extraHint": "计委在请示末尾批了一行小字：「扩张之季，口粮服从排期。」"
+      }
+    ]
+  },
+  {
+    "id": "FARM-004",
+    "pool": "farm",
+    "series": "farm.nanhai",
+    "type": "crisis",
+    "title": "粮归谁管",
+    "source": {
+      "kind": "force",
+      "id": "farm",
+      "name": "南海农庄"
+    },
+    "tags": [
+      "农庄",
+      "生计",
+      "会议"
+    ],
+    "requires": [
+      {
+        "state": "farm.established",
+        "equals": true
+      }
+    ],
+    "excludes": [],
+    "weight": 30,
+    "text": "呈：例会为庄粮吵散一回——计委主统购，农委言地里的事不按表格长，财贸问糖归谁管。两派皆候裁断。",
+    "options": {
+      "left": {
+        "id": "peigei_zhi",
+        "label": "定章程：入营仓，按册配给",
+        "hint": "公平，也死板",
+        "effects": {
+          "stats": {
+            "people": 2,
+            "council": 1,
+            "livelihood": 2
+          }
+        }
+      },
+      "right": {
+        "id": "fangkai_zishou",
+        "label": "松手：留成自售，庄里自负盈亏",
+        "hint": "庄里活了，账也活了",
+        "effects": {
+          "stats": {
+            "livelihood": 3,
+            "council": -3
+          },
+          "forces": {
+            "farm": {
+              "influence": 5,
+              "satisfaction": 4
+            }
+          }
+        }
+      }
+    },
+    "variants": [
+      {
+        "id": "qianren_luanzhang",
+        "kind": "history",
+        "when": {
+          "conditions": [
+            {
+              "state": "history.former_rulers",
+              "exists": true
+            }
+          ]
+        },
+        "extraHint": "文书房提醒：上一任正是为了粮账下台的。这回的章程怎么写，都有人盯着。"
+      }
+    ]
+  },
+  {
+    "id": "FARM-005",
+    "pool": "farm",
+    "series": "farm.nanhai",
+    "type": "price",
+    "title": "农庄要个「章程」",
+    "source": {
+      "kind": "force",
+      "id": "farm",
+      "name": "南海农庄"
+    },
+    "tags": [
+      "农庄",
+      "政治"
+    ],
+    "requires": [
+      {
+        "force": "farm",
+        "metric": "influence",
+        "gte": 45
+      }
+    ],
+    "excludes": [],
+    "weight": 25,
+    "text": "呈：农庄呈《章程》十四条：庄务自议、劳力自调、岁末报账。言辞恭顺，权柄俱在其中。用印，抑或驳回？",
+    "options": {
+      "left": {
+        "id": "gei_zhangcheng",
+        "label": "用印，准章程试行",
+        "hint": "放权换效率。印一落，就收不回了",
+        "effects": {
+          "stats": {
+            "council": -4,
+            "livelihood": 2
+          },
+          "personal": {
+            "faction_alarm": 3
+          },
+          "forces": {
+            "farm": {
+              "influence": 5,
+              "satisfaction": 6
+            }
+          },
+          "states": [
+            {
+              "id": "farm.autonomy_level",
+              "op": "add",
+              "value": 1
+            }
+          ]
+        }
+      },
+      "right": {
+        "id": "bohui_zhangcheng",
+        "label": "驳回，逐条批示",
+        "hint": "十四条批下来，庄里脸上挂不住",
+        "effects": {
+          "forces": {
+            "farm": {
+              "satisfaction": -5,
+              "hostility": 4
+            }
+          }
+        }
+      }
+    },
+    "variants": [
+      {
+        "id": "nongwei_huyuan",
+        "kind": "force",
+        "when": {
+          "conditions": [
+            {
+              "force": "farm",
+              "metric": "satisfaction",
+              "gte": 65
+            }
+          ]
+        },
+        "extraHint": "随草案还附了一封农委几个元老的联名信——他们愿意替这份章程在大会上作保。"
+      }
+    ]
+  },
+  {
+    "id": "FARM-006",
+    "pool": "farm",
+    "series": "farm.nanhai",
+    "type": "backlash",
+    "title": "农庄的护田队",
+    "source": {
+      "kind": "force",
+      "id": "farm",
+      "name": "南海农庄"
+    },
+    "tags": [
+      "农庄",
+      "政治"
+    ],
+    "requires": [
+      {
+        "force": "farm",
+        "metric": "influence",
+        "gte": 65
+      }
+    ],
+    "excludes": [],
+    "weight": 35,
+    "text": "呈：农庄自设护田队二十人，持缴获刀械，出入验牌，庄外呼为「南海兵」。问之，答曰防贼偷牛。",
+    "options": {
+      "left": {
+        "id": "moren_xianzhuang",
+        "label": "由他们去，秋收后再说",
+        "hint": "稻子要紧。刀把子在外面放着，也是要紧的",
+        "effects": {
+          "stats": {
+            "council": -5
+          },
+          "personal": {
+            "faction_alarm": 5,
+            "personal_pressure": 3
+          },
+          "forces": {
+            "farm": {
+              "influence": 5
+            }
+          }
+        }
+      },
+      "right": {
+        "id": "paiyuan_jieguan",
+        "label": "派伏波军接管护田队，刀入库",
+        "hint": "兵权的事，没有秋收后再说",
+        "effects": {
+          "stats": {
+            "military": 3,
+            "council": 3
+          },
+          "personal": {
+            "personal_pressure": 2
+          },
+          "forces": {
+            "farm": {
+              "satisfaction": -6,
+              "hostility": 6
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "FARM-007",
+    "pool": "farm",
+    "series": "farm.nanhai",
+    "type": "omen",
+    "title": "质询农庄",
+    "source": {
+      "kind": "force",
+      "id": "council",
+      "name": "元老院"
+    },
+    "tags": [
+      "农庄",
+      "政治",
+      "会议"
+    ],
+    "requires": [
+      {
+        "force": "farm",
+        "metric": "influence",
+        "gte": 55
+      }
+    ],
+    "excludes": [],
+    "weight": 32,
+    "text": "呈：大会质询：农庄粮款人三账半年未报；归化民新村「只知有庄，不知有城」，作何解释？数委员请往查勘。",
+    "options": {
+      "left": {
+        "id": "jiaodi_zibian",
+        "label": "亲自到会，摊账本",
+        "hint": "一本一本翻给他们看",
+        "effects": {
+          "personal": {
+            "personal_pressure": 2,
+            "faction_alarm": -2
+          }
+        }
+      },
+      "right": {
+        "id": "rang_nongzhuang_kangguo",
+        "label": "「庄务是庄里办的，让他们去问庄里」",
+        "hint": "舍车保帅。帅位也要看车肯不肯",
+        "effects": {
+          "forces": {
+            "farm": {
+              "satisfaction": -4
+            }
+          },
+          "personal": {
+            "faction_alarm": -3,
+            "personal_pressure": -2
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "FARM-008",
+    "pool": "farm",
+    "series": "farm.nanhai",
+    "type": "key",
+    "title": "归化民新村",
+    "source": {
+      "kind": "force",
+      "id": "farm",
+      "name": "南海农庄"
+    },
+    "tags": [
+      "农庄",
+      "民生",
+      "本地人"
+    ],
+    "requires": [
+      {
+        "state": "farm.established",
+        "equals": true
+      },
+      {
+        "state": "series.farm_nanhai",
+        "gte": 2
+      }
+    ],
+    "excludes": [],
+    "weight": 22,
+    "text": "呈：庄南划地安置归化民：茅屋列列，附学堂医务所。图上标四字「归化民村」——有委员问，此村耶，庄外之城耶？",
+    "options": {
+      "left": {
+        "id": "ban_yangban_cun",
+        "label": "照图办村，挂牌「南海农庄归化村」",
+        "hint": "十里八乡都看着。看的人多了，是非也多",
+        "effects": {
+          "stats": {
+            "people": 5,
+            "council": -3
+          },
+          "forces": {
+            "farm": {
+              "influence": 5,
+              "satisfaction": 5
+            },
+            "locals": {
+              "satisfaction": 3
+            }
+          },
+          "states": [
+            {
+              "id": "farm.autonomy_level",
+              "op": "add",
+              "value": 1
+            }
+          ]
+        }
+      },
+      "right": {
+        "id": "huanyi_huanban",
+        "label": "缓一缓：先只盖窝棚，不挂牌",
+        "hint": "闷声过日子",
+        "effects": {
+          "stats": {
+            "council": 2
+          },
+          "personal": {
+            "faction_alarm": -2
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "FARM-009",
+    "pool": "farm",
+    "series": "farm.nanhai",
+    "type": "crisis",
+    "title": "二十天没下雨了",
+    "source": {
+      "kind": "force",
+      "id": "farm",
+      "name": "南海农庄"
+    },
+    "tags": [
+      "农庄",
+      "农业",
+      "危机"
+    ],
+    "requires": [
+      {
+        "state": "farm.established",
+        "equals": true
+      }
+    ],
+    "excludes": [],
+    "weight": 30,
+    "text": "急呈：二十日无雨，渠底见泥，秧田开裂可纳指。报末一行——「再无水，此季休矣」。村中已烧香求雨。",
+    "options": {
+      "left": {
+        "id": "qiangxiu_shuiche",
+        "label": "全员上河滩，三日修起三道水车",
+        "hint": "拼人力，也拼木料",
+        "effects": {
+          "stats": {
+            "livelihood": 3
+          },
+          "days": 2,
+          "forces": {
+            "farm": {
+              "satisfaction": 5
+            }
+          }
+        },
+        "followups": [
+          "FARM-014"
+        ]
+      },
+      "right": {
+        "id": "tingshou_zaita",
+        "label": "改种耐旱的番薯，认了这一季",
+        "hint": "少死些人，少吃些白米",
+        "effects": {
+          "stats": {
+            "livelihood": -4,
+            "people": -1
+          },
+          "forces": {
+            "farm": {
+              "satisfaction": -4
+            }
+          }
+        },
+        "followups": [
+          "FARM-014"
+        ]
+      }
+    }
+  },
+  {
+    "id": "FARM-010",
+    "pool": "farm",
+    "series": "farm.nanhai",
+    "type": "cleanup",
+    "title": "农庄的烂账",
+    "source": {
+      "kind": "character",
+      "id": "any",
+      "name": "值班秘书"
+    },
+    "tags": [
+      "农庄",
+      "继承"
+    ],
+    "requires": [
+      {
+        "state": "farm.destroyed",
+        "equals": true
+      }
+    ],
+    "excludes": [],
+    "weight": 40,
+    "text": "呈：农庄散账清出：预付糖款、赊出谷种、编外工钱。文书对册半宿，翌晨债主堵庄口。",
+    "options": {
+      "left": {
+        "id": "bianmai_zichan",
+        "label": "变卖庄产清偿",
+        "hint": "壮士断腕，腕是自家的",
+        "effects": {
+          "stats": {
+            "livelihood": -2,
+            "council": 2
+          }
+        }
+      },
+      "right": {
+        "id": "tuofu_shangyi",
+        "label": "立据分期，慢慢还",
+        "hint": "账不会消失，只会生利",
+        "effects": {
+          "stats": {
+            "people": -2
+          },
+          "personal": {
+            "personal_pressure": 3
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "FARM-011",
+    "pool": "farm",
+    "series": "farm.nanhai",
+    "type": "key",
+    "title": "糖寮开榨",
+    "source": {
+      "kind": "force",
+      "id": "farm",
+      "name": "南海农庄"
+    },
+    "tags": [
+      "农庄",
+      "商贸",
+      "糖"
+    ],
+    "requires": [
+      {
+        "state": "farm.established",
+        "equals": true
+      },
+      {
+        "state": "series.farm_nanhai",
+        "gte": 2
+      }
+    ],
+    "excludes": [],
+    "weight": 24,
+    "text": "呈：蔗熟，两座糖寮开榨。新法石灰点浆，出雪白细糖。广商船才到博铺即问：短毛白糖，还有多少？",
+    "options": {
+      "left": {
+        "id": "baifa_tang",
+        "label": "加建糖寮，大量出白糖",
+        "hint": "白糖是硬通货，蔗田也是",
+        "effects": {
+          "stats": {
+            "livelihood": 4,
+            "council": -1
+          },
+          "wind": 2,
+          "days": 2,
+          "forces": {
+            "farm": {
+              "influence": 5,
+              "satisfaction": 5
+            }
+          },
+          "states": [
+            {
+              "id": "trade.contact",
+              "op": "set",
+              "value": true
+            },
+            {
+              "id": "series.farm_nanhai",
+              "op": "add",
+              "value": 1
+            }
+          ]
+        },
+        "followups": [
+          "TRADE-007",
+          "FARM-013"
+        ]
+      },
+      "right": {
+        "id": "hongtang_zishou",
+        "label": "只榨红糖，就近自售",
+        "hint": "小打小闹，风声不出去",
+        "effects": {
+          "stats": {
+            "livelihood": 2
+          },
+          "forces": {
+            "farm": {
+              "satisfaction": 3
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "FARM-012",
+    "pool": "farm",
+    "series": "farm.nanhai",
+    "type": "benefit",
+    "title": "农庄的孝敬",
+    "source": {
+      "kind": "force",
+      "id": "farm",
+      "name": "南海农庄"
+    },
+    "tags": [
+      "农庄",
+      "生计"
+    ],
+    "requires": [
+      {
+        "force": "farm",
+        "metric": "influence",
+        "gte": 50
+      },
+      {
+        "force": "farm",
+        "metric": "satisfaction",
+        "gte": 55
+      }
+    ],
+    "excludes": [],
+    "weight": 20,
+    "text": "呈：秋成，农庄孝敬新谷两百石、蔗糖十担，言「庄能有今日，靠首长章程」。收下，还是折价？",
+    "options": {
+      "left": {
+        "id": "shou_xiaojing",
+        "label": "收下，记入农庄功册",
+        "hint": "实惠。情分也是债",
+        "effects": {
+          "stats": {
+            "livelihood": 5
+          },
+          "forces": {
+            "farm": {
+              "influence": 3,
+              "satisfaction": 3
+            }
+          }
+        }
+      },
+      "right": {
+        "id": "zhe_jia_shou",
+        "label": "折价给钱，照市价算",
+        "hint": "两清。庄里脸上挂不住",
+        "effects": {
+          "stats": {
+            "livelihood": 2,
+            "council": 2
+          },
+          "forces": {
+            "farm": {
+              "satisfaction": -3
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "FARM-013",
+    "pool": "farm",
+    "series": "farm.nanhai",
+    "type": "crisis",
+    "title": "蔗田要水",
+    "source": {
+      "kind": "force",
+      "id": "farm",
+      "name": "南海农庄"
+    },
+    "tags": [
+      "农庄",
+      "糖",
+      "冲突"
+    ],
+    "requires": [
+      {
+        "used": "FARM-011"
+      },
+      {
+        "state": "farm.established",
+        "equals": true
+      }
+    ],
+    "excludes": [],
+    "weight": 28,
+    "text": "急呈：榨季在即，拟改坡田二十亩种蔗，引水须取上游村塘。村言：塘是祖宗塘，一瓢不能少。",
+    "options": {
+      "left": {
+        "id": "ying_yin_tangshui",
+        "label": "派工开渠，硬引",
+        "hint": "渠一通，糖就有了。梁子也结下了",
+        "effects": {
+          "stats": {
+            "livelihood": 3,
+            "people": -2
+          },
+          "forces": {
+            "farm": {
+              "influence": 3
+            },
+            "locals": {
+              "hostility": 6,
+              "satisfaction": -4
+            }
+          }
+        }
+      },
+      "right": {
+        "id": "mai_shui_dingyue",
+        "label": "出钱「买水」，与村里立约分成",
+        "hint": "糖利分一成出去。账面难看，往后甜",
+        "effects": {
+          "stats": {
+            "livelihood": 1,
+            "council": -1
+          },
+          "forces": {
+            "farm": {
+              "satisfaction": -2
+            },
+            "locals": {
+              "satisfaction": 4,
+              "influence": 2
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "FARM-014",
+    "pool": "farm",
+    "series": "farm.nanhai",
+    "type": "cleanup",
+    "title": "这一季的收成",
+    "source": {
+      "kind": "force",
+      "id": "farm",
+      "name": "南海农庄"
+    },
+    "tags": [
+      "农庄",
+      "农业",
+      "生计"
+    ],
+    "requires": [
+      {
+        "used": "FARM-009"
+      }
+    ],
+    "excludes": [],
+    "weight": 26,
+    "text": "呈：旱季收成落定，不丰不歉。余粮平价放市，抑或入仓囤备年景？管庄候示。",
+    "options": {
+      "left": {
+        "id": "pingjia_liangzhan",
+        "label": "开平价粮栈，放粮入市",
+        "hint": "粮价稳了，人心也稳了",
+        "effects": {
+          "stats": {
+            "livelihood": 2,
+            "people": 2
+          },
+          "forces": {
+            "farm": {
+              "satisfaction": 2
+            },
+            "trade": {
+              "satisfaction": 2
+            }
+          }
+        }
+      },
+      "right": {
+        "id": "ru_cang_tunbei",
+        "label": "全数入仓，以防年景",
+        "hint": "仓廪实。市面上的粮价也上去了",
+        "effects": {
+          "stats": {
+            "livelihood": 2,
+            "military": 1,
+            "people": -2
+          }
+        }
+      }
+    }
+  }
+]

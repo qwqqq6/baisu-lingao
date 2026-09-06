@@ -1,139 +1,678 @@
 [
   {
-    "id": "core.character.wu_nanhai",
+    "id": "wunanhai",
     "name": "吴南海",
-    "summary": "重视粮食、农庄、安置和地方生产共同体，倾向先让人活下来。",
-    "recommendedForNewPlayers": true,
-    "tendencies": {
-      "agriculture": 5,
-      "civil": 2,
-      "security": 1,
-      "planning": 3,
-      "council": 2,
-      "trade": 1,
-      "technology": 1,
-      "pragmatism": 4,
-      "coercion": 1,
-      "charisma": 3,
-      "caution": 4,
-      "ambition": 2,
-      "compromise": 3,
-      "discipline": 2
+    "route": "农政/民生",
+    "title": "农委会主任",
+    "personality": [
+      "务实",
+      "恋土",
+      "护短"
+    ],
+    "strengths": "缓和生计危机，安置归化民，经营地方生产共同体。",
+    "risks": "南海农庄坐大，农政系统自成一体，引来元老院警惕。",
+    "fallStyles": "问责、架空、农庄坐大",
+    "tags": [
+      "农业",
+      "农庄",
+      "民生"
+    ],
+    "initialBonus": {
+      "desc": "开局生计 +5，合法性 +5。",
+      "stats": {
+        "livelihood": 5
+      },
+      "personal": {
+        "legitimacy": 5
+      }
     },
-    "pressureBias": {
-      "personal_pressure": 1,
-      "faction_alarm": 3,
-      "violence_risk": 0,
-      "legitimacy": 1
+    "ability": {
+      "id": "quannong_anmin",
+      "name": "劝农安民",
+      "desc": "亲自下乡调度粮草，缓和生计危机——但农庄的影响力会进一步膨胀。",
+      "cooldownDays": 10,
+      "effects": {
+        "stats": {
+          "livelihood": 7,
+          "council": -2
+        },
+        "forces": {
+          "farm": {
+            "influence": 4,
+            "satisfaction": 5
+          }
+        },
+        "personal": {
+          "personal_pressure": -3
+        }
+      }
+    },
+    "flaw": {
+      "name": "护短",
+      "desc": "农政系统的每一步扩张，都让其他派系更加不安。",
+      "everyDays": 6,
+      "personal": {
+        "faction_alarm": 2
+      }
+    },
+    "succession": {
+      "baseWeight": 8,
+      "requires": [
+        {
+          "state": "character.wunanhai.available",
+          "equals": true
+        }
+      ],
+      "excludes": [
+        {
+          "state": "character.wunanhai.dead",
+          "equals": true
+        },
+        {
+          "state": "character.wunanhai.available",
+          "equals": false
+        }
+      ],
+      "weightModifiers": [
+        {
+          "when": [
+            {
+              "state": "core.pillar.livelihood",
+              "lte": 35
+            }
+          ],
+          "add": 8,
+          "reason": "生计危机时，农政路线更容易被推上台。"
+        },
+        {
+          "when": [
+            {
+              "force": "farm",
+              "metric": "influence",
+              "gte": 15
+            }
+          ],
+          "add": 6,
+          "reason": "南海农庄坐大后会支持吴南海复出或继任。"
+        },
+        {
+          "when": [
+            {
+              "state": "fall.last_reason",
+              "equals": "farm_overreach"
+            }
+          ],
+          "add": -10,
+          "reason": "前任刚因农庄坐大倒台时，农政人物短期受排斥。"
+        },
+        {
+          "when": [
+            {
+              "state": "farm.destroyed",
+              "equals": true
+            }
+          ],
+          "add": -6,
+          "reason": "农庄已毁，农政路线威信受损。"
+        }
+      ],
+      "entryCard": "CHAR-WNH-SUCC-001"
+    },
+    "openingCard": "CHAR-WNH-OPEN-001",
+    "fates": {
+      "default": {
+        "title": "卸任之后",
+        "fateLabel": "闲居城外",
+        "option": "阅。其人其事，存档备查。",
+        "text": "呈：吴南海交割已毕，迁出执委会院，在城外赁了三间瓦房。房前仍种着一小畦菜，往来的只剩几个老农。"
+      },
+      "farm_overreach": {
+        "title": "闭门思过",
+        "fateLabel": "软禁于农庄旧宅",
+        "option": "阅。卷宗封存。",
+        "text": "急呈：吴南海未回百仞城，被「请」往南海农庄旧宅「休养」，门外伏波军战士两名照料起居。管事送饭，外人不见。旧宅四邻，皆农庄护田队的人。"
+      },
+      "impeach": {
+        "title": "闭门思过",
+        "fateLabel": "软禁于农庄旧宅",
+        "option": "阅。卷宗封存。",
+        "text": "急呈：吴南海交印当日，即被「请」往农庄旧宅静养。名曰休养，门外有哨。农委会旧部送去的果品，一律原样退回。"
+      }
     }
   },
   {
-    "id": "core.character.wu_de",
+    "id": "wude",
     "name": "邬德",
-    "summary": "擅长俘虏治理、基层组织和制度化动员，容易形成自己的组织网络。",
-    "tendencies": {
-      "agriculture": 2,
-      "civil": 5,
-      "security": 2,
-      "planning": 2,
-      "council": 2,
-      "trade": 1,
-      "technology": 1,
-      "pragmatism": 4,
-      "coercion": 2,
-      "charisma": 4,
-      "caution": 3,
-      "ambition": 3,
-      "compromise": 3,
-      "discipline": 4
+    "route": "民政/组织",
+    "title": "民政委员会主任",
+    "personality": [
+      "缜密",
+      "耐心",
+      "控制欲"
+    ],
+    "strengths": "治理俘虏、建立工分与基层组织，把乱摊子理出头绪。",
+    "risks": "基层网络扩张过快，私人组织嫌疑，归化民只认登记册不认执委会。",
+    "fallStyles": "罢免、清洗、基层网络失控",
+    "tags": [
+      "民政",
+      "组织",
+      "俘虏"
+    ],
+    "initialBonus": {
+      "desc": "开局民望 +5，合法性 +3。",
+      "stats": {
+        "people": 5
+      },
+      "personal": {
+        "legitimacy": 3
+      }
     },
-    "pressureBias": {
-      "personal_pressure": 1,
-      "faction_alarm": 3,
-      "violence_risk": 1,
-      "legitimacy": 1
+    "ability": {
+      "id": "dengji_zaoce",
+      "name": "登记造册",
+      "desc": "亲自主持全营地登记甄别，安抚人心、理清底数——但基层组织网的经纬上又多了一圈他的指纹。",
+      "cooldownDays": 10,
+      "effects": {
+        "stats": {
+          "people": 6,
+          "council": -1
+        },
+        "forces": {
+          "naturalized": {
+            "influence": 4,
+            "satisfaction": 5
+          }
+        },
+        "personal": {
+          "personal_pressure": -2,
+          "faction_alarm": 2
+        }
+      }
+    },
+    "flaw": {
+      "name": "网络扩张",
+      "desc": "登记册每厚一寸，会议桌上关于他的窃语就多一分。",
+      "everyDays": 7,
+      "personal": {
+        "faction_alarm": 2
+      }
+    },
+    "succession": {
+      "baseWeight": 8,
+      "requires": [
+        {
+          "state": "character.wude.available",
+          "equals": true
+        }
+      ],
+      "excludes": [
+        {
+          "state": "character.wude.dead",
+          "equals": true
+        },
+        {
+          "state": "character.wude.available",
+          "equals": false
+        }
+      ],
+      "weightModifiers": [
+        {
+          "when": [
+            {
+              "state": "core.pillar.people",
+              "lte": 35
+            }
+          ],
+          "add": 8,
+          "reason": "民望低靡时，擅长民政的人物容易被推出来收拾人心。"
+        },
+        {
+          "when": [
+            {
+              "force": "naturalized",
+              "metric": "influence",
+              "gte": 15
+            }
+          ],
+          "add": 6,
+          "reason": "归化民组织壮大后，只有邬德弹压得住场面。"
+        },
+        {
+          "when": [
+            {
+              "state": "fall.last_reason",
+              "equals": "network_overreach"
+            }
+          ],
+          "add": -10,
+          "reason": "前任刚因基层网络失控倒台时，组织路线短期受排斥。"
+        }
+      ],
+      "entryCard": "CHAR-WD-SUCC-001"
+    },
+    "openingCard": "CHAR-WD-OPEN-001",
+    "fates": {
+      "default": {
+        "title": "卸任之后",
+        "fateLabel": "闭门谢客",
+        "option": "阅。存档备查。",
+        "text": "呈：邬德卸任，闭门谢客。有归化民里正在门外放下两斗新米，未敢敲门，放下便走。"
+      },
+      "network_overreach": {
+        "title": "隔离审查",
+        "fateLabel": "软禁审查",
+        "option": "阅。册封存，人不许见。",
+        "text": "急呈：邬德交出登记册，即被送往博铺一处独院「配合审查」。饮食起居有人照应，纸笔皆不给。归化民间私下焚香，为他求平安。"
+      },
+      "purge": {
+        "title": "隔离审查",
+        "fateLabel": "软禁审查",
+        "option": "阅。册封存。",
+        "text": "急呈：邬德移交名册三箱，人即被送往博铺独院审查。册页编号皆已拍照存底。归化民组织当日无一人出勤。"
+      }
     }
   },
   {
-    "id": "core.character.bei_wei",
+    "id": "beiwei",
     "name": "北炜",
-    "summary": "优先考虑侦察、警戒、治安和外部威胁，解决问题时更相信控制力。",
-    "tendencies": {
-      "agriculture": 1,
-      "civil": 1,
-      "security": 5,
-      "planning": 2,
-      "council": 1,
-      "trade": 1,
-      "technology": 2,
-      "pragmatism": 3,
-      "coercion": 4,
-      "charisma": 1,
-      "caution": 4,
-      "ambition": 3,
-      "compromise": 1,
-      "discipline": 5
+    "route": "军务/安全",
+    "title": "作战参谋",
+    "personality": [
+      "果决",
+      "冷峻",
+      "强硬"
+    ],
+    "strengths": "整训武装、压制危机、击退外部威胁。",
+    "risks": "军务化、强硬镇压、外部仇恨与暴力反噬。",
+    "fallStyles": "刺杀、军变、强硬派反噬",
+    "tags": [
+      "军务",
+      "治安",
+      "保卫"
+    ],
+    "initialBonus": {
+      "desc": "开局军务 +5，风声 +2。",
+      "stats": {
+        "military": 5
+      },
+      "wind": 2
     },
-    "pressureBias": {
-      "personal_pressure": 1,
-      "faction_alarm": 2,
-      "violence_risk": 4,
-      "legitimacy": 1
+    "ability": {
+      "id": "leiting_zhengxun",
+      "name": "雷霆整训",
+      "desc": "亲自主持军事整训，短时间内大幅提升军务——但营地里也会多出几分火药味。",
+      "cooldownDays": 10,
+      "effects": {
+        "stats": {
+          "military": 8,
+          "livelihood": -2
+        },
+        "forces": {
+          "guard": {
+            "influence": 4,
+            "satisfaction": 5
+          }
+        },
+        "personal": {
+          "violence_risk": 3
+        },
+        "wind": 2
+      }
+    },
+    "flaw": {
+      "name": "强硬成瘾",
+      "desc": "他信奉快刀斩乱麻，可刀口舔血的次数多了，总有人想碰一碰他的后背。",
+      "everyDays": 5,
+      "personal": {
+        "violence_risk": 2
+      }
+    },
+    "succession": {
+      "baseWeight": 7,
+      "requires": [
+        {
+          "state": "character.beiwei.available",
+          "equals": true
+        }
+      ],
+      "excludes": [
+        {
+          "state": "character.beiwei.dead",
+          "equals": true
+        },
+        {
+          "state": "character.beiwei.available",
+          "equals": false
+        }
+      ],
+      "weightModifiers": [
+        {
+          "when": [
+            {
+              "state": "core.pillar.military",
+              "lte": 40
+            }
+          ],
+          "add": 8,
+          "reason": "军务吃紧时，武力路线更容易被推上台。"
+        },
+        {
+          "when": [
+            {
+              "force": "guard",
+              "metric": "influence",
+              "gte": 15
+            }
+          ],
+          "add": 6,
+          "reason": "保卫系统壮大后，会力挺自家出身的人物。"
+        },
+        {
+          "when": [
+            {
+              "state": "fall.last_reason",
+              "equals": "assassinate"
+            }
+          ],
+          "add": -8,
+          "reason": "前任遇刺之后，强硬路线人人避嫌。"
+        },
+        {
+          "when": [
+            {
+              "state": "fall.last_reason",
+              "equals": "mutiny"
+            }
+          ],
+          "add": -10,
+          "reason": "前任刚因军变倒台，军方人物短期被警惕。"
+        }
+      ],
+      "entryCard": "CHAR-BW-SUCC-001"
+    },
+    "openingCard": "CHAR-BW-OPEN-001",
+    "fates": {
+      "default": {
+        "title": "卸任之后",
+        "fateLabel": "闲居",
+        "option": "阅。存档备查。",
+        "text": "呈：北炜卸任，迁往马袅。临行只带一兵、一犬、一架旧望远镜。哨线图纸，尽数留交继任。"
+      },
+      "assassinate": {
+        "title": "身后",
+        "fateLabel": "遇刺身亡",
+        "option": "阅。缉凶卷宗，封存待启。",
+        "text": "呈：北炜葬于博铺以东高坡，坟前无碑，有哨兵轮流站岗——是战士们自己排的班。凶手拿住三名，连夜过堂，供出主使。卷宗封存，待继任者启封。"
+      },
+      "mutiny": {
+        "title": "交出兵符",
+        "fateLabel": "兵变逼宫，无人听令",
+        "option": "阅。兵符入库。",
+        "text": "急呈：警卫团三连当夜哗变，围了执委会院。北炜立于阶上，摘下兵符掷于案：「伏波军留给你们了。」次日迁出，无人相送。全军命令，自此不出连排长之手。"
+      }
     }
   },
   {
-    "id": "core.character.ma_qianzhu",
+    "id": "maqianzhu",
     "name": "马千瞩",
-    "summary": "倾向用计划、指标和工业优先级组织临高，把临时营地推向长期秩序。",
-    "tendencies": {
-      "agriculture": 2,
-      "civil": 2,
-      "security": 2,
-      "planning": 5,
-      "council": 3,
-      "trade": 2,
-      "technology": 4,
-      "pragmatism": 3,
-      "coercion": 2,
-      "charisma": 2,
-      "caution": 3,
-      "ambition": 4,
-      "compromise": 2,
-      "discipline": 4
+    "route": "计划/工业",
+    "title": "计划工首",
+    "personality": [
+      "精算",
+      "执拗",
+      "重工"
+    ],
+    "strengths": "统筹长期项目、提升工业与资源调度效率。",
+    "risks": "计划债务累积，工业挤压民生，项目事故与问责。",
+    "fallStyles": "问责、计划失败、工业事故",
+    "tags": [
+      "工业",
+      "计划",
+      "资源"
+    ],
+    "initialBonus": {
+      "desc": "开局元老院 +2，生计 -2，合法性 +3。",
+      "stats": {
+        "council": 2,
+        "livelihood": -2
+      },
+      "personal": {
+        "legitimacy": 3
+      }
     },
-    "pressureBias": {
-      "personal_pressure": 3,
-      "faction_alarm": 2,
-      "violence_risk": 1,
-      "legitimacy": 1
+    "ability": {
+      "id": "jizhong_diaodu",
+      "name": "集中调度",
+      "desc": "以计委名义统一调配人力物力，项目效率大增——代价是短期民望与口粮。",
+      "cooldownDays": 12,
+      "effects": {
+        "stats": {
+          "livelihood": -3,
+          "military": 2
+        },
+        "forces": {
+          "planning": {
+            "influence": 5,
+            "satisfaction": 5
+          }
+        },
+        "states": [
+          {
+            "id": "series.planning_committee",
+            "op": "add",
+            "value": 1
+          }
+        ],
+        "personal": {
+          "personal_pressure": 2
+        }
+      }
+    },
+    "flaw": {
+      "name": "计划债务",
+      "desc": "每张漂亮的排期表背后，都压着一笔还没兑现的账。",
+      "everyDays": 6,
+      "personal": {
+        "personal_pressure": 2
+      }
+    },
+    "succession": {
+      "baseWeight": 7,
+      "requires": [
+        {
+          "state": "character.maqianzhu.available",
+          "equals": true
+        }
+      ],
+      "excludes": [
+        {
+          "state": "character.maqianzhu.dead",
+          "equals": true
+        },
+        {
+          "state": "character.maqianzhu.available",
+          "equals": false
+        }
+      ],
+      "weightModifiers": [
+        {
+          "when": [
+            {
+              "state": "planning.committee_established",
+              "equals": true
+            }
+          ],
+          "add": 5,
+          "reason": "计委成立后，工业路线在会议上的话语权上升。"
+        },
+        {
+          "when": [
+            {
+              "force": "planning",
+              "metric": "influence",
+              "gte": 15
+            }
+          ],
+          "add": 6,
+          "reason": "计委影响力壮大，会推举能看懂排期表的人。"
+        },
+        {
+          "when": [
+            {
+              "state": "fall.last_reason",
+              "equals": "plan_failure"
+            }
+          ],
+          "add": -10,
+          "reason": "前任刚因计划失败问责，工业路线短期被冷落。"
+        }
+      ],
+      "entryCard": "CHAR-MQZ-SUCC-001"
+    },
+    "openingCard": "CHAR-MQZ-OPEN-001",
+    "fates": {
+      "default": {
+        "title": "卸任之后",
+        "fateLabel": "闲居",
+        "option": "阅。存档备查。",
+        "text": "呈：马千瞩卸任，迁居城西。每月初七，仍托人送来一份手写排期表。无人回复，风雨无阻。"
+      },
+      "plan_failure": {
+        "title": "迁往砖窑",
+        "fateLabel": "变相流放",
+        "option": "阅。排期表存档。",
+        "text": "呈：马千瞩迁出百仞城，「往砖窑指导技术」。窑在城西三十里，随行只一名学徒。他每月仍寄来排期表一份，从未收到过回复。"
+      },
+      "health": {
+        "title": "病休",
+        "fateLabel": "病退",
+        "option": "阅。移交清册三箱。",
+        "text": "呈：马千瞩积劳成疾，准予病休。移交名册三箱，病榻上犹批示排期表格式两处——一处批「可行」，一处批「再议」。"
+      }
     }
   },
   {
-    "id": "core.character.wen_desi",
+    "id": "wendsi",
     "name": "文德嗣",
-    "summary": "关注授权、程序、背锅和元老院平衡，适合在多方撕扯中维持合法性。",
-    "recommendedForNewPlayers": true,
-    "tendencies": {
-      "agriculture": 2,
-      "civil": 3,
-      "security": 2,
-      "planning": 3,
-      "council": 5,
-      "trade": 2,
-      "technology": 2,
-      "pragmatism": 3,
-      "coercion": 2,
-      "charisma": 3,
-      "caution": 4,
-      "ambition": 2,
-      "compromise": 5,
-      "discipline": 3
+    "route": "执委会/裁断",
+    "title": "执委会主席",
+    "personality": [
+      "圆融",
+      "隐忍",
+      "肯背锅"
+    ],
+    "strengths": "平衡元老院、压下会议危机、在背锅时保全大局。",
+    "risks": "架空、会议夺权、合法性崩塌，个人压力无声累积。",
+    "fallStyles": "架空、会议夺权、合法性崩塌",
+    "tags": [
+      "会议",
+      "政治",
+      "合法性"
+    ],
+    "initialBonus": {
+      "desc": "开局元老院 +5，合法性 +5。",
+      "stats": {
+        "council": 5
+      },
+      "personal": {
+        "legitimacy": 5
+      }
     },
-    "pressureBias": {
-      "personal_pressure": 4,
-      "faction_alarm": 2,
-      "violence_risk": 1,
-      "legitimacy": 3
+    "ability": {
+      "id": "huipai_yiyi",
+      "name": "会前排异",
+      "desc": "开会前先挨个打招抚，把火药味摁在会场外——只是这些账，最后都记在他自己身上。",
+      "cooldownDays": 10,
+      "effects": {
+        "stats": {
+          "council": 4
+        },
+        "personal": {
+          "faction_alarm": -8,
+          "personal_pressure": 4
+        }
+      }
+    },
+    "flaw": {
+      "name": "锅从天降",
+      "desc": "裁断的人裁不了别人的怨气，每一口锅都沉进他自己的肺里。",
+      "everyDays": 7,
+      "personal": {
+        "personal_pressure": 2
+      }
+    },
+    "succession": {
+      "baseWeight": 8,
+      "requires": [
+        {
+          "state": "character.wendsi.available",
+          "equals": true
+        }
+      ],
+      "excludes": [
+        {
+          "state": "character.wendsi.dead",
+          "equals": true
+        },
+        {
+          "state": "character.wendsi.available",
+          "equals": false
+        }
+      ],
+      "weightModifiers": [
+        {
+          "when": [
+            {
+              "state": "core.pillar.council",
+              "lte": 40
+            }
+          ],
+          "add": 8,
+          "reason": "元老院不和时，擅长裁断的人物容易被推出来主持局面。"
+        },
+        {
+          "when": [
+            {
+              "state": "ruler.pressure_faction",
+              "gte": 50
+            }
+          ],
+          "add": 5,
+          "reason": "派系警惕高企，需要能摁住会场的老好人。"
+        },
+        {
+          "when": [
+            {
+              "state": "fall.last_reason",
+              "equals": "council_seizure"
+            }
+          ],
+          "add": -10,
+          "reason": "前任刚被会议夺权，执委会路线短期受排斥。"
+        }
+      ],
+      "entryCard": "CHAR-WDS-SUCC-001"
+    },
+    "openingCard": "CHAR-WDS-OPEN-001",
+    "fates": {
+      "default": {
+        "title": "卸任之后",
+        "fateLabel": "体面下野",
+        "option": "阅。存档备查。",
+        "text": "呈：文德嗣卸任，大会赠礼三车，他只收了一坛茶。临行语人：印是大会的，情分是自家的。"
+      },
+      "council_seizure": {
+        "title": "政令不出执委会",
+        "fateLabel": "架空，无人听令",
+        "option": "阅。印信封存。",
+        "text": "呈：文德嗣仍在职，然各口已直接听命常委。一日其批「缓办」，当日照办；再批「急办」，次日仍无动静。第三日起，他不再批了。印信封存于案，落了灰。"
+      },
+      "impeach": {
+        "title": "荣退",
+        "fateLabel": "体面下野",
+        "option": "阅。存档备查。",
+        "text": "呈：文德嗣循例卸任，大会程序完备，礼数周全。散会时全体起立相送——程序上，无可挑剔。"
+      }
     }
   }
 ]

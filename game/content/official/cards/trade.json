@@ -1,0 +1,753 @@
+[
+  {
+    "id": "TRADE-001",
+    "pool": "trade",
+    "series": "trade.dongmen",
+    "type": "key",
+    "title": "东门市开市",
+    "source": {
+      "kind": "character",
+      "id": "any",
+      "name": "商务代表"
+    },
+    "tags": [
+      "商贸",
+      "市场"
+    ],
+    "requires": [
+      {
+        "state": "trade.contact",
+        "equals": true
+      }
+    ],
+    "excludes": [
+      {
+        "state": "trade.dongmen_established",
+        "equals": true
+      }
+    ],
+    "weight": 60,
+    "text": "呈：东墙外小市自发绵延半里。请建正街百米带下水道、骡马客栈一所货栈两座，立坊题「东门市」。摊贩已连夜占位。",
+    "options": {
+      "left": {
+        "id": "guanding_shiqi",
+        "label": "照方案建市，税吏进驻",
+        "hint": "街道、下水道、税章一起立",
+        "effects": {
+          "stats": {
+            "livelihood": 3,
+            "council": 2
+          },
+          "wind": 2,
+          "states": [
+            {
+              "id": "trade.dongmen_established",
+              "op": "set",
+              "value": true
+            },
+            {
+              "id": "series.trade_dongmen",
+              "op": "add",
+              "value": 2
+            }
+          ]
+        }
+      },
+      "right": {
+        "id": "moxu_caoshi",
+        "label": "不出面，默许草市自长",
+        "hint": "自己长出来的最旺，也最乱",
+        "effects": {
+          "stats": {
+            "livelihood": 2,
+            "people": 1,
+            "council": -2
+          },
+          "wind": 4,
+          "states": [
+            {
+              "id": "trade.dongmen_established",
+              "op": "set",
+              "value": true
+            },
+            {
+              "id": "series.trade_dongmen",
+              "op": "add",
+              "value": 2
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "TRADE-002",
+    "pool": "trade",
+    "series": "trade.dongmen",
+    "type": "daily",
+    "title": "东门市的早晨",
+    "source": {
+      "kind": "force",
+      "id": "trade",
+      "name": "商贸网络"
+    },
+    "tags": [
+      "商贸",
+      "市场"
+    ],
+    "requires": [
+      {
+        "state": "trade.dongmen_established",
+        "equals": true
+      }
+    ],
+    "excludes": [],
+    "weight": 12,
+    "text": "呈：东门市辰时开市，盐为硬通货，碾米坊排长队。税吏与坐商为抽成几成相持，算盘拍至税卡。",
+    "options": {
+      "left": {
+        "id": "choushui_chonggong",
+        "label": "照章抽税，一文不让",
+        "hint": "落袋为安",
+        "effects": {
+          "stats": {
+            "livelihood": 3,
+            "people": -1,
+            "council": 1
+          }
+        }
+      },
+      "right": {
+        "id": "mianfei_zhaolai",
+        "label": "头三个月免税，放水养鱼",
+        "hint": "市旺了，什么都会有",
+        "effects": {
+          "stats": {
+            "livelihood": 1,
+            "people": 2
+          },
+          "forces": {
+            "trade": {
+              "satisfaction": 3
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "TRADE-003",
+    "pool": "trade",
+    "series": "trade.dongmen",
+    "type": "crisis",
+    "title": "盐价三天翻了三倍",
+    "source": {
+      "kind": "force",
+      "id": "trade",
+      "name": "商贸网络"
+    },
+    "tags": [
+      "商贸",
+      "危机"
+    ],
+    "requires": [
+      {
+        "state": "trade.dongmen_established",
+        "equals": true
+      }
+    ],
+    "excludes": [],
+    "weight": 28,
+    "text": "急呈：盐商联手囤积，三日盐价三倍。传言柜上有营内元老干股。归化民骂：短毛的盐，比县衙的还黑。",
+    "options": {
+      "left": {
+        "id": "pingpao_paishou",
+        "label": "开仓平价抛售，砸回原价",
+        "hint": "官库砸奸商，也砸了自己人的干股",
+        "effects": {
+          "stats": {
+            "livelihood": 2,
+            "people": 3
+          },
+          "forces": {
+            "trade": {
+              "satisfaction": -4
+            }
+          }
+        },
+        "followups": [
+          "TRADE-010"
+        ]
+      },
+      "right": {
+        "id": "suixing_jiushi",
+        "label": "随行就市，不加干预",
+        "hint": "市场的归市场。骂声也归市场",
+        "effects": {
+          "stats": {
+            "livelihood": 3,
+            "people": -3
+          },
+          "forces": {
+            "trade": {
+              "satisfaction": 4
+            }
+          }
+        },
+        "followups": [
+          "TRADE-010"
+        ]
+      }
+    }
+  },
+  {
+    "id": "TRADE-004",
+    "pool": "trade",
+    "series": "trade.dongmen",
+    "type": "crisis",
+    "title": "废图纸换银子",
+    "source": {
+      "kind": "force",
+      "id": "trade",
+      "name": "商贸网络"
+    },
+    "tags": [
+      "商贸",
+      "危机",
+      "外部"
+    ],
+    "requires": [
+      {
+        "state": "trade.dongmen_established",
+        "equals": true
+      },
+      {
+        "state": "series.trade_dongmen",
+        "gte": 2
+      }
+    ],
+    "excludes": [],
+    "weight": 32,
+    "text": "急呈：保卫组拿获收旧货者——专收废图纸残次品，出价不小。广货行柜上已拼出高炉轮廓。",
+    "options": {
+      "left": {
+        "id": "checha_fengtan",
+        "label": "彻查封摊，立废料回炉章程",
+        "hint": "狠得下心，才守得住家",
+        "effects": {
+          "stats": {
+            "military": 2,
+            "council": 2
+          },
+          "wind": -4,
+          "forces": {
+            "trade": {
+              "satisfaction": -5,
+              "hostility": 5
+            }
+          }
+        }
+      },
+      "right": {
+        "id": "zhuangzuo_meikanjian",
+        "label": "睁只眼闭只眼",
+        "hint": "买卖和风声，从来一起涨",
+        "effects": {
+          "stats": {
+            "people": 1
+          },
+          "wind": 7
+        }
+      }
+    }
+  },
+  {
+    "id": "TRADE-005",
+    "pool": "trade",
+    "series": "trade.dongmen",
+    "type": "price",
+    "title": "商会的「报效」",
+    "source": {
+      "kind": "force",
+      "id": "trade",
+      "name": "商贸网络"
+    },
+    "tags": [
+      "商贸",
+      "政治"
+    ],
+    "requires": [
+      {
+        "force": "trade",
+        "metric": "influence",
+        "gte": 45
+      }
+    ],
+    "excludes": [],
+    "weight": 22,
+    "text": "呈：大商行报效铁料药材暹罗布，随货附单请减税三年「以广招徕」。先甜后价，商贾老手段。",
+    "options": {
+      "left": {
+        "id": "jianshui_sannian",
+        "label": "准：减税三年，立碑为据",
+        "hint": "养肥的鱼才好钓",
+        "effects": {
+          "stats": {
+            "livelihood": 2,
+            "council": -3
+          },
+          "forces": {
+            "trade": {
+              "satisfaction": 6,
+              "influence": 4
+            }
+          }
+        }
+      },
+      "right": {
+        "id": "yikou_huijue",
+        "label": "原货退回，一文不免",
+        "hint": "公报私仇的口子，不能开",
+        "effects": {
+          "stats": {
+            "council": 2
+          },
+          "forces": {
+            "trade": {
+              "hostility": 7
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "TRADE-006",
+    "pool": "trade",
+    "series": "trade.dongmen",
+    "type": "daily",
+    "title": "广货船到了",
+    "source": {
+      "kind": "force",
+      "id": "trade",
+      "name": "商贸网络"
+    },
+    "tags": [
+      "外贸"
+    ],
+    "requires": [
+      {
+        "state": "trade.dongmen_established",
+        "equals": true
+      }
+    ],
+    "excludes": [],
+    "weight": 12,
+    "text": "呈：省城货船抵博铺，欲走大生意——糖盐生丝多多益善。船长拍胸保安全，眼却瞟着码头哨位。",
+    "options": {
+      "left": {
+        "id": "yi_yantie_huanliang",
+        "label": "盐铁放开大换",
+        "hint": "挣得多，漏得也多",
+        "effects": {
+          "stats": {
+            "livelihood": 3,
+            "military": 1
+          },
+          "wind": 3
+        }
+      },
+      "right": {
+        "id": "zhi_zuo_yaocai",
+        "label": "只做药材生丝的小生意",
+        "hint": "细水长流，风声不起",
+        "effects": {
+          "stats": {
+            "livelihood": 1
+          },
+          "wind": 1
+        }
+      }
+    }
+  },
+  {
+    "id": "TRADE-007",
+    "pool": "trade",
+    "series": "trade.dongmen",
+    "type": "key",
+    "title": "临高的糖和盐",
+    "source": {
+      "kind": "force",
+      "id": "trade",
+      "name": "商贸网络"
+    },
+    "tags": [
+      "商贸",
+      "外贸",
+      "糖"
+    ],
+    "requires": [
+      {
+        "state": "trade.dongmen_established",
+        "equals": true
+      },
+      {
+        "state": "series.trade_dongmen",
+        "gte": 2
+      }
+    ],
+    "excludes": [],
+    "weight": 25,
+    "text": "呈：广行请包销临高白糖细盐，发雷州高州广州，柜面铺满海峡两岸。糖是银子，也是藏不住的名声。",
+    "options": {
+      "left": {
+        "id": "baoge_dashanghang",
+        "label": "包销给广行",
+        "hint": "银子快，风声也快",
+        "effects": {
+          "stats": {
+            "livelihood": 4,
+            "council": -2
+          },
+          "wind": 3,
+          "forces": {
+            "trade": {
+              "influence": 6,
+              "satisfaction": 5
+            }
+          },
+          "states": [
+            {
+              "id": "series.trade_dongmen",
+              "op": "add",
+              "value": 1
+            }
+          ]
+        }
+      },
+      "right": {
+        "id": "guanying_lingmai",
+        "label": "自设官栈，零卖散销",
+        "hint": "稳当，也慢",
+        "effects": {
+          "stats": {
+            "livelihood": 3,
+            "council": 2
+          },
+          "forces": {
+            "trade": {
+              "satisfaction": -3
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "TRADE-008",
+    "pool": "trade",
+    "series": "trade.dongmen",
+    "type": "daily",
+    "title": "髡货",
+    "source": {
+      "kind": "character",
+      "id": "any",
+      "name": "商务代表"
+    },
+    "tags": [
+      "商贸",
+      "市场"
+    ],
+    "requires": [
+      {
+        "state": "trade.dongmen_established",
+        "equals": true
+      }
+    ],
+    "excludes": [],
+    "weight": 12,
+    "text": "呈：市面新出稀罕——玻璃镜、不碎盏、软皮灯。县中传抄谓之髡货，云一镜值一亩田。商人问：还造否？",
+    "options": {
+      "left": {
+        "id": "zengchan_baoqi",
+        "label": "加单：镜子和杯子尽管造",
+        "hint": "一两镜子一亩田，也扎眼得很",
+        "effects": {
+          "stats": {
+            "livelihood": 2,
+            "council": -1
+          },
+          "wind": 3,
+          "forces": {
+            "trade": {
+              "influence": 3
+            }
+          }
+        },
+        "followups": [
+          "TRADE-011"
+        ]
+      },
+      "right": {
+        "id": "kongzhi_fenliang",
+        "label": "限量发售，物以稀为贵",
+        "hint": "名声慢慢攒，风声慢慢涨",
+        "effects": {
+          "stats": {
+            "livelihood": 1
+          },
+          "wind": 1,
+          "forces": {
+            "trade": {
+              "satisfaction": 2
+            }
+          }
+        },
+        "followups": [
+          "TRADE-011"
+        ]
+      }
+    }
+  },
+  {
+    "id": "TRADE-009",
+    "pool": "trade",
+    "series": "trade.dongmen",
+    "type": "benefit",
+    "title": "商团的孝敬",
+    "source": {
+      "kind": "force",
+      "id": "trade",
+      "name": "商贸网络"
+    },
+    "tags": [
+      "商贸"
+    ],
+    "requires": [
+      {
+        "force": "trade",
+        "metric": "influence",
+        "gte": 50
+      },
+      {
+        "force": "trade",
+        "metric": "satisfaction",
+        "gte": 55
+      }
+    ],
+    "excludes": [],
+    "weight": 20,
+    "text": "呈：行商凑报效一份：番银三百、胡椒两担、苏木一箱，庆市面兴旺。并愿代听水陆行情、广城消息。",
+    "options": {
+      "left": {
+        "id": "shou_baoxiao",
+        "label": "收下，准商团代办外路消息",
+        "hint": "银子和耳报神，都是好东西",
+        "effects": {
+          "stats": {
+            "livelihood": 2,
+            "council": -2
+          },
+          "wind": 2,
+          "forces": {
+            "trade": {
+              "influence": 4,
+              "satisfaction": 3
+            }
+          }
+        }
+      },
+      "right": {
+        "id": "tui_yin_liushi",
+        "label": "番银退回，消息照买",
+        "hint": "情分收着，银子不收",
+        "effects": {
+          "stats": {
+            "council": 2
+          },
+          "forces": {
+            "trade": {
+              "satisfaction": -3
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "TRADE-010",
+    "pool": "trade",
+    "series": "trade.dongmen",
+    "type": "key",
+    "title": "私盐案的水有多深",
+    "source": {
+      "kind": "character",
+      "id": "any",
+      "name": "保卫组"
+    },
+    "tags": [
+      "商贸",
+      "危机",
+      "外部"
+    ],
+    "requires": [
+      {
+        "used": "TRADE-003"
+      }
+    ],
+    "excludes": [],
+    "weight": 28,
+    "text": "急呈：囤盐银钱顺藤而上——半数出自县衙户房书办，官盐引子其所批，三七分账。这张网，捅不捅？",
+    "options": {
+      "left": {
+        "id": "jiefa_dao_fucheng",
+        "label": "捅到府城去",
+        "hint": "一时痛快。以后县衙的每一张纸都会刁难东门市",
+        "effects": {
+          "stats": {
+            "council": 2
+          },
+          "wind": 3,
+          "forces": {
+            "trade": {
+              "hostility": 5,
+              "satisfaction": -3
+            }
+          }
+        }
+      },
+      "right": {
+        "id": "wangkai_yimian",
+        "label": "网开一面，结为奥援",
+        "hint": "肮脏，但管用。县衙的门从此半开着",
+        "effects": {
+          "stats": {
+            "livelihood": 2,
+            "people": -2
+          },
+          "wind": -3,
+          "personal": {
+            "personal_pressure": 2
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "TRADE-011",
+    "pool": "trade",
+    "series": "trade.dongmen",
+    "type": "key",
+    "title": "广州来的大客商",
+    "source": {
+      "kind": "force",
+      "id": "trade",
+      "name": "商贸网络"
+    },
+    "tags": [
+      "商贸",
+      "外贸"
+    ],
+    "requires": [
+      {
+        "used": "TRADE-008"
+      }
+    ],
+    "excludes": [],
+    "weight": 30,
+    "text": "呈：省城大客商指名要见髡首，押定钱两千两包买髡货，暗示省城识货老爷多，可通广州港泊路。",
+    "options": {
+      "left": {
+        "id": "jian_dan_zhi_tan_shengyi",
+        "label": "见。但只谈生意，不谈来历",
+        "hint": "一单两千两。见一面，也是把脸露给全省看",
+        "effects": {
+          "stats": {
+            "livelihood": 4,
+            "council": -2
+          },
+          "wind": 4,
+          "personal": {
+            "faction_alarm": 2
+          },
+          "forces": {
+            "trade": {
+              "influence": 5,
+              "satisfaction": 4
+            }
+          }
+        }
+      },
+      "right": {
+        "id": "bu_jian_rang_dongmen_daili",
+        "label": "不见。东门市代理一切",
+        "hint": "钱少赚些，安全些",
+        "effects": {
+          "stats": {
+            "livelihood": 2
+          },
+          "wind": 1,
+          "forces": {
+            "trade": {
+              "satisfaction": -2
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "TRADE-013",
+    "pool": "trade",
+    "series": "trade.dongmen",
+    "type": "daily",
+    "title": "行情与脚力",
+    "source": {
+      "kind": "force",
+      "id": "trade",
+      "name": "商贸网络"
+    },
+    "tags": [
+      "商贸"
+    ],
+    "requires": [
+      {
+        "state": "trade.contact",
+        "equals": true
+      }
+    ],
+    "excludes": [],
+    "weight": 12,
+    "text": "呈：东门行情一日三变——广城糖涨，雷州盐跌，而脚力钱涨得比货价快。运力官营，抑或照旧雇散？",
+    "options": {
+      "left": {
+        "id": "guanying_jiaoli",
+        "label": "官营运力：编挑夫队，自备车辆",
+        "hint": "稳。也多一笔长支",
+        "effects": {
+          "stats": {
+            "livelihood": 1,
+            "military": 1,
+            "council": 1
+          }
+        }
+      },
+      "right": {
+        "id": "zhao_ju_san_kui",
+        "label": "照旧雇散，随行就市",
+        "hint": "灵活。命脉在别人手里",
+        "effects": {
+          "stats": {
+            "livelihood": 2,
+            "people": 1
+          },
+          "forces": {
+            "trade": {
+              "satisfaction": 2
+            }
+          }
+        }
+      }
+    }
+  }
+]

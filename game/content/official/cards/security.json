@@ -1,0 +1,1118 @@
+[
+  {
+    "id": "SEC-001",
+    "pool": "security",
+    "series": "security.guard",
+    "type": "key",
+    "title": "成立保卫组",
+    "source": {
+      "kind": "character",
+      "id": "any",
+      "name": "侦察排"
+    },
+    "tags": [
+      "军务",
+      "治安",
+      "保卫"
+    ],
+    "requires": [
+      {
+        "any": [
+          {
+            "state": "external.threat",
+            "equals": true
+          },
+          {
+            "state": "core.pillar.military",
+            "lte": 40
+          }
+        ]
+      }
+    ],
+    "excludes": [
+      {
+        "state": "security.guard_authorized",
+        "equals": true
+      }
+    ],
+    "weight": 60,
+    "text": "呈：县衙斥候既至，营内连失二物。请抽三十名过硬骨干设保卫组，专掌侦察警戒治安，名单已拟。刀把子给谁，请示下。",
+    "options": {
+      "left": {
+        "id": "shouquan_lizu",
+        "label": "授权立组，枪械入库造册",
+        "hint": "专业的事交给专业的人",
+        "effects": {
+          "stats": {
+            "military": 5,
+            "council": -2
+          },
+          "personal": {
+            "faction_alarm": 2
+          },
+          "states": [
+            {
+              "id": "security.guard_authorized",
+              "op": "set",
+              "value": true
+            },
+            {
+              "id": "series.security_guard",
+              "op": "add",
+              "value": 2
+            }
+          ]
+        },
+        "followups": [
+          "SEC-010"
+        ]
+      },
+      "right": {
+        "id": "zan_huan_minbing",
+        "label": "暂缓，各口自己组织民兵",
+        "hint": "刀不能轻易交出去",
+        "effects": {
+          "stats": {
+            "military": 2
+          },
+          "personal": {
+            "violence_risk": 1
+          }
+        }
+      }
+    },
+    "variants": [
+      {
+        "id": "beiwei_qinjian",
+        "kind": "character",
+        "when": {
+          "ruler": "beiwei",
+          "chance": 0.7,
+          "tagsAny": [
+            "军务",
+            "治安",
+            "保卫"
+          ]
+        },
+        "replaceOption": "left",
+        "option": {
+          "id": "beiwei_qinjian_lizu",
+          "label": "授权立组，北炜自兼组长",
+          "hint": "他信不过别人掌刀",
+          "effects": {
+            "stats": {
+              "military": 6,
+              "council": -3
+            },
+            "personal": {
+              "faction_alarm": 3,
+              "violence_risk": 2
+            },
+            "forces": {
+              "guard": {
+                "influence": 3,
+                "satisfaction": 5
+              }
+            },
+            "states": [
+              {
+                "id": "security.guard_authorized",
+                "op": "set",
+                "value": true
+              },
+              {
+                "id": "series.security_guard",
+                "op": "add",
+                "value": 2
+              }
+            ],
+            "followups": [
+              "SEC-010"
+            ]
+          }
+        }
+      }
+    ]
+  },
+  {
+    "id": "SEC-002",
+    "pool": "security",
+    "series": "security.guard",
+    "type": "daily",
+    "title": "夜巡的排班",
+    "source": {
+      "kind": "force",
+      "id": "guard",
+      "name": "保卫组"
+    },
+    "tags": [
+      "治安",
+      "军务"
+    ],
+    "requires": [
+      {
+        "state": "security.guard_authorized",
+        "equals": true
+      }
+    ],
+    "excludes": [],
+    "weight": 12,
+    "text": "呈：夜巡两案——双岗加哨，人累而营固；与村社联防，省人而锣约未立。",
+    "options": {
+      "left": {
+        "id": "shuanggang_jiashao",
+        "label": "双岗加哨",
+        "hint": "累点，踏实",
+        "effects": {
+          "stats": {
+            "military": 2,
+            "livelihood": -1
+          }
+        }
+      },
+      "right": {
+        "id": "yucunshe_lianfang",
+        "label": "与村社联防，教哨法、立锣约",
+        "hint": "共用的锣，也是共用的心",
+        "effects": {
+          "stats": {
+            "military": 1
+          },
+          "forces": {
+            "locals": {
+              "satisfaction": 3
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "SEC-003",
+    "pool": "security",
+    "series": "security.guard",
+    "type": "crisis",
+    "title": "夜袭",
+    "source": {
+      "kind": "character",
+      "id": "any",
+      "name": "卫兵"
+    },
+    "tags": [
+      "军务",
+      "危机"
+    ],
+    "requires": [
+      {
+        "state": "external.threat",
+        "equals": true
+      }
+    ],
+    "excludes": [],
+    "weight": 32,
+    "text": "急呈：后半夜有众摸入堆场，喝止不听，火铳已响一遭。人数不明，锣哨大乱。追，抑或守？请速示。",
+    "options": {
+      "left": {
+        "id": "chujifansha",
+        "label": "出击，追出十里再回",
+        "hint": "以攻代守。见血，也立威",
+        "effects": {
+          "stats": {
+            "military": 6,
+            "people": -1
+          },
+          "wind": 3,
+          "personal": {
+            "violence_risk": 4
+          }
+        }
+      },
+      "right": {
+        "id": "jushou_huitui",
+        "label": "据守堆场，天亮再说",
+        "hint": "不追出去，也少流血",
+        "effects": {
+          "stats": {
+            "military": 3,
+            "livelihood": -2
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "SEC-004",
+    "pool": "security",
+    "series": "security.guard",
+    "type": "key",
+    "title": "戒严令",
+    "source": {
+      "kind": "force",
+      "id": "guard",
+      "name": "保卫组"
+    },
+    "tags": [
+      "军务",
+      "治安",
+      "戒严"
+    ],
+    "requires": [
+      {
+        "state": "security.guard_authorized",
+        "equals": true
+      },
+      {
+        "state": "series.security_guard",
+        "gte": 2
+      },
+      {
+        "state": "martial_law.active",
+        "equals": false
+      }
+    ],
+    "excludes": [],
+    "weight": 25,
+    "text": "呈：请全营戒严七日——出入凭牌、夜间断行、商旅盘查。有元老言：莫把自己管成犯人。",
+    "options": {
+      "left": {
+        "id": "xuanbu_jieyan",
+        "label": "用印：戒严七日",
+        "hint": "乱世用重典。重典也咬人",
+        "effects": {
+          "stats": {
+            "military": 6,
+            "people": -4,
+            "council": -3
+          },
+          "personal": {
+            "violence_risk": 5
+          },
+          "states": [
+            {
+              "id": "martial_law.active",
+              "op": "set",
+              "value": true
+            },
+            {
+              "id": "martial_law.timer",
+              "op": "startTimer",
+              "value": 7
+            },
+            {
+              "id": "series.security_guard",
+              "op": "add",
+              "value": 1
+            }
+          ]
+        },
+        "followups": [
+          "SEC-015"
+        ]
+      },
+      "right": {
+        "id": "jying_xiaojin",
+        "label": "只军营内宵禁三日",
+        "hint": "给民市留个活口",
+        "effects": {
+          "stats": {
+            "military": 2
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "SEC-005",
+    "pool": "security",
+    "series": "security.guard",
+    "type": "price",
+    "title": "保卫组要扩权",
+    "source": {
+      "kind": "force",
+      "id": "guard",
+      "name": "保卫组"
+    },
+    "tags": [
+      "保卫",
+      "政治"
+    ],
+    "requires": [
+      {
+        "force": "guard",
+        "metric": "influence",
+        "gte": 45
+      }
+    ],
+    "excludes": [],
+    "weight": 24,
+    "text": "呈：保卫组请扩权三条：搜捕不必知会民政、审讯不必录供、关卡先行扣押。呈文末批四字——「罪在将来」。",
+    "options": {
+      "left": {
+        "id": "gei_soubu_shenxun",
+        "label": "准：给搜捕与先行扣押之权",
+        "hint": "刀快了，就难收了",
+        "effects": {
+          "stats": {
+            "military": 3,
+            "council": -3
+          },
+          "personal": {
+            "violence_risk": 6,
+            "faction_alarm": 3
+          },
+          "forces": {
+            "guard": {
+              "influence": 5,
+              "satisfaction": 6
+            }
+          }
+        }
+      },
+      "right": {
+        "id": "bohui_shouquan",
+        "label": "驳回，扩权一事免谈",
+        "hint": "缰绳要攥在执委会手里",
+        "effects": {
+          "forces": {
+            "guard": {
+              "satisfaction": -5,
+              "hostility": 6
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "SEC-006",
+    "pool": "security",
+    "series": "security.guard",
+    "type": "backlash",
+    "title": "高压的代价",
+    "source": {
+      "kind": "force",
+      "id": "guard",
+      "name": "保卫组"
+    },
+    "tags": [
+      "保卫",
+      "政治",
+      "危机"
+    ],
+    "requires": [
+      {
+        "any": [
+          {
+            "force": "guard",
+            "metric": "influence",
+            "gte": 60
+          },
+          {
+            "state": "core.pillar.military",
+            "gte": 70
+          }
+        ]
+      }
+    ],
+    "excludes": [],
+    "weight": 35,
+    "text": "呈：关卡日增，怨声亦起——货郎多问一句被扣半宿，医务所送来验伤单两份。保卫组复：乱世人命，不能不从严。",
+    "options": {
+      "left": {
+        "id": "jixu_jiama",
+        "label": "从严如故，谁的面子也不给",
+        "hint": "秩序是用怕撑起来的",
+        "effects": {
+          "stats": {
+            "military": 3,
+            "people": -5
+          },
+          "wind": -2,
+          "personal": {
+            "violence_risk": 6
+          },
+          "forces": {
+            "guard": {
+              "satisfaction": 4
+            },
+            "locals": {
+              "hostility": 6
+            }
+          }
+        }
+      },
+      "right": {
+        "id": "shouhui_bufen_shouquan",
+        "label": "收回关卡，查验归民政",
+        "hint": "给局面降温，也给保卫组脸上降温",
+        "effects": {
+          "stats": {
+            "people": 4,
+            "council": 2
+          },
+          "forces": {
+            "guard": {
+              "satisfaction": -6
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "SEC-007",
+    "pool": "security",
+    "series": "security.guard",
+    "type": "omen",
+    "title": "一份名单在流传",
+    "source": {
+      "kind": "force",
+      "id": "guard",
+      "name": "保卫组"
+    },
+    "tags": [
+      "保卫",
+      "前兆"
+    ],
+    "requires": [
+      {
+        "state": "ruler.pressure_violence",
+        "gte": 45
+      }
+    ],
+    "excludes": [],
+    "weight": 32,
+    "text": "密呈：手抄名单流于营外——记名、注址、列罪三等，落款保卫组木戳。已有人夜敲民政的门求「洗名」。",
+    "options": {
+      "left": {
+        "id": "shao_diao_mingdan",
+        "label": "把名单当众烧了",
+        "hint": "安抚一片心，得罪一把刀",
+        "effects": {
+          "stats": {
+            "people": 2
+          },
+          "personal": {
+            "violence_risk": -4
+          },
+          "forces": {
+            "guard": {
+              "satisfaction": -4
+            }
+          }
+        }
+      },
+      "right": {
+        "id": "zhuangzuo_buzhidao",
+        "label": "装作不知道",
+        "hint": "有些工具，用着顺手",
+        "effects": {
+          "personal": {
+            "violence_risk": 3
+          },
+          "forces": {
+            "guard": {
+              "satisfaction": 2
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "SEC-008",
+    "pool": "security",
+    "series": "security.guard",
+    "type": "crisis",
+    "title": "锥子",
+    "source": {
+      "kind": "character",
+      "id": "any",
+      "name": "值班秘书"
+    },
+    "tags": [
+      "保卫",
+      "危机",
+      "前兆"
+    ],
+    "requires": [
+      {
+        "state": "ruler.pressure_violence",
+        "gte": 60
+      }
+    ],
+    "excludes": [],
+    "weight": 38,
+    "text": "急呈：哨卡拿获形迹可疑短工，搜出磨尖锥子。人未过堂，「有人对首长动手」已传遍全营。保卫组请任贴身警卫。",
+    "options": {
+      "left": {
+        "id": "jiaqiang_tieshen",
+        "label": "准：贴身警卫归保卫组排班",
+        "hint": "命比体面要紧",
+        "effects": {
+          "personal": {
+            "faction_alarm": 3,
+            "personal_pressure": 3
+          },
+          "forces": {
+            "guard": {
+              "influence": 3,
+              "satisfaction": 4
+            }
+          }
+        }
+      },
+      "right": {
+        "id": "zhaochang_loumian",
+        "label": "撤掉前呼后拥，照常露面",
+        "hint": "示弱，才是最危险的",
+        "effects": {
+          "stats": {
+            "people": 3
+          },
+          "personal": {
+            "violence_risk": 4,
+            "personal_pressure": 2
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "SEC-009",
+    "pool": "security",
+    "series": "security.guard",
+    "type": "daily",
+    "title": "查寝",
+    "source": {
+      "kind": "force",
+      "id": "guard",
+      "name": "保卫组"
+    },
+    "tags": [
+      "保卫",
+      "军务"
+    ],
+    "requires": [
+      {
+        "state": "security.guard_authorized",
+        "equals": true
+      }
+    ],
+    "excludes": [],
+    "weight": 12,
+    "text": "呈：夜查两事——队员私藏缴获短刀于铺下，值岗饮酒。队伍的规矩，向来是从小事上松掉的。",
+    "options": {
+      "left": {
+        "id": "shoujiao_siqiang",
+        "label": "收缴私藏，禁酒严办",
+        "hint": "严是爱，松是害",
+        "effects": {
+          "stats": {
+            "council": 2,
+            "military": 1
+          },
+          "forces": {
+            "guard": {
+              "satisfaction": -2
+            }
+          }
+        }
+      },
+      "right": {
+        "id": "moren_lugui",
+        "label": "记下名字，睁只眼闭只眼",
+        "hint": "水至清则无鱼",
+        "effects": {
+          "stats": {
+            "military": -1
+          },
+          "forces": {
+            "guard": {
+              "satisfaction": 3
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "SEC-010",
+    "pool": "security",
+    "series": "security.guard",
+    "type": "key",
+    "title": "伏波军成军",
+    "source": {
+      "kind": "force",
+      "id": "guard",
+      "name": "保卫组"
+    },
+    "tags": [
+      "军务",
+      "伏波军"
+    ],
+    "requires": [
+      {
+        "state": "security.guard_authorized",
+        "equals": true
+      },
+      {
+        "state": "series.security_guard",
+        "gte": 2
+      }
+    ],
+    "excludes": [],
+    "weight": 30,
+    "text": "呈：请扩编正规陆军，取伏波将军故事，号「伏波军」；归化民选精壮补入，一兵一册。末云：有军则有国。",
+    "options": {
+      "left": {
+        "id": "fubo_chengjun",
+        "label": "准：伏波军成军，授旗",
+        "hint": "从今天起，这支队有了名字，也有了来路",
+        "effects": {
+          "stats": {
+            "military": 8,
+            "council": -3
+          },
+          "wind": 3,
+          "personal": {
+            "faction_alarm": 3
+          },
+          "forces": {
+            "guard": {
+              "influence": 6,
+              "satisfaction": 6
+            }
+          },
+          "states": [
+            {
+              "id": "series.security_guard",
+              "op": "add",
+              "value": 1
+            }
+          ]
+        }
+      },
+      "right": {
+        "id": "huancun_kuojun",
+        "label": "缓议：先把保卫组的架子搭稳",
+        "hint": "军队的名分一旦有了，就收不回去了",
+        "effects": {
+          "stats": {
+            "military": 2
+          },
+          "personal": {
+            "faction_alarm": -2
+          },
+          "forces": {
+            "guard": {
+              "satisfaction": -3
+            }
+          }
+        }
+      }
+    },
+    "variants": [
+      {
+        "id": "maoji_fuzheng",
+        "kind": "force",
+        "when": {
+          "conditions": [
+            {
+              "force": "guard",
+              "metric": "influence",
+              "gte": 55
+            }
+          ]
+        },
+        "extraHint": "呈文是从保卫组直接送上来的，没过民政委员会的手。"
+      }
+    ]
+  },
+  {
+    "id": "SEC-011",
+    "pool": "security",
+    "series": "security.guard",
+    "type": "crisis",
+    "title": "官军来了",
+    "source": {
+      "kind": "character",
+      "id": "any",
+      "name": "博铺哨所"
+    },
+    "tags": [
+      "军务",
+      "危机",
+      "外部"
+    ],
+    "requires": [
+      {
+        "any": [
+          {
+            "state": "core.wind",
+            "gte": 35
+          },
+          {
+            "day": {
+              "gte": 45
+            }
+          }
+        ]
+      }
+    ],
+    "excludes": [],
+    "weight": 45,
+    "text": "急呈：博铺旗语——官船十二艘，载兵两千，船首有炮，随军竟有澳门佛郎机炮手。县衙告示已下：擒髡首者，赏银百两。",
+    "options": {
+      "left": {
+        "id": "ju_baopu_erzhan",
+        "label": "凭博铺炮台，海上决胜",
+        "hint": "放他们上岸，就再难送走了",
+        "effects": {
+          "stats": {
+            "military": 8,
+            "council": 4,
+            "people": -2
+          },
+          "days": 3,
+          "wind": 8,
+          "personal": {
+            "violence_risk": 4
+          },
+          "states": [
+            {
+              "id": "external.threat",
+              "op": "set",
+              "value": true
+            },
+            {
+              "id": "official.beaten",
+              "op": "set",
+              "value": true
+            }
+          ]
+        },
+        "followups": [
+          "SEC-014"
+        ]
+      },
+      "right": {
+        "id": "qi_shoubai_ren",
+        "label": "弃滩头，收缩百仞城凭河而守",
+        "hint": "存人失地。工地、糖寮、东门市都保不住",
+        "effects": {
+          "stats": {
+            "military": 4,
+            "livelihood": -8,
+            "council": 2
+          },
+          "days": 3,
+          "wind": 5,
+          "states": [
+            {
+              "id": "external.threat",
+              "op": "set",
+              "value": true
+            },
+            {
+              "id": "official.beaten",
+              "op": "set",
+              "value": true
+            }
+          ]
+        },
+        "followups": [
+          "SEC-014"
+        ]
+      }
+    }
+  },
+  {
+    "id": "SEC-012",
+    "pool": "security",
+    "series": "security.guard",
+    "type": "benefit",
+    "title": "保卫组的问安",
+    "source": {
+      "kind": "force",
+      "id": "guard",
+      "name": "保卫组"
+    },
+    "tags": [
+      "保卫"
+    ],
+    "requires": [
+      {
+        "force": "guard",
+        "metric": "influence",
+        "gte": 50
+      },
+      {
+        "force": "guard",
+        "metric": "satisfaction",
+        "gte": 55
+      }
+    ],
+    "excludes": [],
+    "weight": 20,
+    "text": "呈：旬来营地靖谧：哨线外推一里，东门扒手绝迹。组长呈《旬内治安录》，皆「拿获起获押归」字样。",
+    "options": {
+      "left": {
+        "id": "chuanling_jiangli",
+        "label": "传令嘉奖，记功一次",
+        "hint": "赏要及时。兵是养出来的",
+        "effects": {
+          "stats": {
+            "military": 3
+          },
+          "forces": {
+            "guard": {
+              "satisfaction": 4
+            }
+          }
+        }
+      },
+      "right": {
+        "id": "kou_zan_yang",
+        "label": "口头表扬，赏赐缓议",
+        "hint": "刀不能喂得太饱",
+        "effects": {
+          "forces": {
+            "guard": {
+              "satisfaction": -3
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "SEC-013",
+    "pool": "security",
+    "series": "security.guard",
+    "type": "key",
+    "title": "伏波军初阵",
+    "source": {
+      "kind": "force",
+      "id": "guard",
+      "name": "保卫组"
+    },
+    "tags": [
+      "军务",
+      "伏波军"
+    ],
+    "requires": [
+      {
+        "used": "SEC-010"
+      }
+    ],
+    "excludes": [],
+    "weight": 30,
+    "text": "呈：伏波军初阵——海匪夜摸博铺，列队、放排枪、上刺刀，半个时辰解决。沉匪船一，俘十九，自伤二。",
+    "options": {
+      "left": {
+        "id": "chuan_shou_shizhong",
+        "label": "传首示众，战报大张旗鼓",
+        "hint": "威名是打出来的，也是传出去的",
+        "effects": {
+          "stats": {
+            "military": 4,
+            "people": 2
+          },
+          "wind": 3,
+          "forces": {
+            "guard": {
+              "influence": 4,
+              "satisfaction": 4
+            }
+          }
+        },
+        "followups": [
+          "CHAR-BW-021"
+        ]
+      },
+      "right": {
+        "id": "shencang_gongyum",
+        "label": "深藏功与名，只记档案",
+        "hint": "不显山不露水。县衙那边就当不知道",
+        "effects": {
+          "stats": {
+            "military": 2,
+            "council": 1
+          },
+          "wind": -2
+        }
+      }
+    }
+  },
+  {
+    "id": "SEC-014",
+    "pool": "security",
+    "series": "security.guard",
+    "type": "key",
+    "title": "县衙来使",
+    "source": {
+      "kind": "character",
+      "id": "any",
+      "name": "城里缙绅"
+    },
+    "tags": [
+      "军务",
+      "外部",
+      "外交"
+    ],
+    "requires": [
+      {
+        "state": "official.beaten",
+        "equals": true
+      }
+    ],
+    "excludes": [],
+    "weight": 40,
+    "text": "呈：官军退后半月，城中大绅递帖，透底「抚髡为用」：名义受巡检司节制，岁纳粮米，官保不予深究。",
+    "options": {
+      "left": {
+        "id": "shou_fu_chengchen",
+        "label": "受抚：纳粮称臣，换一个名分",
+        "hint": "屈是屈了。买来的是发展的年月",
+        "effects": {
+          "stats": {
+            "livelihood": 2,
+            "people": 2,
+            "council": -4
+          },
+          "wind": -8,
+          "forces": {
+            "locals": {
+              "satisfaction": 3
+            }
+          }
+        }
+      },
+      "right": {
+        "id": "jujue_cizhang",
+        "label": "退还礼物：「临高的事，临高了」",
+        "hint": "硬气。下一次进剿的由头也埋下了",
+        "effects": {
+          "stats": {
+            "military": 2
+          },
+          "wind": 2,
+          "personal": {
+            "faction_alarm": 2
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "SEC-015",
+    "pool": "security",
+    "series": "security.guard",
+    "type": "cleanup",
+    "title": "戒严的账",
+    "source": {
+      "kind": "force",
+      "id": "guard",
+      "name": "保卫组"
+    },
+    "tags": [
+      "保卫",
+      "治安"
+    ],
+    "requires": [
+      {
+        "used": "SEC-004"
+      }
+    ],
+    "excludes": [],
+    "weight": 30,
+    "text": "呈：戒严毕，账未完——先后扣押十一人，九为赶集良民，货郎之货犹未还。民政言：无说法，东门摊贩去半。",
+    "options": {
+      "left": {
+        "id": "daang_peihuo",
+        "label": "当众赔礼，照价赔货",
+        "hint": "丢面子。换回来的是市面",
+        "effects": {
+          "stats": {
+            "people": 3
+          },
+          "forces": {
+            "guard": {
+              "satisfaction": -3
+            },
+            "trade": {
+              "satisfaction": 4
+            }
+          }
+        }
+      },
+      "right": {
+        "id": "jiaowang_guozheng",
+        "label": "「戒严之事，矫枉过正在所难免」",
+        "hint": "保卫组记下了这句撑腰的话",
+        "effects": {
+          "stats": {
+            "people": -2
+          },
+          "personal": {
+            "violence_risk": 2
+          },
+          "forces": {
+            "guard": {
+              "satisfaction": 3
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "SEC-016",
+    "pool": "security",
+    "series": "security.guard",
+    "type": "daily",
+    "title": "军械清点",
+    "source": {
+      "kind": "force",
+      "id": "guard",
+      "name": "保卫组"
+    },
+    "tags": [
+      "军务",
+      "保卫"
+    ],
+    "requires": [
+      {
+        "state": "security.guard_authorized",
+        "equals": true
+      }
+    ],
+    "excludes": [],
+    "weight": 12,
+    "text": "呈：季度军械清点，账面相符。火门锈三杆，矛杆蛀两根。请立领用保养章程，抑或随用随领？",
+    "options": {
+      "left": {
+        "id": "li_lingyong_zhangcheng",
+        "label": "立领用章程，专人保养",
+        "hint": "麻烦一时，安顿长久",
+        "effects": {
+          "stats": {
+            "military": 2,
+            "council": 1
+          }
+        }
+      },
+      "right": {
+        "id": "suiyong_suiling",
+        "label": "随用随领，先顾眼前",
+        "hint": "省事。锈会一点一点吃掉家底",
+        "effects": {
+          "stats": {
+            "military": -1
+          }
+        }
+      }
+    }
+  }
+]

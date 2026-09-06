@@ -1,0 +1,21 @@
+# 编辑器 / 系统
+.zcode/
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Node（开发者可选安装）
+node_modules/
+
+# 构建产物
+dist/
+
+# 本地调试产物
+*.log
+*.tmp
