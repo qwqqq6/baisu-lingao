@@ -167,7 +167,7 @@ export class Game {
     }
 
     this.pushLog(`崇祯元年，广东琼州府临高县。${character.name}（${character.route}）被推上执政之位。`, "system");
-    if (bonus.desc) this.pushLog(`初始加成：${bonus.desc}`, "system");
+    if (bonus.desc) this.pushLog(`${character.name}的初始加成已生效。`, "system");
     if (character.openingCard) this.pendingCards.push(character.openingCard);
   }
 
