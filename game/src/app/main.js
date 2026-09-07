@@ -86,13 +86,16 @@ function choose(side) {
   const result = game.choose(side);
   if (!result) return;
   const fb = result.feedback;
-  game.pushLog(`照批。${fb.deltas}${fb.notes.length ? "。" + fb.notes.join("；") : ""}`, "info");
+  // 默认模式：纪事里也不留数字与势力态度；调试模式全量记录
+  game.pushLog(game.debug
+    ? `照批。${fb.deltas}${fb.notes.length ? "。" + fb.notes.join("；") : ""}`
+    : "照批。", "info");
   if (result.over) {
     ui.renderGameOver(game);
     return;
   }
   if (!advanceOrRender()) return;
-  ui.showFeedback(fb);
+  ui.showFeedback(fb, game.debug);
   if (result.fell) ui.showFallNotice(result.fell);
 }
 

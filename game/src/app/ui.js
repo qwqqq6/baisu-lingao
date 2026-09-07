@@ -186,7 +186,9 @@ export const ui = {
       Object.entries(PILLAR_LABELS).map(([key, label]) => {
         const value = game.state.get(`core.pillar.${key}`);
         return h("div", { class: "pillar" },
-          h("div", { class: "pillar-top" }, h("span", {}, label), h("span", { class: "pillar-value" }, String(value))),
+          h("div", { class: "pillar-top" },
+            h("span", {}, label),
+            game.debug ? h("span", { class: "pillar-value" }, String(value)) : null),
           h("div", { class: "pillar-bar" }, h("div", { class: `pillar-fill ${value <= 20 || value >= 80 ? "danger" : ""}`, style: `width:${value}%` }))
         );
       })
@@ -324,12 +326,18 @@ export const ui = {
     area.append(body);
   },
 
-  /** 结算反馈：批牍体，一句照批 + 极简变化 */
-  showFeedback(fb) {
+  /** 结算反馈：调试模式给全部数据，默认模式只有一句「照批」 */
+  showFeedback(fb, debugMode) {
     const feedback = document.getElementById("feedback");
     if (!feedback) return;
     feedback.innerHTML = "";
     if (!fb) return;
+    if (!debugMode) {
+      feedback.append(
+        h("div", { class: "feedback-box" }, h("span", { class: "feedback-seal" }, "照批"))
+      );
+      return;
+    }
     feedback.append(
       h("div", { class: "feedback-box" },
         h("span", { class: "feedback-seal" }, "照批"),
