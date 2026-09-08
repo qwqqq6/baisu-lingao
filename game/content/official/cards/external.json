@@ -1543,5 +1543,86 @@
         }
       }
     }
+  },
+  {
+    "id": "EXT-022",
+    "pool": "external",
+    "series": "external.locals",
+    "type": "key",
+    "title": "大员来的通事",
+    "source": {
+      "kind": "character",
+      "id": "any",
+      "name": "红毛商馆通事"
+    },
+    "tags": [
+      "外部",
+      "商贸"
+    ],
+    "requires": [
+      {
+        "state": "contact.locals",
+        "equals": true
+      },
+      {
+        "state": "core.wind",
+        "gte": 8
+      },
+      {
+        "state": "core.wind",
+        "lte": 45
+      }
+    ],
+    "excludes": [],
+    "weight": 18,
+    "lines": [
+      {
+        "who": "红毛通事",
+        "line": "（生硬的官话）大员的总督阁下，想跟临高的首长们做买卖——糖、铁器，要多少有多少价钱。阁下……交个朋友？"
+      },
+      {
+        "who": "侦察兵",
+        "line": "他的护卫一人一杆火绳铳。船是双桅的，吃水比我们所有的船都深。"
+      }
+    ],
+    "options": {
+      "left": {
+        "id": "tong_hongmao",
+        "label": "跟他通商。货照价，城防加岗。",
+        "hint": "跟红毛人做买卖——风声也跟着来了",
+        "effects": {
+          "stats": {
+            "livelihood": 2
+          },
+          "wind": 3,
+          "states": [
+            {
+              "id": "trade.contact",
+              "op": "set",
+              "value": true
+            }
+          ]
+        },
+        "followups": [
+          "TRADE-001"
+        ]
+      },
+      "right": {
+        "id": "juzhi_menwai",
+        "label": "婉拒，礼送出境。",
+        "hint": "少个买家，多个记恨的红毛人",
+        "effects": {
+          "stats": {
+            "military": 1
+          },
+          "wind": -1,
+          "forces": {
+            "trade": {
+              "satisfaction": -2
+            }
+          }
+        }
+      }
+    }
   }
 ]

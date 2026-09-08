@@ -817,5 +817,46 @@
       "external"
     ],
     "desc": "拒绝了县衙的抚议，梁子彻底结死。"
+  },
+  {
+    "id": "retreat.proposed",
+    "name": "南渡之议已提出",
+    "type": "boolean",
+    "default": false,
+    "visibility": "hidden",
+    "mutability": "reversible",
+    "tags": [
+      "retreat"
+    ],
+    "desc": "败退之后，南渡台湾之议已被摆上桌面。"
+  },
+  {
+    "id": "retreat.stage",
+    "name": "南渡筹备阶段",
+    "type": "enum",
+    "values": [
+      "none",
+      "prep",
+      "ready"
+    ],
+    "default": "none",
+    "visibility": "hidden",
+    "mutability": "reversible",
+    "tags": [
+      "retreat"
+    ],
+    "desc": "none 未议 / prep 筹备中 / ready 船齐粮足。"
+  },
+  {
+    "id": "retreat.done",
+    "name": "已扬帆南渡",
+    "type": "boolean",
+    "default": false,
+    "visibility": "hidden",
+    "mutability": "terminal",
+    "tags": [
+      "retreat"
+    ],
+    "desc": "全营南渡台湾，临高的故事结束。"
   }
 ]

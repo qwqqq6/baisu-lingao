@@ -1139,5 +1139,65 @@
         }
       }
     }
+  },
+  {
+    "id": "CORE-019",
+    "pool": "core",
+    "series": "politics.council",
+    "type": "daily",
+    "title": "退守备忘录",
+    "source": {
+      "kind": "character",
+      "id": "any",
+      "name": "文书房"
+    },
+    "tags": [
+      "政治",
+      "继承"
+    ],
+    "requires": [
+      {
+        "state": "series.politics_council",
+        "gte": 1
+      }
+    ],
+    "excludes": [],
+    "weight": 12,
+    "lines": [
+      {
+        "who": "文书房文书",
+        "line": "首长，整理旧档翻出一份八年前的手稿——《退守备忘录》。当年写的：若临高不保，一退大员，二退吕宋。落款的名字，被墨涂了。"
+      },
+      {
+        "who": "值班秘书",
+        "line": "（写的人没署名。可全营谁不知道，那年主张往台湾去的，是哪一位。）"
+      }
+    ],
+    "options": {
+      "left": {
+        "id": "gui_dang",
+        "label": "归档。旧事不必重提。",
+        "hint": "纸压在箱底，念头压在心里",
+        "effects": {
+          "stats": {
+            "council": 1
+          }
+        }
+      },
+      "right": {
+        "id": "chongti_dahui",
+        "label": "在大会上重新提起这份备忘。",
+        "hint": "有人会睡不着——八年前睡不着，现在还睡不着",
+        "effects": {
+          "stats": {
+            "council": -1
+          },
+          "personal": {
+            "faction_alarm": 2,
+            "personal_pressure": 1
+          }
+        }
+      }
+    }
   }
 ]

@@ -1743,5 +1743,276 @@
         }
       }
     }
+  },
+  {
+    "id": "WAR-030",
+    "pool": "security",
+    "series": "security.guard",
+    "type": "crisis",
+    "title": "南渡之议",
+    "source": {
+      "kind": "force",
+      "id": "council",
+      "name": "元老院"
+    },
+    "tags": [
+      "退路",
+      "危机"
+    ],
+    "requires": [
+      {
+        "any": [
+          {
+            "state": "war.outcome",
+            "equals": "close"
+          },
+          {
+            "state": "war.outcome",
+            "equals": "hard"
+          }
+        ]
+      }
+    ],
+    "excludes": [],
+    "weight": 100,
+    "lines": [
+      {
+        "who": "元老甲",
+        "line": "今天的话我撂这儿——临高守不住。八年前选基地，台湾还是海南，争了整整一夜。如今海南站不住了，那就按当年的另一案——去台湾。"
+      },
+      {
+        "who": "元老丙",
+        "line": "而且大员的货栈，八年前就有人置下了产业。红毛人递过橄榄枝，郑芝龙的船队，也卖过我们面子。"
+      },
+      {
+        "who": "元老乙",
+        "line": "红毛人在大员有城堡！郑芝龙刚受了抚，摇身一变成了官军水师——这时候去台湾，是自投罗网！"
+      },
+      {
+        "who": "元老甲",
+        "line": "困守孤岛才是自投罗网。首长——八年前争过的事，今天该有答案了。"
+      }
+    ],
+    "options": {
+      "left": {
+        "id": "yi_yi",
+        "label": "议一议。作最坏的打算。",
+        "hint": "把退路摆上桌面，人心就散了一半——也齐了一半",
+        "effects": {
+          "personal": {
+            "personal_pressure": 2,
+            "faction_alarm": 2
+          },
+          "forces": {
+            "guard": {
+              "satisfaction": -2
+            }
+          },
+          "states": [
+            {
+              "id": "retreat.proposed",
+              "op": "set",
+              "value": true
+            },
+            {
+              "id": "retreat.stage",
+              "op": "set",
+              "value": "prep"
+            }
+          ]
+        }
+      },
+      "right": {
+        "id": "bo_hui",
+        "label": "「临高是根。弃土者，众口铄金。」",
+        "hint": "驳回去容易。可战败的阴影，从此赖着不走",
+        "effects": {
+          "stats": {
+            "council": 2
+          },
+          "personal": {
+            "faction_alarm": 3,
+            "personal_pressure": 3
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "WAR-031",
+    "pool": "security",
+    "series": "security.guard",
+    "type": "crisis",
+    "title": "南渡筹备",
+    "source": {
+      "kind": "force",
+      "id": "council",
+      "name": "元老院"
+    },
+    "tags": [
+      "退路",
+      "危机"
+    ],
+    "requires": [
+      {
+        "state": "retreat.proposed",
+        "equals": true
+      },
+      {
+        "state": "retreat.stage",
+        "equals": "prep"
+      }
+    ],
+    "excludes": [],
+    "weight": 100,
+    "lines": [
+      {
+        "who": "军令房",
+        "line": "备船、清册、囤粮。愿走者造册——三日，册上一千二百人。走的人多了，留下守城的人心就散了。"
+      },
+      {
+        "who": "农委会委员",
+        "line": "糖寮、水田、东门市……八年的心血，说丢就丢？我不同意， Marina 我也不签。"
+      },
+      {
+        "who": "值班秘书",
+        "line": "（首长，这两位再吵下去，册子就要撕裂了。）"
+      }
+    ],
+    "options": {
+      "left": {
+        "id": "neng_dai_jin_dai",
+        "label": "能带走的全带走：船，越多越好。",
+        "hint": "粮、械、匠人、书籍——装不下就丢家当",
+        "effects": {
+          "stats": {
+            "livelihood": -4,
+            "military": 2
+          },
+          "wind": 3,
+          "forces": {
+            "guard": {
+              "satisfaction": 3
+            }
+          },
+          "states": [
+            {
+              "id": "retreat.stage",
+              "op": "set",
+              "value": "ready"
+            }
+          ]
+        }
+      },
+      "right": {
+        "id": "xian_che_laoruo",
+        "label": "先撤老弱匠人，主力留下打。",
+        "hint": "留得青山在",
+        "effects": {
+          "stats": {
+            "people": 2,
+            "livelihood": -2,
+            "military": 1
+          },
+          "forces": {
+            "guard": {
+              "satisfaction": 2
+            }
+          },
+          "states": [
+            {
+              "id": "retreat.stage",
+              "op": "set",
+              "value": "ready"
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "WAR-033",
+    "pool": "security",
+    "series": "security.guard",
+    "type": "crisis",
+    "title": "扬帆之夜",
+    "source": {
+      "kind": "force",
+      "id": "council",
+      "name": "元老院"
+    },
+    "tags": [
+      "退路",
+      "危机"
+    ],
+    "requires": [
+      {
+        "state": "retreat.proposed",
+        "equals": true
+      },
+      {
+        "state": "retreat.stage",
+        "equals": "ready"
+      }
+    ],
+    "excludes": [],
+    "weight": 100,
+    "lines": [
+      {
+        "who": "值班秘书",
+        "line": "名册一千四百人，船三十七条。文书房把八年前那份《台湾还是海南》的旧会议记录也塞进了箱子——说是到了那边，接着争。"
+      },
+      {
+        "who": "元老乙",
+        "line": "首长，最后一问：这一去，还回来吗？"
+      },
+      {
+        "who": "元老甲",
+        "line": "回来？先从红毛人手里，把大员拿下来。"
+      }
+    ],
+    "options": {
+      "left": {
+        "id": "yangfan_taiwan",
+        "label": "扬帆。去台湾。",
+        "hint": "八年前争过的事，八年后有了答案",
+        "effects": {
+          "ending": "taiwan",
+          "states": [
+            {
+              "id": "retreat.done",
+              "op": "set",
+              "value": true
+            },
+            {
+              "id": "retreat.stage",
+              "op": "set",
+              "value": "none"
+            }
+          ]
+        }
+      },
+      "right": {
+        "id": "zai_shou_yiye",
+        "label": "再守一夜。天亮再定。",
+        "hint": "还没到山穷水尽——也许",
+        "effects": {
+          "stats": {
+            "military": 1,
+            "people": -1
+          },
+          "personal": {
+            "personal_pressure": 3
+          },
+          "states": [
+            {
+              "id": "retreat.stage",
+              "op": "set",
+              "value": "none"
+            }
+          ]
+        }
+      }
+    }
   }
 ]

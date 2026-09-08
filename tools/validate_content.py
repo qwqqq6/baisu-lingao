@@ -43,7 +43,7 @@ CONDITION_KEYS = {
     "equals", "notEquals", "gt", "gte", "lt", "lte", "between",
     "includes", "notIncludes", "exists", "metric",
 }
-EFFECT_KEYS = {"stats", "wind", "days", "forces", "personal", "states", "ruler", "stepDown"}
+EFFECT_KEYS = {"stats", "wind", "days", "forces", "personal", "states", "ruler", "stepDown", "ending"}
 STAT_KEYS = {"people", "livelihood", "military", "council"}
 PERSONAL_KEYS = {"personal_pressure", "faction_alarm", "violence_risk", "legitimacy"}
 FORCE_METRICS = {"influence", "satisfaction", "hostility"}

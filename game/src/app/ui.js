@@ -369,21 +369,23 @@ export const ui = {
     const rulerNames = [...new Set((game.state.get("history.former_rulers") || []).concat(game.rulerId !== "none" ? [game.rulerId] : []))]
       .map((id) => game.characterManager.get(id)?.name || id)
       .join("、") || "无";
-    const text =
-      reason === "succession"
+    const title = game.gameOverTitle || `终局：${COLLAPSE_TEXTS_TITLE(reason)}`;
+    const text = game.gameOverText
+      || (reason === "succession"
         ? "继任无人：没有人能被推上台，营地陷入漫长的空位期，直到外部势力不请自来。"
-        : COLLAPSE_TEXTS[reason]?.text || "";
+        : COLLAPSE_TEXTS[reason]?.text || "");
+    const buttonLabel = game.gameOverButton || "重新开始";
     app.innerHTML = "";
     app.append(
       h("div", { class: "gameover" },
-        h("h1", {}, `终局：${COLLAPSE_TEXTS_TITLE(reason)}`),
+        h("h1", {}, title),
         h("p", { class: "gameover-text" }, text),
         h("div", { class: "gameover-stats" },
           h("div", {}, `坚持天数：第 ${game.day} 天`),
           h("div", {}, `历任执政者：${rulerNames}`),
           h("div", {}, `最终四柱：民望 ${game.state.get("core.pillar.people")} / 生计 ${game.state.get("core.pillar.livelihood")} / 军务 ${game.state.get("core.pillar.military")} / 元老院 ${game.state.get("core.pillar.council")}`)
         ),
-        h("button", { class: "btn", onclick: () => location.reload() }, "重新开始")
+        h("button", { class: "btn", onclick: () => location.reload() }, buttonLabel)
       )
     );
   },

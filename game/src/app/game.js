@@ -41,6 +41,23 @@ export const FALL_REASONS = {
   council_seizure: "会议夺权",
 };
 
+export const ENDING_TEXTS = {
+  taiwan: {
+    title: "终局：扬帆南渡",
+    text: "船队在夜色里离开南寮海口，帆影连成一线，铁拳旗卷在桅杆上。没有人说话——大家沉默地看着临高在海上变成一道黑线。\n\n八年前，他们在「台湾还是海南」之间选了海南；八年后，海南站不住了，五百余人掉头向南，去大员驱逐红毛人，从一座叫台湾的岛从头再来。值班秘书在航海日志的末页写：崇祯二年，临高失守，全伙南渡台湾。八年前之争，至此有了答案。\n\n《临高启明·执政者》——另一个开头，等你再来书写。",
+    button: "在另一个时空重新开始",
+  },
+};
+
+/** 专属结局（effects.ending 触发）：非崩局、非败退的叙事终局。 */
+export const ENDING_TEXTS = {
+  taiwan: {
+    title: "终局：扬帆南渡",
+    text: "船队在夜色里离开南寮海口，帆影连成一线，铁拳旗卷在桅杆上。没有人说话——大家沉默地看着临高在海上变成一道黑线。\n\n八年前，他们在「台湾还是海南」之间选了海南；八年后，海南站不住了，五百余人掉头向南，去大员驱逐红毛人，从一座叫台湾的岛从头再来。值班秘书在航海日志的末页写：崇祯二年，临高失守，全伙南渡台湾。八年前之争，至此有了答案。\n\n《临高启明·执政者》——另一个开头，等你再来书写。",
+    button: "在另一个时空重新开始",
+  },
+};
+
 export const COLLAPSE_TEXTS = {
   livelihood: {
     title: "生产崩溃",
@@ -300,6 +317,11 @@ export class Game {
     if (holder.type === "succession" && this.pendingInherit) {
       applyEffects(this.pendingInherit, { state: this.state, forces: this.forces });
       this.pendingInherit = null;
+    }
+
+    // 专属结局（如扬帆南渡）
+    if (option.effects?.ending) {
+      this.gameOver(option.effects.ending);
     }
 
     // 倒台卡特殊规则：只有真正下台才消耗该卡；强行续任后压力仍在，倒台会再次逼近
@@ -636,8 +658,14 @@ export class Game {
     }
   }
 
-  gameOver(reason) {
+  gameOver(reason, customText) {
     this.gameOverReason = reason;
+    const ending = ENDING_TEXTS[reason];
+    if (ending) {
+      this.gameOverTitle = ending.title;
+      this.gameOverText = ending.text;
+      this.gameOverButton = ending.button;
+    }
     const text = COLLAPSE_TEXTS[reason];
     if (text) this.pushLog(`【终局】${text.title}`, "collapse");
   }
