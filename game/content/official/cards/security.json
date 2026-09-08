@@ -838,11 +838,16 @@
               "id": "official.beaten",
               "op": "set",
               "value": true
+            },
+            {
+              "id": "war.approach",
+              "op": "set",
+              "value": "sea"
             }
           ]
         },
         "followups": [
-          "SEC-014"
+          "SEC-022"
         ]
       },
       "right": {
@@ -867,11 +872,16 @@
               "id": "official.beaten",
               "op": "set",
               "value": true
+            },
+            {
+              "id": "war.approach",
+              "op": "set",
+              "value": "siege"
             }
           ]
         },
         "followups": [
-          "SEC-014"
+          "SEC-024"
         ]
       }
     },
@@ -1050,7 +1060,14 @@
             "locals": {
               "satisfaction": 3
             }
-          }
+          },
+          "states": [
+            {
+              "id": "official.accepted",
+              "op": "set",
+              "value": true
+            }
+          ]
         }
       },
       "right": {
@@ -1064,7 +1081,14 @@
           "wind": 2,
           "personal": {
             "faction_alarm": 2
-          }
+          },
+          "states": [
+            {
+              "id": "official.refused",
+              "op": "set",
+              "value": true
+            }
+          ]
         }
       }
     },
@@ -1263,6 +1287,458 @@
             "guard": {
               "satisfaction": -3
             }
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "SEC-022",
+    "pool": "security",
+    "series": "security.guard",
+    "type": "crisis",
+    "title": "海上决战之后",
+    "source": {
+      "kind": "character",
+      "id": "any",
+      "name": "伏波军军令房"
+    },
+    "tags": [
+      "军务",
+      "伏波军",
+      "危机"
+    ],
+    "requires": [
+      {
+        "state": "war.approach",
+        "equals": "sea"
+      },
+      {
+        "state": "core.pillar.military",
+        "gte": 55
+      }
+    ],
+    "excludes": [],
+    "weight": 100,
+    "lines": [
+      {
+        "who": "伏波军令房",
+        "line": "战报：官军前锋三船焚沉，都司座船带伤退往雷州。我军伤百十九人，沉船二——博铺炮台，还在我们手里。"
+      },
+      {
+        "who": "保卫组长",
+        "line": "首长，追不追？追，就是与朝廷不死不休；不追，得防他们回马枪。"
+      }
+    ],
+    "options": {
+      "left": {
+        "id": "zhui_wang_zhuyi",
+        "label": "追。烧了他们的粮船再回。",
+        "hint": "追亡逐北，威震琼州",
+        "effects": {
+          "stats": {
+            "military": 5
+          },
+          "days": 2,
+          "forces": {
+            "guard": {
+              "influence": 5,
+              "satisfaction": 5
+            }
+          },
+          "states": [
+            {
+              "id": "war.outcome",
+              "op": "set",
+              "value": "decisive"
+            },
+            {
+              "id": "official.beaten",
+              "op": "set",
+              "value": true
+            }
+          ],
+          "wind": 4
+        },
+        "followups": [
+          "SEC-014",
+          "SEC-017"
+        ]
+      },
+      "right": {
+        "id": "jianbi_qingye",
+        "label": "见好就收，清扫滩头。",
+        "hint": "胜得体面，也给将来留一线",
+        "effects": {
+          "stats": {
+            "military": 2,
+            "council": 3
+          },
+          "forces": {
+            "guard": {
+              "satisfaction": 2
+            }
+          },
+          "states": [
+            {
+              "id": "war.outcome",
+              "op": "set",
+              "value": "decisive"
+            },
+            {
+              "id": "official.beaten",
+              "op": "set",
+              "value": true
+            }
+          ]
+        },
+        "followups": [
+          "SEC-014"
+        ]
+      }
+    },
+    "variants": [
+      {
+        "id": "li_ren_zhu_zhan_SEC-022",
+        "kind": "history",
+        "when": {
+          "conditions": [
+            {
+              "used": "EXT-020"
+            }
+          ]
+        },
+        "extraHint": "黎山方向烟尘骤起——峒主兑现了盟约，黎人勇士从侧翼杀向官军后路。"
+      }
+    ]
+  },
+  {
+    "id": "SEC-023",
+    "pool": "security",
+    "series": "security.guard",
+    "type": "crisis",
+    "title": "海上败退",
+    "source": {
+      "kind": "character",
+      "id": "any",
+      "name": "伏波军军令房"
+    },
+    "tags": [
+      "军务",
+      "伏波军",
+      "危机"
+    ],
+    "requires": [
+      {
+        "state": "war.approach",
+        "equals": "sea"
+      },
+      {
+        "state": "core.pillar.military",
+        "lt": 55
+      }
+    ],
+    "excludes": [],
+    "weight": 100,
+    "lines": [
+      {
+        "who": "伏波军令房",
+        "line": "战报：接战半个时辰，官军炮火太密，前队折了三十余人，残船退回内河。博铺外围，全丢了。"
+      },
+      {
+        "who": "保卫组长",
+        "line": "首长，弟兄们没怕过——是我们的炮够不着他们。往后再战，得先有能打到江心的炮。"
+      }
+    ],
+    "options": {
+      "left": {
+        "id": "si_shou_paotai",
+        "label": "死守博铺炮台，与台共存亡。",
+        "hint": "地可以丢，台不能丢",
+        "effects": {
+          "stats": {
+            "military": 3,
+            "people": -2
+          },
+          "days": 2,
+          "personal": {
+            "violence_risk": 2
+          },
+          "forces": {
+            "guard": {
+              "satisfaction": 4
+            }
+          },
+          "states": [
+            {
+              "id": "war.outcome",
+              "op": "set",
+              "value": "close"
+            }
+          ]
+        }
+      },
+      "right": {
+        "id": "tui_shou_neihe",
+        "label": "退守内河，放官军登陆再打。",
+        "hint": "诱敌深入。水深浪急，他们不熟",
+        "effects": {
+          "stats": {
+            "military": 2,
+            "livelihood": -4
+          },
+          "personal": {
+            "violence_risk": 3
+          },
+          "states": [
+            {
+              "id": "war.outcome",
+              "op": "set",
+              "value": "close"
+            }
+          ]
+        }
+      }
+    },
+    "variants": [
+      {
+        "id": "li_ren_zhu_zhan_SEC-023",
+        "kind": "history",
+        "when": {
+          "conditions": [
+            {
+              "used": "EXT-020"
+            }
+          ]
+        },
+        "extraHint": "黎山方向烟尘骤起——峒主兑现了盟约，黎人勇士从侧翼杀向官军后路。"
+      }
+    ]
+  },
+  {
+    "id": "SEC-024",
+    "pool": "security",
+    "series": "security.guard",
+    "type": "crisis",
+    "title": "坚城之围",
+    "source": {
+      "kind": "force",
+      "id": "guard",
+      "name": "保卫组"
+    },
+    "tags": [
+      "军务",
+      "危机",
+      "伏波军"
+    ],
+    "requires": [
+      {
+        "state": "war.approach",
+        "equals": "siege"
+      }
+    ],
+    "excludes": [],
+    "weight": 100,
+    "lines": [
+      {
+        "who": "保卫组长",
+        "line": "首长，官军把百仞城围了三面，只留东门——城里已经有人夜里缒绳跑了。粮台报：存粮还够二十天。"
+      },
+      {
+        "who": "元老",
+        "line": "二十天之内，要么有援，要么有变。"
+      }
+    ],
+    "options": {
+      "left": {
+        "id": "si_shou_dai_bian",
+        "label": "死守待变，组织夜袭扰敌。",
+        "hint": "围城必有小破绽，等他们自己出错",
+        "effects": {
+          "stats": {
+            "military": 4,
+            "people": -2,
+            "livelihood": -3
+          },
+          "days": 2,
+          "personal": {
+            "violence_risk": 3
+          },
+          "states": [
+            {
+              "id": "war.outcome",
+              "op": "set",
+              "value": "hold"
+            },
+            {
+              "id": "official.beaten",
+              "op": "set",
+              "value": true
+            }
+          ]
+        },
+        "followups": [
+          "SEC-014"
+        ]
+      },
+      "right": {
+        "id": "tuwei_fanji",
+        "label": "开东门，全军突围反咬一口。",
+        "hint": "置之死地而后生——也可能真的死",
+        "effects": {
+          "stats": {
+            "military": 3,
+            "people": -4,
+            "livelihood": -5,
+            "council": -2
+          },
+          "personal": {
+            "violence_risk": 5
+          },
+          "states": [
+            {
+              "id": "war.outcome",
+              "op": "set",
+              "value": "hard"
+            },
+            {
+              "id": "official.beaten",
+              "op": "set",
+              "value": true
+            }
+          ]
+        }
+      }
+    }
+  },
+  {
+    "id": "SEC-025",
+    "pool": "security",
+    "series": "security.guard",
+    "type": "crisis",
+    "title": "受抚之后",
+    "source": {
+      "kind": "character",
+      "id": "any",
+      "name": "县衙典史"
+    },
+    "tags": [
+      "军务",
+      "政治",
+      "外部"
+    ],
+    "requires": [
+      {
+        "state": "official.accepted",
+        "equals": true
+      }
+    ],
+    "excludes": [],
+    "weight": 60,
+    "lines": [
+      {
+        "who": "县衙典史",
+        "line": "上头的意思，抚是抚了，也得立个册子：首长们既受招安，营中洋炮、快船，须报备数目。"
+      },
+      {
+        "who": "保卫组长",
+        "line": "（首长，这是要摸我们的底。）"
+      }
+    ],
+    "options": {
+      "left": {
+        "id": "ru_shi_zaoce",
+        "label": "如实造册报送。",
+        "hint": "坦荡。家底也交出去了",
+        "effects": {
+          "stats": {
+            "council": 3,
+            "military": -2
+          },
+          "wind": -6
+        }
+      },
+      "right": {
+        "id": "xubao_yiben",
+        "label": "虚报一本，真数不给。",
+        "hint": "两头都要防",
+        "effects": {
+          "stats": {
+            "council": -2,
+            "military": 1
+          },
+          "wind": 2,
+          "forces": {
+            "guard": {
+              "satisfaction": 3
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "SEC-026",
+    "pool": "security",
+    "series": "security.guard",
+    "type": "crisis",
+    "title": "拒抚之后",
+    "source": {
+      "kind": "force",
+      "id": "guard",
+      "name": "保卫组"
+    },
+    "tags": [
+      "军务",
+      "政治"
+    ],
+    "requires": [
+      {
+        "state": "official.refused",
+        "equals": true
+      }
+    ],
+    "excludes": [],
+    "weight": 50,
+    "lines": [
+      {
+        "who": "保卫组长",
+        "line": "拒抚的回信送出去十天了。县衙没再来文——村里倒是有话：官府在邻县募勇，一人先发安家银三两。"
+      }
+    ],
+    "options": {
+      "left": {
+        "id": "xianfa_zhiren",
+        "label": "先发制人，抄了募勇的场子。",
+        "hint": "抢先一步。风声也跟着爆",
+        "effects": {
+          "stats": {
+            "military": 4
+          },
+          "wind": 5,
+          "personal": {
+            "violence_risk": 3
+          },
+          "states": [
+            {
+              "id": "external.threat",
+              "op": "set",
+              "value": true
+            }
+          ]
+        }
+      },
+      "right": {
+        "id": "shenbi_gulei",
+        "label": "深壁固垒，广积粮。",
+        "hint": "不动如山",
+        "effects": {
+          "stats": {
+            "military": 2,
+            "livelihood": 2
+          },
+          "personal": {
+            "personal_pressure": 2
           }
         }
       }

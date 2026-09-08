@@ -880,5 +880,79 @@
         }
       }
     }
+  },
+  {
+    "id": "TRADE-016",
+    "pool": "trade",
+    "series": "trade.dongmen",
+    "type": "key",
+    "title": "战后的大生意",
+    "source": {
+      "kind": "force",
+      "id": "trade",
+      "name": "商贸网络"
+    },
+    "tags": [
+      "商贸",
+      "外部"
+    ],
+    "requires": [
+      {
+        "state": "official.beaten",
+        "equals": true
+      },
+      {
+        "state": "war.outcome",
+        "equals": "decisive"
+      }
+    ],
+    "excludes": [],
+    "weight": 40,
+    "lines": [
+      {
+        "who": "广行掌柜",
+        "line": "首长，官军败退的消息比公文跑得还快。整条沿海商路都知道了——跟临高做生意，官府不敢刁难。三家行铺争着要包我们的货。"
+      },
+      {
+        "who": "广行掌柜",
+        "line": "价钱嘛……您开口。这回，是我们求着给您抬价。"
+      }
+    ],
+    "options": {
+      "left": {
+        "id": "baoxiao_tihao",
+        "label": "应了：三家分销，价钱上浮两成。",
+        "hint": "打赢的和平，才值钱",
+        "effects": {
+          "stats": {
+            "livelihood": 5,
+            "council": -2
+          },
+          "wind": 2,
+          "forces": {
+            "trade": {
+              "influence": 6,
+              "satisfaction": 5
+            }
+          }
+        }
+      },
+      "right": {
+        "id": "junfen_xiaoshou",
+        "label": "只与官价交易，不增份额。",
+        "hint": "细水长流，风声不起",
+        "effects": {
+          "stats": {
+            "livelihood": 2,
+            "council": 2
+          },
+          "forces": {
+            "trade": {
+              "satisfaction": -3
+            }
+          }
+        }
+      }
+    }
   }
 ]

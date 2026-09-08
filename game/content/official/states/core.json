@@ -1,61 +1,821 @@
 [
-  { "id": "core.pillar.people", "name": "民望", "type": "counter", "scope": "global", "default": 50, "min": 0, "max": 100, "visibility": "public", "mutability": "reversible", "tags": ["core", "pillar"], "desc": "穿越众在民众与基层心中的声望。" },
-  { "id": "core.pillar.livelihood", "name": "生计", "type": "counter", "scope": "global", "default": 50, "min": 0, "max": 100, "visibility": "public", "mutability": "reversible", "tags": ["core", "pillar"], "desc": "粮食、物资与日常生产的稳定程度。" },
-  { "id": "core.pillar.military", "name": "军务", "type": "counter", "scope": "global", "default": 50, "min": 0, "max": 100, "visibility": "public", "mutability": "reversible", "tags": ["core", "pillar"], "desc": "武装力量与治安的强度。" },
-  { "id": "core.pillar.council", "name": "元老院", "type": "counter", "scope": "global", "default": 50, "min": 0, "max": 100, "visibility": "public", "mutability": "reversible", "tags": ["core", "pillar"], "desc": "元老院与执委会的团结和合法性。" },
-  { "id": "core.wind", "name": "风声", "type": "counter", "scope": "global", "default": 0, "min": 0, "max": 100, "visibility": "hidden", "mutability": "reversible", "tags": ["core", "external"], "desc": "外部世界对临高集团的注意与敌意，越高越危险。" },
-
-  { "id": "ruler.current", "name": "当前执政者", "type": "enum", "values": ["none", "wunanhai", "wude", "beiwei", "maqianzhu", "wendsi"], "default": "none", "visibility": "public", "mutability": "reversible", "tags": ["core", "ruler"], "desc": "当前执政人物 id。" },
-  { "id": "ruler.pressure_personal", "name": "个人执政压力", "type": "counter", "scope": "global", "default": 0, "min": 0, "max": 100, "visibility": "hidden", "mutability": "reversible", "tags": ["core", "pressure"], "desc": "背锅、疲劳与问责的积累，越高越危险。" },
-  { "id": "ruler.pressure_faction", "name": "派系警惕", "type": "counter", "scope": "global", "default": 0, "min": 0, "max": 100, "visibility": "hidden", "mutability": "reversible", "tags": ["core", "pressure"], "desc": "其他派系对当前执政者的警惕，越高越危险。" },
-  { "id": "ruler.pressure_violence", "name": "暴力风险", "type": "counter", "scope": "global", "default": 0, "min": 0, "max": 100, "visibility": "hidden", "mutability": "reversible", "tags": ["core", "pressure"], "desc": "刺杀、兵变与清洗反噬的风险，越高越危险。" },
-  { "id": "ruler.legitimacy", "name": "继任合法性", "type": "counter", "scope": "global", "default": 50, "min": 0, "max": 100, "visibility": "hidden", "mutability": "reversible", "tags": ["core", "pressure"], "desc": "执政者的合法性与被承认程度，越低越危险。" },
-
-  { "id": "stage.current", "name": "当前阶段", "type": "enum", "values": ["landing", "expansion", "consolidation"], "default": "landing", "visibility": "hidden", "mutability": "reversible", "tags": ["core", "stage"], "desc": "登陆期、扩张期、巩固期。" },
-  { "id": "fall.last_reason", "name": "上次倒台原因", "type": "enum", "values": ["none", "impeach", "purge", "assassinate", "mutiny", "health", "farm_overreach", "network_overreach", "plan_failure", "council_seizure"], "default": "none", "visibility": "hidden", "mutability": "reversible", "tags": ["core", "succession"], "desc": "上一位执政者的倒台方式。" },
-  { "id": "history.former_rulers", "name": "前任执政者", "type": "set", "scope": "global", "default": [], "visibility": "hidden", "mutability": "reversible", "tags": ["core", "succession"], "desc": "已下台人物的 id 列表。" },
-  { "id": "history.known_forces", "name": "已知势力", "type": "set", "scope": "global", "default": [], "visibility": "hidden", "mutability": "reversible", "tags": ["core"], "desc": "玩家通过事件得知的势力。" },
-
-  { "id": "contact.locals", "name": "已接触本地人", "type": "boolean", "scope": "global", "default": false, "visibility": "hinted", "mutability": "immutable", "tags": ["external", "locals"], "desc": "解锁本地村社、误会、贸易与归化相关卡。" },
-  { "id": "external.threat", "name": "已遭遇外部威胁", "type": "boolean", "scope": "global", "default": false, "visibility": "hinted", "mutability": "immutable", "tags": ["external", "security"], "desc": "遭遇过袭击或明确敌意，解锁保卫系列。" },
-  { "id": "civil.captives_arrived", "name": "已有俘虏", "type": "boolean", "scope": "global", "default": false, "visibility": "hinted", "mutability": "immutable", "tags": ["civil"], "desc": "解锁俘虏治理系列。" },
-  { "id": "farm.established", "name": "南海农庄已建立", "type": "boolean", "scope": "global", "default": false, "visibility": "hinted", "mutability": "immutable", "tags": ["farm"], "desc": "解锁南海农庄系列后续卡池。" },
-  { "id": "farm.destroyed", "name": "南海农庄已毁", "type": "boolean", "scope": "global", "default": false, "visibility": "hidden", "mutability": "terminal", "tags": ["farm"], "desc": "关闭农庄扩张，开启善后系列。" },
-  { "id": "farm.autonomy_level", "name": "农庄自治程度", "type": "level", "scope": "global", "default": 0, "min": 0, "max": 5, "visibility": "hidden", "mutability": "reversible", "tags": ["farm"], "desc": "0 未开启，1 筹备，2 建立，3 扩张，4 样板，5 坐大。" },
-  { "id": "security.guard_authorized", "name": "保卫组已授权", "type": "boolean", "scope": "global", "default": false, "visibility": "hinted", "mutability": "immutable", "tags": ["security"], "desc": "解锁保卫系列。" },
-  { "id": "martial_law.active", "name": "戒严中", "type": "boolean", "scope": "global", "default": false, "visibility": "public", "mutability": "reversible", "tags": ["security"], "desc": "临时戒严状态。" },
-  { "id": "martial_law.timer", "name": "戒严剩余天数", "type": "timer", "scope": "global", "default": null, "visibility": "hidden", "mutability": "reversible", "tags": ["security"], "desc": "倒计时归零后戒严自动解除。" },
-  { "id": "planning.committee_established", "name": "计划委员会已成立", "type": "boolean", "scope": "global", "default": false, "visibility": "hidden", "mutability": "immutable", "tags": ["planning"], "desc": "解锁计划系列。" },
-  { "id": "trade.contact", "name": "已与外部商人接触", "type": "boolean", "scope": "global", "default": false, "visibility": "hinted", "mutability": "immutable", "tags": ["trade"], "desc": "解锁东门市系列。" },
-  { "id": "trade.dongmen_established", "name": "东门市已开市", "type": "boolean", "scope": "global", "default": false, "visibility": "hinted", "mutability": "immutable", "tags": ["trade"], "desc": "解锁商贸网络。" },
-  { "id": "labor.policy", "name": "当前劳工政策", "type": "enum", "values": ["unset", "soft", "strict", "militarized"], "default": "unset", "visibility": "public", "mutability": "reversible", "tags": ["civil", "labor"], "desc": "影响工分、俘虏、归化民与基层组织卡池。" },
-
-  { "id": "series.politics_council", "name": "元老会议系列进度", "type": "level", "scope": "global", "default": 0, "min": 0, "max": 5, "visibility": "hidden", "mutability": "reversible", "tags": ["series"], "desc": "元老会议系列进度。" },
-  { "id": "series.external_locals", "name": "本地接触系列进度", "type": "level", "scope": "global", "default": 0, "min": 0, "max": 5, "visibility": "hidden", "mutability": "reversible", "tags": ["series"], "desc": "本地接触系列进度。" },
-  { "id": "series.farm_nanhai", "name": "南海农庄系列进度", "type": "level", "scope": "global", "default": 0, "min": 0, "max": 5, "visibility": "hidden", "mutability": "reversible", "tags": ["series"], "desc": "南海农庄系列进度。" },
-  { "id": "series.civil_captives", "name": "俘虏治理系列进度", "type": "level", "scope": "global", "default": 0, "min": 0, "max": 5, "visibility": "hidden", "mutability": "reversible", "tags": ["series"], "desc": "俘虏治理系列进度。" },
-  { "id": "series.civil_labor", "name": "劳工制度系列进度", "type": "level", "scope": "global", "default": 0, "min": 0, "max": 5, "visibility": "hidden", "mutability": "reversible", "tags": ["series"], "desc": "劳工制度系列进度。" },
-  { "id": "series.security_guard", "name": "保卫授权系列进度", "type": "level", "scope": "global", "default": 0, "min": 0, "max": 5, "visibility": "hidden", "mutability": "reversible", "tags": ["series"], "desc": "保卫授权系列进度。" },
-  { "id": "series.planning_committee", "name": "计划委员会系列进度", "type": "level", "scope": "global", "default": 0, "min": 0, "max": 5, "visibility": "hidden", "mutability": "reversible", "tags": ["series"], "desc": "计划委员会系列进度。" },
-  { "id": "series.trade_dongmen", "name": "东门市系列进度", "type": "level", "scope": "global", "default": 0, "min": 0, "max": 5, "visibility": "hidden", "mutability": "reversible", "tags": ["series"], "desc": "东门市系列进度。" },
-
-  { "id": "character.wunanhai.available", "name": "吴南海可用", "type": "boolean", "scope": "global", "default": true, "visibility": "hidden", "mutability": "reversible", "tags": ["character"], "desc": "吴南海是否可以执政。" },
-  { "id": "character.wunanhai.dead", "name": "吴南海已死", "type": "boolean", "scope": "global", "default": false, "visibility": "hidden", "mutability": "terminal", "tags": ["character"], "desc": "吴南海是否死亡。" },
-  { "id": "character.wude.available", "name": "邬德可用", "type": "boolean", "scope": "global", "default": true, "visibility": "hidden", "mutability": "reversible", "tags": ["character"], "desc": "邬德是否可以执政。" },
-  { "id": "character.wude.dead", "name": "邬德已死", "type": "boolean", "scope": "global", "default": false, "visibility": "hidden", "mutability": "terminal", "tags": ["character"], "desc": "邬德是否死亡。" },
-  { "id": "character.beiwei.available", "name": "北炜可用", "type": "boolean", "scope": "global", "default": true, "visibility": "hidden", "mutability": "reversible", "tags": ["character"], "desc": "北炜是否可以执政。" },
-  { "id": "character.beiwei.dead", "name": "北炜已死", "type": "boolean", "scope": "global", "default": false, "visibility": "hidden", "mutability": "terminal", "tags": ["character"], "desc": "北炜是否死亡。" },
-  { "id": "character.maqianzhu.available", "name": "马千瞩可用", "type": "boolean", "scope": "global", "default": true, "visibility": "hidden", "mutability": "reversible", "tags": ["character"], "desc": "马千瞩是否可以执政。" },
-  { "id": "character.maqianzhu.dead", "name": "马千瞩已死", "type": "boolean", "scope": "global", "default": false, "visibility": "hidden", "mutability": "terminal", "tags": ["character"], "desc": "马千瞩是否死亡。" },
-  { "id": "character.wendsi.available", "name": "文德嗣可用", "type": "boolean", "scope": "global", "default": true, "visibility": "hidden", "mutability": "reversible", "tags": ["character"], "desc": "文德嗣是否可以执政。" },
-  { "id": "character.wendsi.dead", "name": "文德嗣已死", "type": "boolean", "scope": "global", "default": false, "visibility": "hidden", "mutability": "terminal", "tags": ["character"], "desc": "文德嗣是否死亡。" },
-
-  { "id": "character.wunanhai.weakened", "name": "吴南海已被架空", "type": "boolean", "scope": "global", "default": false, "visibility": "hidden", "mutability": "immutable", "tags": ["character"], "desc": "吴南海曾在倒台关头被强行挽留，威权已失。" },
-  { "id": "character.wude.weakened", "name": "邬德已被架空", "type": "boolean", "scope": "global", "default": false, "visibility": "hidden", "mutability": "immutable", "tags": ["character"], "desc": "邬德曾在倒台关头被强行挽留，威权已失。" },
-  { "id": "character.beiwei.weakened", "name": "北炜已被架空", "type": "boolean", "scope": "global", "default": false, "visibility": "hidden", "mutability": "immutable", "tags": ["character"], "desc": "北炜曾在倒台关头被强行挽留，威权已失。" },
-  { "id": "character.maqianzhu.weakened", "name": "马千瞩已被架空", "type": "boolean", "scope": "global", "default": false, "visibility": "hidden", "mutability": "immutable", "tags": ["character"], "desc": "马千瞩曾在倒台关头被强行挽留，威权已失。" },
-  { "id": "character.wendsi.weakened", "name": "文德嗣已被架空", "type": "boolean", "scope": "global", "default": false, "visibility": "hidden", "mutability": "immutable", "tags": ["character"], "desc": "文德嗣曾在倒台关头被强行挽留，威权已失。" },
-
-  { "id": "typhoon.prepared", "name": "台风前有防备", "type": "boolean", "scope": "global", "default": false, "visibility": "hidden", "mutability": "reversible", "tags": ["external", "crisis"], "desc": "台风预警时全营抢收抢固，风灾善后走向不同。" },
-  { "id": "official.beaten", "name": "官军已被击退", "type": "boolean", "scope": "global", "default": false, "visibility": "hinted", "mutability": "immutable", "tags": ["external", "military"], "desc": "进剿的官军被击退，县衙的态度自此不同。" }
+  {
+    "id": "core.pillar.people",
+    "name": "民望",
+    "type": "counter",
+    "scope": "global",
+    "default": 50,
+    "min": 0,
+    "max": 100,
+    "visibility": "public",
+    "mutability": "reversible",
+    "tags": [
+      "core",
+      "pillar"
+    ],
+    "desc": "穿越众在民众与基层心中的声望。"
+  },
+  {
+    "id": "core.pillar.livelihood",
+    "name": "生计",
+    "type": "counter",
+    "scope": "global",
+    "default": 50,
+    "min": 0,
+    "max": 100,
+    "visibility": "public",
+    "mutability": "reversible",
+    "tags": [
+      "core",
+      "pillar"
+    ],
+    "desc": "粮食、物资与日常生产的稳定程度。"
+  },
+  {
+    "id": "core.pillar.military",
+    "name": "军务",
+    "type": "counter",
+    "scope": "global",
+    "default": 50,
+    "min": 0,
+    "max": 100,
+    "visibility": "public",
+    "mutability": "reversible",
+    "tags": [
+      "core",
+      "pillar"
+    ],
+    "desc": "武装力量与治安的强度。"
+  },
+  {
+    "id": "core.pillar.council",
+    "name": "元老院",
+    "type": "counter",
+    "scope": "global",
+    "default": 50,
+    "min": 0,
+    "max": 100,
+    "visibility": "public",
+    "mutability": "reversible",
+    "tags": [
+      "core",
+      "pillar"
+    ],
+    "desc": "元老院与执委会的团结和合法性。"
+  },
+  {
+    "id": "core.wind",
+    "name": "风声",
+    "type": "counter",
+    "scope": "global",
+    "default": 0,
+    "min": 0,
+    "max": 100,
+    "visibility": "hidden",
+    "mutability": "reversible",
+    "tags": [
+      "core",
+      "external"
+    ],
+    "desc": "外部世界对临高集团的注意与敌意，越高越危险。"
+  },
+  {
+    "id": "ruler.current",
+    "name": "当前执政者",
+    "type": "enum",
+    "values": [
+      "none",
+      "wunanhai",
+      "wude",
+      "beiwei",
+      "maqianzhu",
+      "wendsi"
+    ],
+    "default": "none",
+    "visibility": "public",
+    "mutability": "reversible",
+    "tags": [
+      "core",
+      "ruler"
+    ],
+    "desc": "当前执政人物 id。"
+  },
+  {
+    "id": "ruler.pressure_personal",
+    "name": "个人执政压力",
+    "type": "counter",
+    "scope": "global",
+    "default": 0,
+    "min": 0,
+    "max": 100,
+    "visibility": "hidden",
+    "mutability": "reversible",
+    "tags": [
+      "core",
+      "pressure"
+    ],
+    "desc": "背锅、疲劳与问责的积累，越高越危险。"
+  },
+  {
+    "id": "ruler.pressure_faction",
+    "name": "派系警惕",
+    "type": "counter",
+    "scope": "global",
+    "default": 0,
+    "min": 0,
+    "max": 100,
+    "visibility": "hidden",
+    "mutability": "reversible",
+    "tags": [
+      "core",
+      "pressure"
+    ],
+    "desc": "其他派系对当前执政者的警惕，越高越危险。"
+  },
+  {
+    "id": "ruler.pressure_violence",
+    "name": "暴力风险",
+    "type": "counter",
+    "scope": "global",
+    "default": 0,
+    "min": 0,
+    "max": 100,
+    "visibility": "hidden",
+    "mutability": "reversible",
+    "tags": [
+      "core",
+      "pressure"
+    ],
+    "desc": "刺杀、兵变与清洗反噬的风险，越高越危险。"
+  },
+  {
+    "id": "ruler.legitimacy",
+    "name": "继任合法性",
+    "type": "counter",
+    "scope": "global",
+    "default": 50,
+    "min": 0,
+    "max": 100,
+    "visibility": "hidden",
+    "mutability": "reversible",
+    "tags": [
+      "core",
+      "pressure"
+    ],
+    "desc": "执政者的合法性与被承认程度，越低越危险。"
+  },
+  {
+    "id": "stage.current",
+    "name": "当前阶段",
+    "type": "enum",
+    "values": [
+      "landing",
+      "expansion",
+      "consolidation"
+    ],
+    "default": "landing",
+    "visibility": "hidden",
+    "mutability": "reversible",
+    "tags": [
+      "core",
+      "stage"
+    ],
+    "desc": "登陆期、扩张期、巩固期。"
+  },
+  {
+    "id": "fall.last_reason",
+    "name": "上次倒台原因",
+    "type": "enum",
+    "values": [
+      "none",
+      "impeach",
+      "purge",
+      "assassinate",
+      "mutiny",
+      "health",
+      "farm_overreach",
+      "network_overreach",
+      "plan_failure",
+      "council_seizure"
+    ],
+    "default": "none",
+    "visibility": "hidden",
+    "mutability": "reversible",
+    "tags": [
+      "core",
+      "succession"
+    ],
+    "desc": "上一位执政者的倒台方式。"
+  },
+  {
+    "id": "history.former_rulers",
+    "name": "前任执政者",
+    "type": "set",
+    "scope": "global",
+    "default": [],
+    "visibility": "hidden",
+    "mutability": "reversible",
+    "tags": [
+      "core",
+      "succession"
+    ],
+    "desc": "已下台人物的 id 列表。"
+  },
+  {
+    "id": "history.known_forces",
+    "name": "已知势力",
+    "type": "set",
+    "scope": "global",
+    "default": [],
+    "visibility": "hidden",
+    "mutability": "reversible",
+    "tags": [
+      "core"
+    ],
+    "desc": "玩家通过事件得知的势力。"
+  },
+  {
+    "id": "contact.locals",
+    "name": "已接触本地人",
+    "type": "boolean",
+    "scope": "global",
+    "default": false,
+    "visibility": "hinted",
+    "mutability": "immutable",
+    "tags": [
+      "external",
+      "locals"
+    ],
+    "desc": "解锁本地村社、误会、贸易与归化相关卡。"
+  },
+  {
+    "id": "external.threat",
+    "name": "已遭遇外部威胁",
+    "type": "boolean",
+    "scope": "global",
+    "default": false,
+    "visibility": "hinted",
+    "mutability": "immutable",
+    "tags": [
+      "external",
+      "security"
+    ],
+    "desc": "遭遇过袭击或明确敌意，解锁保卫系列。"
+  },
+  {
+    "id": "civil.captives_arrived",
+    "name": "已有俘虏",
+    "type": "boolean",
+    "scope": "global",
+    "default": false,
+    "visibility": "hinted",
+    "mutability": "immutable",
+    "tags": [
+      "civil"
+    ],
+    "desc": "解锁俘虏治理系列。"
+  },
+  {
+    "id": "farm.established",
+    "name": "南海农庄已建立",
+    "type": "boolean",
+    "scope": "global",
+    "default": false,
+    "visibility": "hinted",
+    "mutability": "immutable",
+    "tags": [
+      "farm"
+    ],
+    "desc": "解锁南海农庄系列后续卡池。"
+  },
+  {
+    "id": "farm.destroyed",
+    "name": "南海农庄已毁",
+    "type": "boolean",
+    "scope": "global",
+    "default": false,
+    "visibility": "hidden",
+    "mutability": "terminal",
+    "tags": [
+      "farm"
+    ],
+    "desc": "关闭农庄扩张，开启善后系列。"
+  },
+  {
+    "id": "farm.autonomy_level",
+    "name": "农庄自治程度",
+    "type": "level",
+    "scope": "global",
+    "default": 0,
+    "min": 0,
+    "max": 5,
+    "visibility": "hidden",
+    "mutability": "reversible",
+    "tags": [
+      "farm"
+    ],
+    "desc": "0 未开启，1 筹备，2 建立，3 扩张，4 样板，5 坐大。"
+  },
+  {
+    "id": "security.guard_authorized",
+    "name": "保卫组已授权",
+    "type": "boolean",
+    "scope": "global",
+    "default": false,
+    "visibility": "hinted",
+    "mutability": "immutable",
+    "tags": [
+      "security"
+    ],
+    "desc": "解锁保卫系列。"
+  },
+  {
+    "id": "martial_law.active",
+    "name": "戒严中",
+    "type": "boolean",
+    "scope": "global",
+    "default": false,
+    "visibility": "public",
+    "mutability": "reversible",
+    "tags": [
+      "security"
+    ],
+    "desc": "临时戒严状态。"
+  },
+  {
+    "id": "martial_law.timer",
+    "name": "戒严剩余天数",
+    "type": "timer",
+    "scope": "global",
+    "default": null,
+    "visibility": "hidden",
+    "mutability": "reversible",
+    "tags": [
+      "security"
+    ],
+    "desc": "倒计时归零后戒严自动解除。"
+  },
+  {
+    "id": "planning.committee_established",
+    "name": "计划委员会已成立",
+    "type": "boolean",
+    "scope": "global",
+    "default": false,
+    "visibility": "hidden",
+    "mutability": "immutable",
+    "tags": [
+      "planning"
+    ],
+    "desc": "解锁计划系列。"
+  },
+  {
+    "id": "trade.contact",
+    "name": "已与外部商人接触",
+    "type": "boolean",
+    "scope": "global",
+    "default": false,
+    "visibility": "hinted",
+    "mutability": "immutable",
+    "tags": [
+      "trade"
+    ],
+    "desc": "解锁东门市系列。"
+  },
+  {
+    "id": "trade.dongmen_established",
+    "name": "东门市已开市",
+    "type": "boolean",
+    "scope": "global",
+    "default": false,
+    "visibility": "hinted",
+    "mutability": "immutable",
+    "tags": [
+      "trade"
+    ],
+    "desc": "解锁商贸网络。"
+  },
+  {
+    "id": "labor.policy",
+    "name": "当前劳工政策",
+    "type": "enum",
+    "values": [
+      "unset",
+      "soft",
+      "strict",
+      "militarized"
+    ],
+    "default": "unset",
+    "visibility": "public",
+    "mutability": "reversible",
+    "tags": [
+      "civil",
+      "labor"
+    ],
+    "desc": "影响工分、俘虏、归化民与基层组织卡池。"
+  },
+  {
+    "id": "series.politics_council",
+    "name": "元老会议系列进度",
+    "type": "level",
+    "scope": "global",
+    "default": 0,
+    "min": 0,
+    "max": 5,
+    "visibility": "hidden",
+    "mutability": "reversible",
+    "tags": [
+      "series"
+    ],
+    "desc": "元老会议系列进度。"
+  },
+  {
+    "id": "series.external_locals",
+    "name": "本地接触系列进度",
+    "type": "level",
+    "scope": "global",
+    "default": 0,
+    "min": 0,
+    "max": 5,
+    "visibility": "hidden",
+    "mutability": "reversible",
+    "tags": [
+      "series"
+    ],
+    "desc": "本地接触系列进度。"
+  },
+  {
+    "id": "series.farm_nanhai",
+    "name": "南海农庄系列进度",
+    "type": "level",
+    "scope": "global",
+    "default": 0,
+    "min": 0,
+    "max": 5,
+    "visibility": "hidden",
+    "mutability": "reversible",
+    "tags": [
+      "series"
+    ],
+    "desc": "南海农庄系列进度。"
+  },
+  {
+    "id": "series.civil_captives",
+    "name": "俘虏治理系列进度",
+    "type": "level",
+    "scope": "global",
+    "default": 0,
+    "min": 0,
+    "max": 5,
+    "visibility": "hidden",
+    "mutability": "reversible",
+    "tags": [
+      "series"
+    ],
+    "desc": "俘虏治理系列进度。"
+  },
+  {
+    "id": "series.civil_labor",
+    "name": "劳工制度系列进度",
+    "type": "level",
+    "scope": "global",
+    "default": 0,
+    "min": 0,
+    "max": 5,
+    "visibility": "hidden",
+    "mutability": "reversible",
+    "tags": [
+      "series"
+    ],
+    "desc": "劳工制度系列进度。"
+  },
+  {
+    "id": "series.security_guard",
+    "name": "保卫授权系列进度",
+    "type": "level",
+    "scope": "global",
+    "default": 0,
+    "min": 0,
+    "max": 5,
+    "visibility": "hidden",
+    "mutability": "reversible",
+    "tags": [
+      "series"
+    ],
+    "desc": "保卫授权系列进度。"
+  },
+  {
+    "id": "series.planning_committee",
+    "name": "计划委员会系列进度",
+    "type": "level",
+    "scope": "global",
+    "default": 0,
+    "min": 0,
+    "max": 5,
+    "visibility": "hidden",
+    "mutability": "reversible",
+    "tags": [
+      "series"
+    ],
+    "desc": "计划委员会系列进度。"
+  },
+  {
+    "id": "series.trade_dongmen",
+    "name": "东门市系列进度",
+    "type": "level",
+    "scope": "global",
+    "default": 0,
+    "min": 0,
+    "max": 5,
+    "visibility": "hidden",
+    "mutability": "reversible",
+    "tags": [
+      "series"
+    ],
+    "desc": "东门市系列进度。"
+  },
+  {
+    "id": "character.wunanhai.available",
+    "name": "吴南海可用",
+    "type": "boolean",
+    "scope": "global",
+    "default": true,
+    "visibility": "hidden",
+    "mutability": "reversible",
+    "tags": [
+      "character"
+    ],
+    "desc": "吴南海是否可以执政。"
+  },
+  {
+    "id": "character.wunanhai.dead",
+    "name": "吴南海已死",
+    "type": "boolean",
+    "scope": "global",
+    "default": false,
+    "visibility": "hidden",
+    "mutability": "terminal",
+    "tags": [
+      "character"
+    ],
+    "desc": "吴南海是否死亡。"
+  },
+  {
+    "id": "character.wude.available",
+    "name": "邬德可用",
+    "type": "boolean",
+    "scope": "global",
+    "default": true,
+    "visibility": "hidden",
+    "mutability": "reversible",
+    "tags": [
+      "character"
+    ],
+    "desc": "邬德是否可以执政。"
+  },
+  {
+    "id": "character.wude.dead",
+    "name": "邬德已死",
+    "type": "boolean",
+    "scope": "global",
+    "default": false,
+    "visibility": "hidden",
+    "mutability": "terminal",
+    "tags": [
+      "character"
+    ],
+    "desc": "邬德是否死亡。"
+  },
+  {
+    "id": "character.beiwei.available",
+    "name": "北炜可用",
+    "type": "boolean",
+    "scope": "global",
+    "default": true,
+    "visibility": "hidden",
+    "mutability": "reversible",
+    "tags": [
+      "character"
+    ],
+    "desc": "北炜是否可以执政。"
+  },
+  {
+    "id": "character.beiwei.dead",
+    "name": "北炜已死",
+    "type": "boolean",
+    "scope": "global",
+    "default": false,
+    "visibility": "hidden",
+    "mutability": "terminal",
+    "tags": [
+      "character"
+    ],
+    "desc": "北炜是否死亡。"
+  },
+  {
+    "id": "character.maqianzhu.available",
+    "name": "马千瞩可用",
+    "type": "boolean",
+    "scope": "global",
+    "default": true,
+    "visibility": "hidden",
+    "mutability": "reversible",
+    "tags": [
+      "character"
+    ],
+    "desc": "马千瞩是否可以执政。"
+  },
+  {
+    "id": "character.maqianzhu.dead",
+    "name": "马千瞩已死",
+    "type": "boolean",
+    "scope": "global",
+    "default": false,
+    "visibility": "hidden",
+    "mutability": "terminal",
+    "tags": [
+      "character"
+    ],
+    "desc": "马千瞩是否死亡。"
+  },
+  {
+    "id": "character.wendsi.available",
+    "name": "文德嗣可用",
+    "type": "boolean",
+    "scope": "global",
+    "default": true,
+    "visibility": "hidden",
+    "mutability": "reversible",
+    "tags": [
+      "character"
+    ],
+    "desc": "文德嗣是否可以执政。"
+  },
+  {
+    "id": "character.wendsi.dead",
+    "name": "文德嗣已死",
+    "type": "boolean",
+    "scope": "global",
+    "default": false,
+    "visibility": "hidden",
+    "mutability": "terminal",
+    "tags": [
+      "character"
+    ],
+    "desc": "文德嗣是否死亡。"
+  },
+  {
+    "id": "character.wunanhai.weakened",
+    "name": "吴南海已被架空",
+    "type": "boolean",
+    "scope": "global",
+    "default": false,
+    "visibility": "hidden",
+    "mutability": "immutable",
+    "tags": [
+      "character"
+    ],
+    "desc": "吴南海曾在倒台关头被强行挽留，威权已失。"
+  },
+  {
+    "id": "character.wude.weakened",
+    "name": "邬德已被架空",
+    "type": "boolean",
+    "scope": "global",
+    "default": false,
+    "visibility": "hidden",
+    "mutability": "immutable",
+    "tags": [
+      "character"
+    ],
+    "desc": "邬德曾在倒台关头被强行挽留，威权已失。"
+  },
+  {
+    "id": "character.beiwei.weakened",
+    "name": "北炜已被架空",
+    "type": "boolean",
+    "scope": "global",
+    "default": false,
+    "visibility": "hidden",
+    "mutability": "immutable",
+    "tags": [
+      "character"
+    ],
+    "desc": "北炜曾在倒台关头被强行挽留，威权已失。"
+  },
+  {
+    "id": "character.maqianzhu.weakened",
+    "name": "马千瞩已被架空",
+    "type": "boolean",
+    "scope": "global",
+    "default": false,
+    "visibility": "hidden",
+    "mutability": "immutable",
+    "tags": [
+      "character"
+    ],
+    "desc": "马千瞩曾在倒台关头被强行挽留，威权已失。"
+  },
+  {
+    "id": "character.wendsi.weakened",
+    "name": "文德嗣已被架空",
+    "type": "boolean",
+    "scope": "global",
+    "default": false,
+    "visibility": "hidden",
+    "mutability": "immutable",
+    "tags": [
+      "character"
+    ],
+    "desc": "文德嗣曾在倒台关头被强行挽留，威权已失。"
+  },
+  {
+    "id": "typhoon.prepared",
+    "name": "台风前有防备",
+    "type": "boolean",
+    "scope": "global",
+    "default": false,
+    "visibility": "hidden",
+    "mutability": "reversible",
+    "tags": [
+      "external",
+      "crisis"
+    ],
+    "desc": "台风预警时全营抢收抢固，风灾善后走向不同。"
+  },
+  {
+    "id": "official.beaten",
+    "name": "官军已被击退",
+    "type": "boolean",
+    "scope": "global",
+    "default": false,
+    "visibility": "hinted",
+    "mutability": "immutable",
+    "tags": [
+      "external",
+      "military"
+    ],
+    "desc": "进剿的官军被击退，县衙的态度自此不同。"
+  },
+  {
+    "id": "war.approach",
+    "name": "进剿应对",
+    "type": "enum",
+    "values": [
+      "none",
+      "sea",
+      "siege"
+    ],
+    "default": "none",
+    "visibility": "hidden",
+    "mutability": "reversible",
+    "tags": [
+      "war"
+    ],
+    "desc": "官军进剿时的应对方略：海上决战 / 收缩坚城。"
+  },
+  {
+    "id": "war.outcome",
+    "name": "战事结果",
+    "type": "enum",
+    "values": [
+      "none",
+      "decisive",
+      "close",
+      "hold",
+      "hard"
+    ],
+    "default": "none",
+    "visibility": "hidden",
+    "mutability": "reversible",
+    "tags": [
+      "war"
+    ],
+    "desc": "进剿战事的结果：大捷/险胜/力守/苦守。"
+  },
+  {
+    "id": "official.accepted",
+    "name": "已受抚",
+    "type": "boolean",
+    "default": false,
+    "visibility": "hinted",
+    "mutability": "immutable",
+    "tags": [
+      "war",
+      "external"
+    ],
+    "desc": "接受县衙的抚议，名义上受巡检司节制。"
+  },
+  {
+    "id": "official.refused",
+    "name": "已拒抚",
+    "type": "boolean",
+    "default": false,
+    "visibility": "hinted",
+    "mutability": "immutable",
+    "tags": [
+      "war",
+      "external"
+    ],
+    "desc": "拒绝了县衙的抚议，梁子彻底结死。"
+  }
 ]

@@ -1347,5 +1347,97 @@
         }
       }
     }
+  },
+  {
+    "id": "CIV-013",
+    "pool": "civil",
+    "series": "civil.captives",
+    "type": "key",
+    "title": "败兵入营",
+    "source": {
+      "kind": "character",
+      "id": "any",
+      "name": "民政委员会"
+    },
+    "tags": [
+      "俘虏",
+      "民政"
+    ],
+    "requires": [
+      {
+        "state": "official.beaten",
+        "equals": true
+      },
+      {
+        "state": "civil.captives_arrived",
+        "equals": true
+      }
+    ],
+    "excludes": [],
+    "weight": 40,
+    "lines": [
+      {
+        "who": "民政干事",
+        "line": "首长，这一仗又收了百来号俘虏——可这回不一样，里头有正经的卫所军户，还有个把把总。杀不得，放不得，管也难管。"
+      },
+      {
+        "who": "民政干事",
+        "line": "有人提议：挑军户补进伏波军，余下的照老规矩办。您看呢？"
+      }
+    ],
+    "options": {
+      "left": {
+        "id": "tianbu_fubo",
+        "label": "挑精壮补进伏波军，余下归讲习班。",
+        "hint": "以俘治俘，胆子大",
+        "effects": {
+          "stats": {
+            "military": 3,
+            "people": 2
+          },
+          "personal": {
+            "faction_alarm": 2
+          },
+          "forces": {
+            "naturalized": {
+              "influence": 3
+            },
+            "guard": {
+              "satisfaction": 2
+            }
+          },
+          "states": [
+            {
+              "id": "series.civil_captives",
+              "op": "add",
+              "value": 1
+            }
+          ]
+        }
+      },
+      "right": {
+        "id": "quanbu_jiangxiban",
+        "label": "全部进讲习班，慢慢磨。",
+        "hint": "磨得起。粮袋要瘪一些",
+        "effects": {
+          "stats": {
+            "people": 2,
+            "livelihood": -3
+          },
+          "forces": {
+            "naturalized": {
+              "satisfaction": 4
+            }
+          },
+          "states": [
+            {
+              "id": "series.civil_labor",
+              "op": "add",
+              "value": 1
+            }
+          ]
+        }
+      }
+    }
   }
 ]
