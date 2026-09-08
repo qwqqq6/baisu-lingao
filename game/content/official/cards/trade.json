@@ -809,5 +809,76 @@
         "line": "首长，东门行情一日三变——广城糖涨，雷州盐跌，可脚力钱涨得比货价还快。运力官营，还是照旧雇散？"
       }
     ]
+  },
+  {
+    "id": "TRADE-014",
+    "pool": "trade",
+    "series": "trade.dongmen",
+    "type": "omen",
+    "title": "广商的口信",
+    "source": {
+      "kind": "character",
+      "id": "any",
+      "name": "广商管事"
+    },
+    "tags": [
+      "商贸",
+      "外部",
+      "前兆"
+    ],
+    "requires": [
+      {
+        "state": "core.wind",
+        "gte": 40
+      }
+    ],
+    "excludes": [],
+    "weight": 30,
+    "lines": [
+      {
+        "who": "广商管事",
+        "line": "首长，省城传来的话——府里已经把你们「船舶众多、火器犀利」写进公文了。信不信由您。反正我的船，往后得晚上靠岸。"
+      }
+    ],
+    "options": {
+      "left": {
+        "id": "hua_yin_yaxiaoxi",
+        "label": "花银子，让商行把消息压一压。",
+        "hint": "压得住一时，压不住公文",
+        "effects": {
+          "stats": {
+            "livelihood": -2
+          },
+          "wind": -5,
+          "forces": {
+            "trade": {
+              "satisfaction": 3,
+              "influence": 2
+            }
+          }
+        }
+      },
+      "right": {
+        "id": "bei_zhan",
+        "label": "谢过口信，回头加紧备武。",
+        "hint": "风声传到这个份上，该备的都得备",
+        "effects": {
+          "stats": {
+            "military": 3
+          },
+          "wind": 2,
+          "personal": {
+            "personal_pressure": 2
+          },
+          "states": [
+            {
+              "id": "external.threat",
+              "op": "set",
+              "value": true
+            }
+          ]
+        }
+      }
+    }
   }
 ]

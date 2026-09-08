@@ -1016,5 +1016,128 @@
         }
       }
     }
+  },
+  {
+    "id": "CORE-017",
+    "pool": "core",
+    "series": "politics.council",
+    "type": "crisis",
+    "title": "廊下的私语",
+    "source": {
+      "kind": "character",
+      "id": "any",
+      "name": "值班秘书"
+    },
+    "tags": [
+      "会议",
+      "政治",
+      "前兆"
+    ],
+    "requires": [
+      {
+        "state": "ruler.pressure_faction",
+        "gte": 40
+      }
+    ],
+    "excludes": [],
+    "weight": 30,
+    "lines": [
+      {
+        "who": "值班秘书",
+        "line": "首长，今天散会别走正门。几个委员在廊下说话，见我过去就收了声——我只听清半句：「再让他这么干下去……」"
+      }
+    ],
+    "options": {
+      "left": {
+        "id": "qiaoda_yihou",
+        "label": "第二天点名，敲打一二。",
+        "hint": "杀鸡儆猴，猴也记仇",
+        "effects": {
+          "personal": {
+            "faction_alarm": -3,
+            "violence_risk": 1
+          },
+          "stats": {
+            "council": -1
+          }
+        }
+      },
+      "right": {
+        "id": "jiajin_lalong",
+        "label": "不动声色，挨个请喝茶。",
+        "hint": "化敌于无形，就是费茶",
+        "effects": {
+          "stats": {
+            "people": 1
+          },
+          "personal": {
+            "faction_alarm": -2
+          },
+          "forces": {
+            "council": {
+              "influence": 2
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "CORE-018",
+    "pool": "core",
+    "series": "politics.council",
+    "type": "daily",
+    "title": "前任的信",
+    "source": {
+      "kind": "character",
+      "id": "any",
+      "name": "值班秘书"
+    },
+    "tags": [
+      "继承",
+      "人情"
+    ],
+    "requires": [
+      {
+        "state": "history.former_rulers",
+        "exists": true
+      }
+    ],
+    "excludes": [],
+    "weight": 14,
+    "lines": [
+      {
+        "who": "值班秘书",
+        "line": "首长，前任托盐商的船捎来一封信，没拆。信皮上就四个字——「旧部之事」。"
+      }
+    ],
+    "options": {
+      "left": {
+        "id": "chai_hui",
+        "label": "拆开看，替他把事办了。",
+        "hint": "旧情难却，新账难算",
+        "effects": {
+          "stats": {
+            "people": 2
+          },
+          "personal": {
+            "faction_alarm": 2
+          }
+        }
+      },
+      "right": {
+        "id": "tui_hui",
+        "label": "原封退回，一字不批。",
+        "hint": "立规矩：人走茶就凉",
+        "effects": {
+          "stats": {
+            "council": 1
+          },
+          "personal": {
+            "faction_alarm": -1
+          }
+        }
+      }
+    }
   }
 ]

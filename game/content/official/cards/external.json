@@ -1386,5 +1386,162 @@
         "line": "首长，东门外支了骰子摊，工票全往里流，还有人赊账。抓了主家，还是立章程管起来？"
       }
     ]
+  },
+  {
+    "id": "EXT-020",
+    "pool": "external",
+    "series": "external.locals",
+    "type": "key",
+    "title": "黎峒的委屈",
+    "source": {
+      "kind": "character",
+      "id": "any",
+      "name": "峒丁"
+    },
+    "tags": [
+      "本地人",
+      "黎人",
+      "冲突"
+    ],
+    "requires": [
+      {
+        "used": "EXT-011"
+      },
+      {
+        "state": "contact.locals",
+        "equals": true
+      }
+    ],
+    "excludes": [],
+    "weight": 30,
+    "lines": [
+      {
+        "who": "峒丁",
+        "line": "首长，汉商勾着土司的人打我们，牛羊抢走几十头，还伤了两个后生。"
+      },
+      {
+        "who": "峒丁",
+        "line": "峒主说了——短毛的铳借我们使一回，往后黎山的货，全走你们的路。"
+      }
+    ],
+    "options": {
+      "left": {
+        "id": "jie_chong_jiao_guan",
+        "label": "借铳，派教官带队助阵。",
+        "hint": "黎山的门彻底打开了，官府的眼睛也睁开了",
+        "effects": {
+          "stats": {
+            "military": 3
+          },
+          "wind": 2,
+          "days": 2,
+          "forces": {
+            "locals": {
+              "influence": 4,
+              "satisfaction": 5
+            }
+          },
+          "states": [
+            {
+              "id": "external.threat",
+              "op": "set",
+              "value": true
+            }
+          ]
+        }
+      },
+      "right": {
+        "id": "song_liang_song_yao",
+        "label": "不出兵。送粮送药，再替他们去说和。",
+        "hint": "仁义做全，峒主脸上却挂不住",
+        "effects": {
+          "stats": {
+            "people": 2
+          },
+          "forces": {
+            "locals": {
+              "satisfaction": 3,
+              "influence": 1
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    "id": "EXT-021",
+    "pool": "external",
+    "series": "external.locals",
+    "type": "key",
+    "title": "黎山马帮",
+    "source": {
+      "kind": "force",
+      "id": "locals",
+      "name": "本地村社"
+    },
+    "tags": [
+      "本地人",
+      "黎人",
+      "商贸"
+    ],
+    "requires": [
+      {
+        "used": "EXT-020"
+      }
+    ],
+    "excludes": [],
+    "weight": 30,
+    "lines": [
+      {
+        "who": "马帮头领",
+        "line": "首长，黎山的牛马、槟榔、药材、藤条，往后全从你们的路上走。孝敬按月算——就求一件事，路上出了事，你们得管。"
+      }
+    ],
+    "options": {
+      "left": {
+        "id": "she_li_shi",
+        "label": "在东门设黎市，立约护路。",
+        "hint": "山货与铁器对流，官府侧目",
+        "effects": {
+          "stats": {
+            "people": 2,
+            "livelihood": 2
+          },
+          "wind": 2,
+          "forces": {
+            "locals": {
+              "influence": 3,
+              "satisfaction": 4
+            }
+          },
+          "states": [
+            {
+              "id": "series.external_locals",
+              "op": "add",
+              "value": 1
+            }
+          ]
+        }
+      },
+      "right": {
+        "id": "chou_shui_hu_lu",
+        "label": "照章抽税，另收护路费。",
+        "hint": "实惠。马帮嘴上不说，心里记账",
+        "effects": {
+          "stats": {
+            "livelihood": 3,
+            "council": 1
+          },
+          "forces": {
+            "locals": {
+              "satisfaction": -2
+            },
+            "trade": {
+              "influence": 2
+            }
+          }
+        }
+      }
+    }
   }
 ]

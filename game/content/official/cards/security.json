@@ -1194,5 +1194,78 @@
         "line": "季度清点，账面相符。就是火门锈了三杆，矛杆蛀了两根。立个保养章程，还是随用随领？"
       }
     ]
+  },
+  {
+    "id": "SEC-017",
+    "pool": "security",
+    "series": "security.guard",
+    "type": "crisis",
+    "title": "军功封赏之争",
+    "source": {
+      "kind": "force",
+      "id": "guard",
+      "name": "保卫组"
+    },
+    "tags": [
+      "军务",
+      "伏波军",
+      "会议"
+    ],
+    "requires": [
+      {
+        "used": "SEC-013"
+      }
+    ],
+    "excludes": [],
+    "weight": 35,
+    "lines": [
+      {
+        "who": "保卫组长",
+        "line": "首长，初阵的将士在营里候着请功。可赏什么？发银，银根紧；授田，田没着落。"
+      },
+      {
+        "who": "元老",
+        "line": "会上有人提了个法子——以战功授田，屯垦戍边。文的听了直摇头：今日授田给功臣，明日功臣就是新地主。"
+      }
+    ],
+    "options": {
+      "left": {
+        "id": "shou_tian_tunkan",
+        "label": "准：以战功授田，屯垦戍边。",
+        "hint": "军心大悦。人的胃口，也大了",
+        "effects": {
+          "stats": {
+            "military": 3,
+            "livelihood": 2,
+            "council": -2
+          },
+          "personal": {
+            "faction_alarm": 3
+          },
+          "forces": {
+            "guard": {
+              "influence": 4,
+              "satisfaction": 5
+            }
+          }
+        }
+      },
+      "right": {
+        "id": "zhi_fa_shang_yin",
+        "label": "只发赏银，授田再议。",
+        "hint": "账好算。军心嘛……凉得快",
+        "effects": {
+          "stats": {
+            "military": 1,
+            "livelihood": -2
+          },
+          "forces": {
+            "guard": {
+              "satisfaction": -3
+            }
+          }
+        }
+      }
+    }
   }
 ]
