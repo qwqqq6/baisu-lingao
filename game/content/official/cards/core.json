@@ -20,7 +20,7 @@
     "options": {
       "left": {
         "id": "xian_fen_gong",
-        "label": "先立规矩，各口分头负责。",
+        "label": "立规矩。",
         "hint": "先把架子搭起来，散会睡觉",
         "effects": {
           "stats": {
@@ -41,7 +41,7 @@
       },
       "right": {
         "id": "xian_zhua_yaowu",
-        "label": "不议了，先办急务。",
+        "label": "先办事。",
         "hint": "粮食、营防、土著，一件件来",
         "effects": {
           "stats": {
@@ -97,7 +97,7 @@
     "options": {
       "left": {
         "id": "ge_da_50",
-        "label": "各让一步，油对半分。",
+        "label": "对半分。",
         "hint": "今天能散会，明天接着吵",
         "effects": {
           "stats": {
@@ -110,7 +110,7 @@
       },
       "right": {
         "id": "pai_ban_nong",
-        "label": "油先保工地，其他口排队。",
+        "label": "工地优先。",
         "hint": "事情推得动，计委的排期表又得重画",
         "effects": {
           "stats": {
@@ -152,7 +152,7 @@
     "options": {
       "left": {
         "id": "an_gongxian",
-        "label": "照名单办，按资历贡献。",
+        "label": "照名单。",
         "hint": "老同志们满意了",
         "effects": {
           "stats": {
@@ -163,7 +163,7 @@
       },
       "right": {
         "id": "chong_fen",
-        "label": "作废重分，抓阄定先后。",
+        "label": "抓阄。",
         "hint": "听天由命，谁也没话说",
         "effects": {
           "stats": {
@@ -211,7 +211,7 @@
     "options": {
       "left": {
         "id": "dangzhong_jiantao",
-        "label": "大会上说明，补办手续。",
+        "label": "会上说明。",
         "hint": "丢面子，保规矩",
         "effects": {
           "stats": {
@@ -227,7 +227,7 @@
       },
       "right": {
         "id": "tuoyan_lengchu",
-        "label": "压下来，不议。",
+        "label": "压下不议。",
         "hint": "拖字诀。怨气不会自己散",
         "effects": {
           "stats": {
@@ -270,7 +270,7 @@
     "options": {
       "left": {
         "id": "she_mishuchu",
-        "label": "抽归化民设文书房。",
+        "label": "设文书房。",
         "hint": "权力下移一分，案头清净一寸",
         "effects": {
           "stats": {
@@ -288,7 +288,7 @@
       },
       "right": {
         "id": "ziye_piwen",
-        "label": "我今晚自己批完。",
+        "label": "我连夜批。",
         "hint": "批示一件件来，天亮再说",
         "effects": {
           "stats": {
@@ -334,7 +334,7 @@
     "options": {
       "left": {
         "id": "jieshou_zhangcheng",
-        "label": "准了，试行。",
+        "label": "准了。",
         "hint": "戴上笼头，换一个名正言顺",
         "effects": {
           "stats": {
@@ -354,7 +354,7 @@
       },
       "right": {
         "id": "tui_shuojunwu",
-        "label": "非常之时，缓议。",
+        "label": "缓议。",
         "hint": "缓兵之计，用一次少一次",
         "effects": {
           "forces": {
@@ -403,7 +403,7 @@
     "options": {
       "left": {
         "id": "zengshe_chanwei",
-        "label": "照案通过，如期改选。",
+        "label": "照案通过。",
         "hint": "制度化，也把山头摆上了台面",
         "effects": {
           "stats": {
@@ -432,7 +432,7 @@
       },
       "right": {
         "id": "huanyi_cihuo",
-        "label": "缓一缓，人手紧。",
+        "label": "人手紧，缓。",
         "hint": "缓一缓。人心可等不了那么久",
         "effects": {
           "stats": {
@@ -479,7 +479,7 @@
     "options": {
       "left": {
         "id": "rangxian_xiezui",
-        "label": "接受罢免，当场交印。",
+        "label": "交印。",
         "hint": "保全体面，退场",
         "effects": {
           "stats": {
@@ -501,7 +501,7 @@
       },
       "right": {
         "id": "qiangli_yazhi",
-        "label": "我不同意。散会。",
+        "label": "散会。",
         "hint": "赌一把。看他们敢不敢动真格",
         "effects": {
           "stats": {
@@ -545,7 +545,7 @@
     "options": {
       "left": {
         "id": "zhaozhang_banshi",
-        "label": "知道了，照章登记。",
+        "label": "照章登记。",
         "hint": "规矩是规矩",
         "effects": {
           "stats": {
@@ -555,7 +555,7 @@
       },
       "right": {
         "id": "sidi_duowen",
-        "label": "进来坐，把知道的都说说。",
+        "label": "坐下细说。",
         "hint": "墙角的烟，比会议桌上的坦白",
         "effects": {
           "stats": {
@@ -601,7 +601,7 @@
     "options": {
       "left": {
         "id": "gongkai_qingsuan",
-        "label": "摊开在大会上。",
+        "label": "摊到会上。",
         "hint": "立信，也结仇",
         "effects": {
           "stats": {
@@ -616,7 +616,7 @@
       },
       "right": {
         "id": "mentou_chuli",
-        "label": "悄悄还清，别声张。",
+        "label": "悄悄还清。",
         "hint": "自家的难处，自家咽",
         "effects": {
           "stats": {
@@ -662,7 +662,7 @@
     "options": {
       "left": {
         "id": "zidong_qingshi",
-        "label": "主动请求重新授权。",
+        "label": "主动请命。",
         "hint": "低头，把位子坐稳",
         "effects": {
           "stats": {
@@ -720,7 +720,7 @@
     "options": {
       "left": {
         "id": "jieshiqu_gui_dahui",
-        "label": "归大会常委。",
+        "label": "归大会。",
         "hint": "程序上无懈可击。往后每一步都有人在旁边念条文",
         "effects": {
           "stats": {
@@ -737,7 +737,7 @@
       },
       "right": {
         "id": "jieshiqu_gui_zhengzhi",
-        "label": "归执政。",
+        "label": "归我。",
         "hint": "办起事来利落。章程成了手里的刀",
         "effects": {
           "stats": {
@@ -790,7 +790,7 @@
     "options": {
       "left": {
         "id": "jiao_dahui_gongshen",
-        "label": "照章程，公审。",
+        "label": "公审。",
         "hint": "规矩立住了。寒的是被弹劾者一系的心",
         "effects": {
           "stats": {
@@ -804,7 +804,7 @@
       },
       "right": {
         "id": "leng_chuli",
-        "label": "证据不足，冷处理。",
+        "label": "冷处理。",
         "hint": "当事人记住了。看懂的人也记住了",
         "effects": {
           "stats": {
@@ -854,7 +854,7 @@
     "options": {
       "left": {
         "id": "rangbu_gaitiming",
-        "label": "让步，改提别人。",
+        "label": "让步换人。",
         "hint": "程序赢了。你的提名从此都要先过会",
         "effects": {
           "stats": {
@@ -867,7 +867,7 @@
       },
       "right": {
         "id": "jianchi_yijian",
-        "label": "坚持原议，先斩后奏。",
+        "label": "先斩后奏。",
         "hint": "事情办成了。章程的裂缝也留下了",
         "effects": {
           "stats": {
@@ -912,7 +912,7 @@
     "options": {
       "left": {
         "id": "da_hui_yifengxin",
-        "label": "代笔回信，报个平安。",
+        "label": "代笔回信。",
         "hint": "报得了平安，报不了别的",
         "effects": {
           "stats": {
@@ -925,7 +925,7 @@
       },
       "right": {
         "id": "buyu_zhiji",
-        "label": "别提这事，谁也别问。",
+        "label": "谁也别提。",
         "hint": "有些人夜里睡不着，白天照常开工",
         "effects": {
           "stats": {
@@ -983,7 +983,7 @@
     "options": {
       "left": {
         "id": "shou_beishu",
-        "label": "收下决议，当众谢过各位委员。",
+        "label": "收下，谢过。",
         "hint": "背书到位，底气也到位",
         "effects": {
           "stats": {
@@ -1002,7 +1002,7 @@
       },
       "right": {
         "id": "zhi_xie_bu_ling",
-        "label": "谢谢大会。章，一个也不能多盖。",
+        "label": "谢了，章照旧。",
         "hint": "缰绳不松",
         "effects": {
           "stats": {
@@ -1050,7 +1050,7 @@
     "options": {
       "left": {
         "id": "qiaoda_yihou",
-        "label": "第二天点名，敲打一二。",
+        "label": "点名敲打。",
         "hint": "杀鸡儆猴，猴也记仇",
         "effects": {
           "personal": {
@@ -1064,7 +1064,7 @@
       },
       "right": {
         "id": "jiajin_lalong",
-        "label": "不动声色，挨个请喝茶。",
+        "label": "挨个请喝茶。",
         "hint": "化敌于无形，就是费茶",
         "effects": {
           "stats": {
@@ -1114,7 +1114,7 @@
     "options": {
       "left": {
         "id": "chai_hui",
-        "label": "拆开看，替他把事办了。",
+        "label": "拆了，办了。",
         "hint": "旧情难却，新账难算",
         "effects": {
           "stats": {
@@ -1127,7 +1127,7 @@
       },
       "right": {
         "id": "tui_hui",
-        "label": "原封退回，一字不批。",
+        "label": "原封退回。",
         "hint": "立规矩：人走茶就凉",
         "effects": {
           "stats": {
@@ -1176,7 +1176,7 @@
     "options": {
       "left": {
         "id": "gui_dang",
-        "label": "归档。旧事不必重提。",
+        "label": "归档。",
         "hint": "纸压在箱底，念头压在心里",
         "effects": {
           "stats": {
@@ -1186,7 +1186,7 @@
       },
       "right": {
         "id": "chongti_dahui",
-        "label": "在大会上重新提起这份备忘。",
+        "label": "会上重提。",
         "hint": "有人会睡不着——八年前睡不着，现在还睡不着",
         "effects": {
           "stats": {

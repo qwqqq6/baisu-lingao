@@ -30,7 +30,7 @@
     "options": {
       "left": {
         "id": "guanding_shiqi",
-        "label": "照方案建市，税吏进驻",
+        "label": "建市。",
         "hint": "街道、下水道、税章一起立",
         "effects": {
           "stats": {
@@ -54,7 +54,7 @@
       },
       "right": {
         "id": "moxu_caoshi",
-        "label": "不出面，默许草市自长",
+        "label": "默许草市。",
         "hint": "自己长出来的最旺，也最乱",
         "effects": {
           "stats": {
@@ -111,7 +111,7 @@
     "options": {
       "left": {
         "id": "choushui_chonggong",
-        "label": "照章抽税，一文不让",
+        "label": "照章抽税。",
         "hint": "落袋为安",
         "effects": {
           "stats": {
@@ -123,7 +123,7 @@
       },
       "right": {
         "id": "mianfei_zhaolai",
-        "label": "头三个月免税，放水养鱼",
+        "label": "免税养市。",
         "hint": "市旺了，什么都会有",
         "effects": {
           "stats": {
@@ -171,7 +171,7 @@
     "options": {
       "left": {
         "id": "pingpao_paishou",
-        "label": "开仓平价抛售，砸回原价",
+        "label": "开仓压价。",
         "hint": "官库砸奸商，也砸了自己人的干股",
         "effects": {
           "stats": {
@@ -190,7 +190,7 @@
       },
       "right": {
         "id": "suixing_jiushi",
-        "label": "随行就市，不加干预",
+        "label": "随行就市。",
         "hint": "市场的归市场。骂声也归市场",
         "effects": {
           "stats": {
@@ -246,7 +246,7 @@
     "options": {
       "left": {
         "id": "checha_fengtan",
-        "label": "彻查封摊，立废料回炉章程",
+        "label": "彻查封摊。",
         "hint": "狠得下心，才守得住家",
         "effects": {
           "stats": {
@@ -264,7 +264,7 @@
       },
       "right": {
         "id": "zhuangzuo_meikanjian",
-        "label": "睁只眼闭只眼",
+        "label": "睁只眼。",
         "hint": "买卖和风声，从来一起涨",
         "effects": {
           "stats": {
@@ -308,7 +308,7 @@
     "options": {
       "left": {
         "id": "jianshui_sannian",
-        "label": "准：减税三年，立碑为据",
+        "label": "准，减三年。",
         "hint": "养肥的鱼才好钓",
         "effects": {
           "stats": {
@@ -325,7 +325,7 @@
       },
       "right": {
         "id": "yikou_huijue",
-        "label": "原货退回，一文不免",
+        "label": "原货退回。",
         "hint": "公报私仇的口子，不能开",
         "effects": {
           "stats": {
@@ -371,7 +371,7 @@
     "options": {
       "left": {
         "id": "yi_yantie_huanliang",
-        "label": "盐铁放开大换",
+        "label": "盐铁大换。",
         "hint": "挣得多，漏得也多",
         "effects": {
           "stats": {
@@ -383,7 +383,7 @@
       },
       "right": {
         "id": "zhi_zuo_yaocai",
-        "label": "只做药材生丝的小生意",
+        "label": "只做小生意。",
         "hint": "细水长流，风声不起",
         "effects": {
           "stats": {
@@ -431,7 +431,7 @@
     "options": {
       "left": {
         "id": "baoge_dashanghang",
-        "label": "包销给广行",
+        "label": "包销。",
         "hint": "银子快，风声也快",
         "effects": {
           "stats": {
@@ -456,7 +456,7 @@
       },
       "right": {
         "id": "guanying_lingmai",
-        "label": "自设官栈，零卖散销",
+        "label": "官栈零卖。",
         "hint": "稳当，也慢",
         "effects": {
           "stats": {
@@ -504,7 +504,7 @@
     "options": {
       "left": {
         "id": "zengchan_baoqi",
-        "label": "加单：镜子和杯子尽管造",
+        "label": "加单尽造。",
         "hint": "一两镜子一亩田，也扎眼得很",
         "effects": {
           "stats": {
@@ -524,7 +524,7 @@
       },
       "right": {
         "id": "kongzhi_fenliang",
-        "label": "限量发售，物以稀为贵",
+        "label": "限量发售。",
         "hint": "名声慢慢攒，风声慢慢涨",
         "effects": {
           "stats": {
@@ -580,7 +580,7 @@
     "options": {
       "left": {
         "id": "shou_baoxiao",
-        "label": "收下，准商团代办外路消息",
+        "label": "收下。",
         "hint": "银子和耳报神，都是好东西",
         "effects": {
           "stats": {
@@ -598,7 +598,7 @@
       },
       "right": {
         "id": "tui_yin_liushi",
-        "label": "番银退回，消息照买",
+        "label": "银子照买。",
         "hint": "情分收着，银子不收",
         "effects": {
           "stats": {
@@ -645,7 +645,7 @@
     "options": {
       "left": {
         "id": "jiefa_dao_fucheng",
-        "label": "捅到府城去",
+        "label": "捅到府城。",
         "hint": "一时痛快。以后县衙的每一张纸都会刁难东门市",
         "effects": {
           "stats": {
@@ -662,7 +662,7 @@
       },
       "right": {
         "id": "wangkai_yimian",
-        "label": "网开一面，结为奥援",
+        "label": "网开一面。",
         "hint": "肮脏，但管用。县衙的门从此半开着",
         "effects": {
           "stats": {
@@ -708,7 +708,7 @@
     "options": {
       "left": {
         "id": "jian_dan_zhi_tan_shengyi",
-        "label": "见。但只谈生意，不谈来历",
+        "label": "见，只谈生意。",
         "hint": "一单两千两。见一面，也是把脸露给全省看",
         "effects": {
           "stats": {
@@ -729,7 +729,7 @@
       },
       "right": {
         "id": "bu_jian_rang_dongmen_daili",
-        "label": "不见。东门市代理一切",
+        "label": "不见。",
         "hint": "钱少赚些，安全些",
         "effects": {
           "stats": {
@@ -776,7 +776,7 @@
     "options": {
       "left": {
         "id": "guanying_jiaoli",
-        "label": "官营运力：编挑夫队，自备车辆",
+        "label": "官营运力。",
         "hint": "稳。也多一笔长支",
         "effects": {
           "stats": {
@@ -788,7 +788,7 @@
       },
       "right": {
         "id": "zhao_ju_san_kui",
-        "label": "照旧雇散，随行就市",
+        "label": "照旧雇散。",
         "hint": "灵活。命脉在别人手里",
         "effects": {
           "stats": {
@@ -843,7 +843,7 @@
     "options": {
       "left": {
         "id": "hua_yin_yaxiaoxi",
-        "label": "花银子，让商行把消息压一压。",
+        "label": "花钱压消息。",
         "hint": "压得住一时，压不住公文",
         "effects": {
           "stats": {
@@ -860,7 +860,7 @@
       },
       "right": {
         "id": "bei_zhan",
-        "label": "谢过口信，回头加紧备武。",
+        "label": "谢过，备武。",
         "hint": "风声传到这个份上，该备的都得备",
         "effects": {
           "stats": {
@@ -921,7 +921,7 @@
     "options": {
       "left": {
         "id": "baoxiao_tihao",
-        "label": "应了：三家分销，价钱上浮两成。",
+        "label": "应了，抬价。",
         "hint": "打赢的和平，才值钱",
         "effects": {
           "stats": {
@@ -939,7 +939,7 @@
       },
       "right": {
         "id": "junfen_xiaoshou",
-        "label": "只与官价交易，不增份额。",
+        "label": "官价，不增。",
         "hint": "细水长流，风声不起",
         "effects": {
           "stats": {

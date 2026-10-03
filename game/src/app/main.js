@@ -9,6 +9,7 @@ import { loadOfficialContent } from "../engine/content.js";
 import { hasSave, saveGame } from "../engine/save.js";
 import { Game } from "./game.js";
 import { isDebugOn, setDebugOn, ui } from "./ui.js";
+import { flyOut } from "./swipe.js";
 
 /** @type {*} 内容包（loadOfficialContent 产物） */
 let content;
@@ -45,8 +46,14 @@ function advanceOrRender() {
   return true;
 }
 
-/** 批复一条：结算 → 纪事 → 终局/下一张 → 反馈与下台提示。 */
-function choose(side) {
+/** 批复一条：卡片飞出 → 结算 → 纪事 → 终局/下一张 → 宝座反馈。 */
+async function choose(side) {
+  // 键盘批复补飞出动画（滑动/侧点路径已自带并打了 flying 标记）
+  const el = document.querySelector(".rcard");
+  if (el && !el.dataset.flying) {
+    el.dataset.flying = "1";
+    await flyOut(el, side);
+  }
   const result = game.choose(side);
   if (!result) return;
   const fb = result.feedback;
@@ -59,7 +66,7 @@ function choose(side) {
     return;
   }
   if (!advanceOrRender()) return;
-  ui.showFeedback(fb, game.debug);
+  ui.showFeedback(fb);
   if (result.fell) ui.showFallNotice(result.fell);
 }
 

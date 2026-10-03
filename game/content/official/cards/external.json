@@ -25,7 +25,7 @@
     "options": {
       "left": {
         "id": "zhudong_jiechu",
-        "label": "携玻璃珠铁针，登门接触",
+        "label": "带礼登门。",
         "hint": "先把买卖的口子开一条缝",
         "effects": {
           "stats": {
@@ -56,7 +56,7 @@
       },
       "right": {
         "id": "xian_ding_santian",
-        "label": "先盯三天再说",
+        "label": "再盯三天。",
         "hint": "稳是稳，就是慢",
         "effects": {
           "stats": {
@@ -106,7 +106,7 @@
     "options": {
       "left": {
         "id": "yili_xiangdai",
-        "label": "请进棚里坐，倒碗糖水",
+        "label": "请进，上茶。",
         "hint": "糖水在琼州是待客的上礼",
         "effects": {
           "stats": {
@@ -125,7 +125,7 @@
       },
       "right": {
         "id": "gongshi_gongban",
-        "label": "在门房接待，公事公办",
+        "label": "门房接待。",
         "hint": "买卖归买卖，交情另说",
         "effects": {
           "stats": {
@@ -179,7 +179,7 @@
     "options": {
       "left": {
         "id": "pei_liang_peili",
-        "label": "拔桩、赔粮、当面作揖",
+        "label": "拔桩赔粮。",
         "hint": "破财消灾。粮是从自家口粮里匀",
         "effects": {
           "stats": {
@@ -200,7 +200,7 @@
       },
       "right": {
         "id": "qiangying_quli",
-        "label": "派兵护桩，寸步不让",
+        "label": "派兵护桩。",
         "hint": "快刀。但从今天起村里见了短毛就关鸡叫狗",
         "effects": {
           "stats": {
@@ -268,7 +268,7 @@
     "options": {
       "left": {
         "id": "dingdian_kai_xiaoshi",
-        "label": "定点定时，立个官市的规矩",
+        "label": "立官市。",
         "hint": "货栈、牙人、秤，都立起来",
         "effects": {
           "stats": {
@@ -292,7 +292,7 @@
       },
       "right": {
         "id": "bao_weizu_guanzhi",
-        "label": "由哨兵全程看管，只许换粮",
+        "label": "哨兵看管。",
         "hint": "安全第一。买卖萧条些",
         "effects": {
           "stats": {
@@ -348,7 +348,7 @@
     "options": {
       "left": {
         "id": "xueliu_mengyue",
-        "label": "签章程，当众折箭为誓",
+        "label": "折箭为誓。",
         "hint": "得一股助力，背一份人情",
         "effects": {
           "stats": {
@@ -375,7 +375,7 @@
       },
       "right": {
         "id": "zhitan_bushengmeng",
-        "label": "「买卖照旧，盟就不必了」",
+        "label": "只谈买卖。",
         "hint": "缰绳不交出去",
         "effects": {
           "wind": 1,
@@ -422,7 +422,7 @@
     "options": {
       "left": {
         "id": "zhuqila_shenwen",
-        "label": "押下来，连夜分开审",
+        "label": "连夜审。",
         "hint": "嘴会撬开，事也会传开",
         "effects": {
           "stats": {
@@ -443,7 +443,7 @@
       },
       "right": {
         "id": "fanghui_daihua",
-        "label": "放人，捎两包糖给县衙「问安」",
+        "label": "放人递糖。",
         "hint": "先递话，再递糖",
         "effects": {
           "stats": {
@@ -494,7 +494,7 @@
     "options": {
       "left": {
         "id": "fen_yanyin",
-        "label": "照单应下：盐、铁器、差事都给",
+        "label": "照单应下。",
         "hint": "喂饱了，绑得也紧了",
         "effects": {
           "stats": {
@@ -511,7 +511,7 @@
       },
       "right": {
         "id": "wanju",
-        "label": "回一份薄礼，其余不提",
+        "label": "回礼婉拒。",
         "hint": "家底要紧。村口的怨气也攒下了",
         "effects": {
           "forces": {
@@ -560,7 +560,7 @@
     "options": {
       "left": {
         "id": "jieguan_yanchang",
-        "label": "接：派员驻场，编灶户入册",
+        "label": "接。编灶户。",
         "hint": "白花花的盐，就是白花花的银子",
         "effects": {
           "stats": {
@@ -588,7 +588,7 @@
       },
       "right": {
         "id": "weichi_yuanzhuang",
-        "label": "暂不动官产，只做买卖",
+        "label": "不碰官产。",
         "hint": "盐照买，官身不碰",
         "effects": {
           "stats": {
@@ -636,7 +636,7 @@
     "options": {
       "left": {
         "id": "quanli_bifeng",
-        "label": "信老船工：抢收抢固，船只上岸",
+        "label": "信他，抢收。",
         "hint": "停工三天，账面难看",
         "effects": {
           "stats": {
@@ -669,7 +669,7 @@
       },
       "right": {
         "id": "tingtian_anming",
-        "label": "加固要紧处，工地不停",
+        "label": "工地不停。",
         "hint": "赌一把。琼州的台风可不给面子",
         "effects": {
           "stats": {
@@ -742,7 +742,7 @@
     "options": {
       "left": {
         "id": "yiyao_quanli",
-        "label": "金鸡纳霜优先病人，全营挂蚊帐、垫平积水",
+        "label": "药先紧病人。",
         "hint": "药和帐都不够，先紧着人",
         "effects": {
           "stats": {
@@ -757,7 +757,7 @@
       },
       "right": {
         "id": "ge_li_bingren",
-        "label": "重病人集中隔离开荒点，工地照常",
+        "label": "隔离，赶工。",
         "hint": "进度保住了。人心散没散不好说",
         "effects": {
           "stats": {
@@ -810,7 +810,7 @@
     "options": {
       "left": {
         "id": "jinshan_chijiu",
-        "label": "带盐和铁器进山赴约",
+        "label": "进山吃酒。",
         "hint": "黎人的路不好走，交情却值钱",
         "effects": {
           "stats": {
@@ -835,7 +835,7 @@
       },
       "right": {
         "id": "qing_daoyingnei",
-        "label": "请他们把货带到东门外来卖",
+        "label": "请到东门。",
         "hint": "不出营地，买卖照做",
         "effects": {
           "stats": {
@@ -882,7 +882,7 @@
     "options": {
       "left": {
         "id": "gu_gengchuan",
-        "label": "雇下这几条船，按市价给粮",
+        "label": "雇下船。",
         "hint": "水上眼睛，比哨塔看得远",
         "effects": {
           "stats": {
@@ -894,7 +894,7 @@
       },
       "right": {
         "id": "yiliao_weizhu",
-        "label": "鱼照买，人不雇",
+        "label": "只买鱼。",
         "hint": "省口粮，也不沾因果",
         "effects": {
           "stats": {
@@ -937,7 +937,7 @@
     "options": {
       "left": {
         "id": "jiu_zai_yang_li",
-        "label": "开仓赈济周边村社",
+        "label": "开仓赈济。",
         "hint": "粮出自己的仓，买的是十里八乡的人心",
         "effects": {
           "stats": {
@@ -957,7 +957,7 @@
       },
       "right": {
         "id": "bimen_zihao",
-        "label": "只修自家，闭门自保",
+        "label": "闭门自保。",
         "hint": "省下粮食。村口的眼神也冷了下来",
         "effects": {
           "stats": {
@@ -1008,7 +1008,7 @@
     "options": {
       "left": {
         "id": "quanli_jiuzai",
-        "label": "停工三日，全力救灾修屋",
+        "label": "停工救灾。",
         "hint": "人回来了，工期没了",
         "effects": {
           "stats": {
@@ -1025,7 +1025,7 @@
       },
       "right": {
         "id": "xian_baowuzhi",
-        "label": "先抢修糖寮和仓库，工棚缓一缓",
+        "label": "先保糖寮。",
         "hint": "家当保住了。人心呢？",
         "effects": {
           "stats": {
@@ -1070,7 +1070,7 @@
     "options": {
       "left": {
         "id": "gaojia_maiduan",
-        "label": "咬牙买断，以糖抵账",
+        "label": "咬牙买断。",
         "hint": "贵。但下回摆子来，营里有底气",
         "effects": {
           "stats": {
@@ -1087,7 +1087,7 @@
       },
       "right": {
         "id": "pai_renzhou_xunyao",
-        "label": "不买。派人去雷州、广州自行寻药",
+        "label": "自己寻药。",
         "hint": "省下银子，赌的是时间",
         "effects": {
           "stats": {
@@ -1141,7 +1141,7 @@
     "options": {
       "left": {
         "id": "chubing_yanya",
-        "label": "出兵弹压，护陈家场面",
+        "label": "出兵压场。",
         "hint": "盟约是盟约了。别的村看在眼里",
         "effects": {
           "stats": {
@@ -1162,7 +1162,7 @@
       },
       "right": {
         "id": "zuo_he_touren",
-        "label": "只做和头人，两边劝解，不出兵",
+        "label": "只做和头。",
         "hint": "不失公道。可陈家觉得亏了",
         "effects": {
           "stats": {
@@ -1211,7 +1211,7 @@
     "options": {
       "left": {
         "id": "liang_bingwei_songsong",
-        "label": "伏波军列队营门，礼送出境",
+        "label": "列队送客。",
         "hint": "兵威一亮，官府面子上过不去。风声也传出去了",
         "effects": {
           "stats": {
@@ -1237,7 +1237,7 @@
       },
       "right": {
         "id": "shi_yinzi_zou_menlu",
-        "label": "使银子，走县衙的门路",
+        "label": "银子开路。",
         "hint": "给大使一份「茶资」，给师爷两坛糖",
         "effects": {
           "stats": {
@@ -1290,7 +1290,7 @@
     "options": {
       "left": {
         "id": "gua_zai_yingmen",
-        "label": "收匾，挂营门口",
+        "label": "接匾。",
         "hint": "十里八乡都看得见",
         "effects": {
           "stats": {
@@ -1307,7 +1307,7 @@
       },
       "right": {
         "id": "xie_er_bushou",
-        "label": "厚赏鼓乐，匾却退回去",
+        "label": "厚赏退匾。",
         "hint": "「名不敢居」。族老的脸有点挂不住",
         "effects": {
           "stats": {
@@ -1354,7 +1354,7 @@
     "options": {
       "left": {
         "id": "qu_san_litang",
-        "label": "驱散了事，警告主家",
+        "label": "立章程管。",
         "hint": "赌风不可长",
         "effects": {
           "stats": {
@@ -1365,7 +1365,7 @@
       },
       "right": {
         "id": "li_zhang_shou_guan",
-        "label": "圈一块地立章程：抽头充公，不许赊账",
+        "label": "驱散了事。",
         "hint": "禁不如疏。工票转起来，市面也热闹",
         "effects": {
           "stats": {
@@ -1427,7 +1427,7 @@
     "options": {
       "left": {
         "id": "jie_chong_jiao_guan",
-        "label": "借铳，派教官带队助阵。",
+        "label": "借铳助阵。",
         "hint": "黎山的门彻底打开了，官府的眼睛也睁开了",
         "effects": {
           "stats": {
@@ -1452,7 +1452,7 @@
       },
       "right": {
         "id": "song_liang_song_yao",
-        "label": "不出兵。送粮送药，再替他们去说和。",
+        "label": "送粮说和。",
         "hint": "仁义做全，峒主脸上却挂不住",
         "effects": {
           "stats": {
@@ -1500,7 +1500,7 @@
     "options": {
       "left": {
         "id": "she_li_shi",
-        "label": "在东门设黎市，立约护路。",
+        "label": "设黎市。",
         "hint": "山货与铁器对流，官府侧目",
         "effects": {
           "stats": {
@@ -1525,7 +1525,7 @@
       },
       "right": {
         "id": "chou_shui_hu_lu",
-        "label": "照章抽税，另收护路费。",
+        "label": "照章抽税。",
         "hint": "实惠。马帮嘴上不说，心里记账",
         "effects": {
           "stats": {
@@ -1588,7 +1588,7 @@
     "options": {
       "left": {
         "id": "tong_hongmao",
-        "label": "跟他通商。货照价，城防加岗。",
+        "label": "通商，加岗。",
         "hint": "跟红毛人做买卖——风声也跟着来了",
         "effects": {
           "stats": {
@@ -1609,7 +1609,7 @@
       },
       "right": {
         "id": "juzhi_menwai",
-        "label": "婉拒，礼送出境。",
+        "label": "礼送出境。",
         "hint": "少个买家，多个记恨的红毛人",
         "effects": {
           "stats": {

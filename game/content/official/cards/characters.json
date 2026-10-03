@@ -20,7 +20,7 @@
     "options": {
       "left": {
         "id": "xian_zhangliang_tianmu",
-        "label": "先丈量田亩、清点稻种薯种",
+        "label": "先丈田。",
         "hint": "家底摸清，心里不慌",
         "effects": {
           "stats": {
@@ -36,7 +36,7 @@
       },
       "right": {
         "id": "xian_zhua_fulu_yingpan",
-        "label": "先抓伙房：开荒的人先吃饱",
+        "label": "先抓伙房。",
         "hint": "吃饱了才好说话",
         "effects": {
           "stats": {
@@ -93,7 +93,7 @@
     "options": {
       "left": {
         "id": "ti_nongwei_beishu",
-        "label": "替农委说话",
+        "label": "替农委说话。",
         "hint": "护短护到底",
         "effects": {
           "personal": {
@@ -109,7 +109,7 @@
       },
       "right": {
         "id": "ziqing_shencha",
-        "label": "自请查农口账目",
+        "label": "自请查账。",
         "hint": "自断一臂，换个清白",
         "effects": {
           "personal": {
@@ -168,7 +168,7 @@
     "options": {
       "left": {
         "id": "yinjiu_quzhi",
-        "label": "引咎去职",
+        "label": "引咎去职。",
         "hint": "体面下台，来日方长",
         "effects": {
           "stats": {
@@ -194,7 +194,7 @@
       },
       "right": {
         "id": "laizhe_buzou",
-        "label": "赖着不走",
+        "label": "赖着不走。",
         "hint": "强行续任，代价在后头",
         "effects": {
           "stats": {
@@ -253,7 +253,7 @@
     "options": {
       "left": {
         "id": "tihui_jiaoyin",
-        "label": "体面交印",
+        "label": "交印。",
         "hint": "这一回，没人再保了",
         "effects": {
           "stats": {
@@ -276,7 +276,7 @@
       },
       "right": {
         "id": "gu_yi_yazhen",
-        "label": "再硬一次",
+        "label": "再硬一次。",
         "hint": "刀已经架在脖子上了",
         "effects": {
           "stats": {
@@ -323,7 +323,7 @@
     "options": {
       "left": {
         "id": "rang_jiubu_jixu_guan",
-        "label": "旧部照旧管粮",
+        "label": "旧部照旧。",
         "hint": "熟手管熟事",
         "effects": {
           "stats": {
@@ -342,7 +342,7 @@
       },
       "right": {
         "id": "diaoli_hexin_gangwei",
-        "label": "旧部调离要害岗位",
+        "label": "调离要害。",
         "hint": "拔钉子，费锤子",
         "effects": {
           "stats": {
@@ -395,7 +395,7 @@
     "options": {
       "left": {
         "id": "tui_liangzhong",
-        "label": "把新种的稻穗分给各村试种",
+        "label": "分穗各村。",
         "hint": "十里八乡都记着这个好",
         "effects": {
           "stats": {
@@ -413,7 +413,7 @@
       },
       "right": {
         "id": "nongzhuang_miantui",
-        "label": "让农庄把新法闷头推到底",
+        "label": "闷头推。",
         "hint": "快。也扎眼",
         "effects": {
           "stats": {
@@ -460,7 +460,7 @@
     "options": {
       "left": {
         "id": "jieshou_linshi_shouquan",
-        "label": "接受临时授权",
+        "label": "受任。",
         "hint": "先干起来再说",
         "effects": {
           "ruler": "wunanhai",
@@ -479,7 +479,7 @@
       },
       "right": {
         "id": "yaoqiu_kuoda_quanxian",
-        "label": "要求扩大农政权限",
+        "label": "要扩权。",
         "hint": "趁热打铁，也趁势坐大",
         "effects": {
           "ruler": "wunanhai",
@@ -531,7 +531,7 @@
     "options": {
       "left": {
         "id": "dengji_quan_yingdi",
-        "label": "全员登记，一人一册",
+        "label": "全员登记。",
         "hint": "一册在手，心中有数",
         "effects": {
           "stats": {
@@ -553,7 +553,7 @@
       },
       "right": {
         "id": "xian_li_huofang_yizhang",
-        "label": "先立伙房与医帐",
+        "label": "先立伙房。",
         "hint": "先救命，再造册",
         "effects": {
           "stats": {
@@ -600,7 +600,7 @@
     "options": {
       "left": {
         "id": "shunshi_tuixing_baojia",
-        "label": "顺势推行保甲编组",
+        "label": "推保甲。",
         "hint": "网络再密一层",
         "effects": {
           "stats": {
@@ -618,7 +618,7 @@
       },
       "right": {
         "id": "shoudiao_bufen_quanxian",
-        "label": "主动收掉部分权限",
+        "label": "自剪羽翼。",
         "hint": "自剪羽翼，以安众心",
         "effects": {
           "personal": {
@@ -676,7 +676,7 @@
     "options": {
       "left": {
         "id": "jiaoquan_quzhi",
-        "label": "交权去职，配合审查",
+        "label": "交权配合。",
         "hint": "把册子交出去",
         "effects": {
           "stats": {
@@ -702,7 +702,7 @@
       },
       "right": {
         "id": "lianye_chuanlian",
-        "label": "连夜串联保位",
+        "label": "连夜串联。",
         "hint": "网络就是他的刀",
         "effects": {
           "stats": {
@@ -760,7 +760,7 @@
     "options": {
       "left": {
         "id": "jiao_ce_zishou",
-        "label": "交册自守，退出核心",
+        "label": "交册自守。",
         "hint": "保人不保权",
         "effects": {
           "stats": {
@@ -791,7 +791,7 @@
       },
       "right": {
         "id": "hu_ziwei",
-        "label": "让基层「自发请愿」留任",
+        "label": "请愿留任。",
         "hint": "网收回来一次，就再也松不开了",
         "effects": {
           "stats": {
@@ -843,7 +843,7 @@
     "options": {
       "left": {
         "id": "anzhong_wenji",
-        "label": "暗中向他问计",
+        "label": "暗中问计。",
         "hint": "好用，但难堪",
         "effects": {
           "stats": {
@@ -862,7 +862,7 @@
       },
       "right": {
         "id": "bixian_bujian",
-        "label": "避嫌不见",
+        "label": "避嫌不见。",
         "hint": "名分要紧",
         "effects": {
           "stats": {
@@ -912,7 +912,7 @@
     "options": {
       "left": {
         "id": "ti_ba_ganbu",
-        "label": "从训练班里提一批骨干下基层",
+        "label": "提骨干下基层。",
         "hint": "他的人，越提越多",
         "effects": {
           "stats": {
@@ -934,7 +934,7 @@
       },
       "right": {
         "id": "zengkai_suanxue",
-        "label": "增开算学、测绘两科",
+        "label": "增开两科。",
         "hint": "急用先学，不声张",
         "effects": {
           "stats": {
@@ -981,7 +981,7 @@
     "options": {
       "left": {
         "id": "linshou_shouquan",
-        "label": "受任于败军之际",
+        "label": "受任。",
         "hint": "先把摊子接住",
         "effects": {
           "ruler": "wude",
@@ -1000,7 +1000,7 @@
       },
       "right": {
         "id": "yaoqiu_zhengshi_renming",
-        "label": "要求正式任命与专断之权",
+        "label": "要专断权。",
         "hint": "名不正则言不顺",
         "effects": {
           "ruler": "wude",
@@ -1051,7 +1051,7 @@
     "options": {
       "left": {
         "id": "chongjian_jingjiequan",
-        "label": "重建警戒圈，哨线外推半里",
+        "label": "外推哨线。",
         "hint": "把敌人挡在哨线之外",
         "effects": {
           "stats": {
@@ -1067,7 +1067,7 @@
       },
       "right": {
         "id": "qingcha_neijian",
-        "label": "先清查营内闲杂人等",
+        "label": "先清内部。",
         "hint": "祸起萧墙",
         "effects": {
           "stats": {
@@ -1117,7 +1117,7 @@
     "options": {
       "left": {
         "id": "zai_yao_yizhongdui",
-        "label": "再要一个中队",
+        "label": "再要一队。",
         "hint": "枪杆子越多越好",
         "effects": {
           "stats": {
@@ -1136,7 +1136,7 @@
       },
       "right": {
         "id": "anzhu_bupi",
-        "label": "按住不批",
+        "label": "按住不批。",
         "hint": "刀不能无鞘",
         "effects": {
           "personal": {
@@ -1194,7 +1194,7 @@
     "options": {
       "left": {
         "id": "shangzhong_buzhi",
-        "label": "伤重不治",
+        "label": "伤重不治。",
         "hint": "强硬了一辈子，倒在暗处",
         "effects": {
           "stats": {
@@ -1226,7 +1226,7 @@
       },
       "right": {
         "id": "jiaoxing_tanguo",
-        "label": "侥幸逃过，惊魂未定",
+        "label": "侥幸逃过。",
         "hint": "命保住了，胆气漏了",
         "effects": {
           "stats": {
@@ -1284,7 +1284,7 @@
     "options": {
       "left": {
         "id": "zidong_jiefang",
-        "label": "自动请解兵权",
+        "label": "解兵权。",
         "hint": "把枪放下，人还能站着",
         "effects": {
           "stats": {
@@ -1308,7 +1308,7 @@
       },
       "right": {
         "id": "qingxi_paizhang",
-        "label": "连夜清洗涉事的连排",
+        "label": "连夜清洗。",
         "hint": "兵变未必发生，军心一定散了",
         "effects": {
           "stats": {
@@ -1355,7 +1355,7 @@
     "options": {
       "left": {
         "id": "baoliu_mingdan",
-        "label": "保留名单，以备外敌",
+        "label": "留名单。",
         "hint": "防患于未然",
         "effects": {
           "stats": {
@@ -1373,7 +1373,7 @@
       },
       "right": {
         "id": "dangmian_shao_diao",
-        "label": "当众烧掉",
+        "label": "当众烧掉。",
         "hint": "火光里都是人情",
         "effects": {
           "stats": {
@@ -1426,7 +1426,7 @@
     "options": {
       "left": {
         "id": "baopu_paotai",
-        "label": "在博铺起一座炮台",
+        "label": "起炮台。",
         "hint": "海上的事，海上挡",
         "effects": {
           "stats": {
@@ -1444,7 +1444,7 @@
       },
       "right": {
         "id": "yelu_lianbing",
-        "label": "拉练：全营夜间紧急集合",
+        "label": "夜间拉练。",
         "hint": "练的是兵，折腾的是所有人",
         "effects": {
           "stats": {
@@ -1489,7 +1489,7 @@
     "options": {
       "left": {
         "id": "shouren_yu_weinan",
-        "label": "于危难中受任",
+        "label": "受任。",
         "hint": "先把哨线扎紧",
         "effects": {
           "ruler": "beiwei",
@@ -1510,7 +1510,7 @@
       },
       "right": {
         "id": "yaoqiu_junshi_ducai",
-        "label": "要求战时专断之权",
+        "label": "要专断权。",
         "hint": "军情紧急，不容掣肘",
         "effects": {
           "ruler": "beiwei",
@@ -1563,7 +1563,7 @@
     "options": {
       "left": {
         "id": "quanyuan_pucha",
-        "label": "全员铺开物资普查",
+        "label": "物资普查。",
         "hint": "磨刀不误砍柴工",
         "effects": {
           "stats": {
@@ -1581,7 +1581,7 @@
       },
       "right": {
         "id": "xian_zhua_yizhuan_yao",
-        "label": "先抓一座砖窑见效",
+        "label": "先抓砖窑。",
         "hint": "空谈误国，实干兴营",
         "effects": {
           "stats": {
@@ -1628,7 +1628,7 @@
     "options": {
       "left": {
         "id": "wei_zhibiao_huhang",
-        "label": "为指标护航",
+        "label": "为指标护航。",
         "hint": "计划就是纪律",
         "effects": {
           "stats": {
@@ -1646,7 +1646,7 @@
       },
       "right": {
         "id": "huan_zhibiao_sanyueyue",
-        "label": "指标缓三个月",
+        "label": "缓三个月。",
         "hint": "退一步，表就好看些",
         "effects": {
           "stats": {
@@ -1707,7 +1707,7 @@
     "options": {
       "left": {
         "id": "yinjiu_cizhi_jihua",
-        "label": "引咎辞职",
+        "label": "引咎辞职。",
         "hint": "表算错了，人认账",
         "effects": {
           "stats": {
@@ -1733,7 +1733,7 @@
       },
       "right": {
         "id": "na_shuju_yingding",
-        "label": "拿数据硬顶",
+        "label": "拿数据硬顶。",
         "hint": "他从来不信自己会错",
         "effects": {
           "stats": {
@@ -1796,7 +1796,7 @@
     "options": {
       "left": {
         "id": "cizhi_jishu",
-        "label": "辞去职务，退居技术顾问",
+        "label": "退居技术。",
         "hint": "表留给别人画",
         "effects": {
           "stats": {
@@ -1824,7 +1824,7 @@
       },
       "right": {
         "id": "yueji_shangshu",
-        "label": "越级上书全体大会",
+        "label": "越级上书。",
         "hint": "最后一搏。赢了表在，输了人走",
         "effects": {
           "stats": {
@@ -1879,7 +1879,7 @@
     "options": {
       "left": {
         "id": "rang_jihua_pao_wan",
-        "label": "让计划跑完这一期",
+        "label": "跑完这期。",
         "hint": "箭在弦上",
         "effects": {
           "stats": {
@@ -1895,7 +1895,7 @@
       },
       "right": {
         "id": "dongjie_changbiao",
-        "label": "冻结长表，重新核算",
+        "label": "冻结重算。",
         "hint": "推倒重来，代价不小",
         "effects": {
           "stats": {
@@ -1946,7 +1946,7 @@
     "options": {
       "left": {
         "id": "yanshi_zhiliang",
-        "label": "立验收制：不合格一律返工",
+        "label": "立验收制。",
         "hint": "工慢了，活硬了",
         "effects": {
           "stats": {
@@ -1963,7 +1963,7 @@
       },
       "right": {
         "id": "jijiang_gongqi",
-        "label": "超额完工者发双工分",
+        "label": "双工分。",
         "hint": "大棒之外，也得有胡萝卜",
         "effects": {
           "stats": {
@@ -2010,7 +2010,7 @@
     "options": {
       "left": {
         "id": "jieshi_paiqi_biao",
-        "label": "接过排期表",
+        "label": "接表。",
         "hint": "账在胸中",
         "effects": {
           "ruler": "maqianzhu",
@@ -2036,7 +2036,7 @@
       },
       "right": {
         "id": "yaoqiu_tongchou_quanli",
-        "label": "要求全营统筹之权",
+        "label": "要统筹权。",
         "hint": "要办事，先要权",
         "effects": {
           "ruler": "maqianzhu",
@@ -2091,7 +2091,7 @@
     "options": {
       "left": {
         "id": "kaihui_dajia_shangliang",
-        "label": "凡事上会，大会商量着办",
+        "label": "凡事上会。",
         "hint": "程序是最好的挡箭牌",
         "effects": {
           "stats": {
@@ -2105,7 +2105,7 @@
       },
       "right": {
         "id": "huixia_zhuyi_baihui",
-        "label": "会下逐一拜会",
+        "label": "会下拜会。",
         "hint": "功夫在诗外",
         "effects": {
           "stats": {
@@ -2154,7 +2154,7 @@
     "options": {
       "left": {
         "id": "zai_bei_yici",
-        "label": "再背一次",
+        "label": "再背一次。",
         "hint": "大局为重",
         "effects": {
           "stats": {
@@ -2168,7 +2168,7 @@
       },
       "right": {
         "id": "tanpai_jujue",
-        "label": "摊牌：这锅不背了",
+        "label": "这锅不背了。",
         "hint": "老好人也有脾气",
         "effects": {
           "stats": {
@@ -2230,7 +2230,7 @@
     "options": {
       "left": {
         "id": "timian_jiaoyin",
-        "label": "体面交印",
+        "label": "体面交印。",
         "hint": "输掉位子，不输风度",
         "effects": {
           "stats": {
@@ -2253,7 +2253,7 @@
       },
       "right": {
         "id": "dongyong_foujuequan",
-        "label": "动用否决权硬顶",
+        "label": "动用否决。",
         "hint": "最后的权力",
         "effects": {
           "stats": {
@@ -2312,7 +2312,7 @@
     "options": {
       "left": {
         "id": "qian_zi_tuiwei",
-        "label": "签字，同时请辞",
+        "label": "签字，请辞。",
         "hint": "最后一件事，按自己的意思办",
         "effects": {
           "stats": {
@@ -2335,7 +2335,7 @@
       },
       "right": {
         "id": "juebu_qianzi",
-        "label": "拒绝签字",
+        "label": "拒签。",
         "hint": "傀儡也有傀儡的骨气",
         "effects": {
           "stats": {
@@ -2381,7 +2381,7 @@
     "options": {
       "left": {
         "id": "qing_ta_chumian",
-        "label": "请他出面调停",
+        "label": "请他调停。",
         "hint": "人情用一次少一次",
         "effects": {
           "stats": {
@@ -2394,7 +2394,7 @@
       },
       "right": {
         "id": "rang_ta_xiuxi",
-        "label": "让他好好休息",
+        "label": "让他歇着。",
         "hint": "人情要省着用",
         "effects": {
           "stats": {
@@ -2440,7 +2440,7 @@
     "options": {
       "left": {
         "id": "cha_huajie",
-        "label": "趁茶热，把两桩积怨说开",
+        "label": "茶桌上说开。",
         "hint": "多少架，是茶桌上劝住的",
         "effects": {
           "stats": {
@@ -2454,7 +2454,7 @@
       },
       "right": {
         "id": "mocha_tingfeng",
-        "label": "只倒茶，不打断——听风声",
+        "label": "只倒茶，听。",
         "hint": "醉翁之意不在酒",
         "effects": {
           "stats": {
@@ -2499,7 +2499,7 @@
     "options": {
       "left": {
         "id": "mianer_shouming",
-        "label": "勉为其难，接下印信",
+        "label": "接印。",
         "hint": "躬身入局",
         "effects": {
           "ruler": "wendsi",
@@ -2518,7 +2518,7 @@
       },
       "right": {
         "id": "yaoqiu_quanli_zhishu",
-        "label": "要求权责书面明确",
+        "label": "先小人后君子。",
         "hint": "先小人后君子",
         "effects": {
           "ruler": "wendsi",
@@ -2574,7 +2574,7 @@
     "options": {
       "left": {
         "id": "kuoda_xuetang",
-        "label": "把夜学办成正经学堂，元老轮流授课",
+        "label": "大办学堂。",
         "hint": "灯亮一片，闲话也多一片",
         "effects": {
           "stats": {
@@ -2594,7 +2594,7 @@
       },
       "right": {
         "id": "disu_yunying",
-        "label": "低调运行，不扩不加",
+        "label": "低调运行。",
         "hint": "灯还亮着，只是没人提",
         "effects": {
           "stats": {
@@ -2641,7 +2641,7 @@
     "options": {
       "left": {
         "id": "houzang_libei",
-        "label": "元老亲临执绋，厚葬立碑，抚恤从优",
+        "label": "厚葬立碑。",
         "hint": "全军看着。这一刀抚的是活人的心",
         "effects": {
           "stats": {
@@ -2663,7 +2663,7 @@
       },
       "right": {
         "id": "congjian_anzang",
-        "label": "从简安葬，抚恤照章",
+        "label": "从简安葬。",
         "hint": "章是章。兵的心是另一本账",
         "effects": {
           "stats": {

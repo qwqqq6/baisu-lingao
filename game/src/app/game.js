@@ -563,9 +563,14 @@ export class Game {
   describeChanges(before, after, effects) {
     const names = this.pillarNames();
     const parts = [];
+    /** @type {Record<string, number>} 四柱增减（宝座 ▲▼ 反馈用） */
+    const pillarDeltas = {};
     for (const key of Object.keys(names)) {
       const delta = after[key] - before[key];
-      if (delta !== 0) parts.push(`${names[key]} ${delta > 0 ? "+" : ""}${delta}`);
+      if (delta !== 0) {
+        parts.push(`${names[key]} ${delta > 0 ? "+" : ""}${delta}`);
+        pillarDeltas[key] = delta;
+      }
     }
     const deltas = parts.length ? parts.join("，") : "四柱无变动";
 
@@ -589,7 +594,7 @@ export class Game {
       if ((changes.hostility || 0) >= 5) notes.push(`「${def.name}」敌意滋生`);
       else if ((changes.satisfaction || 0) >= 5) notes.push(`「${def.name}」颇为受用`);
     }
-    return { deltas, notes: notes.slice(0, 2) };
+    return { deltas, notes: notes.slice(0, 2), pillarDeltas };
   }
 
   /** @param {string} text @param {string} [kind] */

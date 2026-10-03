@@ -39,7 +39,7 @@
     "options": {
       "left": {
         "id": "shouquan_lizu",
-        "label": "授权立组，枪械入库造册",
+        "label": "授权立组。",
         "hint": "专业的事交给专业的人",
         "effects": {
           "stats": {
@@ -68,7 +68,7 @@
       },
       "right": {
         "id": "zan_huan_minbing",
-        "label": "暂缓，各口自己组织民兵",
+        "label": "暂缓。",
         "hint": "刀不能轻易交出去",
         "effects": {
           "stats": {
@@ -165,7 +165,7 @@
     "options": {
       "left": {
         "id": "shuanggang_jiashao",
-        "label": "双岗加哨",
+        "label": "双岗加哨。",
         "hint": "累点，踏实",
         "effects": {
           "stats": {
@@ -176,7 +176,7 @@
       },
       "right": {
         "id": "yucunshe_lianfang",
-        "label": "与村社联防，教哨法、立锣约",
+        "label": "村社联防。",
         "hint": "共用的锣，也是共用的心",
         "effects": {
           "stats": {
@@ -223,7 +223,7 @@
     "options": {
       "left": {
         "id": "chujifansha",
-        "label": "出击，追出十里再回",
+        "label": "追出十里。",
         "hint": "以攻代守。见血，也立威",
         "effects": {
           "stats": {
@@ -238,7 +238,7 @@
       },
       "right": {
         "id": "jushou_huitui",
-        "label": "据守堆场，天亮再说",
+        "label": "据守。",
         "hint": "不追出去，也少流血",
         "effects": {
           "stats": {
@@ -290,7 +290,7 @@
     "options": {
       "left": {
         "id": "xuanbu_jieyan",
-        "label": "用印：戒严七日",
+        "label": "戒严七日。",
         "hint": "乱世用重典。重典也咬人",
         "effects": {
           "stats": {
@@ -325,7 +325,7 @@
       },
       "right": {
         "id": "jying_xiaojin",
-        "label": "只军营内宵禁三日",
+        "label": "只宵禁三日。",
         "hint": "给民市留个活口",
         "effects": {
           "stats": {
@@ -368,7 +368,7 @@
     "options": {
       "left": {
         "id": "gei_soubu_shenxun",
-        "label": "准：给搜捕与先行扣押之权",
+        "label": "给。",
         "hint": "刀快了，就难收了",
         "effects": {
           "stats": {
@@ -389,7 +389,7 @@
       },
       "right": {
         "id": "bohui_shouquan",
-        "label": "驳回，扩权一事免谈",
+        "label": "驳回。",
         "hint": "缰绳要攥在执委会手里",
         "effects": {
           "forces": {
@@ -444,7 +444,7 @@
     "options": {
       "left": {
         "id": "jixu_jiama",
-        "label": "从严如故，谁的面子也不给",
+        "label": "从严如故。",
         "hint": "秩序是用怕撑起来的",
         "effects": {
           "stats": {
@@ -467,7 +467,7 @@
       },
       "right": {
         "id": "shouhui_bufen_shouquan",
-        "label": "收回关卡，查验归民政",
+        "label": "收回关卡。",
         "hint": "给局面降温，也给保卫组脸上降温",
         "effects": {
           "stats": {
@@ -515,7 +515,7 @@
     "options": {
       "left": {
         "id": "shao_diao_mingdan",
-        "label": "把名单当众烧了",
+        "label": "烧了名单。",
         "hint": "安抚一片心，得罪一把刀",
         "effects": {
           "stats": {
@@ -533,7 +533,7 @@
       },
       "right": {
         "id": "zhuangzuo_buzhidao",
-        "label": "装作不知道",
+        "label": "装不知道。",
         "hint": "有些工具，用着顺手",
         "effects": {
           "personal": {
@@ -581,7 +581,7 @@
     "options": {
       "left": {
         "id": "jiaqiang_tieshen",
-        "label": "准：贴身警卫归保卫组排班",
+        "label": "加强警卫。",
         "hint": "命比体面要紧",
         "effects": {
           "personal": {
@@ -598,7 +598,7 @@
       },
       "right": {
         "id": "zhaochang_loumian",
-        "label": "撤掉前呼后拥，照常露面",
+        "label": "照常露面。",
         "hint": "示弱，才是最危险的",
         "effects": {
           "stats": {
@@ -644,7 +644,7 @@
     "options": {
       "left": {
         "id": "shoujiao_siqiang",
-        "label": "收缴私藏，禁酒严办",
+        "label": "收缴严办。",
         "hint": "严是爱，松是害",
         "effects": {
           "stats": {
@@ -660,7 +660,7 @@
       },
       "right": {
         "id": "moren_lugui",
-        "label": "记下名字，睁只眼闭只眼",
+        "label": "记名睁眼。",
         "hint": "水至清则无鱼",
         "effects": {
           "stats": {
@@ -711,7 +711,7 @@
     "options": {
       "left": {
         "id": "fubo_chengjun",
-        "label": "准：伏波军成军，授旗",
+        "label": "准，成军。",
         "hint": "从今天起，这支队有了名字，也有了来路",
         "effects": {
           "stats": {
@@ -739,7 +739,7 @@
       },
       "right": {
         "id": "huancun_kuojun",
-        "label": "缓议：先把保卫组的架子搭稳",
+        "label": "缓议。",
         "hint": "军队的名分一旦有了，就收不回去了",
         "effects": {
           "stats": {
@@ -815,7 +815,7 @@
     "options": {
       "left": {
         "id": "ju_baopu_erzhan",
-        "label": "凭博铺炮台，海上决胜",
+        "label": "海上决战。",
         "hint": "放他们上岸，就再难送走了",
         "effects": {
           "stats": {
@@ -852,7 +852,7 @@
       },
       "right": {
         "id": "qi_shoubai_ren",
-        "label": "弃滩头，收缩百仞城凭河而守",
+        "label": "收缩守城。",
         "hint": "存人失地。工地、糖寮、东门市都保不住",
         "effects": {
           "stats": {
@@ -923,7 +923,7 @@
     "options": {
       "left": {
         "id": "chuanling_jiangli",
-        "label": "传令嘉奖，记功一次",
+        "label": "记功嘉奖。",
         "hint": "赏要及时。兵是养出来的",
         "effects": {
           "stats": {
@@ -938,7 +938,7 @@
       },
       "right": {
         "id": "kou_zan_yang",
-        "label": "口头表扬，赏赐缓议",
+        "label": "口头表扬。",
         "hint": "刀不能喂得太饱",
         "effects": {
           "forces": {
@@ -981,7 +981,7 @@
     "options": {
       "left": {
         "id": "chuan_shou_shizhong",
-        "label": "传首示众，战报大张旗鼓",
+        "label": "传首示众。",
         "hint": "威名是打出来的，也是传出去的",
         "effects": {
           "stats": {
@@ -1002,7 +1002,7 @@
       },
       "right": {
         "id": "shencang_gongyum",
-        "label": "深藏功与名，只记档案",
+        "label": "深藏档案。",
         "hint": "不显山不露水。县衙那边就当不知道",
         "effects": {
           "stats": {
@@ -1047,7 +1047,7 @@
     "options": {
       "left": {
         "id": "shou_fu_chengchen",
-        "label": "受抚：纳粮称臣，换一个名分",
+        "label": "受抚。",
         "hint": "屈是屈了。买来的是发展的年月",
         "effects": {
           "stats": {
@@ -1072,7 +1072,7 @@
       },
       "right": {
         "id": "jujue_cizhang",
-        "label": "退还礼物：「临高的事，临高了」",
+        "label": "退礼硬顶。",
         "hint": "硬气。下一次进剿的由头也埋下了",
         "effects": {
           "stats": {
@@ -1124,7 +1124,7 @@
     "options": {
       "left": {
         "id": "daang_peihuo",
-        "label": "当众赔礼，照价赔货",
+        "label": "当众赔礼。",
         "hint": "丢面子。换回来的是市面",
         "effects": {
           "stats": {
@@ -1142,7 +1142,7 @@
       },
       "right": {
         "id": "jiaowang_guozheng",
-        "label": "「戒严之事，矫枉过正在所难免」",
+        "label": "矫枉过正。",
         "hint": "保卫组记下了这句撑腰的话",
         "effects": {
           "stats": {
@@ -1192,7 +1192,7 @@
     "options": {
       "left": {
         "id": "li_lingyong_zhangcheng",
-        "label": "立领用章程，专人保养",
+        "label": "立章程。",
         "hint": "麻烦一时，安顿长久",
         "effects": {
           "stats": {
@@ -1203,7 +1203,7 @@
       },
       "right": {
         "id": "suiyong_suiling",
-        "label": "随用随领，先顾眼前",
+        "label": "随用随领。",
         "hint": "省事。锈会一点一点吃掉家底",
         "effects": {
           "stats": {
@@ -1255,7 +1255,7 @@
     "options": {
       "left": {
         "id": "shou_tian_tunkan",
-        "label": "准：以战功授田，屯垦戍边。",
+        "label": "授田屯垦。",
         "hint": "军心大悦。人的胃口，也大了",
         "effects": {
           "stats": {
@@ -1276,7 +1276,7 @@
       },
       "right": {
         "id": "zhi_fa_shang_yin",
-        "label": "只发赏银，授田再议。",
+        "label": "只发赏银。",
         "hint": "账好算。军心嘛……凉得快",
         "effects": {
           "stats": {
@@ -1333,7 +1333,7 @@
     "options": {
       "left": {
         "id": "zhui_wang_zhuyi",
-        "label": "追。烧了他们的粮船再回。",
+        "label": "追！烧粮船。",
         "hint": "追亡逐北，威震琼州",
         "effects": {
           "stats": {
@@ -1367,7 +1367,7 @@
       },
       "right": {
         "id": "jianbi_qingye",
-        "label": "见好就收，清扫滩头。",
+        "label": "见好就收。",
         "hint": "胜得体面，也给将来留一线",
         "effects": {
           "stats": {
@@ -1453,7 +1453,7 @@
     "options": {
       "left": {
         "id": "si_shou_paotai",
-        "label": "死守博铺炮台，与台共存亡。",
+        "label": "死守炮台。",
         "hint": "地可以丢，台不能丢",
         "effects": {
           "stats": {
@@ -1480,7 +1480,7 @@
       },
       "right": {
         "id": "tui_shou_neihe",
-        "label": "退守内河，放官军登陆再打。",
+        "label": "退守内河。",
         "hint": "诱敌深入。水深浪急，他们不熟",
         "effects": {
           "stats": {
@@ -1552,7 +1552,7 @@
     "options": {
       "left": {
         "id": "si_shou_dai_bian",
-        "label": "死守待变，组织夜袭扰敌。",
+        "label": "死守待变。",
         "hint": "围城必有小破绽，等他们自己出错",
         "effects": {
           "stats": {
@@ -1583,7 +1583,7 @@
       },
       "right": {
         "id": "tuwei_fanji",
-        "label": "开东门，全军突围反咬一口。",
+        "label": "开门突围。",
         "hint": "置之死地而后生——也可能真的死",
         "effects": {
           "stats": {
@@ -1648,7 +1648,7 @@
     "options": {
       "left": {
         "id": "ru_shi_zaoce",
-        "label": "如实造册报送。",
+        "label": "如实造册。",
         "hint": "坦荡。家底也交出去了",
         "effects": {
           "stats": {
@@ -1660,7 +1660,7 @@
       },
       "right": {
         "id": "xubao_yiben",
-        "label": "虚报一本，真数不给。",
+        "label": "虚报一本。",
         "hint": "两头都要防",
         "effects": {
           "stats": {
@@ -1709,7 +1709,7 @@
     "options": {
       "left": {
         "id": "xianfa_zhiren",
-        "label": "先发制人，抄了募勇的场子。",
+        "label": "先发制人。",
         "hint": "抢先一步。风声也跟着爆",
         "effects": {
           "stats": {
@@ -1730,7 +1730,7 @@
       },
       "right": {
         "id": "shenbi_gulei",
-        "label": "深壁固垒，广积粮。",
+        "label": "深壁固垒。",
         "hint": "不动如山",
         "effects": {
           "stats": {
@@ -1796,7 +1796,7 @@
     "options": {
       "left": {
         "id": "yi_yi",
-        "label": "议一议。作最坏的打算。",
+        "label": "议一议。",
         "hint": "把退路摆上桌面，人心就散了一半——也齐了一半",
         "effects": {
           "personal": {
@@ -1824,7 +1824,7 @@
       },
       "right": {
         "id": "bo_hui",
-        "label": "「临高是根。弃土者，众口铄金。」",
+        "label": "驳回。",
         "hint": "驳回去容易。可战败的阴影，从此赖着不走",
         "effects": {
           "stats": {
@@ -1882,7 +1882,7 @@
     "options": {
       "left": {
         "id": "neng_dai_jin_dai",
-        "label": "能带走的全带走：船，越多越好。",
+        "label": "能带全带。",
         "hint": "粮、械、匠人、书籍——装不下就丢家当",
         "effects": {
           "stats": {
@@ -1906,7 +1906,7 @@
       },
       "right": {
         "id": "xian_che_laoruo",
-        "label": "先撤老弱匠人，主力留下打。",
+        "label": "先撤老弱。",
         "hint": "留得青山在",
         "effects": {
           "stats": {
@@ -1974,7 +1974,7 @@
     "options": {
       "left": {
         "id": "yangfan_taiwan",
-        "label": "扬帆。去台湾。",
+        "label": "扬帆。",
         "hint": "八年前争过的事，八年后有了答案",
         "effects": {
           "ending": "taiwan",
@@ -1994,7 +1994,7 @@
       },
       "right": {
         "id": "zai_shou_yiye",
-        "label": "再守一夜。天亮再定。",
+        "label": "再守一夜。",
         "hint": "还没到山穷水尽——也许",
         "effects": {
           "stats": {

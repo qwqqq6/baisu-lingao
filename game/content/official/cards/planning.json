@@ -26,7 +26,7 @@
     "options": {
       "left": {
         "id": "pipi_chengli",
-        "label": "批准成立计委，三表通发各口",
+        "label": "准，立计委。",
         "hint": "把算盘攥成拳头",
         "effects": {
           "stats": {
@@ -57,7 +57,7 @@
       },
       "right": {
         "id": "zhi_she_tongjichu",
-        "label": "只设统计处，先记账不管事",
+        "label": "只设统计处。",
         "hint": "表先画着，权先不交",
         "effects": {
           "stats": {
@@ -110,7 +110,7 @@
     "options": {
       "left": {
         "id": "an_jiwei_paiqi",
-        "label": "按表执行，特例须计委核",
+        "label": "按表执行。",
         "hint": "总得有人说了算",
         "effects": {
           "stats": {
@@ -127,7 +127,7 @@
       },
       "right": {
         "id": "gekou_zixing_qishi",
-        "label": "各口酌情，月底报备",
+        "label": "各口酌情。",
         "hint": "和气是和气了，进度自己长腿跑了",
         "effects": {
           "stats": {
@@ -186,7 +186,7 @@
     "options": {
       "left": {
         "id": "yadao_yiqie",
-        "label": "重点工程压倒一切",
+        "label": "重点压倒。",
         "hint": "集中力量办大事",
         "effects": {
           "stats": {
@@ -214,7 +214,7 @@
       },
       "right": {
         "id": "junheng_paichan",
-        "label": "砍掉一半项目，均衡排产",
+        "label": "均衡排产。",
         "hint": "细水长流",
         "effects": {
           "stats": {
@@ -265,7 +265,7 @@
     "options": {
       "left": {
         "id": "xia_tiabiao_rencuo",
-        "label": "下调指标，公开认错修表",
+        "label": "认错修表。",
         "hint": "认怂，但信用保住了",
         "effects": {
           "stats": {
@@ -283,7 +283,7 @@
       },
       "right": {
         "id": "bi_xiamian_jiaban",
-        "label": "限期赶工，夜间加一班",
+        "label": "限期赶工。",
         "hint": "表是死的，人是活的——也是会倒的",
         "effects": {
           "stats": {
@@ -331,7 +331,7 @@
     "options": {
       "left": {
         "id": "jiaochu_tonggou",
-        "label": "交出去：物资尽入总账",
+        "label": "交出去。",
         "hint": "调度顺了，抱怨也顺路来了",
         "effects": {
           "stats": {
@@ -354,7 +354,7 @@
       },
       "right": {
         "id": "liu_yishou",
-        "label": "留一手：只做统计，不做调拨",
+        "label": "留一手。",
         "hint": "想攥全部，先攒够信用",
         "effects": {
           "forces": {
@@ -408,7 +408,7 @@
     "options": {
       "left": {
         "id": "zaifa_yilun_renwu",
-        "label": "再压一轮任务下去",
+        "label": "再压一轮。",
         "hint": "债多不愁，表长不怕",
         "effects": {
           "stats": {
@@ -427,7 +427,7 @@
       },
       "right": {
         "id": "tingdiao_yiban",
-        "label": "停掉一半项目",
+        "label": "停一半项目。",
         "hint": "长痛不如短痛。督工会记很久",
         "effects": {
           "stats": {
@@ -481,7 +481,7 @@
     "options": {
       "left": {
         "id": "qinzi_dabian",
-        "label": "亲自到会答辩",
+        "label": "亲自答辩。",
         "hint": "把账算清楚，把锅接下来",
         "effects": {
           "stats": {
@@ -495,7 +495,7 @@
       },
       "right": {
         "id": "rang_jiwei_yingfu",
-        "label": "让计委自己去应付",
+        "label": "让计委去。",
         "hint": "谁的孩子谁抱",
         "effects": {
           "forces": {
@@ -542,7 +542,7 @@
     "options": {
       "left": {
         "id": "baa_minsheng",
-        "label": "打锄头，先保春耕",
+        "label": "打锄头。",
         "hint": "锄头养人",
         "effects": {
           "stats": {
@@ -557,7 +557,7 @@
       },
       "right": {
         "id": "bao_gongye",
-        "label": "打枪头，先武装伏波军",
+        "label": "打枪头。",
         "hint": "枪头护家",
         "effects": {
           "stats": {
@@ -611,7 +611,7 @@
     "options": {
       "left": {
         "id": "zhun_biao_kuojian",
-        "label": "用印：照新表扩产",
+        "label": "照表扩产。",
         "hint": "成绩换权限，划算，也心惊",
         "effects": {
           "stats": {
@@ -628,7 +628,7 @@
       },
       "right": {
         "id": "biaoyang_huanyi",
-        "label": "传令表扬，扩产缓议",
+        "label": "表扬，缓议。",
         "hint": "功劳记下，缰绳不松",
         "effects": {
           "stats": {
@@ -678,7 +678,7 @@
     "options": {
       "left": {
         "id": "zhu_pao",
-        "label": "铸炮：先武装伏波军",
+        "label": "铸炮。",
         "hint": "督工亲自盯着翻砂",
         "effects": {
           "stats": {
@@ -695,7 +695,7 @@
       },
       "right": {
         "id": "da_nongju",
-        "label": "打农具：先还农口的账",
+        "label": "打农具。",
         "hint": "农委等这批锄头等了一季",
         "effects": {
           "stats": {
