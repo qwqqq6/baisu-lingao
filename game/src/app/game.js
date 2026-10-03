@@ -1,12 +1,19 @@
 /**
- * 游戏流程控制器：开局、抽卡、结算、倒台与继任、崩局判定、存读档。
+ * 游戏流程控制器：开局、回合循环、倒台与继任、崩局与专属结局、存读档。
  * 引擎模块保持纯逻辑，这里负责把它们串成一局游戏。
+ *
+ * 结构约定：
+ * - 结局文案在 ./endings.js（纯数据）；
+ * - 阶段报告在 ./report.js（引擎生成卡）；
+ * - Game 类只做编排，可序列化字段集中在 serialize/restore。
+ *
+ * @module app/game
  */
 
-import { StateManager, matchesWithContext } from "../engine/state.js";
+import { StateManager, matchesWithContext, weightedPick } from "../engine/state.js";
 import { ForcesManager } from "../engine/forces.js";
 import { CharacterManager } from "../engine/character.js";
-import { applyEffects, checkCollapse, PILLAR_STATE_IDS } from "../engine/effects.js";
+import { applyEffects, checkCollapse, PILLAR_STATE_IDS, pressureStateId } from "../engine/effects.js";
 import {
   buildDrawContext,
   availableSeries,
@@ -14,13 +21,29 @@ import {
   pickCardInSeries,
   applyVariants,
 } from "../engine/draw.js";
-import { weightedPick } from "../engine/state.js";
 import { saveGame, loadGame, clearSave } from "../engine/save.js";
+import { FALL_REASONS, ENDING_TEXTS, COLLAPSE_TEXTS } from "./endings.js";
+import { buildReport } from "./report.js";
 
+// 兼容再导出：UI 与测试从 game.js 取结局文案
+export { FALL_REASONS, ENDING_TEXTS, COLLAPSE_TEXTS };
+
+/** 日常卡冷却窗（最近 N 张不重复）。 */
 const RECENT_CARDS_LIMIT = 8;
+/** 近期系列降权窗。 */
 const RECENT_SERIES_LIMIT = 4;
+/** 阶段报告间隔（天）。 */
+const REPORT_INTERVAL = 10;
+/** 纪事上限。 */
+const LOG_LIMIT = 60;
+/** 阶段分界（天）。 */
+const STAGE_BOUNDARIES = { expansion: 10, consolidation: 40 };
+const STAGE_NAMES = { landing: "登陆期", expansion: "扩张期", consolidation: "巩固期" };
+/** 季节轮转（每十天一季）。 */
+const SEASONS = ["春", "夏", "秋", "冬"];
+const SEASON_LENGTH = 10;
 
-/** 各人物的本命势力：倒台时若它足够强势，可强行挽留（架空）。 */
+/** 各人物的本命势力：倒台时若它足够强势，可强行挽留（架空，文档 4.2 节）。 */
 const HOME_FORCE = {
   wunanhai: "farm",
   wude: "naturalized",
@@ -29,58 +52,14 @@ const HOME_FORCE = {
   wendsi: "council",
 };
 
-export const FALL_REASONS = {
-  impeach: "罢免",
-  purge: "清洗",
-  assassinate: "刺杀",
-  mutiny: "军变",
-  health: "病退",
-  farm_overreach: "农庄坐大",
-  network_overreach: "网络失控",
-  plan_failure: "计划失败",
-  council_seizure: "会议夺权",
-};
-
-export const ENDING_TEXTS = {
-  taiwan: {
-    title: "终局：扬帆南渡",
-    text: "船队在夜色里离开南寮海口，帆影连成一线，铁拳旗卷在桅杆上。没有人说话——大家沉默地看着临高在海上变成一道黑线。\n\n八年前，他们在「台湾还是海南」之间选了海南；八年后，海南站不住了，五百余人掉头向南，去大员驱逐红毛人，从一座叫台湾的岛从头再来。值班秘书在航海日志的末页写：崇祯二年，临高失守，全伙南渡台湾。八年前之争，至此有了答案。\n\n《临高启明·执政者》——另一个开头，等你再来书写。",
-    button: "在另一个时空重新开始",
-  },
-};
-
-export const COLLAPSE_TEXTS = {
-  livelihood: {
-    title: "生产崩溃",
-    text: "仓廪见底，灶冷烟稀。饥荒像潮水一样漫过营地，队伍在一夜之间散了。《临高启明》的第一页，翻不到这里。",
-  },
-  people: {
-    title: "民变四起",
-    text: "归化民跑了，劳工逃了，连跟了最久的老人也开始夜里磨刀。营地在大火中易主，史书里只留下一行'初，众不服'。",
-  },
-  military: {
-    title: "军务失控",
-    text: "枪杆子终于不再听命于会议。哨线之内是军营，哨线之外没有人说话——因为已经没有人需要被说服了。",
-  },
-  council: {
-    title: "元老院分裂",
-    text: "会议彻底破裂，各派各立山头、各征各粮。临高集团在一场没有枪声的内战里四分五裂。",
-  },
-  wind: {
-    title: "外部围剿",
-    text: "风声终于变成了刀兵。官军、海商、乡勇组成联军封锁了海岸，桅杆如林，旌旗蔽日——这片海摊再无宁日。",
-  },
-  legitimacy: {
-    title: "执政失效",
-    text: "没有人再执行来自上头的命令，不是因为反抗，而是因为无所谓。权力在无声无息中蒸发，营地仍在，'临高'已经不在了。",
-  },
-  succession: {
-    title: "继任危机",
-    text: "前任倒台，继任无人。各派相持不下，营地陷入漫长的空位期，直到外部势力不请自来。",
-  },
-};
+/** 强行挽留（架空）的门槛。 */
+const ENTRENCH_INFLUENCE = 65;
+const ENTRENCH_SATISFACTION = 50;
 
 export class Game {
+  /**
+   * @param {*} content loadOfficialContent() 的产物（或测试夹具）
+   */
   constructor(content) {
     this.content = content;
     this.state = new StateManager();
@@ -94,6 +73,7 @@ export class Game {
     this.resetRuntime();
   }
 
+  /** 把一局游戏的运行时状态归零（不动内容与定义）。 */
   resetRuntime() {
     this.day = 1;
     this.usedCards = new Set();
@@ -118,31 +98,57 @@ export class Game {
     this.pendingInherit = null;
     /** 调试模式：UI 显示隐藏数值与调试工具（不影响引擎逻辑） */
     this.debug = false;
+    /** 专属结局画面的自定义文案（gameOver 时按 ENDING_TEXTS 填充） */
+    this.gameOverTitle = null;
+    this.gameOverText = null;
+    this.gameOverButton = null;
     this.log = [];
   }
 
+  // ------------------------------------------------------------ 只读视图
+
+  /** @returns {string} 当前执政者 id（"none" 表示权位空悬） */
   get rulerId() {
     return this.state.get("ruler.current");
   }
 
+  /** @returns {import("../engine/character.js").Character|null} */
   get ruler() {
     return this.characterManager.get(this.rulerId);
   }
 
+  /** @returns {"landing"|"expansion"|"consolidation"} */
   get stage() {
-    const day = this.day;
-    if (day <= 10) return "landing";
-    if (day <= 40) return "expansion";
+    if (this.day <= STAGE_BOUNDARIES.expansion) return "landing";
+    if (this.day <= STAGE_BOUNDARIES.consolidation) return "expansion";
     return "consolidation";
   }
 
-  /** 季节：每十天一季，影响农事/商贸/军务系列权重（天时系统） */
+  /** @returns {string} 季节（春夏秋冬，每十天一季） */
   get season() {
-    return ["春", "夏", "秋", "冬"][Math.floor((this.day - 1) / 10) % 4];
+    return SEASONS[Math.floor((this.day - 1) / SEASON_LENGTH) % 4];
   }
 
-  // ---------------------------------------------------------------- 开局
+  /** @returns {Record<string, number>} 四柱快照 */
+  pillars() {
+    return {
+      people: this.state.get("core.pillar.people"),
+      livelihood: this.state.get("core.pillar.livelihood"),
+      military: this.state.get("core.pillar.military"),
+      council: this.state.get("core.pillar.council"),
+    };
+  }
 
+  pillarNames() {
+    return { people: "民望", livelihood: "生计", military: "军务", council: "元老院" };
+  }
+
+  // ------------------------------------------------------------ 开局
+
+  /**
+   * 开新局：重置世界，落座执政者，应用初始加成，入队开局贺表。
+   * @param {string} characterId
+   */
   newGame(characterId) {
     this.resetRuntime();
     this.state.reset();
@@ -153,54 +159,45 @@ export class Game {
     if (!character) throw new Error(`未知人物：${characterId}`);
 
     this.state.set("ruler.current", characterId);
-    const bonus = character.initialBonus || {};
+    this.applyInitialBonus(character.initialBonus || {});
+
+    this.pushLog(`崇祯元年，广东琼州府临高县。${character.name}（${character.route}）被推上执政之位。`, "system");
+    if (character.initialBonus?.desc) {
+      this.pushLog(`${character.name}的初始加成已生效。`, "system");
+    }
+    if (character.openingCard) this.pendingCards.push(character.openingCard);
+  }
+
+  /** @param {object} bonus 人物卡 initialBonus */
+  applyInitialBonus(bonus) {
     if (bonus.stats) {
       for (const [key, value] of Object.entries(bonus.stats)) {
         this.state.apply({ id: PILLAR_STATE_IDS[key], op: "add", value });
       }
     }
     if (bonus.wind) this.state.apply({ id: "core.wind", op: "add", value: bonus.wind });
-    if (bonus.personal) {
-      for (const [key, value] of Object.entries(bonus.personal)) {
-        const id =
-          key === "legitimacy"
-            ? "ruler.legitimacy"
-            : key === "personal_pressure"
-              ? "ruler.pressure_personal"
-              : key === "faction_alarm"
-                ? "ruler.pressure_faction"
-                : "ruler.pressure_violence";
-        this.state.apply({ id, op: "add", value });
-      }
-    }
-
-    this.pushLog(`崇祯元年，广东琼州府临高县。${character.name}（${character.route}）被推上执政之位。`, "system");
-    if (bonus.desc) this.pushLog(`${character.name}的初始加成已生效。`, "system");
-    if (character.openingCard) this.pendingCards.push(character.openingCard);
+    if (bonus.personal) this.applyPressure(bonus.personal);
   }
 
-  // ---------------------------------------------------------------- 回合
+  /** @param {Record<string, number>} personal 压力键值对 */
+  applyPressure(personal) {
+    for (const [key, value] of Object.entries(personal)) {
+      const id = pressureStateId(key);
+      if (id) this.state.apply({ id, op: "add", value });
+    }
+  }
 
-  /** 抽出下一张要展示的卡（含倒台/继任等强制事件），返回 false 表示游戏结束或无卡可发。 */
+  // ------------------------------------------------------------ 回合循环
+
+  /**
+   * 抽出下一张要呈现的卡（含倒台/继任/结局等强制事件）。
+   * 优先级：崩局 > 结局卡 > 继任 > 倒台 > 插入卡 > 阶段报告 > 系列加权抽取。
+   * @returns {boolean} false 表示游戏结束或无卡可发
+   */
   nextTurn() {
     if (this.gameOverReason) return false;
     this.forces.ensureUnlocked(this.ctx());
-
-    // 人物缺陷：周期性压力漂移（隐藏进行，只进日志暗示）
-    const ruler = this.ruler;
-    if (ruler?.flaw && this.day % ruler.flaw.everyDays === 0) {
-      for (const [key, value] of Object.entries(ruler.flaw.personal || {})) {
-        const id =
-          key === "legitimacy"
-            ? "ruler.legitimacy"
-            : key === "personal_pressure"
-              ? "ruler.pressure_personal"
-              : key === "faction_alarm"
-                ? "ruler.pressure_faction"
-                : "ruler.pressure_violence";
-        this.state.apply({ id, op: "add", value });
-      }
-    }
+    this.applyFlawDrift();
 
     const collapse = checkCollapse(this.state);
     if (collapse) {
@@ -208,7 +205,6 @@ export class Game {
       return false;
     }
 
-    // 倒台结局：先放结局，再议继任
     if (this.epilogueQueued) {
       const epilogue = this.epilogueQueued;
       this.epilogueQueued = null;
@@ -220,43 +216,84 @@ export class Game {
       return this.drawSuccession();
     }
 
-    // 倒台卡：优先级最高的强制事件
     const ctx = this.ctx();
+    return (
+      this.presentDownfallIfDue(ctx) ||
+      this.popPendingCard(ctx) ||
+      this.presentReportIfDue() ||
+      this.drawFromSeries(ctx)
+    );
+  }
+
+  /** 人物缺陷：周期性压力漂移（隐藏进行，只通过阶段报告暗示）。 */
+  applyFlawDrift() {
+    const ruler = this.ruler;
+    if (ruler?.flaw && this.day % ruler.flaw.everyDays === 0) {
+      this.applyPressure(ruler.flaw.personal || {});
+    }
+  }
+
+  /**
+   * 倒台卡是最高优先级的强制事件：条件满足且未消耗即呈现。
+   * @returns {boolean} 是否呈现了倒台卡
+   */
+  presentDownfallIfDue(ctx) {
     for (const card of this.content.cards) {
       if (card.type !== "downfall" || this.usedCards.has(card.id)) continue;
-      if (!(card.requires || []).every((c) => matchesWithContext(c, ctx))) continue;
-      if ((card.excludes || []).some((c) => matchesWithContext(c, ctx))) continue;
+      if (!this.cardAvailable(card, ctx)) continue;
       this.present(card);
       return true;
     }
+    return false;
+  }
 
-    // 未处理的插入卡（后续链卡在此弹出，出队时重新校验条件）
+  /**
+   * 弹出待处理插入卡（链式事件弧的后续）。
+   * 出队时重新校验条件；已消耗的非日常卡不重复出队。
+   * @returns {boolean}
+   */
+  popPendingCard(ctx) {
     while (this.pendingCards.length) {
       const id = this.pendingCards.shift();
       const card = this.content.cardIndex.get(id);
       if (!card) continue;
       if (card.type !== "daily" && this.usedCards.has(card.id)) continue;
-      if (!(card.requires || []).every((c) => matchesWithContext(c, ctx))) continue;
-      if ((card.excludes || []).some((c) => matchesWithContext(c, ctx))) continue;
+      if (!this.cardAvailable(card, ctx)) continue;
       this.present(card);
       return true;
     }
+    return false;
+  }
 
-    // 阶段报告：每十天一份，用暗示代替数值（压力不进公开 UI）
-    if (this.day - this.lastReportDay >= 10) {
-      this.lastReportDay = this.day;
-      this.present(this.buildReport());
-      return true;
-    }
+  /** @param {*} card @param {object} ctx */
+  cardAvailable(card, ctx) {
+    return (
+      (card.requires || []).every((c) => matchesWithContext(c, ctx)) &&
+      !(card.excludes || []).some((c) => matchesWithContext(c, ctx))
+    );
+  }
 
-    // 系列加权抽取：只保留当前确有可用卡牌的系列，避免"系列可用但入口卡未解锁"导致空抽
-    const drawRuntime = this.runtimeForDraw();
+  /** 每 REPORT_INTERVAL 天一份阶段报告。 @returns {boolean} */
+  presentReportIfDue() {
+    if (this.day - this.lastReportDay < REPORT_INTERVAL) return false;
+    this.lastReportDay = this.day;
+    this.present(buildReport({ day: this.day, state: this.state, forces: this.forces }));
+    return true;
+  }
+
+  /**
+   * 系列加权抽取：只保留当前确有可用卡牌的系列
+   * （避免"系列可用但入口卡未解锁"导致空抽）。
+   * @returns {boolean}
+   */
+  drawFromSeries(ctx) {
+    const runtime = this.runtimeForDraw();
     const weighted = [];
-    for (const s of availableSeries(this.content.series, ctx)) {
-      const card = pickCardInSeries(s, this.content.cards, ctx, drawRuntime);
+    for (const series of availableSeries(this.content.series, ctx)) {
+      const card = pickCardInSeries(series, this.content.cards, ctx, runtime);
       if (!card) continue;
-      const { weight } = applySeriesWeight(s, ctx, drawRuntime);
-      weighted.push({ series: s, card, weight });
+      const { weight } = applySeriesWeight(series, ctx, runtime);
+      weighted.push({ series, card, weight });
     }
     const picked = weightedPick(weighted);
     if (!picked) {
@@ -270,6 +307,10 @@ export class Game {
     return true;
   }
 
+  /**
+   * 继任：按人物数据声明的权重推举；无人可继任即继任危机终局。
+   * @returns {boolean}
+   */
   drawSuccession() {
     const pick = this.characterManager.pickSuccessor(this.ctx());
     if (!pick) {
@@ -287,12 +328,20 @@ export class Game {
     return true;
   }
 
+  /** @param {*} card @param {*} [meta] */
   present(card, meta = {}) {
     this.currentCard = { ...card, meta };
     this.lastDrawnCardId = card.id;
   }
 
-  /** 玩家选择 left / right，结算并推进天数。返回结算反馈。 */
+  // ------------------------------------------------------------ 批复结算
+
+  /**
+   * 玩家批复 left / right：结算效果、推进天数、处理下台与终局。
+   * @param {"left"|"right"} side
+   * @returns {{feedback: {deltas: string, notes: string[]}, fell: *|null,
+   *            over: *|null, days?: number}|null}
+   */
   choose(side) {
     const holder = this.currentCard;
     if (!holder || this.gameOverReason) return null;
@@ -304,7 +353,7 @@ export class Game {
     const result = applyEffects(option.effects, { state: this.state, forces: this.forces });
     const after = this.pillars();
 
-    // 结局反哺继任：前任的结局在继任者开局留下痕迹（软禁的旧部寒心、被杀的军中不安……）
+    // 结局反哺继任：前任的结局在继任者开局留下痕迹
     if (holder.type === "succession" && this.pendingInherit) {
       applyEffects(this.pendingInherit, { state: this.state, forces: this.forces });
       this.pendingInherit = null;
@@ -315,45 +364,25 @@ export class Game {
       this.gameOver(option.effects.ending);
     }
 
-    // 倒台卡特殊规则：只有真正下台才消耗该卡；强行续任后压力仍在，倒台会再次逼近
+    // 倒台卡特殊规则：只有真正下台才消耗该卡；强行续任后倒台会再次逼近
     const refusedDownfall = holder.type === "downfall" && !option.effects?.stepDown;
     if (!refusedDownfall) this.usedCards.add(holder.id);
     this.cardSeen[holder.id] = (this.cardSeen[holder.id] || 0) + 1;
 
-    // 不可逆状态发生变化时写入纪事，让"后果"可见
-    for (const [id, old] of Object.entries(beforeStates)) {
-      const def = this.state.getDefinition(id);
-      if (!def) continue;
-      const now = this.state.get(id);
-      if (now === old) continue;
-      if (def.type === "boolean" || def.type === "set" || def.mutability === "immutable" || def.mutability === "terminal") {
-        if (def.type === "set") {
-          const added = now.filter((v) => !old.includes(v));
-          if (added.length) this.pushLog(`【此后】${def.name}：${added.join("、")}`, "system");
-        } else if (now) {
-          this.pushLog(`【此后】${def.name}`, "system");
-        }
-      } else if (def.type === "enum" || def.type === "level") {
-        this.pushLog(`【此后】${def.name}`, "system");
-      }
-    }
+    this.logIrreversibleChanges(beforeStates);
     if (holder.type === "daily") {
       this.recentCards = [holder.id, ...this.recentCards].slice(0, RECENT_CARDS_LIMIT);
     }
 
-    // 后续插入卡
+    // 后续插入卡（链式事件弧）
     for (const id of option.followups || []) {
       if (this.content.cardIndex.has(id)) this.pendingCards.push(id);
     }
 
-    // 推进天数、计时器与阶段
     this.advanceDays(result.days);
 
-    // 倒台结算：把当前执政者挪入前任序列
-    let fell = null;
-    if (option.effects?.stepDown) {
-      fell = this.performStepDown();
-    }
+    // 倒台结算：把当前执政者挪入前任序列（或被强行挽留）
+    const fell = option.effects?.stepDown ? this.performStepDown() : null;
 
     const collapse = checkCollapse(this.state);
     if (collapse) {
@@ -370,139 +399,127 @@ export class Game {
     };
   }
 
+  /**
+   * 不可逆状态发生变化时写「【此后】×××」进纪事，让后果可见
+   * （counter 不记，避免泄露隐藏压力）。
+   * @param {Record<string, *>} beforeStates
+   */
+  logIrreversibleChanges(beforeStates) {
+    for (const [id, old] of Object.entries(beforeStates)) {
+      const def = this.state.getDefinition(id);
+      if (!def) continue;
+      const now = this.state.get(id);
+      if (now === old) continue;
+      if (def.type === "boolean" || def.type === "set" || def.mutability === "immutable" || def.mutability === "terminal") {
+        if (def.type === "set") {
+          const added = now.filter((v) => !old.includes(v));
+          if (added.length) this.pushLog(`【此后】${def.name}：${added.join("、")}`, "system");
+        } else if (now) {
+          this.pushLog(`【此后】${def.name}`, "system");
+        }
+      } else if (def.type === "enum" || def.type === "level") {
+        this.pushLog(`【此后】${def.name}`, "system");
+      }
+    }
+  }
+
+  /**
+   * 下台结算。强势的本命势力会把罢免转化为「强行挽留（架空）」；
+   * 真正下台时按 fates 表排专属结局卡（先于继任呈现）。
+   * @returns {{character: *, reason: string, dead?: boolean, fateLabel?: string|null, entrenched?: boolean}|null}
+   */
   performStepDown() {
     const ruler = this.ruler;
     if (!ruler) return null;
     const reason = this.state.get("fall.last_reason");
 
-    // 支持者强行挽留：罢免转化为架空/勉强续任（文档 4.2 节）
-    const homeForce = HOME_FORCE[ruler.id];
-    if (
-      homeForce &&
-      this.forces.isUnlocked(homeForce) &&
-      this.forces.metric(homeForce, "influence") >= 65 &&
-      this.forces.metric(homeForce, "satisfaction") >= 50 &&
-      !this.state.get(`character.${ruler.id}.weakened`)
-    ) {
-      this.state.set(`character.${ruler.id}.weakened`, true);
-      this.state.apply({ id: "ruler.pressure_faction", op: "add", value: 10 });
-      this.state.apply({ id: "ruler.pressure_personal", op: "add", value: 5 });
-      this.forces.adjust(homeForce, { influence: 5 });
-      const forceName = (this.forces.definitions.find((f) => f.id === homeForce) || {}).name || homeForce;
-      this.pushLog(`众意难违：「${forceName}」力保 ${ruler.name} 留任。位子保住了，威权却没有了。`, "succession");
+    if (this.tryEntrench(ruler)) {
       return { character: ruler, reason: "强行挽留（架空）", entrenched: true };
     }
 
     this.state.apply({ id: "history.former_rulers", op: "addToSet", value: ruler.id });
     this.formerRuler = ruler.id;
     this.state.set("ruler.current", "none");
-    // 压力交接：个人压力与暴力风险清零，派系警惕减半遗留，合法性保留由继任卡修正
+    // 压力交接：个人压力与暴力风险清零，派系警惕减半遗留，
+    // 合法性保留由继任卡修正
     this.state.set("ruler.pressure_personal", 0);
     this.state.set("ruler.pressure_violence", 0);
     this.state.set("ruler.pressure_faction", Math.ceil((this.state.get("ruler.pressure_faction") || 0) / 2));
     this.abilityReadyDay = this.day;
+
     const reasonText = FALL_REASONS[reason] || "去职";
     this.pushLog(`朝局震动：${ruler.name} 因「${reasonText}」下台。`, "succession");
 
-    // 专属结局：按倒台原因从人物数据里取（软禁 / 被杀 / 无人听令 / 流放 / 病退……）
-    const fates = ruler.fates || {};
-    const fate = fates[reason] || fates.default;
-    let fateLabel = null;
-    if (fate) {
-      fateLabel = fate.fateLabel || null;
-      this.pendingInherit = fate.inherit || null;
-      this.epilogueQueued = {
-        id: `EPILOGUE-${ruler.id}-${this.day}`,
-        pool: "core",
-        series: "politics.council",
-        type: "epilogue",
-        title: fate.title,
-        source: { kind: "character", id: ruler.id, name: ruler.name },
-        tags: ["结局"],
-        requires: [],
-        excludes: [],
-        weight: 0,
-        text: fate.text,
-        options: {
-          left: { id: "yue_cundang", label: fate.option || "阅。存档备查。", effects: {} },
-        },
-        meta: { fateLabel },
-      };
-      if (fateLabel) this.pushLog(`【结局】${ruler.name}：${fateLabel}。`, "succession");
-    }
-    return {
+    const fell = {
       character: ruler,
       reason: reasonText,
       dead: Boolean(this.state.get(`character.${ruler.id}.dead`)),
-      fateLabel,
+      fateLabel: null,
     };
+    this.queueEpilogue(ruler, reason, fell);
+    return fell;
   }
 
-  /** 阶段报告：把隐藏局势写成几行公文，不出现任何数值。 */
-  buildReport() {
-    const lines = [];
-    const ruler = this.ruler;
-    if (this.state.get("ruler.pressure_personal") >= 40) {
-      lines.push("近来各口的事务都压在您一人肩上。秘书处的人说，后半夜常见您屋里的灯还亮着。");
+  /**
+   * 强行挽留（架空）：本命势力足够强势时，罢免转化为架空。
+   * @returns {boolean} 是否触发了挽留
+   */
+  tryEntrench(ruler) {
+    const homeForce = HOME_FORCE[ruler.id];
+    if (!homeForce || !this.forces.isUnlocked(homeForce)) return false;
+    if (
+      this.forces.metric(homeForce, "influence") < ENTRENCH_INFLUENCE ||
+      this.forces.metric(homeForce, "satisfaction") < ENTRENCH_SATISFACTION ||
+      this.state.get(`character.${ruler.id}.weakened`)
+    ) {
+      return false;
     }
-    if (this.state.get("ruler.pressure_faction") >= 40) {
-      lines.push("会上的风向有些不对。几位委员散会后留在廊下交头接耳，见人来了就住口。");
-    }
-    if (this.state.get("ruler.pressure_violence") >= 40) {
-      lines.push("营区外夜里不太平。保卫组这个月拿的人，比往常都多。");
-    }
-    if (this.state.get("ruler.legitimacy") <= 40) {
-      lines.push("各口对批示开始讨价还价，一件三五天能办的事，如今要走七八道手续。");
-    }
-    if (this.state.get("core.wind") >= 40) {
-      lines.push("海面上生面孔的船多了。县衙那边许久没有递话来——安静得反常。");
-    }
-    for (const def of this.forces.definitions) {
-      if (!this.forces.isUnlocked(def.id)) continue;
-      const m = this.metricsOf(def.id);
-      if (m.satisfaction <= 25) lines.push(`「${def.name}」近来对上头的话爱答不理，差事办得敷衍。`);
-      else if (m.hostility >= 60) lines.push(`「${def.name}」的人在暗中串联，风声很紧。`);
-      else if (m.influence >= 70) lines.push(`「${def.name}」的势力正盛，营里办事，先得过他们的门。`);
-    }
-    if (!lines.length) {
-      const neutrals = [
-        "各处大致安分。粮仓的账对得上，哨线的记录也齐——这样的日子，在临高算得上好日子。",
-        "没什么可写的大事。东门市的市面照常，工地的进度照旧，往年这个时节，土匪该来了，今年还没有。",
-        "各口的日子过得平平。归化民里有几家在办喜事，借走了营里两副碗筷，说好如数归还。",
-        "本旬无事。值夜的战士说，后半夜听见海滩上有野狗刨沙子，除此之外，天下太平。",
-      ];
-      lines.push(neutrals[this.day % neutrals.length]);
-    }
-    return {
-      id: `REPORT-${this.day}`,
+    this.state.set(`character.${ruler.id}.weakened`, true);
+    this.state.apply({ id: "ruler.pressure_faction", op: "add", value: 10 });
+    this.state.apply({ id: "ruler.pressure_personal", op: "add", value: 5 });
+    this.forces.adjust(homeForce, { influence: 5 });
+    const forceName = this.forces.definitions.find((f) => f.id === homeForce)?.name || homeForce;
+    this.pushLog(`众意难违：「${forceName}」力保 ${ruler.name} 留任。位子保住了，威权却没有了。`, "succession");
+    return true;
+  }
+
+  /**
+   * 按倒台原因从人物 fates 表排专属结局卡，并暂存反哺继任的 inherit。
+   * @param {object} ruler @param {string} reason @param {object} fell
+   */
+  queueEpilogue(ruler, reason, fell) {
+    const fate = ruler.fates?.[reason] || ruler.fates?.default;
+    if (!fate) return;
+    fell.fateLabel = fate.fateLabel || null;
+    this.pendingInherit = fate.inherit || null;
+    this.epilogueQueued = {
+      id: `EPILOGUE-${ruler.id}-${this.day}`,
       pool: "core",
       series: "politics.council",
-      type: "report",
-      title: `阶段报告（第 ${this.day} 日）`,
-      source: { kind: "force", id: "council", name: "执委会秘书处" },
-      tags: ["报告"],
+      type: "epilogue",
+      title: fate.title,
+      source: { kind: "character", id: ruler.id, name: ruler.name },
+      tags: ["结局"],
       requires: [],
       excludes: [],
       weight: 0,
-      text: `秘书处汇总了近旬各方情形，择要报呈首长：\n\n${lines.map((l) => `· ${l}`).join("\n")}`,
+      text: fate.text,
       options: {
-        left: {
-          id: "cun_dang_beicha",
-          label: "阅毕，存档备查",
-          effects: {}
-        }
-      }
+        left: { id: "yue_cundang", label: fate.option || "阅。存档备查。", effects: {} },
+      },
+      meta: { fateLabel: fell.fateLabel },
     };
+    if (fell.fateLabel) {
+      this.pushLog(`【结局】${ruler.name}：${fell.fateLabel}。`, "succession");
+    }
   }
 
-  metricsOf(forceId) {
-    return {
-      influence: this.forces.metric(forceId, "influence") ?? 0,
-      satisfaction: this.forces.metric(forceId, "satisfaction") ?? 0,
-      hostility: this.forces.metric(forceId, "hostility") ?? 0,
-    };
-  }
+  // ------------------------------------------------------------ 时间推进
 
+  /**
+   * 推进天数：计时器、戒严到期、阶段切换。
+   * @param {number} days
+   */
   advanceDays(days) {
     const oldStage = this.stage;
     this.day += days;
@@ -514,17 +531,18 @@ export class Game {
     const newStage = this.stage;
     if (newStage !== oldStage) {
       this.state.set("stage.current", newStage);
-      const names = { landing: "登陆期", expansion: "扩张期", consolidation: "巩固期" };
-      this.pushLog(`时代推进：进入${names[newStage]}。`, "system");
+      this.pushLog(`时代推进：进入${STAGE_NAMES[newStage]}。`, "system");
     }
   }
 
-  // ---------------------------------------------------------------- 人物能力
+  // ------------------------------------------------------------ 人物能力
 
+  /** @returns {boolean} */
   canUseAbility() {
     return Boolean(this.ruler?.ability) && this.day >= this.abilityReadyDay && !this.gameOverReason;
   }
 
+  /** 发动执政者能力；返回能力定义（不可用时为 null）。 */
   useAbility() {
     if (!this.canUseAbility()) return null;
     const ability = this.ruler.ability;
@@ -534,48 +552,15 @@ export class Game {
     return ability;
   }
 
-  // ---------------------------------------------------------------- 结算描述
+  // ------------------------------------------------------------ 反馈与调试
 
-  pillars() {
-    return {
-      people: this.state.get("core.pillar.people"),
-      livelihood: this.state.get("core.pillar.livelihood"),
-      military: this.state.get("core.pillar.military"),
-      council: this.state.get("core.pillar.council"),
-    };
-  }
-
-  pillarNames() {
-    return { people: "民望", livelihood: "生计", military: "军务", council: "元老院" };
-  }
-
-  setDebug(on) {
-    this.debug = Boolean(on);
-  }
-
-  /** 调试工具：跳过若干天（触发阶段报告/计时器等） */
-  debugSkipDays(n) {
-    this.advanceDays(Math.max(1, n));
-  }
-
-  /** 调试工具：直接抬高某项隐藏压力（legitimacy 为减） */
-  debugBump(kind) {
-    const map = {
-      personal: "ruler.pressure_personal",
-      faction: "ruler.pressure_faction",
-      violence: "ruler.pressure_violence",
-    };
-    const id = map[kind];
-    if (!id) return;
-    this.state.apply({ id, op: "add", value: 20 });
-  }
-
-  debugBumpLegitimacy() {
-    this.state.apply({ id: "ruler.legitimacy", op: "add", value: -20 });
-  }
-
+  /**
+   * 批牍体反馈：一行四柱增减 + 至多两条隐晦注脚（仅调试模式展示）。
+   * @param {Record<string, number>} before @param {Record<string, number>} after
+   * @param {*} effects
+   * @returns {{deltas: string, notes: string[]}}
+   */
   describeChanges(before, after, effects) {
-    // 批牍体反馈：一行四柱增减 + 至多一条隐晦注脚
     const names = this.pillarNames();
     const parts = [];
     for (const key of Object.keys(names)) {
@@ -589,8 +574,10 @@ export class Game {
     if (wind >= 3) notes.push("风声渐紧");
     else if (wind <= -3) notes.push("风声稍歇");
     const personal = effects?.personal || {};
-    const p = personal.personal_pressure || 0, f = personal.faction_alarm || 0,
-      v = personal.violence_risk || 0, l = personal.legitimacy || 0;
+    const p = personal.personal_pressure || 0;
+    const f = personal.faction_alarm || 0;
+    const v = personal.violence_risk || 0;
+    const l = personal.legitimacy || 0;
     if (p >= 4) notes.push("肩上担子更重");
     if (f >= 4) notes.push("元老院投来警惕目光");
     if (v >= 4) notes.push("空气里多了火药味");
@@ -605,13 +592,57 @@ export class Game {
     return { deltas, notes: notes.slice(0, 2) };
   }
 
+  /** @param {string} text @param {string} [kind] */
   pushLog(text, kind = "info") {
     this.log.unshift({ day: this.day, text, kind });
-    if (this.log.length > 60) this.log.pop();
+    if (this.log.length > LOG_LIMIT) this.log.pop();
   }
 
-  // ---------------------------------------------------------------- 内部
+  /** @param {boolean} on */
+  setDebug(on) {
+    this.debug = Boolean(on);
+  }
 
+  /** 调试：跳过若干天（触发计时器/阶段推进）。 @param {number} n */
+  debugSkipDays(n) {
+    this.advanceDays(Math.max(1, n));
+  }
+
+  /** 调试：抬高一项隐藏压力。 @param {"personal"|"faction"|"violence"} kind */
+  debugBump(kind) {
+    const id = pressureStateId(
+      kind === "personal" ? "personal_pressure" : kind === "faction" ? "faction_alarm" : "violence_risk",
+    );
+    if (id) this.state.apply({ id, op: "add", value: 20 });
+  }
+
+  /** 调试：合法性 -20。 */
+  debugBumpLegitimacy() {
+    this.state.apply({ id: "ruler.legitimacy", op: "add", value: -20 });
+  }
+
+  // ------------------------------------------------------------ 终局
+
+  /**
+   * 终局入口：崩局原因或专属结局 id。
+   * 专属结局（ENDING_TEXTS）会覆盖结局画面的标题/文案/按钮。
+   * @param {string} reason
+   */
+  gameOver(reason) {
+    this.gameOverReason = reason;
+    const ending = ENDING_TEXTS[reason];
+    if (ending) {
+      this.gameOverTitle = ending.title;
+      this.gameOverText = ending.text;
+      this.gameOverButton = ending.button;
+    }
+    const collapse = COLLAPSE_TEXTS[reason];
+    if (collapse) this.pushLog(`【终局】${collapse.title}`, "collapse");
+  }
+
+  // ------------------------------------------------------------ 内部
+
+  /** @returns {import("../engine/conditions.js").DrawContext} */
   ctx() {
     return buildDrawContext({
       state: this.state,
@@ -621,6 +652,7 @@ export class Game {
     });
   }
 
+  /** @returns {import("../engine/draw.js").DrawRuntime} */
   runtimeForDraw() {
     return {
       usedCards: this.usedCards,
@@ -634,6 +666,7 @@ export class Game {
     };
   }
 
+  /** 系列停滞计数：进度长期不动时给推进卡加权。 @param {string} seriesId */
   trackStall(seriesId) {
     const progressId = `series.${seriesId.replace(".", "_")}`;
     const current = this.state.get(progressId) || 0;
@@ -649,20 +682,9 @@ export class Game {
     }
   }
 
-  gameOver(reason, customText) {
-    this.gameOverReason = reason;
-    const ending = ENDING_TEXTS[reason];
-    if (ending) {
-      this.gameOverTitle = ending.title;
-      this.gameOverText = ending.text;
-      this.gameOverButton = ending.button;
-    }
-    const text = COLLAPSE_TEXTS[reason];
-    if (text) this.pushLog(`【终局】${text.title}`, "collapse");
-  }
+  // ------------------------------------------------------------ 存档
 
-  // ---------------------------------------------------------------- 存档
-
+  /** 序列化一局游戏（写入 localStorage 或导出为文件）。 */
   serialize() {
     return {
       version: 1,
@@ -682,17 +704,25 @@ export class Game {
       pendingInherit: this.pendingInherit,
       debug: this.debug,
       gameOverReason: this.gameOverReason,
+      gameOverTitle: this.gameOverTitle || null,
+      gameOverText: this.gameOverText || null,
+      gameOverButton: this.gameOverButton || null,
       state: this.state.snapshot(),
       forces: this.forces.snapshot(),
       log: [...this.log],
     };
   }
 
+  /**
+   * 从存档载荷恢复（字段缺省按新局处理）。
+   * @param {*} data
+   */
   restore(data) {
     this.resetRuntime();
     this.state.reset();
     this.state.loadDefinitions(this.content.states);
     this.forces.reset();
+
     this.day = data.day ?? 1;
     this.usedCards = new Set(data.usedCards || []);
     this.pendingCards = [...(data.pendingCards || [])];
@@ -709,16 +739,25 @@ export class Game {
     this.pendingInherit = data.pendingInherit ?? null;
     this.debug = Boolean(data.debug);
     this.gameOverReason = data.gameOverReason ?? null;
+    this.gameOverTitle = data.gameOverTitle ?? null;
+    this.gameOverText = data.gameOverText ?? null;
+    this.gameOverButton = data.gameOverButton ?? null;
     this.state.restore(data.state);
     this.forces.restore(data.forces);
     this.log = [...(data.log || [])];
     this.currentCard = null;
   }
 
+  /** 写入 localStorage。 @returns {boolean} */
   save() {
     return saveGame(this.serialize());
   }
 
+  /**
+   * 从 localStorage 恢复一局。
+   * @param {*} content
+   * @returns {Game|null}
+   */
   static load(content) {
     const data = loadGame();
     if (!data) return null;
@@ -727,6 +766,7 @@ export class Game {
     return game;
   }
 
+  /** 清除存档。 */
   static discardSave() {
     clearSave();
   }

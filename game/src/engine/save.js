@@ -1,9 +1,17 @@
 /**
- * 存档：localStorage 单槽位存取，保存运行时上下文 + 状态快照 + 势力快照。
+ * 存档：localStorage 单槽位存取。
+ * 载荷带 saveVersion 字段；当前为 1（结构变化时递增并写迁移）。
+ *
+ * @module engine/save
  */
 
 const SAVE_KEY = "lingqi_ruler_save_v1";
 
+/**
+ * 写入存档。
+ * @param {*} payload Game.serialize() 的产物
+ * @returns {boolean}
+ */
 export function saveGame(payload) {
   try {
     localStorage.setItem(SAVE_KEY, JSON.stringify(payload));
@@ -14,6 +22,7 @@ export function saveGame(payload) {
   }
 }
 
+/** @returns {*|null} 读档；无档或损坏返回 null */
 export function loadGame() {
   try {
     const raw = localStorage.getItem(SAVE_KEY);
@@ -24,6 +33,7 @@ export function loadGame() {
   }
 }
 
+/** @returns {boolean} 是否存在存档 */
 export function hasSave() {
   try {
     return Boolean(localStorage.getItem(SAVE_KEY));
@@ -32,6 +42,7 @@ export function hasSave() {
   }
 }
 
+/** 清除存档（重新开始用）。 */
 export function clearSave() {
   try {
     localStorage.removeItem(SAVE_KEY);

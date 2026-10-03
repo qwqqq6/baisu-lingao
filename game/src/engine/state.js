@@ -2,21 +2,53 @@
  * StateManager：游戏世界状态的唯一定义与存取处。
  *
  * 职责（与 docs/状态管理类说明.md 一致）：
- * - 注册状态定义，按定义初始化默认值。
- * - 校验类型、枚举值、数值边界和可变性。
- * - 执行卡牌选项产生的状态变化（apply / applyAll）。
- * - 条件判断（matches / matchesAll）。
- * - 推进计时器（tickTimers）。
- * - 存档快照（snapshot / restore / reset）。
+ * - 注册状态定义，按定义初始化默认值；
+ * - 校验类型、枚举值、数值边界和可变性；
+ * - 执行卡牌选项产生的状态变化（apply / applyAll）；
+ * - 推进计时器（tickTimers）；
+ * - 导出与恢复存档快照（snapshot / restore / reset）。
+ *
+ * 条件判定在 engine/conditions.js，加权随机在 engine/random.js；
+ * 此处重新导出以保持既有导入路径兼容。
+ *
+ * @module engine/state
+ */
+
+import { matchesWithContext } from "./conditions.js";
+import { weightedPick } from "./random.js";
+
+export { matchesWithContext, weightedPick };
+
+/**
+ * @typedef {object} StateDefinition
+ * @property {string} id            英文命名空间 id（如 core.pillar.people）
+ * @property {string} name          中文名
+ * @property {"boolean"|"counter"|"level"|"enum"|"timer"|"set"} type
+ * @property {string} [scope]       作用域（保留字段，当前全部 global）
+ * @property {*} default            默认值
+ * @property {number} [min]         数值下界
+ * @property {number} [max]         数值上界
+ * @property {string[]} [values]    enum 的合法值
+ * @property {"public"|"hinted"|"hidden"} [visibility]
+ * @property {"reversible"|"immutable"|"terminal"} [mutability]
+ * @property {string[]} [tags]
+ * @property {string} [desc]
+ */
+
+/**
+ * @typedef {object} StateChange
+ * @property {string} id
+ * @property {"set"|"add"|"subtract"|"addToSet"|"removeFromSet"|"startTimer"|"clearTimer"} op
+ * @property {*} value
  */
 
 export class StateManager {
   constructor() {
-    /** @type {Map<string, object>} id -> 定义 */
+    /** @type {Map<string, StateDefinition>} id -> 定义 */
     this.definitions = new Map();
-    /** @type {Map<string, any>} id -> 运行时值 */
+    /** @type {Map<string, *>} id -> 运行时值 */
     this.values = new Map();
-    /** 最近一次被拒绝的写入原因，供日志与调试使用 */
+    /** 最近一次被拒绝的写入原因（诊断用，随时会被覆盖） */
     this.lastWarning = "";
   }
 
@@ -28,7 +60,7 @@ export class StateManager {
     }
   }
 
-  /** 追加一个状态定义。 */
+  /** 追加一个状态定义；id 重复视为内容错误，直接抛出。 */
   define(definition) {
     if (!definition || !definition.id) {
       throw new Error("状态定义缺少 id");
@@ -40,30 +72,41 @@ export class StateManager {
     this.values.set(definition.id, this._normalize(definition, definition.default));
   }
 
-  /** 读取状态值；未定义的 id 返回 undefined。 */
+  /**
+   * 读取状态值；未定义的 id 返回 undefined。
+   * @param {string} id
+   */
   get(id) {
     return this.values.get(id);
   }
 
+  /** @param {string} id @returns {StateDefinition|undefined} */
   getDefinition(id) {
     return this.definitions.get(id);
   }
 
-  /** 直接设置状态值，带类型/枚举/边界/可变性校验。 */
+  /**
+   * 直接设置状态值，带类型/枚举/边界/可变性校验。
+   * @param {string} id
+   * @param {*} value
+   * @returns {boolean} 是否写入成功
+   */
   set(id, value) {
     const def = this.definitions.get(id);
     if (!def) {
       this.lastWarning = `未定义的状态 id：${id}`;
       return false;
     }
-    if (!this._checkMutability(def, value)) {
-      return false;
-    }
+    if (!this._checkMutability(def, value)) return false;
     this.values.set(id, this._normalize(def, value));
     return true;
   }
 
-  /** 执行单条状态变化 { id, op, value }。 */
+  /**
+   * 执行单条状态变化。
+   * @param {StateChange} change
+   * @returns {boolean} 是否执行成功
+   */
   apply(change) {
     if (!change || !change.id) return false;
     const def = this.definitions.get(change.id);
@@ -121,6 +164,10 @@ export class StateManager {
     return true;
   }
 
+  /**
+   * 依次执行一组状态变化；返回是否全部成功。
+   * @param {StateChange[]} changes
+   */
   applyAll(changes) {
     let ok = true;
     for (const change of changes || []) {
@@ -129,7 +176,7 @@ export class StateManager {
     return ok;
   }
 
-  /** 推进所有计时器；归零后自动置为 null。 */
+  /** 推进所有计时器 days 天；归零后自动置为 null。 */
   tickTimers(days) {
     for (const [id, def] of this.definitions) {
       if (def.type !== "timer") continue;
@@ -140,10 +187,17 @@ export class StateManager {
     }
   }
 
+  /** @param {*} condition @returns {boolean}（见 engine/conditions.js） */
   matches(condition) {
-    return matchCondition(condition, (id) => this.values.get(id));
+    return matchesWithContext(condition, {
+      state: this,
+      day: 0,
+      usedCards: new Set(),
+      forceMetric: () => undefined,
+    });
   }
 
+  /** @param {*[]} conditions */
   matchesAll(conditions) {
     return (conditions || []).every((c) => this.matches(c));
   }
@@ -155,7 +209,7 @@ export class StateManager {
     return out;
   }
 
-  /** 恢复快照：校验 id 已定义，补齐缺失的默认值。 */
+  /** 恢复快照：校验 id 已定义，补齐缺失状态的默认值。 */
   restore(snapshot) {
     for (const [id, def] of this.definitions) {
       const value = snapshot ? snapshot[id] : undefined;
@@ -169,6 +223,7 @@ export class StateManager {
     this.lastWarning = "";
   }
 
+  /** 按定义归一化值：数值取整并裁剪边界，enum 回落默认，timer 补结构。 */
   _normalize(def, value) {
     switch (def.type) {
       case "counter":
@@ -194,8 +249,8 @@ export class StateManager {
 
   /**
    * 可变性检查：
-   * - reversible：自由变化。
-   * - immutable：只能从默认值向新值推进，不能回滚也不能反复横跳。
+   * - reversible：自由变化；
+   * - immutable：只能从默认值向新值推进一次，不能回滚；
    * - terminal：只能从默认值触发一次。
    */
   _checkMutability(def, nextValue) {
@@ -219,90 +274,4 @@ export class StateManager {
     }
     return true;
   }
-}
-
-/**
- * 条件判断。condition 的形态见 docs/重做规划 v0.2 第 10.12 节：
- * - { state, equals|notEquals|gt|gte|lt|lte|between|includes|notIncludes|exists }
- * - { force, metric, gte|gt|lt|lte|equals }
- * - { ruler: id } / { used: cardId } / { day: {gte, lte} } / { stage }
- * - { any: [...] } / { all: [...] }
- * getState 是一个 (stateId) => value 的取值函数，避免引擎模块间的循环依赖。
- */
-export function matchCondition(condition, getState) {
-  if (!condition) return true;
-  if (condition.any) return condition.any.some((c) => matchCondition(c, getState));
-  if (condition.all) return condition.all.every((c) => matchCondition(c, getState));
-  if (condition.used !== undefined) return true; // used 集合由调用方在外层判定，见 matchesWithContext
-  if (condition.ruler !== undefined) return getState("ruler.current") === condition.ruler;
-  if (condition.stage !== undefined) return getState("stage.current") === condition.stage;
-  if (condition.day !== undefined) return false; // 需要天数，由 matchesWithContext 处理
-  if (condition.force !== undefined) return false; // 需要势力数值，由 matchesWithContext 处理
-  if (condition.state !== undefined) return compareState(condition, getState(condition.state));
-  return true;
-}
-
-function compareState(condition, value) {
-  if (condition.equals !== undefined) return value === condition.equals;
-  if (condition.notEquals !== undefined) return value !== condition.notEquals;
-  if (condition.gt !== undefined) return (Number(value) || 0) > condition.gt;
-  if (condition.gte !== undefined) return (Number(value) || 0) >= condition.gte;
-  if (condition.lt !== undefined) return (Number(value) || 0) < condition.lt;
-  if (condition.lte !== undefined) return (Number(value) || 0) <= condition.lte;
-  if (condition.between !== undefined) {
-    const [lo, hi] = condition.between;
-    const n = Number(value) || 0;
-    return n >= lo && n <= hi;
-  }
-  if (condition.includes !== undefined) return Array.isArray(value) && value.includes(condition.includes);
-  if (condition.notIncludes !== undefined) return !Array.isArray(value) || !value.includes(condition.notIncludes);
-  if (condition.exists !== undefined) {
-    const has = Array.isArray(value) ? value.length > 0 : value !== null && value !== undefined;
-    return condition.exists ? has : !has;
-  }
-  return true;
-}
-
-/**
- * 带运行时上下文的条件判断（卡牌抽取统一入口）。
- * ctx: { state: StateManager, day, usedCards:Set<string>, forces, currentRuler }
- */
-export function matchesWithContext(condition, ctx) {
-  if (!condition) return true;
-  if (condition.any) return condition.any.some((c) => matchesWithContext(c, ctx));
-  if (condition.all) return condition.all.every((c) => matchesWithContext(c, ctx));
-  if (condition.used !== undefined) return ctx.usedCards.has(condition.used);
-  if (condition.ruler !== undefined) return ctx.state.get("ruler.current") === condition.ruler;
-  if (condition.stage !== undefined) return ctx.state.get("stage.current") === condition.stage;
-  if (condition.day !== undefined) {
-    const day = ctx.day || 0;
-    if (condition.day.gte !== undefined && day < condition.day.gte) return false;
-    if (condition.day.lte !== undefined && day > condition.day.lte) return false;
-    return true;
-  }
-  if (condition.force !== undefined) {
-    const value = ctx.forceMetric(condition.force, condition.metric);
-    if (value === undefined) return false;
-    if (condition.equals !== undefined) return value === condition.equals;
-    if (condition.gt !== undefined) return value > condition.gt;
-    if (condition.gte !== undefined) return value >= condition.gte;
-    if (condition.lt !== undefined) return value < condition.lt;
-    if (condition.lte !== undefined) return value <= condition.lte;
-    return true;
-  }
-  if (condition.state !== undefined) return compareState(condition, ctx.state.get(condition.state));
-  return true;
-}
-
-/** 简单加权随机。items 的每项需含 weight 数值字段。 */
-export function weightedPick(items) {
-  const pool = items.filter((item) => (item.weight || 0) > 0);
-  if (!pool.length) return null;
-  const total = pool.reduce((sum, item) => sum + item.weight, 0);
-  let roll = Math.random() * total;
-  for (const item of pool) {
-    roll -= item.weight;
-    if (roll <= 0) return item;
-  }
-  return pool[pool.length - 1];
 }
