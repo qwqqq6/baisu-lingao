@@ -37,6 +37,7 @@
 - 卡牌编号按主题池：`CORE-`、`FARM-`、`CIV-`、`SEC-`、`PLAN-`、`TRADE-`、`EXT-`、`LAB-`、`WAR-`、`FIG-`（元老列传）、`MED-`、`FIN-`、`LAW-`、`DLY-`、`NAT-`、`LEQ-`、`RET-`（南渡），人物卡 `CHAR-WNH/WD/BW/MQZ/WDS-`。
 - 强制事件卡（`succession`/`downfall`/`opening`/`collapse` 类型）绝不进入常规抽卡池；倒台卡只有真正下台才消耗，拒绝（强行续任）后可再次触发；本命势力（HOME_FORCE）足够强势时倒台会转化为「架空」（weakened 状态），随后 `CHAR-*-FALL2-001` 二次倒台卡接管。
 - **倒台结局**：人物定义里的 `fates` 表按倒台原因（`fall.last_reason` 的枚举值，缺省用 `default`）给出 `{title, text, fateLabel, option}`；真正下台时引擎由此生成 type=epilogue 的结局卡（单选项、engine 生成不进内容池），在 `nextTurn` 里**先于继任**呈现。新增倒台原因时要同步补 fates 条目，否则落到 default。
+- **走向未来结局**：requires 支持 `{"usedRatio": {"gte": 0.6}}`（叙事池消耗比=已批常规卡/常规池总量，opening/succession/downfall 不计）；CORE-028《案头薄了》据此在叙事将尽时呈上，批「未完待续」触发 `ending: "future"`（ENDING_TEXTS.future + 专属朝阳背景 end-future.png），批「合卷」则继续游玩（一次性卡）。卡池扩充后该阈值自动伸缩，无需改数。
 - 变体 `when` 支持 `ruler`、`chance`、`tagsAny`、`conditions`（通用条件数组），kind 分 character/force/stage/history 四类；一次只应用一个变体。
 - followups 写在选项层（不是 effects 内），结算后注入待处理队列；队列 FIFO，下一回合优先弹出（这是链式事件弧的实现方式：前因卡选完，后果卡立即顶上）；出队时重新校验 requires，且已消耗的非日常卡不重复出队。
 - 抽卡防重复三件套：每张卡记录出现次数（cardSeen，出现越多权重越低，除数 1+0.6×次数）、recentCards 冷却窗 8 张、相邻两张必不重复（lastDrawnCardId）。三者都随存档序列化。

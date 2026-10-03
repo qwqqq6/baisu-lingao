@@ -48,14 +48,16 @@ const SEASON_TAGS = {
 
 /**
  * 构建抽卡上下文。
- * @param {{state: object, forces: ForcesManager, day: number, usedCards: Set<string>}} param0
+ * @param {{state: object, forces: ForcesManager, day: number, usedCards: Set<string>,
+ *          usedRatio?: number}} param0
  * @returns {DrawContext}
  */
-export function buildDrawContext({ state, forces, day, usedCards }) {
+export function buildDrawContext({ state, forces, day, usedCards, usedRatio = 0 }) {
   return {
     state,
     day,
     usedCards,
+    usedRatio,
     forceMetric: (forceId, metric) => forces.metric(forceId, metric),
   };
 }

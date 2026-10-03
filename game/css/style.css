@@ -440,6 +440,7 @@ h1, h2, h3 { font-weight: 700; letter-spacing: 0.06em; }
   background-repeat: no-repeat;
 }
 .gameover[data-ending="taiwan"] { --end-img: url("../assets/bg/end-taiwan.png"); }
+.gameover[data-ending="future"] { --end-img: url("../assets/bg/end-future.png"); }
 .gameover h1 { font-size: 34px; color: var(--gold); text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9), 0 2px 6px rgba(0, 0, 0, 0.9); }
 .gameover-text { max-width: 640px; margin: 16px auto; line-height: 2.1; white-space: pre-line; color: var(--ink-light); text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9); }
 .gameover-stats {

@@ -56,12 +56,19 @@ const HOME_FORCE = {
 const ENTRENCH_INFLUENCE = 65;
 const ENTRENCH_SATISFACTION = 50;
 
+/** 永不进入常规抽卡池的类型（usedRatio 的分母不含它们）。 */
+const FORCED_CARD_TYPES = new Set(["opening", "succession", "downfall"]);
+
 export class Game {
   /**
    * @param {*} content loadOfficialContent() 的产物（或测试夹具）
    */
   constructor(content) {
     this.content = content;
+    /** 常规叙事池（用于计算 usedRatio：已批常规卡 / 常规池总量） */
+    this.narrativePool = new Set(
+      (content.cards || []).filter((c) => !FORCED_CARD_TYPES.has(c.type)).map((c) => c.id),
+    );
     this.state = new StateManager();
     this.forces = new ForcesManager();
     this.characterManager = new CharacterManager();
@@ -649,11 +656,17 @@ export class Game {
 
   /** @returns {import("../engine/conditions.js").DrawContext} */
   ctx() {
+    let consumed = 0;
+    for (const id of this.usedCards) {
+      if (this.narrativePool.has(id)) consumed += 1;
+    }
+    const usedRatio = this.narrativePool.size ? consumed / this.narrativePool.size : 0;
     return buildDrawContext({
       state: this.state,
       forces: this.forces,
       day: this.day,
       usedCards: this.usedCards,
+      usedRatio,
     });
   }
 

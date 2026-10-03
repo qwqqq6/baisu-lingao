@@ -115,6 +115,20 @@ export function registerTests(t) {
     assert.equal(matchesWithContext({ "ruler": "wude" }, ctx), false);
   });
 
+  t("条件：usedRatio 叙事池消耗比", () => {
+    const ctx = buildDrawContext({
+      state: new StateManager(), forces: new ForcesManager(),
+      day: 90, usedCards: new Set(["A", "B", "C", "D", "E", "F"]), usedRatio: 0.6,
+    });
+    assert.equal(matchesWithContext({ "usedRatio": { "gte": 0.6 } }, ctx), true);
+    assert.equal(matchesWithContext({ "usedRatio": { "gte": 0.61 } }, ctx), false);
+    assert.equal(matchesWithContext({ "usedRatio": { "lte": 0.5 } }, ctx), false);
+    // 未提供 usedRatio 的上下文（旧调用方）视为 0，不误开闸
+    const legacy = buildDrawContext({ state: new StateManager(), forces: new ForcesManager(), day: 1, usedCards: new Set() });
+    assert.equal(matchesWithContext({ "usedRatio": { "gte": 0.6 } }, legacy), false);
+    assert.equal(matchesWithContext({ "usedRatio": { "gte": 0 } }, legacy), true);
+  });
+
   // ---------- 加权随机 ----------
   t("weightedPick：零权重被排除且必返回成员", () => {
     const picked = new Set();

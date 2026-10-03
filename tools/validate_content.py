@@ -41,7 +41,7 @@ CARD_FILES = [
 CONDITION_KEYS = {
     "state", "force", "ruler", "used", "day", "stage", "any", "all",
     "equals", "notEquals", "gt", "gte", "lt", "lte", "between",
-    "includes", "notIncludes", "exists", "metric",
+    "includes", "notIncludes", "exists", "metric", "usedRatio",
 }
 EFFECT_KEYS = {"stats", "wind", "days", "forces", "personal", "states", "ruler", "stepDown", "ending"}
 STAT_KEYS = {"people", "livelihood", "military", "council"}

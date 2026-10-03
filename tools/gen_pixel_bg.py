@@ -413,4 +413,48 @@ for yy in range(H):
             px[xx, yy] = c
 save(img, "end-taiwan.png")
 
+# ---------------- 10) end-future：未完待续·朝阳 ----------------
+img = Image.new("RGB", (W, H))
+HOR = 150
+sky_gradient(img, (18, 24, 58), (86, 56, 86), (240, 152, 78), HOR)
+stars(img, int(HOR * 0.45), [(250, 242, 214)], 10, max_y_frac=0.32)
+sea(img, HOR, (28, 32, 58), (148, 106, 76), 54)
+px = img.load()
+village(img, HOR, (14, 12, 26), 6, (255, 216, 132))
+# 半轮朝阳悬在海平线上（画在村庄剪影之后，不被塔屋遮挡）
+CX = 72
+for dy in range(-16, 1):
+    for dx in range(-16, 17):
+        if dx * dx + dy * dy <= 16 * 16:
+            px[min(W - 1, max(0, CX + dx)), HOR + dy] = (255, 212, 122)
+# 日出光路（比月夜的宽，通向画面前方）
+for i in range(90):
+    y = HOR + random.randint(1, 100)
+    w = max(1, (y - HOR) // 5)
+    for dx in range(-w, w + 1):
+        if random.random() < 0.6:
+            px[min(W - 1, max(0, CX + dx)), y] = (242, 172, 100)
+# 一叶翘头帆船，朝朝阳驶去
+bx, by, s = 40, 208, 8
+for dx in range(s * 2):
+    px[bx + dx, by] = (16, 13, 18)
+    if dx % 3 == 0:
+        px[bx + dx, by + 1] = (16, 13, 18)
+for ex in (0, 1, s * 2 - 2, s * 2 - 1):
+    px[bx + ex, by - 1] = (16, 13, 18)
+for k in range(s + 3):
+    px[bx + s, by - k] = (16, 13, 18)
+for k in range(2, s + 1):
+    px[bx + s + 1, by - k] = (16, 13, 18)
+    px[bx + s + 2, by - k] = (16, 13, 18)
+px[bx + s, by - s - 3] = (158, 30, 20)
+px[bx + s + 1, by - s - 3] = (158, 30, 20)
+# 船尾的航迹
+for k in range(1, 22):
+    y = by + 1 + k // 2
+    x = bx + s - k
+    if 0 <= x < W and y < H and random.random() < 0.7:
+        px[x, y] = (200, 150, 96)
+save(img, "end-future.png")
+
 print("全部生成完毕 ->", OUT)

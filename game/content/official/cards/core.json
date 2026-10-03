@@ -3010,5 +3010,63 @@
     "line": "按律，逃兵枪毙。可他是自己回来的。全营的兵都在看这一条怎么落——您落，我执行。"
    }
   ]
+ },
+ {
+  "id": "CORE-028",
+  "pool": "core",
+  "series": "politics.council",
+  "type": "omen",
+  "title": "案头薄了",
+  "source": {
+   "kind": "force",
+   "id": "council",
+   "name": "文书房"
+  },
+  "tags": [
+   "叙事",
+   "终局"
+  ],
+  "requires": [
+   {
+    "usedRatio": {
+     "gte": 0.6
+    }
+   }
+  ],
+  "excludes": [],
+  "weight": 100,
+  "options": {
+   "left": {
+    "id": "ti_weiwan",
+    "label": "题：未完待续。",
+    "hint": "落笔即是句读，句读之后是空白",
+    "effects": {
+     "ending": "future"
+    }
+   },
+   "right": {
+    "id": "he_juan",
+    "label": "合卷，明日再批。",
+    "hint": "字还没写完，谁也别想收笔",
+    "effects": {
+     "stats": {
+      "council": 2
+     },
+     "personal": {
+      "personal_pressure": -3
+     }
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "值班秘书",
+    "line": "首长，今儿的案头薄得透光。文书房数过了：各口还能递上来的条陈，十成里批过六成——再往后，是没人写过的日子了。"
+   },
+   {
+    "who": "值班秘书",
+    "line": "呈文簿的卷尾留了一页白。您题，还是不题？"
+   }
+  ]
  }
 ]

@@ -65,6 +65,13 @@ export function matchesWithContext(condition, ctx) {
     if (condition.day.lte !== undefined && day > condition.day.lte) return false;
     return true;
   }
+  if (condition.usedRatio !== undefined) {
+    // 叙事池消耗比：已批过的常规池卡 / 常规池总卡数（0~1），驱动「叙事终点」类卡
+    const ratio = ctx.usedRatio || 0;
+    if (condition.usedRatio.gte !== undefined && ratio < condition.usedRatio.gte) return false;
+    if (condition.usedRatio.lte !== undefined && ratio > condition.usedRatio.lte) return false;
+    return true;
+  }
   if (condition.force !== undefined) {
     const value = ctx.forceMetric(condition.force, condition.metric);
     if (value === undefined) return false;
