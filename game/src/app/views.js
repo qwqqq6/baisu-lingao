@@ -69,7 +69,7 @@ export function renderMain(game, handlers) {
   renderCard(game, handlers);
 }
 
-/** 宝座行：金线图标（王权式无底纹），危险泛红；调试模式附数字。 */
+/** 宝座行：金线图标 + 进度细条（四柱为公开指标），危险泛红；调试模式附数字。 */
 function renderMeters(game) {
   return h("div", { class: "meters", id: "meters" },
     Object.entries(PILLAR_LABELS).map(([key, label]) => {
@@ -79,6 +79,8 @@ function renderMeters(game) {
       icon.innerHTML = PILLAR_SVGS[key];
       return h("div", { class: `meter ${danger ? "danger" : ""}`, dataset: { key }, title: label },
         icon,
+        h("div", { class: "meter-track" },
+          h("div", { class: `meter-fill ${danger ? "danger" : ""}`, style: `width:${value}%` })),
         game.debug ? h("span", { class: "meter-value" }, String(value)) : null
       );
     })
