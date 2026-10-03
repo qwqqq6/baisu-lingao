@@ -1162,7 +1162,10 @@
        "value": 1
       }
      ]
-    }
+    },
+    "followups": [
+     "FIN-009"
+    ]
    },
    "right": {
     "id": "xianyin",
@@ -2022,6 +2025,482 @@
    {
     "who": "东门市的行家",
     "line": "市面上的牙人（中介）两头吃：压农户的价、抬买家的钱。要立规矩——还是干脆不要牙人？"
+   }
+  ]
+ },
+ {
+  "id": "FIN-009",
+  "pool": "trade",
+  "series": "finance.notes",
+  "type": "daily",
+  "title": "券样防伪",
+  "source": {
+   "kind": "force",
+   "id": "trade",
+   "name": "商贸网络"
+  },
+  "tags": [
+   "财政",
+   "流通券"
+  ],
+  "requires": [
+   {
+    "state": "series.finance_notes",
+    "gte": 1
+   }
+  ],
+  "excludes": [],
+  "weight": 20,
+  "options": {
+   "left": {
+    "id": "jingyin",
+    "label": "加一道暗记。",
+    "hint": "多一道暗记，少一夜盗印",
+    "effects": {
+     "stats": {
+      "livelihood": 1,
+      "council": 1
+     },
+     "days": 1,
+     "states": [
+      {
+       "id": "series.finance_notes",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "FIN-010"
+    ]
+   },
+   "right": {
+    "id": "gankuai",
+    "label": "尽快发行。",
+    "hint": "市面上等米下锅，等不起精雕细刻",
+    "effects": {
+     "stats": {
+      "livelihood": 2
+     },
+     "wind": 1,
+     "states": [
+      {
+       "id": "series.finance_notes",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "FIN-010"
+    ]
+   }
+  },
+  "lines": [
+   {
+    "who": "管账的首长",
+    "line": "券样刻好了：纸浆里掺了蓝靛，迎光看，帘纹里藏着「临高」两个暗字；角上盖骑缝章，编号一笔一登记。"
+   },
+   {
+    "who": "管账的首长",
+    "line": "造假的人连官票都敢仿。咱们的券，得让最精的广商掌柜也挑不出假。"
+   }
+  ]
+ },
+ {
+  "id": "FIN-010",
+  "pool": "trade",
+  "series": "finance.notes",
+  "type": "crisis",
+  "title": "印局的纸",
+  "source": {
+   "kind": "force",
+   "id": "trade",
+   "name": "商贸网络"
+  },
+  "tags": [
+   "财政",
+   "流通券"
+  ],
+  "requires": [
+   {
+    "state": "series.finance_notes",
+    "gte": 1
+   }
+  ],
+  "excludes": [],
+  "weight": 20,
+  "options": {
+   "left": {
+    "id": "huanzhi",
+    "label": "全套换纸。",
+    "hint": "纸一换，丢的纸就是废纸",
+    "effects": {
+     "stats": {
+      "livelihood": -2,
+      "council": 2
+     },
+     "days": 1,
+     "states": [
+      {
+       "id": "series.finance_notes",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "FIN-011"
+    ]
+   },
+   "right": {
+    "id": "anzhongcha",
+    "label": "暗中布网。",
+    "hint": "等他用那张纸，人赃并获",
+    "effects": {
+     "stats": {
+      "council": 1
+     },
+     "wind": -1,
+     "days": 1,
+     "states": [
+      {
+       "id": "series.finance_notes",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "FIN-011"
+    ]
+   }
+  },
+  "lines": [
+   {
+    "who": "冉耀",
+    "line": "印券的纸库昨夜被撬了——没丢钱，丢了三刀白券纸。政保推断：里应外合，看库的归化民有个表哥在琼山纸行。"
+   },
+   {
+    "who": "管账的首长",
+    "line": "纸流出去，假券就是早晚的事。券还没发行几天……"
+   }
+  ]
+ },
+ {
+  "id": "FIN-011",
+  "pool": "trade",
+  "series": "finance.notes",
+  "type": "daily",
+  "title": "找零的难题",
+  "source": {
+   "kind": "force",
+   "id": "trade",
+   "name": "商贸网络"
+  },
+  "tags": [
+   "财政",
+   "流通券"
+  ],
+  "requires": [
+   {
+    "state": "series.finance_notes",
+    "gte": 1
+   }
+  ],
+  "excludes": [],
+  "weight": 20,
+  "options": {
+   "left": {
+    "id": "yinjiaopiao",
+    "label": "印角票。",
+    "hint": "碎票好找零，也碎人心里的整",
+    "effects": {
+     "stats": {
+      "livelihood": 3
+     },
+     "wind": 1,
+     "states": [
+      {
+       "id": "series.finance_notes",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "FIN-012"
+    ]
+   },
+   "right": {
+    "id": "guazhang",
+    "label": "柜上挂账。",
+    "hint": "一笔笔记着，十日一结",
+    "effects": {
+     "stats": {
+      "livelihood": 1,
+      "council": 1
+     },
+     "states": [
+      {
+       "id": "series.finance_notes",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "FIN-012"
+    ]
+   }
+  },
+  "lines": [
+   {
+    "who": "东门市的行家",
+    "line": "券发了，麻烦跟着来：流通券最小的面额是一钱，市面上一把青菜三个铜板——找不开。有人拿券买葱，找回来的是盐粒。"
+   },
+   {
+    "who": "管账的首长",
+    "line": "铸铜钱来不及，纸角票印起来倒是快——就是票越碎，假的越多。"
+   }
+  ]
+ },
+ {
+  "id": "FIN-012",
+  "pool": "trade",
+  "series": "finance.notes",
+  "type": "crisis",
+  "title": "假券出现",
+  "source": {
+   "kind": "force",
+   "id": "trade",
+   "name": "商贸网络"
+  },
+  "tags": [
+   "财政",
+   "流通券"
+  ],
+  "requires": [
+   {
+    "state": "series.finance_notes",
+    "gte": 1
+   }
+  ],
+  "excludes": [],
+  "weight": 20,
+  "options": {
+   "left": {
+    "id": "gongkaishoujiao",
+    "label": "公开收缴。",
+    "hint": "当众烧假券，券的信用比追人要紧",
+    "effects": {
+     "stats": {
+      "people": 2,
+      "council": 2
+     },
+     "wind": 1,
+     "days": 1,
+     "states": [
+      {
+       "id": "series.finance_notes",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "FIN-013"
+    ]
+   },
+   "right": {
+    "id": "fangchangxian",
+    "label": "放长线。",
+    "hint": "让假券再流一阵，钓出窝主",
+    "effects": {
+     "stats": {
+      "council": -2,
+      "livelihood": -1
+     },
+     "wind": -2,
+     "days": 2,
+     "states": [
+      {
+       "id": "series.finance_notes",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "FIN-013"
+    ]
+   }
+  },
+  "lines": [
+   {
+    "who": "东门市的行家",
+    "line": "柜上识破一张十两假券：纸对、章对，暗字却是描的——灯下现了原形。持券的是个生面孔，接了券扭头就往人堆里钻。"
+   },
+   {
+    "who": "午木",
+    "line": "人跑了，路子能顺出来。这批假券做得用心，不是小贼——后头是琼山的纸行，纸行后头是谁，还没摸到顶。"
+   }
+  ]
+ },
+ {
+  "id": "FIN-013",
+  "pool": "trade",
+  "series": "finance.notes",
+  "type": "crisis",
+  "title": "广商的压兑",
+  "source": {
+   "kind": "force",
+   "id": "trade",
+   "name": "商贸网络"
+  },
+  "tags": [
+   "财政",
+   "流通券"
+  ],
+  "requires": [
+   {
+    "state": "series.finance_notes",
+    "gte": 1
+   }
+  ],
+  "excludes": [],
+  "weight": 20,
+  "options": {
+   "left": {
+    "id": "rushudui",
+    "label": "如数兑足。",
+    "hint": "当面点清，一钱不短——信用立住了",
+    "effects": {
+     "stats": {
+      "livelihood": -3,
+      "people": 2,
+      "council": 2
+     },
+     "wind": -2,
+     "states": [
+      {
+       "id": "series.finance_notes",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "FIN-014"
+    ]
+   },
+   "right": {
+    "id": "tuoqi",
+    "label": "约期兑付。",
+    "hint": "五日后连利兑清，拖一拖风头",
+    "effects": {
+     "stats": {
+      "council": -2
+     },
+     "wind": 2,
+     "personal": {
+      "faction_alarm": 1
+     },
+     "states": [
+      {
+       "id": "series.finance_notes",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "FIN-014"
+    ]
+   }
+  },
+  "lines": [
+   {
+    "who": "广商的代表",
+    "line": "广行的掌柜今早拿三千两流通券到柜，要全数兑成现银——脸上带笑，话里带刺：「贵券信用如何，还看今日。」"
+   },
+   {
+    "who": "管账的首长",
+    "line": "库里现银够兑三千，兑完就见底。他这是替整个广州商界试咱们的底。"
+   }
+  ]
+ },
+ {
+  "id": "FIN-014",
+  "pool": "trade",
+  "series": "finance.notes",
+  "type": "benefit",
+  "title": "乡民的收讫章",
+  "source": {
+   "kind": "force",
+   "id": "trade",
+   "name": "商贸网络"
+  },
+  "tags": [
+   "财政",
+   "流通券"
+  ],
+  "requires": [
+   {
+    "state": "series.finance_notes",
+    "gte": 1
+   }
+  ],
+  "excludes": [],
+  "weight": 20,
+  "options": {
+   "left": {
+    "id": "tuiguang",
+    "label": "各口都设兑柜。",
+    "hint": "信用这个东西，柜台越多越硬",
+    "effects": {
+     "stats": {
+      "livelihood": 2,
+      "people": 3
+     },
+     "wind": 1,
+     "days": 1,
+     "states": [
+      {
+       "id": "series.finance_notes",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "zhibaodongmen",
+    "label": "只保东门市。",
+    "hint": "一个口子守住，比十个口子撒开稳",
+    "effects": {
+     "stats": {
+      "council": 1,
+      "livelihood": 1
+     },
+     "states": [
+      {
+       "id": "series.finance_notes",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "东门市的行家",
+    "line": "村里人不识字，认券靠记号。柜上想了个法子：每笔兑付，当面在券角捺一个指头大的红印——不识字的人，认印不认字。"
+   },
+   {
+    "who": "管账的首长",
+    "line": "头一个月，东门市柜上兑付四千一百两，假券只出了七张。卖炭的老汉把券折三层贴身收着，说这纸比地契还金贵。"
    }
   ]
  }

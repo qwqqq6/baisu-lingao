@@ -2318,7 +2318,10 @@
        "value": 1
       }
      ]
-    }
+    },
+    "followups": [
+     "MED-009"
+    ]
    },
    "right": {
     "id": "baoshou",
@@ -3582,6 +3585,463 @@
    {
     "who": "东门市的行家",
     "line": "天一黑，东门市就散市。有小贩来问：能不能点起汽灯摆夜市？卖点吃食杂货——白天做工人，晚上才有闲。"
+   }
+  ]
+ },
+ {
+  "id": "MED-009",
+  "pool": "civil",
+  "series": "medic.safety",
+  "type": "crisis",
+  "title": "术前一刻",
+  "source": {
+   "kind": "force",
+   "id": "naturalized",
+   "name": "归化民组织"
+  },
+  "tags": [
+   "医疗",
+   "手术"
+  ],
+  "requires": [
+   {
+    "state": "series.medic_safety",
+    "gte": 2
+   }
+  ],
+  "excludes": [],
+  "weight": 22,
+  "options": {
+   "left": {
+    "id": "kaidao",
+    "label": "开刀。",
+    "hint": "手术台上，犹豫比刀更伤人",
+    "effects": {
+     "stats": {
+      "military": 1,
+      "people": 1
+     },
+     "states": [
+      {
+       "id": "series.medic_safety",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "MED-010"
+    ]
+   },
+   "right": {
+    "id": "zaideng",
+    "label": "再等等。",
+    "hint": "等他自己咽气，就不用担责任",
+    "effects": {
+     "stats": {
+      "people": -3
+     },
+     "states": [
+      {
+       "id": "series.medic_safety",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "医务所的医生",
+    "line": "人抬上案了。烈酒洗了三遍手，器械在滚水里煮着。家属那头——他婆娘在门外磕头，他爹把红手印按在了纸上。"
+   },
+   {
+    "who": "医务所的医生",
+    "line": "现在就一样：灯。汽灯调到最亮，护士只管拉钩擦血，手不许过灯影。"
+   }
+  ]
+ },
+ {
+  "id": "MED-010",
+  "pool": "civil",
+  "series": "medic.safety",
+  "type": "crisis",
+  "title": "箭头拔不拔",
+  "source": {
+   "kind": "force",
+   "id": "naturalized",
+   "name": "归化民组织"
+  },
+  "tags": [
+   "医疗",
+   "手术"
+  ],
+  "requires": [
+   {
+    "state": "series.medic_safety",
+    "gte": 2
+   }
+  ],
+  "excludes": [],
+  "weight": 22,
+  "options": {
+   "left": {
+    "id": "batou",
+    "label": "拔。",
+    "hint": "医生的手，得配上决断的胆",
+    "effects": {
+     "stats": {
+      "military": 2
+     },
+     "states": [
+      {
+       "id": "series.medic_safety",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "MED-011"
+    ]
+   },
+   "right": {
+    "id": "liuzhu",
+    "label": "留箭保守。",
+    "hint": "五五开的命，赌不得",
+    "effects": {
+     "stats": {
+      "people": -2
+     },
+     "states": [
+      {
+       "id": "series.medic_safety",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "MED-011"
+    ]
+   }
+  },
+  "lines": [
+   {
+    "who": "医务所的医生",
+    "line": "打开了。箭头进了三寸，倒钩卡在肠子上——顺着拔，会撕烂半截肠；剪断箭杆留在里头，人是熬不过今夜的。"
+   },
+   {
+    "who": "医务所的医生",
+    "line": "我的手不能抖。您在门口站着就行——我说拔，就得有人替我担这个名。"
+   }
+  ]
+ },
+ {
+  "id": "MED-011",
+  "pool": "civil",
+  "series": "medic.safety",
+  "type": "crisis",
+  "title": "术后当夜",
+  "source": {
+   "kind": "force",
+   "id": "naturalized",
+   "name": "归化民组织"
+  },
+  "tags": [
+   "医疗",
+   "手术"
+  ],
+  "requires": [
+   {
+    "state": "series.medic_safety",
+    "gte": 2
+   }
+  ],
+  "excludes": [],
+  "weight": 22,
+  "options": {
+   "left": {
+    "id": "shouye",
+    "label": "彻夜守着。",
+    "hint": "医生守一夜，胜过衙门贴十张告示",
+    "effects": {
+     "stats": {
+      "people": 2
+     },
+     "days": 1,
+     "states": [
+      {
+       "id": "series.medic_safety",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "MED-012"
+    ]
+   },
+   "right": {
+    "id": "geiyao",
+    "label": "按时给药。",
+    "hint": "医有医的章法，急不来",
+    "effects": {
+     "stats": {
+      "people": -1
+     },
+     "days": 1,
+     "states": [
+      {
+       "id": "series.medic_safety",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "MED-012"
+    ]
+   }
+  },
+  "lines": [
+   {
+    "who": "医务所的医生",
+    "line": "箭头出来了，缝了十一针。人没醒，烧上来了，浑身烫得像灶膛。今晚是坎——熬过去就活，熬不过，明早门口的人能围一圈。"
+   },
+   {
+    "who": "值班秘书",
+    "line": "门外他婆娘没走，坐在台阶上。村里已经有人传：髡医把人的肚子打开又缝上，是在里头换了心。"
+   }
+  ]
+ },
+ {
+  "id": "MED-012",
+  "pool": "civil",
+  "series": "medic.safety",
+  "type": "benefit",
+  "title": "第三天早晨",
+  "source": {
+   "kind": "force",
+   "id": "naturalized",
+   "name": "归化民组织"
+  },
+  "tags": [
+   "医疗",
+   "手术"
+  ],
+  "requires": [
+   {
+    "state": "series.medic_safety",
+    "gte": 2
+   }
+  ],
+  "excludes": [],
+  "weight": 22,
+  "options": {
+   "left": {
+    "id": "shouxia3",
+    "label": "都收下。",
+    "hint": "从今往后，这片地方的命，归咱们管",
+    "effects": {
+     "stats": {
+      "people": 5,
+      "livelihood": -1
+     },
+     "wind": 1,
+     "states": [
+      {
+       "id": "series.medic_safety",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "MED-013"
+    ]
+   },
+   "right": {
+    "id": "xianhao",
+    "label": "先收急症。",
+    "hint": "名声立得太快，饭要一口口吃",
+    "effects": {
+     "stats": {
+      "people": 2
+     },
+     "states": [
+      {
+       "id": "series.medic_safety",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "MED-013"
+    ]
+   }
+  },
+  "lines": [
+   {
+    "who": "医务所的医生",
+    "line": "醒了。天蒙蒙亮时要水喝，喝了半碗米汤，认得人了。他婆娘在门口听见动静，一头撞进来，跪在地上直哭，又不敢碰他。"
+   },
+   {
+    "who": "医务所的医生",
+    "line": "七天后能下地。这一刀过后，医务所的门槛怕是要被踏平——今早已经有邻村的抬着病人来了两个。"
+   }
+  ]
+ },
+ {
+  "id": "MED-013",
+  "pool": "civil",
+  "series": "medic.safety",
+  "type": "daily",
+  "title": "广郎中来探",
+  "source": {
+   "kind": "force",
+   "id": "naturalized",
+   "name": "归化民组织"
+  },
+  "tags": [
+   "医疗",
+   "手术"
+  ],
+  "requires": [
+   {
+    "state": "series.medic_safety",
+    "gte": 2
+   }
+  ],
+  "excludes": [],
+  "weight": 22,
+  "options": {
+   "left": {
+    "id": "shoutu",
+    "label": "收他为徒。",
+    "hint": "本地的郎中归了心，乡下的病就好治一半",
+    "effects": {
+     "stats": {
+      "people": 3,
+      "council": 1
+     },
+     "states": [
+      {
+       "id": "series.medic_safety",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "MED-014"
+    ]
+   },
+   "right": {
+    "id": "qingjiao",
+    "label": "互相切磋。",
+    "hint": "他懂的地道药性，咱们还真不懂",
+    "effects": {
+     "stats": {
+      "people": 2,
+      "council": 2
+     },
+     "states": [
+      {
+       "id": "series.medic_safety",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "MED-014"
+    ]
+   }
+  },
+  "lines": [
+   {
+    "who": "村里的郎中",
+    "line": "……老朽行医四十年，只当剖腹是屠户的营生。今日见了，是我坐井观天。这缝合的手法、这洗手的规矩——可肯教老朽一二？"
+   },
+   {
+    "who": "医务所的医生",
+    "line": "他带了两箱家传的医书做贽礼。这老头上周还在说咱们是妖法。"
+   }
+  ]
+ },
+ {
+  "id": "MED-014",
+  "pool": "civil",
+  "series": "medic.safety",
+  "type": "key",
+  "title": "看护训练班",
+  "source": {
+   "kind": "force",
+   "id": "naturalized",
+   "name": "归化民组织"
+  },
+  "tags": [
+   "医疗",
+   "手术"
+  ],
+  "requires": [
+   {
+    "state": "series.medic_safety",
+    "gte": 2
+   }
+  ],
+  "excludes": [],
+  "weight": 20,
+  "options": {
+   "left": {
+    "id": "kaiban2",
+    "label": "开班。",
+    "hint": "一顶白帽子，戴出一支医护队",
+    "effects": {
+     "stats": {
+      "people": 3,
+      "council": 1
+     },
+     "wind": 1,
+     "days": 1,
+     "states": [
+      {
+       "id": "series.medic_safety",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "xianshou",
+    "label": "先收八个。",
+    "hint": "带教的人手，也就够八个",
+    "effects": {
+     "stats": {
+      "people": 1
+     },
+     "states": [
+      {
+       "id": "series.medic_safety",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "医务所的医生",
+    "line": "那台手术之后，来报名当看护的归化民少年排了队。想办个训练班：洗手、换药、拉钩、记录——白帽子白褂子，从咱们这儿立规矩。"
+   },
+   {
+    "who": "杜雯",
+    "line": "我来动员女学员。让村里人看看，女人戴上白帽子的样子——那不是妖法，是文明。"
    }
   ]
  }

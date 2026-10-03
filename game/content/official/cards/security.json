@@ -2232,6 +2232,7 @@
      ]
     },
     "followups": [
+     "WAR-052",
      "WAR-043"
     ]
    },
@@ -2255,6 +2256,7 @@
      ]
     },
     "followups": [
+     "WAR-052",
      "WAR-043"
     ]
    }
@@ -3153,6 +3155,1611 @@
    {
     "who": "管军械的首长",
     "line": "枪用久了，膛线磨平、击发打滑。修械所一开，老枪能再顶一年——就是又得从工口抢三个匠人。"
+   }
+  ]
+ },
+ {
+  "id": "WAR-052",
+  "pool": "security",
+  "series": "war.local",
+  "type": "crisis",
+  "title": "壕沟前",
+  "source": {
+   "kind": "force",
+   "id": "guard",
+   "name": "保卫系统"
+  },
+  "tags": [
+   "苟家庄",
+   "战事"
+  ],
+  "requires": [
+   {
+    "state": "series.war_local",
+    "gte": 3
+   }
+  ],
+  "excludes": [],
+  "weight": 24,
+  "options": {
+   "left": {
+    "id": "daqiao",
+    "label": "搭门板。",
+    "hint": "响声就是命令，快过静默",
+    "effects": {
+     "stats": {
+      "military": 2
+     },
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "WAR-053"
+    ]
+   },
+   "right": {
+    "id": "tongshui",
+    "label": "先放水填壕。",
+    "hint": "慢半个时辰，稳一整晚",
+    "effects": {
+     "stats": {
+      "military": 1
+     },
+     "days": 1,
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "WAR-053"
+    ]
+   }
+  },
+  "lines": [
+   {
+    "who": "带路的佃户",
+    "line": "首长……不，长官。前头就是护庄壕了，一丈宽，底下的竹签子泡了粪水，沾了就烂。"
+   },
+   {
+    "who": "石志奇",
+    "line": "工兵班扛了六扇门板。搭过去，人过、炮过——就是声音小不了。动作快，庄丁的更夫一炷香转一圈。"
+   }
+  ]
+ },
+ {
+  "id": "WAR-053",
+  "pool": "security",
+  "series": "war.local",
+  "type": "crisis",
+  "title": "土炮响了",
+  "source": {
+   "kind": "force",
+   "id": "guard",
+   "name": "保卫系统"
+  },
+  "tags": [
+   "苟家庄",
+   "战事"
+  ],
+  "requires": [
+   {
+    "state": "series.war_local",
+    "gte": 3
+   }
+  ],
+  "excludes": [],
+  "weight": 24,
+  "options": {
+   "left": {
+    "id": "yashang",
+    "label": "压上去。",
+    "hint": "土炮再响十声，也拦不住已过沟的人",
+    "effects": {
+     "stats": {
+      "military": 3,
+      "people": -1
+     },
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "WAR-054"
+    ]
+   },
+   "right": {
+    "id": "huipao",
+    "label": "我方还炮。",
+    "hint": "压住它的火力，慢而稳",
+    "effects": {
+     "stats": {
+      "military": 2
+     },
+     "days": 1,
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "WAR-054"
+    ]
+   }
+  },
+  "lines": [
+   {
+    "who": "哨长",
+    "line": "更夫发现了！梆子响成一片——庄子东南角的土炮开火了，铁砂子打得门板上噼啪响，两个兵挂了彩。"
+   },
+   {
+    "who": "石志奇",
+    "line": "土炮打不远，就是吓人。压住队形，别乱——它的炮口抬太高，打不着壕沿上的人。"
+   }
+  ]
+ },
+ {
+  "id": "WAR-054",
+  "pool": "security",
+  "series": "war.local",
+  "type": "crisis",
+  "title": "破门",
+  "source": {
+   "kind": "force",
+   "id": "guard",
+   "name": "保卫系统"
+  },
+  "tags": [
+   "苟家庄",
+   "战事"
+  ],
+  "requires": [
+   {
+    "state": "series.war_local",
+    "gte": 3
+   }
+  ],
+  "excludes": [],
+  "weight": 24,
+  "options": {
+   "left": {
+    "id": "zhuangmen",
+    "label": "撞门。",
+    "hint": "正面破门，堂堂之阵",
+    "effects": {
+     "stats": {
+      "military": 3,
+      "people": -1
+     },
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "WAR-055"
+    ]
+   },
+   "right": {
+    "id": "zuangou",
+    "label": "走水口。",
+    "hint": "奇兵钻沟，正兵虚撞",
+    "effects": {
+     "stats": {
+      "military": 4
+     },
+     "wind": 1,
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "WAR-055"
+    ]
+   }
+  },
+  "lines": [
+   {
+    "who": "石志奇",
+    "line": "到庄墙下了。两扇包铁大门，撞木已经就位；墙上庄丁往下扔火把，墙根堆的柴垛点着了。"
+   },
+   {
+    "who": "带路的佃户",
+    "line": "西墙有个排水口，狗能钻——人瘦点也能。当年我给苟家掏过淤，闭眼都摸得到。"
+   }
+  ]
+ },
+ {
+  "id": "WAR-055",
+  "pool": "security",
+  "series": "war.local",
+  "type": "crisis",
+  "title": "祠堂前的对峙",
+  "source": {
+   "kind": "force",
+   "id": "guard",
+   "name": "保卫系统"
+  },
+  "tags": [
+   "苟家庄",
+   "战事"
+  ],
+  "requires": [
+   {
+    "state": "series.war_local",
+    "gte": 3
+   }
+  ],
+  "excludes": [],
+  "weight": 24,
+  "options": {
+   "left": {
+    "id": "hanhua",
+    "label": "喊话劝降。",
+    "hint": "给条活路，换一祠堂的人",
+    "effects": {
+     "stats": {
+      "people": 3,
+      "military": 1
+     },
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "WAR-056"
+    ]
+   },
+   "right": {
+    "id": "qianggong",
+    "label": "强攻。",
+    "hint": "夜长梦多，人质更危险",
+    "effects": {
+     "stats": {
+      "military": 5,
+      "people": -3
+     },
+     "personal": {
+      "violence_risk": 1
+     },
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "WAR-056"
+    ]
+   }
+  },
+  "lines": [
+   {
+    "who": "冉耀",
+    "line": "进庄子了。苟家的庄丁退到祠堂前，剩下四十多个，刀枪横着——祠堂里跪着一排人质，是各家送进庄的『寄命娃』。"
+   },
+   {
+    "who": "石志奇",
+    "line": "里头有老人孩子。强攻，祠堂的门槛要用人命铺；喊话，他们要点粮要条活路。"
+   }
+  ]
+ },
+ {
+  "id": "WAR-056",
+  "pool": "security",
+  "series": "war.local",
+  "type": "daily",
+  "title": "苟老爷的下场",
+  "source": {
+   "kind": "force",
+   "id": "guard",
+   "name": "保卫系统"
+  },
+  "tags": [
+   "苟家庄",
+   "战事"
+  ],
+  "requires": [
+   {
+    "state": "series.war_local",
+    "gte": 3
+   }
+  ],
+  "excludes": [],
+  "weight": 24,
+  "options": {
+   "left": {
+    "id": "fengzang",
+    "label": "准其收殓。",
+    "hint": "死人不骂，活人才服",
+    "effects": {
+     "stats": {
+      "people": 3
+     },
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "WAR-057"
+    ]
+   },
+   "right": {
+    "id": "shizhong",
+    "label": "首恶悬示。",
+    "hint": "给四邻八乡看个分明",
+    "effects": {
+     "stats": {
+      "people": -2,
+      "military": 2
+     },
+     "wind": 2,
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "WAR-057"
+    ]
+   }
+  },
+  "lines": [
+   {
+    "who": "冉耀",
+    "line": "庄丁降了大半。苟老爷没跑掉——在后宅阁楼上吊了，白绫还挂在梁上。他二儿子苟二爷带了几个人，从后门走了，往岭上去。"
+   },
+   {
+    "who": "值班秘书",
+    "line": "苟老爷的尸身怎么处置，庄里人都在看。苟二爷那几个，抓不抓？"
+   }
+  ]
+ },
+ {
+  "id": "WAR-057",
+  "pool": "security",
+  "series": "war.local",
+  "type": "daily",
+  "title": "地窖清点",
+  "source": {
+   "kind": "force",
+   "id": "guard",
+   "name": "保卫系统"
+  },
+  "tags": [
+   "苟家庄",
+   "战事"
+  ],
+  "requires": [
+   {
+    "state": "series.war_local",
+    "gte": 3
+   }
+  ],
+  "excludes": [],
+  "weight": 24,
+  "options": {
+   "left": {
+    "id": "fangliang",
+    "label": "放人烧契。",
+    "hint": "卖身契当众烧，人送回家",
+    "effects": {
+     "stats": {
+      "people": 5
+     },
+     "wind": 1,
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "WAR-058"
+    ]
+   },
+   "right": {
+    "id": "liuyong",
+    "label": "人归营用。",
+    "hint": "无家可归的，营里收下做工",
+    "effects": {
+     "stats": {
+      "people": 2,
+      "livelihood": 1
+     },
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "WAR-058"
+    ]
+   }
+  },
+  "lines": [
+   {
+    "who": "管账的首长",
+    "line": "后宅地窖起出来了：纹银两千四百两，粮三百石，兵器堆了半屋——还有一匣子契书，压在最底下。"
+   },
+   {
+    "who": "管民政的首长",
+    "line": "契书后头还压着一样东西：七张卖身契。四个丫头、三个小厮，都是本村人卖进去的。"
+   }
+  ]
+ },
+ {
+  "id": "WAR-058",
+  "pool": "security",
+  "series": "war.local",
+  "type": "daily",
+  "title": "俘虏甄别",
+  "source": {
+   "kind": "force",
+   "id": "guard",
+   "name": "保卫系统"
+  },
+  "tags": [
+   "苟家庄",
+   "战事"
+  ],
+  "requires": [
+   {
+    "state": "series.war_local",
+    "gte": 3
+   }
+  ],
+  "excludes": [],
+  "weight": 24,
+  "options": {
+   "left": {
+    "id": "quanfang",
+    "label": "全放归农。",
+    "hint": "苟家的丁，也是穷苦人家",
+    "effects": {
+     "stats": {
+      "people": 4,
+      "livelihood": 1
+     },
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "WAR-059"
+    ]
+   },
+   "right": {
+    "id": "biandui",
+    "label": "编入劳役。",
+    "hint": "以工赎身，三个月为期",
+    "effects": {
+     "stats": {
+      "livelihood": 3,
+      "people": -1
+     },
+     "days": 1,
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "WAR-059"
+    ]
+   }
+  },
+  "lines": [
+   {
+    "who": "冉耀",
+    "line": "庄丁俘虏一百一十七个，跪了一晒谷场。一个个过：手上老茧厚的是庄稼人被抓的丁，放；跟苟家放债收租的十一个，另说。"
+   },
+   {
+    "who": "管民政的首长",
+    "line": "有个老什长喊冤，说自家闺女在苟家为婢，他是拿工换人。查了，地窖那七张卖身契里，真有他闺女。"
+   }
+  ]
+ },
+ {
+  "id": "WAR-059",
+  "pool": "security",
+  "series": "war.local",
+  "type": "key",
+  "title": "佃户大会",
+  "source": {
+   "kind": "force",
+   "id": "guard",
+   "name": "保卫系统"
+  },
+  "tags": [
+   "苟家庄",
+   "战事"
+  ],
+  "requires": [
+   {
+    "state": "series.war_local",
+    "gte": 3
+   }
+  ],
+  "excludes": [],
+  "weight": 24,
+  "options": {
+   "left": {
+    "id": "dangzhongfen",
+    "label": "当众烧旧契。",
+    "hint": "火光里立的新规矩，全庄都看见了",
+    "effects": {
+     "stats": {
+      "people": 6,
+      "livelihood": 2
+     },
+     "wind": 3,
+     "days": 1,
+     "forces": {
+      "locals": {
+       "satisfaction": 6
+      }
+     },
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "WAR-060"
+    ]
+   },
+   "right": {
+    "id": "huanqifa",
+    "label": "换发新契。",
+    "hint": "旧契存档，新契盖章",
+    "effects": {
+     "stats": {
+      "people": 4,
+      "council": 2
+     },
+     "days": 1,
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "WAR-060"
+    ]
+   }
+  },
+  "lines": [
+   {
+    "who": "管民政的首长",
+    "line": "晒谷场搭了台子，全庄佃户都到了。苟家的地契一摞摞摆在台上——按您批的法子，念一户、烧一户、分一户。"
+   },
+   {
+    "who": "带路的佃户",
+    "line": "我分到六亩水田，是自家佃了三代的那块。腿肚子直抖，不敢伸手接契……长官，这契，往后真作数？"
+   }
+  ]
+ },
+ {
+  "id": "WAR-060",
+  "pool": "security",
+  "series": "war.local",
+  "type": "crisis",
+  "title": "分田夜话",
+  "source": {
+   "kind": "force",
+   "id": "guard",
+   "name": "保卫系统"
+  },
+  "tags": [
+   "苟家庄",
+   "战事"
+  ],
+  "requires": [
+   {
+    "state": "series.war_local",
+    "gte": 3
+   }
+  ],
+  "excludes": [],
+  "weight": 24,
+  "options": {
+   "left": {
+    "id": "geijitian",
+    "label": "给三亩祭田。",
+    "hint": "留一分体面，收一村人心",
+    "effects": {
+     "stats": {
+      "people": 3
+     },
+     "wind": -1,
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "WAR-061"
+    ]
+   },
+   "right": {
+    "id": "bugei",
+    "label": "不给。",
+    "hint": "旧根不拔净，新苗长不成",
+    "effects": {
+     "stats": {
+      "people": -2,
+      "council": 2
+     },
+     "wind": 1,
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "WAR-061"
+    ]
+   }
+  },
+  "lines": [
+   {
+    "who": "值班秘书",
+    "line": "夜里，佃户里几位老人摸到营门口，跪着不肯起——求咱们留苟家幼孙一条根，给他家留三亩祭田。"
+   },
+   {
+    "who": "管民政的首长",
+    "line": "老人说：苟家再狠，也是『主家』。地拿了，根绝了，怕遭天谴——也怕苟二爷回来那天的账。"
+   }
+  ]
+ },
+ {
+  "id": "WAR-061",
+  "pool": "security",
+  "series": "war.local",
+  "type": "daily",
+  "title": "阵亡的哨兵",
+  "source": {
+   "kind": "force",
+   "id": "guard",
+   "name": "保卫系统"
+  },
+  "tags": [
+   "苟家庄",
+   "战事"
+  ],
+  "requires": [
+   {
+    "state": "series.war_local",
+    "gte": 3
+   }
+  ],
+  "excludes": [],
+  "weight": 24,
+  "options": {
+   "left": {
+    "id": "houzang",
+    "label": "厚葬立碑。",
+    "hint": "碑上刻名字，全村送葬",
+    "effects": {
+     "stats": {
+      "people": 4,
+      "military": 1
+     },
+     "wind": 1,
+     "days": 1,
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "WAR-062"
+    ]
+   },
+   "right": {
+    "id": "fuxu",
+    "label": "抚恤双倍。",
+    "hint": "银子给到位，碑就不必了",
+    "effects": {
+     "stats": {
+      "livelihood": -1,
+      "people": 2
+     },
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "WAR-062"
+    ]
+   }
+  },
+  "lines": [
+   {
+    "who": "石志奇",
+    "line": "清点完了：我方阵亡两人。一个是伏波军的老兵，胸口中的铁砂；一个是带路佃户的儿子，才十九，替传令兵挡了一铳。"
+   },
+   {
+    "who": "值班秘书",
+    "line": "老兵家里没人了。那孩子的爹，就是带路的那位——他站在儿子身上首长长首长短短，一句话不哭，就是站不住。"
+   }
+  ]
+ },
+ {
+  "id": "WAR-062",
+  "pool": "security",
+  "series": "war.local",
+  "type": "crisis",
+  "title": "苟二爷的串联",
+  "source": {
+   "kind": "force",
+   "id": "guard",
+   "name": "保卫系统"
+  },
+  "tags": [
+   "苟家庄",
+   "战事"
+  ],
+  "requires": [
+   {
+    "state": "series.war_local",
+    "gte": 3
+   }
+  ],
+  "excludes": [],
+  "weight": 24,
+  "options": {
+   "left": {
+    "id": "gegejipo",
+    "label": "分化瓦解。",
+    "hint": "一家一家谈，谈得拢的是路，谈不拢的是靶",
+    "effects": {
+     "stats": {
+      "military": 2,
+      "people": 1
+     },
+     "wind": -1,
+     "days": 2,
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "WAR-063"
+    ]
+   },
+   "right": {
+    "id": "xianfazhiren",
+    "label": "先发制人。",
+    "hint": "趁绳没拧成，先斩绳头",
+    "effects": {
+     "stats": {
+      "military": 4,
+      "people": -2
+     },
+     "wind": 3,
+     "days": 1,
+     "personal": {
+      "violence_risk": 1
+     },
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "WAR-063"
+    ]
+   }
+  },
+  "lines": [
+   {
+    "who": "午木",
+    "line": "苟二爷没跑远，在岭后雷虎寨落脚，捎话给周边五家土寨：『髡贼共产共妻，下一个就轮到你们。』有两家寨主已经收了他的银子。"
+   },
+   {
+    "who": "冉耀",
+    "line": "五寨要是串起来，就是四百条枪。现在打，是打草惊蛇；不打，让他们串成绳。"
+   }
+  ]
+ },
+ {
+  "id": "WAR-063",
+  "pool": "security",
+  "series": "war.local",
+  "type": "benefit",
+  "title": "石志奇的战后报告",
+  "source": {
+   "kind": "force",
+   "id": "guard",
+   "name": "保卫系统"
+  },
+  "tags": [
+   "苟家庄",
+   "战事"
+  ],
+  "requires": [
+   {
+    "state": "series.war_local",
+    "gte": 3
+   }
+  ],
+  "excludes": [],
+  "weight": 22,
+  "options": {
+   "left": {
+    "id": "lungong",
+    "label": "照单行赏。",
+    "hint": "赏出来的规矩，比罚出来的长久",
+    "effects": {
+     "stats": {
+      "military": 2,
+      "people": 3
+     },
+     "days": 1,
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "qinggong",
+    "label": "集体记功。",
+    "hint": "一仗是全营的仗，不立私恩",
+    "effects": {
+     "stats": {
+      "council": 2,
+      "military": 1
+     },
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "石志奇",
+    "line": "战报写完了：毙三十一、俘一百一十七、我亡二伤七。缴获清单附后。末尾我加了一段——『此战之胜，胜在哨探与带路人，不在铳炮。』"
+   },
+   {
+    "who": "石志奇",
+    "line": "请您过目。另外，这一仗该赏的人，名单我列好了：头一行的名字，是那个佃户。"
+   }
+  ]
+ },
+ {
+  "id": "WAR-070",
+  "pool": "security",
+  "series": "war.local",
+  "type": "key",
+  "title": "誓师",
+  "source": {
+   "kind": "force",
+   "id": "guard",
+   "name": "保卫系统"
+  },
+  "tags": [
+   "澄迈",
+   "战事"
+  ],
+  "requires": [
+   {
+    "state": "war.outcome",
+    "notEquals": "none"
+   },
+   {
+    "state": "series.war_local",
+    "gte": 2
+   }
+  ],
+  "excludes": [],
+  "weight": 22,
+  "options": {
+   "left": {
+    "id": "xunhua",
+    "label": "训话。",
+    "hint": "话不用多，一句就够",
+    "effects": {
+     "stats": {
+      "military": 3,
+      "people": 1
+     },
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "WAR-071"
+    ]
+   },
+   "right": {
+    "id": "faxiang",
+    "label": "只发饷。",
+    "hint": "银子说话，比口号实在",
+    "effects": {
+     "stats": {
+      "military": 2,
+      "livelihood": -1
+     },
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "WAR-071"
+    ]
+   }
+  },
+  "lines": [
+   {
+    "who": "石志奇",
+    "line": "全营列队。三个步兵连、一个炮队，米尼铳上了油，刺刀雪亮。我把话讲完，底下鸦雀无声——就等您一句话。"
+   },
+   {
+    "who": "石志奇",
+    "line": "兵们的家眷在营墙外看。这一仗打完，他们的婆娘娃娃就是这片地上的人了。"
+   }
+  ]
+ },
+ {
+  "id": "WAR-071",
+  "pool": "security",
+  "series": "war.local",
+  "type": "crisis",
+  "title": "首轮炮击",
+  "source": {
+   "kind": "force",
+   "id": "guard",
+   "name": "保卫系统"
+  },
+  "tags": [
+   "澄迈",
+   "战事"
+  ],
+  "requires": [
+   {
+    "state": "war.outcome",
+    "notEquals": "none"
+   },
+   {
+    "state": "series.war_local",
+    "gte": 2
+   }
+  ],
+  "excludes": [],
+  "weight": 22,
+  "options": {
+   "left": {
+    "id": "xiaozheng",
+    "label": "耐心校正。",
+    "hint": "炮打准了，步兵少流血",
+    "effects": {
+     "stats": {
+      "military": 3
+     },
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "WAR-072"
+    ]
+   },
+   "right": {
+    "id": "buji",
+    "label": "不必校正。",
+    "hint": "响声本身就是武器",
+    "effects": {
+     "stats": {
+      "military": 1,
+      "people": -1
+     },
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "WAR-072"
+    ]
+   }
+  },
+  "lines": [
+   {
+    "who": "管炮的首长",
+    "line": "新铸的四斤半野战炮试锋了。第一轮群射，官军的前哨棚子上了天；第二轮打高了，掀了自家前沿三丈的一棵树。"
+   },
+   {
+    "who": "石志奇",
+    "line": "炮手是新练的，表尺还不熟。校正要三轮——官军的骑兵可能等不了三轮。"
+   }
+  ]
+ },
+ {
+  "id": "WAR-072",
+  "pool": "security",
+  "series": "war.local",
+  "type": "crisis",
+  "title": "白刃",
+  "source": {
+   "kind": "force",
+   "id": "guard",
+   "name": "保卫系统"
+  },
+  "tags": [
+   "澄迈",
+   "战事"
+  ],
+  "requires": [
+   {
+    "state": "war.outcome",
+    "notEquals": "none"
+   },
+   {
+    "state": "series.war_local",
+    "gte": 2
+   }
+  ],
+  "excludes": [],
+  "weight": 22,
+  "options": {
+   "left": {
+    "id": "weiwen",
+    "label": "战后慰问。",
+    "hint": "见血的手，得有人握一握",
+    "effects": {
+     "stats": {
+      "people": 2,
+      "military": 1
+     },
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "WAR-073"
+    ]
+   },
+   "right": {
+    "id": "jianyue",
+    "label": "只论战功。",
+    "hint": "兵的心事，让他自己咽",
+    "effects": {
+     "stats": {
+      "military": 2,
+      "people": -1
+     },
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "WAR-073"
+    ]
+   }
+  },
+  "lines": [
+   {
+    "who": "哨长",
+    "line": "官军的督战队把溃兵又赶回来了，一波一波顶到壕前。弹药打光的一个班，上了刺刀——咱们的刺刀，头一回成排地见血。"
+   },
+   {
+    "who": "石志奇",
+    "line": "老兵说，刺刀见红，兵才成兵。可下阵地的时候，有个新兵蹲在壕里吐，怎么拉都拉不起来。"
+   }
+  ]
+ },
+ {
+  "id": "WAR-073",
+  "pool": "security",
+  "series": "war.local",
+  "type": "crisis",
+  "title": "伤兵",
+  "source": {
+   "kind": "force",
+   "id": "guard",
+   "name": "保卫系统"
+  },
+  "tags": [
+   "澄迈",
+   "战事"
+  ],
+  "requires": [
+   {
+    "state": "war.outcome",
+    "notEquals": "none"
+   },
+   {
+    "state": "series.war_local",
+    "gte": 2
+   }
+  ],
+  "excludes": [],
+  "weight": 22,
+  "options": {
+   "left": {
+    "id": "quanliqiangjiu",
+    "label": "全力抢救。",
+    "hint": "医务所今晚不关门",
+    "effects": {
+     "stats": {
+      "people": 3,
+      "military": 1
+     },
+     "days": 1,
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "WAR-074"
+    ]
+   },
+   "right": {
+    "id": "xianzhongzheng",
+    "label": "先救轻伤。",
+    "hint": "重耽误了命，轻耽误了兵",
+    "effects": {
+     "stats": {
+      "military": 2,
+      "people": -2
+     },
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "WAR-074"
+    ]
+   }
+  },
+  "lines": [
+   {
+    "who": "医务所的医生",
+    "line": "伤兵下来了四十多个，门板当担架，从前沿抬到医务所要走一个时辰——太阳毒，血痂和衣裳粘在一起。"
+   },
+   {
+    "who": "医务所的医生",
+    "line": "截肢的两个，麻药只够一个。另一个咬着裹了布的枪管，让战友压住腿——他没喊名字，喊的是他婆娘。"
+   }
+  ]
+ },
+ {
+  "id": "WAR-074",
+  "pool": "security",
+  "series": "war.local",
+  "type": "daily",
+  "title": "战报的数字",
+  "source": {
+   "kind": "force",
+   "id": "guard",
+   "name": "保卫系统"
+  },
+  "tags": [
+   "澄迈",
+   "战事"
+  ],
+  "requires": [
+   {
+    "state": "war.outcome",
+    "notEquals": "none"
+   },
+   {
+    "state": "series.war_local",
+    "gte": 2
+   }
+  ],
+  "excludes": [],
+  "weight": 22,
+  "options": {
+   "left": {
+    "id": "baoshishu",
+    "label": "按实数。",
+    "hint": "数字实在，捷报才立得住",
+    "effects": {
+     "stats": {
+      "council": 2,
+      "people": 1
+     },
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "WAR-075"
+    ]
+   },
+   "right": {
+    "id": "baoxiqing",
+    "label": "取上限。",
+    "hint": "仗打赢了，气势不能输",
+    "effects": {
+     "stats": {
+      "people": 2,
+      "council": -1
+     },
+     "wind": 1,
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "WAR-075"
+    ]
+   }
+  },
+  "lines": [
+   {
+    "who": "值班秘书",
+    "line": "战报拟好了：毙敌六百余、俘千总以下二百一十七。落笔前石参谋来了一句——「毙敌数再核一遍，报虚数，往后就得一直虚。」"
+   },
+   {
+    "who": "管文宣的首长",
+    "line": "《时报》头版等着排版。报五百，是稳妥；报七百，全营欢腾。"
+   }
+  ]
+ },
+ {
+  "id": "WAR-075",
+  "pool": "security",
+  "series": "war.local",
+  "type": "crisis",
+  "title": "官军俘虏",
+  "source": {
+   "kind": "force",
+   "id": "guard",
+   "name": "保卫系统"
+  },
+  "tags": [
+   "澄迈",
+   "战事"
+  ],
+  "requires": [
+   {
+    "state": "war.outcome",
+    "notEquals": "none"
+   },
+   {
+    "state": "series.war_local",
+    "gte": 2
+   }
+  ],
+  "excludes": [],
+  "weight": 22,
+  "options": {
+   "left": {
+    "id": "qufu",
+    "label": "礼遇劝降。",
+    "hint": "千总归心，比千两黄金值钱",
+    "effects": {
+     "stats": {
+      "people": 3,
+      "military": 2
+     },
+     "wind": 1,
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "WAR-076"
+    ]
+   },
+   "right": {
+    "id": "yilifaban",
+    "label": "依律处置。",
+    "hint": "俘虏就是俘虏，规矩不因官阶改",
+    "effects": {
+     "stats": {
+      "council": 2
+     },
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "WAR-076"
+    ]
+   }
+  },
+  "lines": [
+   {
+    "who": "冉耀",
+    "line": "俘虏里有个千总，姓何，伤了大腿，是抬来的。他见了咱们的伤兵和俘虏吃一样的伙食，盯着看了半天。"
+   },
+   {
+    "who": "何千总",
+    "line": "……朝廷的兵败在你们手里，不冤。只求速死，莫要折辱。"
+   }
+  ]
+ },
+ {
+  "id": "WAR-076",
+  "pool": "security",
+  "series": "war.local",
+  "type": "daily",
+  "title": "战场打扫",
+  "source": {
+   "kind": "force",
+   "id": "guard",
+   "name": "保卫系统"
+  },
+  "tags": [
+   "澄迈",
+   "战事"
+  ],
+  "requires": [
+   {
+    "state": "war.outcome",
+    "notEquals": "none"
+   },
+   {
+    "state": "series.war_local",
+    "gte": 2
+   }
+  ],
+  "excludes": [],
+  "weight": 22,
+  "options": {
+   "left": {
+    "id": "yanmai",
+    "label": "掩埋立标。",
+    "hint": "给敌人留的体面，是给自己攒的人心",
+    "effects": {
+     "stats": {
+      "people": 4
+     },
+     "wind": 1,
+     "days": 1,
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "WAR-077"
+    ]
+   },
+   "right": {
+    "id": "yiqiliaoshi",
+    "label": "移交乡里。",
+    "hint": "官军的兵，官府来收",
+    "effects": {
+     "stats": {
+      "people": -1
+     },
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "WAR-077"
+    ]
+   }
+  },
+  "lines": [
+   {
+    "who": "管军械的首长",
+    "line": "缴获清完了：鸟铳四百二十杆、盔甲二百副、骡马六十多匹，还有官军丢下的两箱火绳——潮得能种出蘑菇。"
+   },
+   {
+    "who": "管民政的首长",
+    "line": "阵亡的官军兵尸首排了两排。有归化民来认：里头有他们被抓了壮丁的兄弟。"
+   }
+  ]
+ },
+ {
+  "id": "WAR-077",
+  "pool": "security",
+  "series": "war.local",
+  "type": "benefit",
+  "title": "澄迈士绅的犒劳",
+  "source": {
+   "kind": "force",
+   "id": "guard",
+   "name": "保卫系统"
+  },
+  "tags": [
+   "澄迈",
+   "战事"
+  ],
+  "requires": [
+   {
+    "state": "war.outcome",
+    "notEquals": "none"
+   },
+   {
+    "state": "series.war_local",
+    "gte": 2
+   }
+  ],
+  "excludes": [],
+  "weight": 22,
+  "options": {
+   "left": {
+    "id": "shouerbudaying",
+    "label": "收礼不表态。",
+    "hint": "猪羊收下，心思留白",
+    "effects": {
+     "stats": {
+      "livelihood": 3,
+      "people": 1
+     },
+     "wind": 1,
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "tuihui",
+    "label": "原样退回。",
+    "hint": "今天收了礼，明天就得还人情",
+    "effects": {
+     "stats": {
+      "people": 1,
+      "council": 1
+     },
+     "wind": -1,
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "值班秘书",
+    "line": "澄迈县城的几家士绅抬着猪羊酒米来「劳军」——三天前他们还给官军送过万民伞。礼单上的落款，按了七家的红章。"
+   },
+   {
+    "who": "值班秘书",
+    "line": "县丞托人带了句话：愿与贵军「共保地方」。墙头草的礼，收是不收？"
    }
   ]
  }

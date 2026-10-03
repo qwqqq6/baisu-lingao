@@ -2293,5 +2293,718 @@
     "line": "断案的越来越多，律条不够用了：贪墨多少两算重罪？抗工几日算犯法？旧律没有的，各口断得五花八门——同一个罪，东门市打二十板，工地上只罚三天工分。"
    }
   ]
+ },
+ {
+  "id": "FIG-RY-005",
+  "pool": "core",
+  "series": "figures.elders",
+  "type": "daily",
+  "title": "冉耀编保甲",
+  "source": {
+   "kind": "force",
+   "id": "guard",
+   "name": "保卫系统"
+  },
+  "tags": [
+   "元老"
+  ],
+  "requires": [
+   {
+    "used": "FIG-RY-002"
+   }
+  ],
+  "excludes": [],
+  "weight": 18,
+  "options": {
+   "left": {
+    "id": "baojia",
+    "label": "编而不连。",
+    "hint": "保甲查贼可以，株连免谈",
+    "effects": {
+     "stats": {
+      "people": 3,
+      "military": 2
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "yanbian",
+    "label": "照旧例严办。",
+    "hint": "乱世用重典，一步不能软",
+    "effects": {
+     "stats": {
+      "military": 3,
+      "people": -3
+     },
+     "wind": 1,
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "冉耀",
+    "line": "保甲编到第三村了：十户一牌、百户一甲，门牌钉上门框。归化民摸着门牌问——这是不是又要连坐？"
+   },
+   {
+    "who": "冉耀",
+    "line": "连坐不连坐，看怎么用。查夜堵贼是一用，株连九族是另一用——我用前一种。"
+   }
+  ]
+ },
+ {
+  "id": "FIG-RY-006",
+  "pool": "core",
+  "series": "figures.elders",
+  "type": "crisis",
+  "title": "冉耀的钥匙",
+  "source": {
+   "kind": "force",
+   "id": "guard",
+   "name": "保卫系统"
+  },
+  "tags": [
+   "元老"
+  ],
+  "requires": [
+   {
+    "used": "FIG-RY-004"
+   }
+  ],
+  "excludes": [],
+  "weight": 18,
+  "options": {
+   "left": {
+    "id": "checha3",
+    "label": "查到底。",
+    "hint": "钥匙的事，就是权柄的事",
+    "effects": {
+     "stats": {
+      "council": 2
+     },
+     "wind": 1,
+     "days": 1,
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "huansuo",
+    "label": "换锁了事。",
+    "hint": "水至清则无鱼",
+    "effects": {
+     "stats": {
+      "council": -1
+     },
+     "personal": {
+      "faction_alarm": -1
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "冉耀",
+    "line": "政保局的档案房三把钥匙：您一把、我一把、还有一把封在铁盒里存在主席那儿。昨夜档案房进了人——门没撬，锁没动。"
+   },
+   {
+    "who": "冉耀",
+    "line": "三把钥匙，一把都没少。动档案的是钥匙的主人，或者……是配了钥匙的人。这事查到底，可能查到您我头上。"
+   }
+  ]
+ },
+ {
+  "id": "FIG-MQZ-005",
+  "pool": "core",
+  "series": "figures.elders",
+  "type": "daily",
+  "title": "马千瞩查仓",
+  "source": {
+   "kind": "force",
+   "id": "planning",
+   "name": "计划委员会"
+  },
+  "tags": [
+   "元老"
+  ],
+  "requires": [
+   {
+    "used": "FIG-MQZ-002"
+   }
+  ],
+  "excludes": [],
+  "weight": 18,
+  "options": {
+   "left": {
+    "id": "peitaduizhang",
+    "label": "陪他对账。",
+    "hint": "账对清楚了，比枷号示众管用",
+    "effects": {
+     "stats": {
+      "council": 2,
+      "livelihood": 1
+     },
+     "days": 1,
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "jiaozhengfa",
+    "label": "交军法处。",
+    "hint": "仓就是军令，亏一石就是亏一卒",
+    "effects": {
+     "stats": {
+      "military": 2,
+      "people": -2
+     },
+     "wind": 1,
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "马千瞩",
+    "line": "夜里突查了三座仓：账上写着一千二百石粮，斗量出来一千一百四十石——差的六十石，仓耗？还是耗子长了两条腿？"
+   },
+   {
+    "who": "马千瞩",
+    "line": "管仓的两个归化民已带到。我不动刑，我只算账——从上月一日到昨夜，每一斗粮的进出，我陪他们对到天亮。"
+   }
+  ]
+ },
+ {
+  "id": "FIG-MQZ-006",
+  "pool": "core",
+  "series": "figures.elders",
+  "type": "daily",
+  "title": "马千瞩的沙盘",
+  "source": {
+   "kind": "force",
+   "id": "planning",
+   "name": "计划委员会"
+  },
+  "tags": [
+   "元老"
+  ],
+  "requires": [
+   {
+    "used": "FIG-MQZ-004"
+   }
+  ],
+  "excludes": [],
+  "weight": 18,
+  "options": {
+   "left": {
+    "id": "zhundun",
+    "label": "准囤。",
+    "hint": "囤下的每一样，都是将来的胆",
+    "effects": {
+     "stats": {
+      "livelihood": -2,
+      "council": 2
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "huazhai",
+    "label": "先救眼前。",
+    "hint": "命脉是远虑，账房是近忧",
+    "effects": {
+     "stats": {
+      "livelihood": 1,
+      "council": -1
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "马千瞩",
+    "line": "做了一只沙盘：山是山、河是河，咱们的盐场、农庄、哨所都插了小旗。就是插旗的时候手抖——焦炭、药材、纸，三样全指着外路。"
+   },
+   {
+    "who": "马千瞩",
+    "line": "三根命脉攥在别人手里。我拟了备单：每样囤三个月的量——钱从各口的骨头缝里抠。"
+   }
+  ]
+ },
+ {
+  "id": "FIG-DW-005",
+  "pool": "core",
+  "series": "figures.elders",
+  "type": "crisis",
+  "title": "杜雯的夜校风波",
+  "source": {
+   "kind": "force",
+   "id": "naturalized",
+   "name": "归化民组织"
+  },
+  "tags": [
+   "元老"
+  ],
+  "requires": [
+   {
+    "used": "FIG-DW-002"
+   }
+  ],
+  "excludes": [],
+  "weight": 18,
+  "options": {
+   "left": {
+    "id": "ligongduzhi",
+    "label": "立规护住。",
+    "hint": "夜校的门，就是她的门",
+    "effects": {
+     "stats": {
+      "people": 3
+     },
+     "wind": 2,
+     "personal": {
+      "faction_alarm": 1
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "jialitiaojie",
+    "label": "家族内调。",
+    "hint": "法进不了家门，先进族老的门",
+    "effects": {
+     "stats": {
+      "people": 1
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "杜雯",
+    "line": "夜校的女学员被婆家锁了三天。今晚她自己翻墙出来的，脸上的手印还亮着——她要念书，婆家说要打断她的腿。"
+   },
+   {
+    "who": "杜雯",
+    "line": "我把她安顿在洗衣坊做工。婆家找上门来讨人——这一回，我不打算再讲人情了。"
+   }
+  ]
+ },
+ {
+  "id": "FIG-DW-006",
+  "pool": "core",
+  "series": "figures.elders",
+  "type": "daily",
+  "title": "杜雯的名单",
+  "source": {
+   "kind": "force",
+   "id": "naturalized",
+   "name": "归化民组织"
+  },
+  "tags": [
+   "元老"
+  ],
+  "requires": [
+   {
+    "used": "FIG-DW-005"
+   }
+  ],
+  "excludes": [],
+  "weight": 18,
+  "options": {
+   "left": {
+    "id": "shetuoer",
+    "label": "办托儿所。",
+    "hint": "娃娃有人带，机器才转得动",
+    "effects": {
+     "stats": {
+      "people": 3,
+      "livelihood": 2
+     },
+     "wind": 1,
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "geijiabu",
+    "label": "给家用补贴。",
+    "hint": "钱到家，事让各家自理",
+    "effects": {
+     "stats": {
+      "people": 1,
+      "livelihood": -1
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "杜雯",
+    "line": "归化民女工的花名册送来了：纺织坊四十七人、洗衣坊二十二人、医务看护班九人。三年前，这个数字是零。"
+   },
+   {
+    "who": "杜雯",
+    "line": "名单后头还有一栏，我想加：女工的娃谁带。不带娃的工，做不长——这是我挨了三年骂才想明白的事。"
+   }
+  ]
+ },
+ {
+  "id": "FIG-CHY-005",
+  "pool": "core",
+  "series": "figures.elders",
+  "type": "daily",
+  "title": "陈海阳验炮",
+  "source": {
+   "kind": "force",
+   "id": "guard",
+   "name": "保卫系统"
+  },
+  "tags": [
+   "元老"
+  ],
+  "requires": [
+   {
+    "used": "FIG-CHY-003"
+   }
+  ],
+  "excludes": [],
+  "weight": 18,
+  "options": {
+   "left": {
+    "id": "yongyoumu",
+    "label": "用柚木。",
+    "hint": "船上的钱，省不得",
+    "effects": {
+     "stats": {
+      "military": 3,
+      "livelihood": -2
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "lizhimu",
+    "label": "先用荔枝木。",
+    "hint": "先有炮，再谈好炮架",
+    "effects": {
+     "stats": {
+      "military": 1
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "陈海阳",
+    "line": "新装的两门炮试过了：打两百丈的旧船靶，五发中三。炮是佛郎机炮匠监的工，打得准——就是炮架的木料差，海上一震就散。"
+   },
+   {
+    "who": "陈海阳",
+    "line": "雷州的老柚木，贵三成，能用十年。海南本地的荔枝木，便宜，撑死三年。海上打仗，炮架散了比炮管炸了还要命。"
+   }
+  ]
+ },
+ {
+  "id": "FIG-CHY-006",
+  "pool": "core",
+  "series": "figures.elders",
+  "type": "crisis",
+  "title": "陈海阳的风暴角",
+  "source": {
+   "kind": "force",
+   "id": "guard",
+   "name": "保卫系统"
+  },
+  "tags": [
+   "元老"
+  ],
+  "requires": [
+   {
+    "used": "FIG-CHY-005"
+   }
+  ],
+  "excludes": [],
+  "weight": 18,
+  "options": {
+   "left": {
+    "id": "gaihangxian",
+    "label": "改航线。",
+    "hint": "老水手的经验，写进海图",
+    "effects": {
+     "stats": {
+      "military": 2,
+      "people": 2
+     },
+     "days": 1,
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "pingyunqi",
+    "label": "凭运气闯。",
+    "hint": "风暴季就两个月，省下的都是糖钱",
+    "effects": {
+     "stats": {
+      "livelihood": 2
+     },
+     "personal": {
+      "violence_risk": 1
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "陈海阳",
+    "line": "巡逻队在玉苞角外遇上风暴前哨，两条船抢滩自救，人全捞回来了，船底的铜皮刮掉半边。老水手说：那片海的脾气，是季节性的。"
+   },
+   {
+    "who": "陈海阳",
+    "line": "我重画了航线：风暴季走外线，多半天路，避那片角。有船长嘀咕费时费煤——费时费煤，总比喂海强。"
+   }
+  ]
+ },
+ {
+  "id": "FIG-WDS-005",
+  "pool": "core",
+  "series": "figures.elders",
+  "type": "daily",
+  "title": "文德嗣接待香山使者",
+  "source": {
+   "kind": "force",
+   "id": "council",
+   "name": "扩大会议"
+  },
+  "tags": [
+   "元老"
+  ],
+  "requires": [
+   {
+    "used": "FIG-WDS-002"
+   }
+  ],
+  "excludes": [],
+  "weight": 18,
+  "options": {
+   "left": {
+    "id": "huilfang",
+    "label": "回访澳门。",
+    "hint": "走一趟，胜过十封信",
+    "effects": {
+     "stats": {
+      "council": 2,
+      "livelihood": 1
+     },
+     "wind": 1,
+     "days": 2,
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "shuxin",
+    "label": "只回书信。",
+    "hint": "虚实未明，人不动",
+    "effects": {
+     "stats": {
+      "council": 1
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "文德嗣",
+    "line": "香山县的使者到了，带了两箱洋货做礼：自鸣钟、玻璃镜、两瓶葡萄酒。话是澳门的神父教的，官话里夹着葡语。"
+   },
+   {
+    "who": "文德嗣",
+    "line": "礼对等、话对等。他探咱们的虚实，咱们也探澳门的虚实——外交就是彼此看底牌，看谁先眨眼。"
+   }
+  ]
+ },
+ {
+  "id": "FIG-SZQ-005",
+  "pool": "core",
+  "series": "figures.elders",
+  "type": "crisis",
+  "title": "石志奇的逃兵",
+  "source": {
+   "kind": "force",
+   "id": "guard",
+   "name": "保卫系统"
+  },
+  "tags": [
+   "元老"
+  ],
+  "requires": [
+   {
+    "used": "FIG-SZQ-002"
+   }
+  ],
+  "excludes": [],
+  "weight": 18,
+  "options": {
+   "left": {
+    "id": "bianzhang",
+    "label": "贬为辅兵。",
+    "hint": "刀下留的这个人情，全军记得",
+    "effects": {
+     "stats": {
+      "people": 3,
+      "military": -1
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "yilv",
+    "label": "依律。",
+    "hint": "法就是法，今天软一寸，明天溃一里",
+    "effects": {
+     "stats": {
+      "military": 3,
+      "people": -2
+     },
+     "wind": 1,
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "石志奇",
+    "line": "抓回来一个逃兵。他自己回营的——跑了三天，在家门口站了一夜，天亮自己回来了。他娘病着，他想看一眼就走。"
+   },
+   {
+    "who": "石志奇",
+    "line": "按律，逃兵枪毙。可他是自己回来的。全营的兵都在看这一条怎么落——您落，我执行。"
+   }
+  ]
  }
 ]
