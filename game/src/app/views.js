@@ -1,6 +1,7 @@
 /**
- * 局内视图（王权式）：顶栏四印宝座指标 + 居中人物卡（立绘/对白）+
- * 左右滑动批复 + 极简 chrome（纪事与功能收进菜单浮层）。
+ * 局内视图（王权式·烛光暗夜版）：顶部金线图标宝座 + 居中牌匾大卡
+ * （立绘/对白）+ 左右斜向批复文字 + 底部在位纪年 + 角落浮钮。
+ * 纪事与功能收进菜单浮层。
  *
  * @module app/views
  */
@@ -9,18 +10,32 @@ import { h, avatarElForName } from "./dom.js";
 import { TYPE_LABELS, PILLAR_LABELS } from "./labels.js";
 import { attachSwipe, flyOut } from "./swipe.js";
 
-/** 四柱图标（宝座指标）。 */
-const PILLAR_ICONS = { people: "👥", livelihood: "🌾", military: "⚔", council: "⚖" };
-/** 危险阈值（趋势图标泛红）。 */
+/** 危险阈值（图标泛红）。 */
 const DANGER_LOW = 20;
 const DANGER_HIGH = 80;
 /** 纪事在浮层中的显示条数。 */
 const LOG_ROWS = 40;
 
+/** 四柱金线图标（SVG 线描，王权式）。 */
+const PILLAR_SVGS = {
+  people: `<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="16" cy="10" r="4.4"/><path d="M7 26c1.6-5.2 5-7.6 9-7.6s7.4 2.4 9 7.6"/></svg>`,
+  livelihood: `<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M16 28V8"/><path d="M16 12c-4-.6-6-3-6.4-6.4 3.6.3 6 2.4 6.4 6.4zM16 12c4-.6 6-3 6.4-6.4-3.6.3-6 2.4-6.4 6.4z"/>
+    <path d="M16 18c-4-.6-6-3-6.4-6.4 3.6.3 6 2.4 6.4 6.4zM16 18c4-.6 6-3 6.4-6.4-3.6.3-6 2.4-6.4 6.4z"/>
+    <path d="M16 24c-4-.6-6-3-6.4-6.4 3.6.3 6 2.4 6.4 6.4zM16 24c4-.6 6-3 6.4-6.4-3.6.3-6 2.4-6.4 6.4z"/></svg>`,
+  military: `<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M25 7l-3.4 12L11 25l-4-4L19 10.4 25 7z"/><path d="M8 20l4 4"/><path d="M6 26l3-3"/><path d="M25 7l1.6-1.6"/></svg>`,
+  council: `<svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M16 5v20"/><path d="M8 9h16"/><path d="M16 25H7"/><path d="M16 25h9"/>
+    <path d="M7 25l-2.6-7h5.2L7 25z"/><path d="M25 25l-2.6-7h5.2L25 25z"/>
+    <path d="M7 9l9 4 9-4"/><circle cx="16" cy="4" r="1.4"/></svg>`,
+};
+
 // ---------------------------------------------------------------- 主界面
 
 /**
- * 主界面：指标行 + 卡台 + 角落按钮；随后渲染当前卡。
+ * 主界面：宝座行 + 卡台（斜向选项）+ 底部纪年 + 角落浮钮；随后渲染当前卡。
  * @param {*} game
  * @param {object} handlers
  */
@@ -32,47 +47,45 @@ export function renderMain(game, handlers) {
   app.append(
     h("div", { class: "reign" },
       renderMeters(game),
-      h("div", { class: "reign-date" },
-        h("span", { class: "chip" }, `第 ${game.day} 天`),
-        h("span", { class: "chip" }, `${game.season}季`),
-        ruler ? h("span", { class: "chip chip-ruler" }, ruler.name) : h("span", { class: "chip chip-ruler" }, "权位空悬")
+      h("div", { class: "reign-stage" },
+        h("button", { class: "choice choice-left", id: "choice-left", title: "向左滑动批复" }),
+        h("div", { class: "card-slot", id: "card-slot" }),
+        h("button", { class: "choice choice-right", id: "choice-right", title: "向右滑动批复" })
       ),
       h("div", { class: "reign-fall", id: "fall-slot" }),
-      h("div", { class: "reign-stage" },
-        h("button", { class: "choice-dot", id: "dot-left", title: "向左滑：批复左侧" }),
-        h("div", { class: "card-slot", id: "card-slot" }),
-        h("button", { class: "choice-dot", id: "dot-right", title: "向右滑：批复右侧" })
+      h("div", { class: "reign-footer" },
+        `第 ${game.day} 天 · ${game.season}季 · ${ruler ? ruler.name : "权位空悬"}在位`
       ),
       h("button", {
-        class: "btn round ability-fab",
-        id: "ability-fab",
+        class: "fab fab-ability",
         disabled: !game.canUseAbility(),
         onclick: handlers.onAbility,
         title: ruler?.ability ? `${ruler.ability.name}：${ruler.ability.desc}` : "",
-      }, ruler?.ability ? ruler.ability.name.slice(0, 2) : "技"),
-      h("button", { class: "btn round menu-fab", onclick: () => toggleMenu(game, handlers) }, "☰")
+      }, "技"),
+      h("button", { class: "fab fab-menu", onclick: () => toggleMenu(game, handlers) }, "☰")
     )
   );
 
   renderCard(game, handlers);
 }
 
-/** 指标行：四印宝座（默认只有图标，调试模式附数字）。 */
+/** 宝座行：金线图标（王权式无底纹），危险泛红；调试模式附数字。 */
 function renderMeters(game) {
   return h("div", { class: "meters", id: "meters" },
     Object.entries(PILLAR_LABELS).map(([key, label]) => {
       const value = game.state.get(`core.pillar.${key}`);
       const danger = value <= DANGER_LOW || value >= DANGER_HIGH;
-      return h("div", { class: `meter ${danger ? "danger" : ""}`, dataset: { key } },
-        h("span", { class: "meter-icon" }, PILLAR_ICONS[key]),
-        h("span", { class: "meter-name" }, label),
+      const icon = h("span", { class: "meter-icon", title: label });
+      icon.innerHTML = PILLAR_SVGS[key];
+      return h("div", { class: `meter ${danger ? "danger" : ""}`, dataset: { key }, title: label },
+        icon,
         game.debug ? h("span", { class: "meter-value" }, String(value)) : null
       );
     })
   );
 }
 
-/** 调试数据行（仅调试模式）：隐藏数值一览。 */
+/** 调试数据行（仅调试模式，位于菜单浮层内）。 */
 function renderDebugStrip(game, handlers) {
   if (!game.debug) return null;
   const bar = (label, id) =>
@@ -98,21 +111,21 @@ function renderDebugStrip(game, handlers) {
 // ---------------------------------------------------------------- 事件卡
 
 /**
- * 当前事件卡：立绘 + 对白；挂滑动交互；侧点显示批复台词。
+ * 当前事件卡：立绘 + 对白；挂滑动交互；两侧斜向文字显示批复台词。
  * 单选项卡（报告/结局）左右皆可滑走。
  * @param {*} game @param {object} handlers
  */
 export function renderCard(game, handlers) {
   const slot = document.getElementById("card-slot");
-  const dotLeft = document.getElementById("dot-left");
-  const dotRight = document.getElementById("dot-right");
+  const choiceLeft = document.getElementById("choice-left");
+  const choiceRight = document.getElementById("choice-right");
   if (!slot) return;
   slot.innerHTML = "";
 
   const card = game.currentCard;
   if (!card) {
     slot.append(h("div", { class: "rcard empty" }, h("p", {}, "各处事务暂告一段落……")));
-    setDots(dotLeft, dotRight, null, null, () => {});
+    setChoices(choiceLeft, choiceRight, null, null, () => {});
     return;
   }
 
@@ -122,6 +135,7 @@ export function renderCard(game, handlers) {
   const speaker = firstSpeaker(game, card);
 
   const cardEl = h("div", { class: "rcard" },
+    h("div", { class: "rcard-frame" }),
     h("div", { class: "rcard-badges" },
       h("span", { class: "badge badge-source" }, card.source?.name || "未知来源"),
       h("span", { class: `badge badge-type type-${card.type}` }, TYPE_LABELS[card.type] || card.type)
@@ -130,17 +144,17 @@ export function renderCard(game, handlers) {
       speaker.avatar,
       h("div", { class: "rcard-who" }, speaker.name)
     ),
-    h("div", { class: "rcard-body-wrap" },
-      meta.character ? h("p", { class: "rcard-meta" }, `继任者：${meta.character.name}（${meta.character.route}）`) : null,
-      meta.reasons?.length
-        ? h("ul", { class: "card-reasons" }, meta.reasons.map((r) => h("li", {}, r)))
-        : null,
+    h("div", { class: "rcard-body" },
       h("h2", { class: "rcard-title" }, card.title),
       Array.isArray(card.lines) && card.lines.length
         ? h("div", { class: "rcard-lines" },
             card.lines.map((l) => h("div", { class: "rcard-line" }, h("span", {}, l.line))))
         : h("p", { class: "rcard-text" }, card.text),
-      card.hintExtra ? h("p", { class: "rcard-hint" }, card.hintExtra) : null
+      card.hintExtra ? h("p", { class: "rcard-hint" }, card.hintExtra) : null,
+      meta.character ? h("p", { class: "rcard-meta" }, `继任者：${meta.character.name}（${meta.character.route}）`) : null,
+      meta.reasons?.length
+        ? h("ul", { class: "card-reasons" }, meta.reasons.map((r) => h("li", {}, r)))
+        : null
     )
   );
   slot.append(cardEl);
@@ -150,10 +164,10 @@ export function renderCard(game, handlers) {
     cardEl.dataset.flying = "1"; // 键盘路径据此跳过重复动画
     flyOut(cardEl, side).then(() => handlers.onChoose(side));
   };
-  setDots(dotLeft, dotRight, left, right, choose, game);
+  setChoices(choiceLeft, choiceRight, left, right, choose, game);
 
   attachSwipe(cardEl, (side) => choose(side), (side, progress) => {
-    lightDot(dotLeft, dotRight, side, progress);
+    lightChoice(choiceLeft, choiceRight, side, progress);
   });
 }
 
@@ -166,31 +180,28 @@ function firstSpeaker(game, card) {
   return { name, avatar: avatarElForName(game, name) };
 }
 
-/** 配置左右侧点：文案、点击批复、调试 tooltip。 */
-function setDots(dotLeft, dotRight, left, right, choose, game) {
-  if (!dotLeft || !dotRight) return;
-  for (const [dot, opt, side] of [[dotLeft, left, "left"], [dotRight, right, "right"]]) {
-    dot.innerHTML = "";
+/** 配置两侧斜向批复文字：文案、点击批复、调试 tooltip。 */
+function setChoices(choiceLeft, choiceRight, left, right, choose, game) {
+  if (!choiceLeft || !choiceRight) return;
+  for (const [el, opt, side] of [[choiceLeft, left, "left"], [choiceRight, right, "right"]]) {
+    el.innerHTML = "";
     if (!opt) {
-      dot.classList.add("inactive");
-      dot.onclick = null;
+      el.classList.add("inactive");
+      el.onclick = null;
       continue;
     }
-    dot.classList.remove("inactive");
-    dot.append(
-      h("span", { class: "dot-seal" }, "批"),
-      h("span", { class: "dot-label" }, opt.label)
-    );
-    if (game && game.debug && opt.effects) dot.title = JSON.stringify(opt.effects);
-    else dot.title = side === "left" ? "向左滑动" : "向右滑动";
-    dot.onclick = () => choose(side);
+    el.classList.remove("inactive");
+    el.append(h("span", { class: "choice-text" }, opt.label));
+    if (game && game.debug && opt.effects) el.title = JSON.stringify(opt.effects);
+    else el.title = side === "left" ? "向左滑动批复" : "向右滑动批复";
+    el.onclick = () => choose(side);
   }
 }
 
-/** 拖拽进度点亮侧点。 */
-function lightDot(dotLeft, dotRight, side, progress) {
-  const active = side === "left" ? dotLeft : dotRight;
-  const other = side === "left" ? dotRight : dotLeft;
+/** 拖拽进度点亮对应侧文字。 */
+function lightChoice(choiceLeft, choiceRight, side, progress) {
+  const active = side === "left" ? choiceLeft : choiceRight;
+  const other = side === "left" ? choiceRight : choiceLeft;
   if (active) active.style.setProperty("--lit", String(progress));
   if (other) other.style.setProperty("--lit", "0");
 }
@@ -198,8 +209,7 @@ function lightDot(dotLeft, dotRight, side, progress) {
 // ---------------------------------------------------------------- 反馈
 
 /**
- * 决策后的宝座反馈：受影响指标上方浮出 ▲/▼（默认模式唯一数值线索，
- * 只示方向不示大小）。
+ * 决策后的宝座反馈：受影响图标上方浮出 ▲/▼。
  * @param {Record<string, number>|undefined} pillarDeltas
  */
 export function showFeedback(fb) {
@@ -215,7 +225,7 @@ export function showFeedback(fb) {
   }
 }
 
-/** 下台横幅（顶栏下短暂显示）。 @param {*} fell */
+/** 下台横幅。 @param {*} fell */
 export function showFallNotice(fell) {
   if (!fell) return;
   const slot = document.getElementById("fall-slot");
@@ -243,6 +253,7 @@ function toggleMenu(game, handlers) {
     onclick: (e) => { if (e.target.id === "menu-mask") mask.remove(); },
   },
     h("div", { class: "menu-panel" },
+      h("h2", {}, "临高启明 · 执政者"),
       h("div", { class: "menu-actions" },
         h("button", { class: "btn ghost", onclick: handlers.onSave }, "存档"),
         h("button", { class: "btn ghost", onclick: handlers.onLoad }, "读档"),
@@ -264,7 +275,8 @@ function toggleMenu(game, handlers) {
           )
         )
       ),
-      h("button", { class: "btn", onclick: () => mask.remove() }, "回到批牍")
+      h("div", { class: "menu-close" },
+        h("button", { class: "btn", onclick: () => mask.remove() }, "回到批牍"))
     )
   );
   document.body.append(mask);
