@@ -80,7 +80,7 @@
    },
    {
     "who": "元老",
-    "line": "（底下有人嘀咕：督工这是要收权呐。）"
+    "line": "（底下有人嘀咕：老马这是要收权呐。）"
    }
   ]
  },
@@ -428,7 +428,7 @@
    "right": {
     "id": "tingdiao_yiban",
     "label": "停一半项目。",
-    "hint": "长痛不如短痛。督工会记很久",
+    "hint": "长痛不如短痛。马千瞩会记很久",
     "effects": {
      "stats": {
       "livelihood": 3
@@ -679,7 +679,7 @@
    "left": {
     "id": "zhu_pao",
     "label": "铸炮。",
-    "hint": "督工亲自盯着翻砂",
+    "hint": "马千瞩亲自盯着翻砂",
     "effects": {
      "stats": {
       "military": 4,

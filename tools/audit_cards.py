@@ -260,7 +260,7 @@ def audit_c(states, forces, series, characters, cards_by_file):
                     parent_sets = option_sets(opt)
                     for c in conds:
                         if "used" in c:
-                            if c["used"] in (card["id"],) | parent_used:
+                            if c["used"] in ({card["id"]} | parent_used):
                                 continue  # 父卡或父卡前置刚用过，成立
                             print(f"[审] {card['id']}→{fu} 要求 used:{c['used']}"
                                   f"（非父卡，需链上游保证）")
