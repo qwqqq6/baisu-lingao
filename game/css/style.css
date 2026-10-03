@@ -22,7 +22,7 @@
   --good: #7fb37f;
 }
 
-* { box-sizing: border-box; }
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
 html, body {
   margin: 0;
@@ -32,6 +32,9 @@ html, body {
   font-family: "Noto Serif SC", "Source Han Serif SC", "SimSun", "Songti SC", serif;
   min-height: 100vh;
   overscroll-behavior: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
 }
 
 #app { max-width: 1080px; margin: 0 auto; }
@@ -47,11 +50,13 @@ h1, h2, h3 { font-weight: 700; letter-spacing: 0.06em; }
 .reign {
   position: relative;
   min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   align-items: center;
   overflow: hidden;
   user-select: none;
+  padding-top: env(safe-area-inset-top);
   background:
     radial-gradient(ellipse 62% 46% at 50% 34%, rgba(201, 164, 92, 0.13), transparent 70%),
     radial-gradient(ellipse 90% 60% at 50% 108%, rgba(74, 46, 20, 0.35), transparent 72%),
@@ -425,16 +430,62 @@ h1, h2, h3 { font-weight: 700; letter-spacing: 0.06em; }
 }
 @keyframes toast-in { from { opacity: 0; transform: translate(-50%, 8px); } to { opacity: 1; transform: translate(-50%, 0); } }
 
-/* ============ 响应式与无动画 ============ */
+/* ============ 竖屏手机（目标平台）============ */
 
-@media (max-width: 560px) {
-  .game-title { font-size: clamp(36px, 11vw, 48px); }
-  /* clamp 已按视口缩放；此处只调布局贴边 */
-  .choice-left { left: 0; }
-  .choice-right { right: 0; }
-  .choice { padding: 20px 6px; }
-  .reign-stage { padding: 8px 0 66px; }
+@media (orientation: portrait) and (max-width: 740px) {
+  /* 卡片收窄，给两侧斜向批复文字留位（王权手机比例） */
+  .rcard { width: min(68vw, 330px); height: min(72dvh, 72vh, 620px); }
+  .rcard-portrait .avatar-fallback { font-size: clamp(76px, 22vw, 110px); }
+  .rcard-line, .rcard-text { font-size: clamp(14px, 4vw, 16.5px); }
+  .rcard-title { font-size: clamp(17px, 4.8vw, 21px); }
+
+  /* 斜向批复：贴边、字号按宽度走 */
+  .choice { top: 24%; width: clamp(84px, 20vw, 116px); padding: 14px 2px; }
+  .choice-text { font-size: clamp(18px, 5.2vw, 24px); }
+  .choice-left { left: 8px; }
+  .choice-right { right: 8px; }
+
+  /* 宝座收紧 */
+  .meters { gap: clamp(10px, 4.5vw, 30px); margin-top: 10px; }
+  .meter-icon, .meter-track { width: clamp(36px, 10vw, 50px); }
+  .meter-icon { height: clamp(36px, 10vw, 50px); }
+  .meter-track { height: 4px; }
+
+  /* 纪年与浮钮避开 Home 条 */
+  .reign-stage { padding: 4px 0 76px; }
+  .reign-footer { bottom: calc(6px + env(safe-area-inset-bottom)); font-size: 12px; letter-spacing: 0.16em; }
+  .fab { bottom: calc(44px + env(safe-area-inset-bottom)); width: 46px; height: 46px; }
+  .fab-ability { left: 10px; }
+  .fab-menu { right: 10px; }
+
+  /* 标题页 */
+  .title-screen { min-height: 100vh; min-height: 100dvh; }
+  .game-title { font-size: clamp(38px, 13vw, 52px); }
+  .title-buttons .btn { min-width: min(78vw, 260px); }
+
+  /* 选人页单列 */
+  .char-grid { grid-template-columns: 1fr; gap: 10px; }
+  .char-card { padding: 13px 15px; }
+
+  /* 结局与菜单 */
+  .gameover { min-height: 100vh; min-height: 100dvh; padding: 48px 14px; }
+  .menu-panel { width: 94vw; max-height: 86dvh; max-height: 86vh; padding: 16px; }
+  .menu-actions .btn { font-size: 13px; padding: 7px 13px; }
 }
+
+/* 横屏矮窗（意外姿势的兜底）：保住卡与文字不挤爆 */
+@media (orientation: landscape) and (max-height: 560px) {
+  .rcard { height: min(86vh, 86dvh, 480px); }
+  .meters { margin-top: 6px; }
+  .meter-icon, .meter-track { width: 34px; }
+  .meter-icon { height: 34px; }
+  .choice { top: 26%; width: clamp(110px, 18vmin, 160px); }
+  .reign-stage { padding: 2px 0 48px; }
+  .fab { bottom: 10px; }
+  .reign-footer { display: none; }
+}
+
+/* ============ 响应式与无动画 ============ */
 
 @media (prefers-reduced-motion: reduce) {
   .flag, .flag-slice, .ember, .title-inner, .rcard, .meter.danger .meter-icon,
