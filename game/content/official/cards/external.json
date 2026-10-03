@@ -3871,5 +3871,469 @@
     "line": "大船进博铺，非得本地引水不可——水道一年一变。老船工们愿意受雇，就一条：得给「师傅」的名分，不能当杂役使。"
    }
   ]
+ },
+ {
+  "id": "EXT-040",
+  "pool": "external",
+  "series": "external.locals",
+  "type": "crisis",
+  "title": "卤水之争",
+  "source": {
+   "kind": "force",
+   "id": "locals",
+   "name": "本地村社"
+  },
+  "tags": [
+   "盐场",
+   "纠纷"
+  ],
+  "requires": [
+   {
+    "used": "EXT-017"
+   },
+   {
+    "state": "series.external_locals",
+    "gte": 4
+   }
+  ],
+  "excludes": [],
+  "weight": 22,
+  "options": {
+   "left": {
+    "id": "huajie",
+    "label": "按老池界。",
+    "hint": "老规矩先立住，人心才安",
+    "effects": {
+     "stats": {
+      "people": 2
+     },
+     "states": [
+      {
+       "id": "series.external_locals",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "EXT-041"
+    ]
+   },
+   "right": {
+    "id": "xinfa",
+    "label": "按新测绘重划。",
+    "hint": "卤脉是新的，界也该是新的",
+    "effects": {
+     "stats": {
+      "livelihood": 2,
+      "people": -2
+     },
+     "wind": 1,
+     "states": [
+      {
+       "id": "series.external_locals",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "EXT-041"
+    ]
+   }
+  },
+  "lines": [
+   {
+    "who": "管灶的首长",
+    "line": "新晒盐田开挖，占了灶户三口祖传的老卤池。三十几家灶户围了工地——领头的白发老爷子捧着咸菜坛子大的那块『卤引』木牌。"
+   },
+   {
+    "who": "管灶的首长",
+    "line": "牌是万历年间官府发的。您说，这牌子如今算数不算数？"
+   }
+  ]
+ },
+ {
+  "id": "EXT-041",
+  "pool": "external",
+  "series": "external.locals",
+  "type": "daily",
+  "title": "盐引夹私",
+  "source": {
+   "kind": "force",
+   "id": "trade",
+   "name": "商贸网络"
+  },
+  "tags": [
+   "盐场",
+   "盐引"
+  ],
+  "requires": [
+   {
+    "used": "EXT-040"
+   }
+  ],
+  "excludes": [],
+  "weight": 18,
+  "options": {
+   "left": {
+    "id": "chayan",
+    "label": "开箱验盐。",
+    "hint": "官引也照验，规矩才立得平",
+    "effects": {
+     "stats": {
+      "council": 2,
+      "livelihood": 1
+     },
+     "wind": 1,
+     "states": [
+      {
+       "id": "series.external_locals",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "EXT-042"
+    ]
+   },
+   "right": {
+    "id": "zhengyan",
+    "label": "验引不验箱。",
+    "hint": "官面上的体面，留一分",
+    "effects": {
+     "stats": {
+      "council": 1
+     },
+     "states": [
+      {
+       "id": "series.external_locals",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "EXT-042"
+    ]
+   }
+  },
+  "lines": [
+   {
+    "who": "管账的首长",
+    "line": "盐课司批的官引三十车到了，引上写的是官盐——箱底垫的却是私盐，夹带的两成。验，是打盐课司的脸；不验，咱们的盐市就成私货的幌子。"
+   }
+  ]
+ },
+ {
+  "id": "EXT-042",
+  "pool": "external",
+  "series": "external.locals",
+  "type": "crisis",
+  "title": "夜船",
+  "source": {
+   "kind": "force",
+   "id": "guard",
+   "name": "保卫系统"
+  },
+  "tags": [
+   "盐场",
+   "私盐"
+  ],
+  "requires": [
+   {
+    "used": "EXT-041"
+   }
+  ],
+  "excludes": [],
+  "weight": 20,
+  "options": {
+   "left": {
+    "id": "kouchuan",
+    "label": "扣船拿人。",
+    "hint": "私盐过三巡，官盐变私盐",
+    "effects": {
+     "stats": {
+      "military": 2,
+      "people": -1
+     },
+     "wind": -1,
+     "days": 1,
+     "states": [
+      {
+       "id": "series.external_locals",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "EXT-043"
+    ]
+   },
+   "right": {
+    "id": "shoushuifangxing",
+    "label": "补税放行。",
+    "hint": "堵不如疏，税是正解",
+    "effects": {
+     "stats": {
+      "livelihood": 3,
+      "council": -1
+     },
+     "wind": 1,
+     "states": [
+      {
+       "id": "series.external_locals",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "EXT-043"
+    ]
+   }
+  },
+  "lines": [
+   {
+    "who": "冉耀",
+    "line": "夜里又来了一条无灯快船，舱里三百斤私盐。船主是本地盐贩，认罚——他说：官盐引贵过盐，不夹私，一家老小喝西北风。"
+   }
+  ]
+ },
+ {
+  "id": "EXT-043",
+  "pool": "external",
+  "series": "external.locals",
+  "type": "key",
+  "title": "晒与煮",
+  "source": {
+   "kind": "force",
+   "id": "planning",
+   "name": "计划委员会"
+  },
+  "tags": [
+   "盐场",
+   "技改"
+  ],
+  "requires": [
+   {
+    "used": "EXT-042"
+   }
+  ],
+  "excludes": [],
+  "weight": 24,
+  "options": {
+   "left": {
+    "id": "taiyangshai",
+    "label": "全面改晒盐。",
+    "hint": "日头不要钱，产量翻三倍",
+    "effects": {
+     "stats": {
+      "livelihood": 5,
+      "people": -3
+     },
+     "wind": 2,
+     "days": 2,
+     "forces": {
+      "planning": {
+       "influence": 4
+      }
+     },
+     "states": [
+      {
+       "id": "series.external_locals",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "EXT-044"
+    ]
+   },
+   "right": {
+    "id": "baozhuzhu",
+    "label": "保住煮盐灶。",
+    "hint": "灶户的饭碗，也是产能",
+    "effects": {
+     "stats": {
+      "people": 4,
+      "livelihood": 1
+     },
+     "forces": {
+      "locals": {
+       "satisfaction": 4
+      }
+     },
+     "states": [
+      {
+       "id": "series.external_locals",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "EXT-044"
+    ]
+   }
+  },
+  "lines": [
+   {
+    "who": "管灶的首长",
+    "line": "晒盐法试的塘出盐了：一样的滩，日晒的产量是灶煮的三倍，柴钱省下一半。可灶户祖辈的营生就是那口铁锅——锅一凉，三百户人家吃什么？"
+   },
+   {
+    "who": "管灶的首长",
+    "line": "老爷子们说：太阳晒出来的盐，没有锅气，不香。这话没道理——可人有人的道理。"
+   }
+  ]
+ },
+ {
+  "id": "EXT-044",
+  "pool": "external",
+  "series": "external.locals",
+  "type": "crisis",
+  "title": "盐工怠工",
+  "source": {
+   "kind": "force",
+   "id": "naturalized",
+   "name": "归化民组织"
+  },
+  "tags": [
+   "盐场",
+   "工潮"
+  ],
+  "requires": [
+   {
+    "used": "EXT-043"
+   }
+  ],
+  "excludes": [],
+  "weight": 20,
+  "options": {
+   "left": {
+    "id": "tanpan",
+    "label": "坐下谈。",
+    "hint": "工钱的事，桌上说",
+    "effects": {
+     "stats": {
+      "people": 3,
+      "livelihood": -1
+     },
+     "days": 1,
+     "states": [
+      {
+       "id": "series.external_locals",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "EXT-045"
+    ]
+   },
+   "right": {
+    "id": "huangong",
+    "label": "换人顶岗。",
+    "hint": "工地不能停，人事以后说",
+    "effects": {
+     "stats": {
+      "livelihood": 2,
+      "people": -3
+     },
+     "wind": 1,
+     "personal": {
+      "faction_alarm": 1
+     },
+     "states": [
+      {
+       "id": "series.external_locals",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "EXT-045"
+    ]
+   }
+  },
+  "lines": [
+   {
+    "who": "管灶的首长",
+    "line": "盐工撂了盐耙：晒盐的塘归了公，工钱还是灶煮的老数。领头的年轻盐工念过三个月夜校——他把《时报》上「劳动有价值」那版贴在了塘边篱笆上。"
+   }
+  ]
+ },
+ {
+  "id": "EXT-045",
+  "pool": "external",
+  "series": "external.locals",
+  "type": "benefit",
+  "title": "盐场的秋账",
+  "source": {
+   "kind": "force",
+   "id": "trade",
+   "name": "商贸网络"
+  },
+  "tags": [
+   "盐场",
+   "收成"
+  ],
+  "requires": [
+   {
+    "used": "EXT-044"
+   }
+  ],
+  "excludes": [],
+  "weight": 16,
+  "options": {
+   "left": {
+    "id": "zhangbang3",
+    "label": "账目公开。",
+    "hint": "每一担盐的去处，晒盐人都看得见",
+    "effects": {
+     "stats": {
+      "people": 3,
+      "council": 1
+     },
+     "states": [
+      {
+       "id": "series.external_locals",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "nashui",
+    "label": "先报税入。",
+    "hint": "盐税是硬通货，先紧财政",
+    "effects": {
+     "stats": {
+      "livelihood": 2,
+      "council": 1
+     },
+     "states": [
+      {
+       "id": "series.external_locals",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "管账的首长",
+    "line": "秋盐出账：两万一千石，比去年官办翻了近两倍。广商包了一半，澳门的船订了三成——剩下的，够全临高吃到明年夏。"
+   }
+  ]
  }
 ]

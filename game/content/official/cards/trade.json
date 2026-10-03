@@ -2503,5 +2503,460 @@
     "line": "头一个月，东门市柜上兑付四千一百两，假券只出了七张。卖炭的老汉把券折三层贴身收着，说这纸比地契还金贵。"
    }
   ]
+ },
+ {
+  "id": "TRADE-023",
+  "pool": "trade",
+  "series": "trade.dongmen",
+  "type": "key",
+  "title": "行栈头一单",
+  "source": {
+   "kind": "force",
+   "id": "trade",
+   "name": "商贸网络"
+  },
+  "tags": [
+   "广州",
+   "行栈"
+  ],
+  "requires": [
+   {
+    "used": "TRADE-019"
+   }
+  ],
+  "excludes": [],
+  "weight": 22,
+  "options": {
+   "left": {
+    "id": "kaizhang",
+    "label": "开张。",
+    "hint": "广纱换白糖，头一单要响",
+    "effects": {
+     "stats": {
+      "livelihood": 3
+     },
+     "wind": 1,
+     "days": 1,
+     "forces": {
+      "trade": {
+       "influence": 3
+      }
+     },
+     "states": [
+      {
+       "id": "series.trade_dongmen",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "TRADE-024"
+    ]
+   },
+   "right": {
+    "id": "xiantan",
+    "label": "先试水三成货。",
+    "hint": "广州水深，先伸脚趾",
+    "effects": {
+     "stats": {
+      "livelihood": 1
+     },
+     "states": [
+      {
+       "id": "series.trade_dongmen",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "TRADE-024"
+    ]
+   }
+  },
+  "lines": [
+   {
+    "who": "广商的代表",
+    "line": "广州行栈开张了。头一单找上门的是广纱行：拿一万匹夏布坯，换咱们的雪白糖——加一成利，唯一的要求：箱子上不许印髡字。"
+   }
+  ]
+ },
+ {
+  "id": "TRADE-024",
+  "pool": "trade",
+  "series": "trade.dongmen",
+  "type": "crisis",
+  "title": "市舶司的常例",
+  "source": {
+   "kind": "force",
+   "id": "trade",
+   "name": "商贸网络"
+  },
+  "tags": [
+   "广州",
+   "常例"
+  ],
+  "requires": [
+   {
+    "used": "TRADE-023"
+   }
+  ],
+  "excludes": [],
+  "weight": 20,
+  "options": {
+   "left": {
+    "id": "geichangli",
+    "label": "给。",
+    "hint": "阎王好见，小鬼难缠",
+    "effects": {
+     "stats": {
+      "livelihood": -1
+     },
+     "wind": -1,
+     "states": [
+      {
+       "id": "series.trade_dongmen",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "TRADE-025"
+    ]
+   },
+   "right": {
+    "id": "bugeichangli",
+    "label": "不给。",
+    "hint": "一次不给，次次不用给",
+    "effects": {
+     "stats": {
+      "livelihood": -2,
+      "council": 2
+     },
+     "wind": 2,
+     "states": [
+      {
+       "id": "series.trade_dongmen",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "TRADE-025"
+    ]
+   }
+  },
+  "lines": [
+   {
+    "who": "广商的代表",
+    "line": "货卡在市舶司三天了。书办伸手要『常例』：一船五十两，旺季翻倍。给，货明天就放；不给，他天天来验货——每验一次，霉损三成。"
+   }
+  ]
+ },
+ {
+  "id": "TRADE-025",
+  "pool": "trade",
+  "series": "trade.dongmen",
+  "type": "crisis",
+  "title": "会馆的请帖",
+  "source": {
+   "kind": "force",
+   "id": "trade",
+   "name": "商贸网络"
+  },
+  "tags": [
+   "广州",
+   "会馆"
+  ],
+  "requires": [
+   {
+    "used": "TRADE-024"
+   }
+  ],
+  "excludes": [],
+  "weight": 20,
+  "options": {
+   "left": {
+    "id": "fuyan",
+    "label": "赴宴。",
+    "hint": "鸿门宴也是宴，去了才知深浅",
+    "effects": {
+     "stats": {
+      "council": 2,
+      "livelihood": 1
+     },
+     "wind": 1,
+     "days": 1,
+     "states": [
+      {
+       "id": "series.trade_dongmen",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "TRADE-026"
+    ]
+   },
+   "right": {
+    "id": "chengbing",
+    "label": "称病辞了。",
+    "hint": "露面越少，根脚越稳",
+    "effects": {
+     "stats": {
+      "council": -1
+     },
+     "states": [
+      {
+       "id": "series.trade_dongmen",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "TRADE-026"
+    ]
+   }
+  },
+  "lines": [
+   {
+    "who": "广商的代表",
+    "line": "粤商总会的请帖到了：三日后琼花会馆的酒——请的是「临高行栈的东家」。帖子递得巧，咱们的东家是谁，全广州都在猜。"
+   }
+  ]
+ },
+ {
+  "id": "TRADE-026",
+  "pool": "trade",
+  "series": "trade.dongmen",
+  "type": "crisis",
+  "title": "身份的裂缝",
+  "source": {
+   "kind": "force",
+   "id": "guard",
+   "name": "保卫系统"
+  },
+  "tags": [
+   "广州",
+   "细作"
+  ],
+  "requires": [
+   {
+    "used": "TRADE-025"
+   }
+  ],
+  "excludes": [],
+  "weight": 22,
+  "options": {
+   "left": {
+    "id": "chezou",
+    "label": "连夜撤人。",
+    "hint": "根脚要紧，行栈可以再开",
+    "effects": {
+     "stats": {
+      "livelihood": -3,
+      "council": 1
+     },
+     "wind": -2,
+     "days": 1,
+     "states": [
+      {
+       "id": "series.trade_dongmen",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "TRADE-027"
+    ]
+   },
+   "right": {
+    "id": "dingzhu",
+    "label": "顶住不动。",
+    "hint": "一撤就坐实了身份",
+    "effects": {
+     "stats": {
+      "livelihood": 1
+     },
+     "wind": 2,
+     "personal": {
+      "faction_alarm": 2
+     },
+     "states": [
+      {
+       "id": "series.trade_dongmen",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "TRADE-027"
+    ]
+   }
+  },
+  "lines": [
+   {
+    "who": "午木",
+    "line": "广州来线：行栈的二掌柜被南海县的快班跟了三天。二掌柜是政保的人，代号「茶壶」——他要是扛不住，广州的网连根拔。"
+   }
+  ]
+ },
+ {
+  "id": "TRADE-027",
+  "pool": "trade",
+  "series": "trade.dongmen",
+  "type": "crisis",
+  "title": "广府的风向",
+  "source": {
+   "kind": "force",
+   "id": "trade",
+   "name": "商贸网络"
+  },
+  "tags": [
+   "广州",
+   "官府"
+  ],
+  "requires": [
+   {
+    "used": "TRADE-026"
+   }
+  ],
+  "excludes": [],
+  "weight": 20,
+  "options": {
+   "left": {
+    "id": "shoujin",
+    "label": "收缩观望。",
+    "hint": "风向不明，船收半帆",
+    "effects": {
+     "stats": {
+      "livelihood": -1
+     },
+     "wind": -1,
+     "states": [
+      {
+       "id": "series.trade_dongmen",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "TRADE-028"
+    ]
+   },
+   "right": {
+    "id": "jiada",
+    "label": "加大铺货。",
+    "hint": "趁禁令没落地，能铺多少铺多少",
+    "effects": {
+     "stats": {
+      "livelihood": 4
+     },
+     "wind": 3,
+     "states": [
+      {
+       "id": "series.trade_dongmen",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "TRADE-028"
+    ]
+   }
+  },
+  "lines": [
+   {
+    "who": "广商的代表",
+    "line": "广州府衙的风声变了：有人在臬司递了帖子，说临高髡货「惑众病民」，请禁。布政司还没批——这种禁令，批不批全看上头的账。"
+   }
+  ]
+ },
+ {
+  "id": "TRADE-028",
+  "pool": "trade",
+  "series": "trade.dongmen",
+  "type": "benefit",
+  "title": "紫明楼联号",
+  "source": {
+   "kind": "force",
+   "id": "trade",
+   "name": "商贸网络"
+  },
+  "tags": [
+   "广州",
+   "紫明楼"
+  ],
+  "requires": [
+   {
+    "used": "TRADE-027"
+   },
+   {
+    "state": "ziminglou.open",
+    "equals": true
+   }
+  ],
+  "excludes": [],
+  "weight": 18,
+  "options": {
+   "left": {
+    "id": "kaifenhao",
+    "label": "开联号。",
+    "hint": "一桌酒席，半个广州的耳目",
+    "effects": {
+     "stats": {
+      "livelihood": 3,
+      "council": 1
+     },
+     "wind": -1,
+     "days": 1,
+     "forces": {
+      "trade": {
+       "influence": 4
+      }
+     },
+     "states": [
+      {
+       "id": "series.trade_dongmen",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "huanyi2",
+    "label": "缓一缓。",
+    "hint": "广府的水太浑，先别蹚",
+    "effects": {
+     "stats": {
+      "council": 1
+     },
+     "wind": 1,
+     "states": [
+      {
+       "id": "series.trade_dongmen",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "广商的代表",
+    "line": "临高紫明楼的牌子在广州认开了——食客们传：临高的菜，一吃就知道不是凡火。东家们想请紫明楼在广州开联号，场地都看好了，就在濠畔街。"
+   }
+  ]
  }
 ]

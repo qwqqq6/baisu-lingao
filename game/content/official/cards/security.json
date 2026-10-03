@@ -847,6 +847,7 @@
      ]
     },
     "followups": [
+     "WAR-080",
      "SEC-022"
     ]
    },
@@ -881,6 +882,7 @@
      ]
     },
     "followups": [
+     "WAR-080",
      "SEC-024"
     ]
    }
@@ -1361,6 +1363,7 @@
      "wind": 4
     },
     "followups": [
+     "WAR-084",
      "SEC-014",
      "SEC-017"
     ]
@@ -1393,6 +1396,7 @@
      ]
     },
     "followups": [
+     "WAR-084",
      "SEC-014"
     ]
    }
@@ -1902,7 +1906,10 @@
        "value": "ready"
       }
      ]
-    }
+    },
+    "followups": [
+     "RET-001"
+    ]
    },
    "right": {
     "id": "xian_che_laoruo",
@@ -1926,7 +1933,10 @@
        "value": "ready"
       }
      ]
-    }
+    },
+    "followups": [
+     "RET-001"
+    ]
    }
   }
  },
@@ -1953,6 +1963,10 @@
    {
     "state": "retreat.stage",
     "equals": "ready"
+   },
+   {
+    "state": "retreat.farewell_done",
+    "equals": true
    }
   ],
   "excludes": [],
@@ -4760,6 +4774,1033 @@
    {
     "who": "值班秘书",
     "line": "县丞托人带了句话：愿与贵军「共保地方」。墙头草的礼，收是不收？"
+   }
+  ]
+ },
+ {
+  "id": "WAR-080",
+  "pool": "security",
+  "series": "war.local",
+  "type": "crisis",
+  "title": "海峡的桅影",
+  "source": {
+   "kind": "force",
+   "id": "guard",
+   "name": "保卫系统"
+  },
+  "tags": [
+   "官军",
+   "预警"
+  ],
+  "requires": [
+   {
+    "used": "SEC-011"
+   }
+  ],
+  "excludes": [],
+  "weight": 26,
+  "options": {
+   "left": {
+    "id": "baojing",
+    "label": "全营戒备。",
+    "hint": "桅影就是命令",
+    "effects": {
+     "stats": {
+      "military": 3
+     },
+     "days": 1,
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "WAR-081"
+    ]
+   },
+   "right": {
+    "id": "zaihecha",
+    "label": "再派快船。",
+    "hint": "看清楚了再动，一步不虚",
+    "effects": {
+     "stats": {
+      "military": 1
+     },
+     "wind": -1,
+     "days": 1,
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "WAR-081"
+    ]
+   }
+  },
+  "lines": [
+   {
+    "who": "陈海阳",
+    "line": "巡逻快船回来报：海峡北口出现大队福船，粗数四十条以上，帆影连成一线，往澄迈角来。"
+   },
+   {
+    "who": "陈海阳",
+    "line": "官军渡海了。咱们的船小，海上硬拼是送——撤回港里，还是海上袭扰？"
+   }
+  ]
+ },
+ {
+  "id": "WAR-081",
+  "pool": "security",
+  "series": "war.local",
+  "type": "crisis",
+  "title": "两头下注的村子",
+  "source": {
+   "kind": "force",
+   "id": "locals",
+   "name": "本地村社"
+  },
+  "tags": [
+   "官军",
+   "民心"
+  ],
+  "requires": [
+   {
+    "used": "WAR-080"
+   }
+  ],
+  "excludes": [],
+  "weight": 24,
+  "options": {
+   "left": {
+    "id": "buzhuijiu",
+    "label": "不追究。",
+    "hint": "人求生而已，心不能逼",
+    "effects": {
+     "stats": {
+      "people": 3
+     },
+     "wind": -1,
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "WAR-082"
+    ]
+   },
+   "right": {
+    "id": "lian",
+    "label": "立安连坐。",
+    "hint": "通敌的口子一开就收不住",
+    "effects": {
+     "stats": {
+      "people": -3,
+      "military": 2
+     },
+     "wind": 2,
+     "personal": {
+      "violence_risk": 1
+     },
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "WAR-082"
+    ]
+   }
+  },
+  "lines": [
+   {
+    "who": "冉耀",
+    "line": "北面三家村的天不亮就有人挑着鸡和米出了村——哨兵拦下来，领头的跪着说是『走亲戚』。方向是官军扎营的岭后。"
+   },
+   {
+    "who": "冉耀",
+    "line": "人心在秤上。这时候动刀，秤砣就掉官军那边去了。"
+   }
+  ]
+ },
+ {
+  "id": "WAR-082",
+  "pool": "security",
+  "series": "war.local",
+  "type": "crisis",
+  "title": "坚壁清野",
+  "source": {
+   "kind": "force",
+   "id": "guard",
+   "name": "保卫系统"
+  },
+  "tags": [
+   "官军",
+   "清野"
+  ],
+  "requires": [
+   {
+    "used": "WAR-080"
+   }
+  ],
+  "excludes": [],
+  "weight": 24,
+  "options": {
+   "left": {
+    "id": "qingye",
+    "label": "烧。",
+    "hint": "官军就地征粮的路，一把火断掉",
+    "effects": {
+     "stats": {
+      "military": 4,
+      "people": -4,
+      "livelihood": -2
+     },
+     "wind": 2,
+     "days": 1,
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "WAR-083"
+    ]
+   },
+   "right": {
+    "id": "cangdi",
+    "label": "藏粮疏散。",
+    "hint": "粮进山、人进营，村舍不动",
+    "effects": {
+     "stats": {
+      "military": 2,
+      "people": 2
+     },
+     "days": 1,
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "WAR-083"
+    ]
+   }
+  },
+  "lines": [
+   {
+    "who": "石志奇",
+    "line": "官军四十条船，粮运是软肋。坚壁清野是老法子：沿官道十里，粮下窖、井填死、村舍烧——烧的是自家的村舍。"
+   },
+   {
+    "who": "管民政的首长",
+    "line": "几家村子祖宅三代，烧之前，得有人去说。"
+   }
+  ]
+ },
+ {
+  "id": "WAR-083",
+  "pool": "security",
+  "series": "war.local",
+  "type": "crisis",
+  "title": "决战前夜",
+  "source": {
+   "kind": "force",
+   "id": "guard",
+   "name": "保卫系统"
+  },
+  "tags": [
+   "官军",
+   "军议"
+  ],
+  "requires": [
+   {
+    "used": "WAR-080"
+   }
+  ],
+  "excludes": [],
+  "weight": 26,
+  "options": {
+   "left": {
+    "id": "dingfangan",
+    "label": "照沙盘打。",
+    "hint": "仗在桌上打赢一半，剩下一半在壕里",
+    "effects": {
+     "stats": {
+      "military": 3
+     },
+     "days": 1,
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "jiping",
+    "label": "留一手预备队。",
+    "hint": "沙盘是死的，仗是活的",
+    "effects": {
+     "stats": {
+      "military": 2,
+      "people": 1
+     },
+     "days": 1,
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "石志奇",
+    "line": "沙盘摆好了：官军必走博铺官道，隘口是咽喉。弹药基数算过——每人四十发，打到明日午时。"
+   },
+   {
+    "who": "石志奇",
+    "line": "天亮前各连进阵地。您的位置在二线指挥所——这是命令，不是商量。"
+   }
+  ]
+ },
+ {
+  "id": "WAR-084",
+  "pool": "security",
+  "series": "war.local",
+  "type": "benefit",
+  "title": "战场的主将旗",
+  "source": {
+   "kind": "force",
+   "id": "guard",
+   "name": "保卫系统"
+  },
+  "tags": [
+   "官军",
+   "大捷"
+  ],
+  "requires": [
+   {
+    "state": "war.outcome",
+    "notEquals": "none"
+   },
+   {
+    "state": "official.beaten",
+    "equals": true
+   }
+  ],
+  "excludes": [],
+  "weight": 22,
+  "options": {
+   "left": {
+    "id": "shoucang",
+    "label": "收入营史馆。",
+    "hint": "旗是给后来人看的",
+    "effects": {
+     "stats": {
+      "military": 2,
+      "council": 2
+     },
+     "wind": 1,
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "WAR-085"
+    ]
+   },
+   "right": {
+    "id": "shaodiao2",
+    "label": "当众烧了。",
+    "hint": "烧的是旗，立的是威",
+    "effects": {
+     "stats": {
+      "people": 2
+     },
+     "wind": 2,
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "WAR-085"
+    ]
+   }
+  },
+  "lines": [
+   {
+    "who": "哨长",
+    "line": "战场上起获了官军主将的大旗和一方总兵关防。旗杆断了，旗面让血和泥糊了半边。"
+   },
+   {
+    "who": "值班秘书",
+    "line": "怎么处置？送来的伤兵营里就有认得这面旗的官军俘虏——他们看见旗，眼圈都是红的。"
+   }
+  ]
+ },
+ {
+  "id": "WAR-085",
+  "pool": "security",
+  "series": "war.local",
+  "type": "crisis",
+  "title": "降卒的营",
+  "source": {
+   "kind": "force",
+   "id": "guard",
+   "name": "保卫系统"
+  },
+  "tags": [
+   "官军",
+   "俘虏"
+  ],
+  "requires": [
+   {
+    "used": "WAR-084"
+   }
+  ],
+  "excludes": [],
+  "weight": 22,
+  "options": {
+   "left": {
+    "id": "shoubian",
+    "label": "择优收编。",
+    "hint": "官军的弓手铳手，练一练就是伏波军",
+    "effects": {
+     "stats": {
+      "military": 4,
+      "people": -1
+     },
+     "wind": 2,
+     "days": 2,
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "WAR-086"
+    ]
+   },
+   "right": {
+    "id": "qiansan",
+    "label": "遣散归乡。",
+    "hint": "发了路粮，各回各家",
+    "effects": {
+     "stats": {
+      "people": 4,
+      "military": -1
+     },
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "WAR-086"
+    ]
+   }
+  },
+  "lines": [
+   {
+    "who": "管民政的首长",
+    "line": "官军降卒四百一十七人，编了三个俘虏营。头一批愿留的二百六十人——里头有手艺的铁匠、船木匠、还有两个识字的书办。"
+   },
+   {
+    "who": "石志奇",
+    "line": "编进伏波军要过政保的手。冉耀说，宁可慢，不可漏。"
+   }
+  ]
+ },
+ {
+  "id": "WAR-086",
+  "pool": "security",
+  "series": "war.local",
+  "type": "benefit",
+  "title": "战后的海峡",
+  "source": {
+   "kind": "force",
+   "id": "guard",
+   "name": "保卫系统"
+  },
+  "tags": [
+   "官军",
+   "海防"
+  ],
+  "requires": [
+   {
+    "used": "WAR-085"
+   }
+  ],
+  "excludes": [],
+  "weight": 18,
+  "options": {
+   "left": {
+    "id": "xunluoqu",
+    "label": "常态巡海。",
+    "hint": "海峡的每一寸水，都要有咱们的船影",
+    "effects": {
+     "stats": {
+      "military": 3,
+      "livelihood": -1
+     },
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "xiuzheng",
+    "label": "休整补充。",
+    "hint": "船要修，人要歇",
+    "effects": {
+     "stats": {
+      "military": 1,
+      "people": 2
+     },
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "陈海阳",
+    "line": "官军水师的残部退回了海峡北岸，十几条破船泊在雷州港不敢出来。海峡眼下是空的——空的海峡，就是咱们的海峡。"
+   }
+  ]
+ },
+ {
+  "id": "RET-001",
+  "pool": "security",
+  "series": "security.guard",
+  "type": "crisis",
+  "title": "船与人的算术",
+  "source": {
+   "kind": "force",
+   "id": "council",
+   "name": "扩大会议"
+  },
+  "tags": [
+   "南渡",
+   "运力"
+  ],
+  "requires": [
+   {
+    "state": "retreat.stage",
+    "equals": "ready"
+   },
+   {
+    "state": "retreat.proposed",
+    "equals": true
+   },
+   {
+    "state": "retreat.farewell_done",
+    "notEquals": true
+   }
+  ],
+  "excludes": [],
+  "weight": 30,
+  "options": {
+   "left": {
+    "id": "suanzhang2",
+    "label": "连夜算清。",
+    "hint": "一条船一条船数，一个人一个人过",
+    "effects": {
+     "stats": {
+      "council": 2
+     },
+     "wind": 1,
+     "days": 1,
+     "states": [
+      {
+       "id": "series.security_guard",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "RET-002"
+    ]
+   },
+   "right": {
+    "id": "chaipai",
+    "label": "各口自报。",
+    "hint": "谁先上船，各口自己争去",
+    "effects": {
+     "stats": {
+      "council": -2
+     },
+     "wind": 2,
+     "personal": {
+      "faction_alarm": 2
+     },
+     "states": [
+      {
+       "id": "series.security_guard",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "RET-002"
+    ]
+   }
+  },
+  "lines": [
+   {
+    "who": "马千瞩",
+    "line": "船位的账算出来了：能动的船九条，载员连人带粮上限八百六十——咱们连归化民骨干，是一千三百人。"
+   },
+   {
+    "who": "马千瞩",
+    "line": "四百四十个名额，怎么砍，都是砍在骨头上的。名单给您，笔我下不去。"
+   }
+  ]
+ },
+ {
+  "id": "RET-002",
+  "pool": "security",
+  "series": "security.guard",
+  "type": "crisis",
+  "title": "带不带归化民",
+  "source": {
+   "kind": "force",
+   "id": "naturalized",
+   "name": "归化民组织"
+  },
+  "tags": [
+   "南渡",
+   "取舍"
+  ],
+  "requires": [
+   {
+    "used": "RET-001"
+   }
+  ],
+  "excludes": [],
+  "weight": 30,
+  "options": {
+   "left": {
+    "id": "guyuandai",
+    "label": "骨干带家眷。",
+    "hint": "带走一颗心，留下一片情",
+    "effects": {
+     "stats": {
+      "people": 3,
+      "council": -1
+     },
+     "wind": 2,
+     "states": [
+      {
+       "id": "series.security_guard",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "RET-003"
+    ]
+   },
+   "right": {
+    "id": "zhidaiguyuan",
+    "label": "只带骨干本人。",
+    "hint": "船位就是命，妇孺上不了船",
+    "effects": {
+     "stats": {
+      "people": -4,
+      "council": 2
+     },
+     "wind": 1,
+     "personal": {
+      "faction_alarm": 1
+     },
+     "states": [
+      {
+       "id": "series.security_guard",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "RET-003"
+    ]
+   }
+  },
+  "lines": [
+   {
+    "who": "管民政的首长",
+    "line": "归化民骨干一百四十人，家家都有婆娘娃。全带上，船不够；不带，人家凭什么跟你漂过黑水沟？"
+   },
+   {
+    "who": "值班秘书",
+    "line": "芳草地的教员把名单退回来了，附了一句：走可以，我的学生一个不带，我上不了船。"
+   }
+  ]
+ },
+ {
+  "id": "RET-003",
+  "pool": "security",
+  "series": "security.guard",
+  "type": "crisis",
+  "title": "带不走的机器",
+  "source": {
+   "kind": "force",
+   "id": "planning",
+   "name": "计划委员会"
+  },
+  "tags": [
+   "南渡",
+   "机械"
+  ],
+  "requires": [
+   {
+    "used": "RET-002"
+   }
+  ],
+  "excludes": [],
+  "weight": 26,
+  "options": {
+   "left": {
+    "id": "chaijie",
+    "label": "能拆的拆走。",
+    "hint": "机器比银子金贵",
+    "effects": {
+     "stats": {
+      "livelihood": 2
+     },
+     "days": 2,
+     "states": [
+      {
+       "id": "series.security_guard",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "RET-004"
+    ]
+   },
+   "right": {
+    "id": "maicang",
+    "label": "就地埋藏封存。",
+    "hint": "留个火种，等回来那天",
+    "effects": {
+     "stats": {
+      "council": 2
+     },
+     "wind": 1,
+     "days": 1,
+     "states": [
+      {
+       "id": "series.security_guard",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "RET-004"
+    ]
+   }
+  },
+  "lines": [
+   {
+    "who": "蒙德",
+    "line": "锅驼机三台，拆得走两台；镗床最金贵，也最沉——两条船的舱就这么让它吃了。"
+   },
+   {
+    "who": "蒙德",
+    "line": "剩下的，埋进山洞浇上混凝土，图纸我随身带。就是……这一埋，再见不知何年。"
+   }
+  ]
+ },
+ {
+  "id": "RET-004",
+  "pool": "security",
+  "series": "security.guard",
+  "type": "crisis",
+  "title": "走漏的风声",
+  "source": {
+   "kind": "force",
+   "id": "guard",
+   "name": "保卫系统"
+  },
+  "tags": [
+   "南渡",
+   "风声"
+  ],
+  "requires": [
+   {
+    "used": "RET-003"
+   }
+  ],
+  "excludes": [],
+  "weight": 26,
+  "options": {
+   "left": {
+    "id": "yancha",
+    "label": "封港清查。",
+    "hint": "出港前，一只鸟都别想飞出去",
+    "effects": {
+     "stats": {
+      "military": 2
+     },
+     "wind": -2,
+     "days": 1,
+     "states": [
+      {
+       "id": "series.security_guard",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "RET-005"
+    ]
+   },
+   "right": {
+    "id": "jiangji",
+    "label": "将计就计。",
+    "hint": "放个假消息：咱们要死守百仞",
+    "effects": {
+     "stats": {
+      "military": 1,
+      "council": 1
+     },
+     "wind": -1,
+     "states": [
+      {
+       "id": "series.security_guard",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "RET-005"
+    ]
+   }
+  },
+  "lines": [
+   {
+    "who": "午木",
+    "line": "码头上的一个挑夫失踪了——政保的线报，此人是琼山细作。船期若漏出去，海峡里等咱们的可能就不止是风浪。"
+   }
+  ]
+ },
+ {
+  "id": "RET-005",
+  "pool": "security",
+  "series": "security.guard",
+  "type": "crisis",
+  "title": "走不动的老人",
+  "source": {
+   "kind": "force",
+   "id": "council",
+   "name": "扩大会议"
+  },
+  "tags": [
+   "南渡",
+   "留守"
+  ],
+  "requires": [
+   {
+    "used": "RET-004"
+   }
+  ],
+  "excludes": [],
+  "weight": 26,
+  "options": {
+   "left": {
+    "id": "liushoudui",
+    "label": "组留守队。",
+    "hint": "留下的人守着临高的火种",
+    "effects": {
+     "stats": {
+      "people": 2,
+      "council": 2
+     },
+     "wind": 1,
+     "states": [
+      {
+       "id": "series.security_guard",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "RET-006"
+    ]
+   },
+   "right": {
+    "id": "yingtai",
+    "label": "硬抬上船。",
+    "hint": "一个都不能少——哪怕抬着",
+    "effects": {
+     "stats": {
+      "people": 3,
+      "livelihood": -1
+     },
+     "states": [
+      {
+       "id": "series.security_guard",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "RET-006"
+    ]
+   }
+  },
+  "lines": [
+   {
+    "who": "值班秘书",
+    "line": "有三位老首长走不了了：一位瘫了半年，一位说死也要死在临高，还有一位把船票让给了归化民的双胞胎。"
+   },
+   {
+    "who": "值班秘书",
+    "line": "他们说：埋在百仞滩，比埋在海那边强。"
+   }
+  ]
+ },
+ {
+  "id": "RET-006",
+  "pool": "security",
+  "series": "security.guard",
+  "type": "crisis",
+  "title": "码头点名夜",
+  "source": {
+   "kind": "force",
+   "id": "council",
+   "name": "扩大会议"
+  },
+  "tags": [
+   "南渡",
+   "告别"
+  ],
+  "requires": [
+   {
+    "used": "RET-005"
+   }
+  ],
+  "excludes": [],
+  "weight": 30,
+  "options": {
+   "left": {
+    "id": "dianming",
+    "label": "点名，登船。",
+    "hint": "名字念过，就是历史",
+    "effects": {
+     "stats": {
+      "council": 3,
+      "people": 2
+     },
+     "wind": 2,
+     "days": 1,
+     "states": [
+      {
+       "id": "series.security_guard",
+       "op": "add",
+       "value": 1
+      },
+      {
+       "id": "retreat.farewell_done",
+       "op": "set",
+       "value": true
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "wuyan",
+    "label": "不点名，悄悄走。",
+    "hint": "哭声留在岸上，人上船",
+    "effects": {
+     "stats": {
+      "council": 1
+     },
+     "wind": 1,
+     "states": [
+      {
+       "id": "series.security_guard",
+       "op": "add",
+       "value": 1
+      },
+      {
+       "id": "retreat.farewell_done",
+       "op": "set",
+       "value": true
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "值班秘书",
+    "line": "子时，博铺码头。九条船压得吃水线到了肩，名册在马灯下翻页。念一个名，应一声，上一个跳板。"
+   },
+   {
+    "who": "值班秘书",
+    "line": "岸上百仞滩的方向，留守的人点起了一排火把。没有人说话——火把就是话。"
    }
   ]
  }

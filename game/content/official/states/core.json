@@ -1308,5 +1308,18 @@
    "series"
   ],
   "desc": "series.leeq_workers 系列进度。"
+ },
+ {
+  "id": "retreat.farewell_done",
+  "name": "南渡告别礼成",
+  "type": "boolean",
+  "scope": "global",
+  "default": false,
+  "visibility": "hidden",
+  "mutability": "immutable",
+  "tags": [
+   "retreat"
+  ],
+  "desc": "码头点名完成，扬帆之夜方可出场。"
  }
 ]
