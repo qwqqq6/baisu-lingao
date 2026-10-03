@@ -49,6 +49,25 @@ def sea(img, horizon, dark, light, wave_rows=40):
             px[x + dx, y] = light if random.random() < 0.7 else dark
 
 
+def dryland(img, horizon, dark, light):
+    """旱地滩涂：渐变土色 + 干裂口（荒年版，枯树立于地上而非海上）。"""
+    px = img.load()
+    for y in range(horizon, H):
+        depth = (y - horizon) / max(1, H - horizon)
+        base = tuple(int(dark[i] + (light[i] - dark[i]) * depth * 0.6) for i in range(3))
+        for x in range(W):
+            px[x, y] = base
+    for _ in range(26):
+        x = random.randint(2, W - 4)
+        y = horizon + random.randint(2, H - horizon - 4)
+        ln = random.randint(5, 16)
+        for k in range(ln):
+            if random.random() < 0.85:
+                px[min(W - 1, x + k), y] = dark
+            if random.random() < 0.3 and y + 1 < H:
+                px[min(W - 1, x + k), y + 1] = dark
+
+
 def stars(img, horizon, colors, count, min_y=2, max_y_frac=0.6):
     px = img.load()
     for _ in range(count):
@@ -73,40 +92,82 @@ def moon(img, cx, cy, r, color, halo):
                 px[x, y] = halo
 
 
-def city(img, horizon, color, windows, win_color, broken=False):
-    """城郭剪影：百仞城方块群 + 点亮窗。"""
+def village(img, horizon, color, lamps, lamp_color, broken=False):
+    """明末渔村与穿越营地剪影：茅草屋（人字顶）、椰树、木栅栏、哨塔、零星灯火。
+    崇祯年间的临高没有高楼——登陆地博铺是海边一片村寨。"""
     px = img.load()
-    rng = random.Random(7)
-    x = 4
-    heights = [22, 34, 26, 44, 30, 38, 24, 34, 28, 40, 26, 32]
-    if broken:
-        heights[3] = 16
-        heights[4] = 10
-    for i, bh in enumerate(heights):
-        bw = rng.randint(10, 16)
-        top_y = horizon - bh
-        for yy in range(top_y, horizon):
-            for xx in range(x, min(x + bw, W - 2)):
+    rng = random.Random(1628)
+
+    def hut(x, w, h):
+        # 夯土墙
+        top = horizon - h
+        for yy in range(top, horizon):
+            for xx in range(x, x + w):
                 px[xx, yy] = color
-        # 屋檐
-        for xx in range(x - 1, min(x + bw + 1, W - 2)):
-            px[xx, top_y] = color
-            px[xx, top_y + 1] = color
-        # 窗
-        if not broken or i not in (3, 4):
-            for _ in range(windows):
-                wx = rng.randint(x + 1, x + bw - 3)
-                wy = rng.randint(top_y + 3, horizon - 4)
-                px[wx, wy] = win_color
-                if rng.random() < 0.5:
-                    px[wx + 1, wy] = win_color
-        x += bw + rng.randint(1, 3)
-        if x > W - 14:
+        # 人字草顶，出檐
+        roof = max(3, w // 2)
+        for r in range(roof + 1):
+            half = ((w // 2 + 2) * (roof - r)) // roof
+            for xx in range(x - 1, x + w + 1):
+                if abs(xx - (x + (w - 1) / 2)) <= half:
+                    px[xx, top - r] = color
+        if lamps and rng.random() < 0.75:
+            lx = x + rng.randint(1, max(1, w - 3))
+            px[lx, top + rng.randint(1, max(1, h - 2))] = lamp_color
+
+    def palm(x, h, lean):
+        # 弯干 + 顶端叶冠
+        cx = float(x)
+        for i in range(h):
+            xi = int(round(cx))
+            if 0 <= xi < W:
+                px[xi, horizon - 1 - i] = color
+            cx += lean
+        tx, ty = int(round(cx)), horizon - h
+        for dx in (-3, -2, 2, 3):
+            for k in (0, 1):
+                if 0 <= tx + dx < W and 0 <= ty + k < H:
+                    px[tx + dx, ty + k] = color
+        for dx in (-1, 0, 1):
+            if 0 <= tx + dx < W:
+                px[tx + dx, ty - 1] = color
+
+    def tower(x, h):
+        # 木哨塔：四腿脚手架 + 横撑 + 顶棚（营地标志）
+        for i in range(h):
+            y = horizon - 1 - i
+            for xx in (x, x + 1, x + 5, x + 6):
+                if 0 <= xx < W:
+                    px[xx, y] = color
+            if i in (h // 3, 2 * h // 3):
+                for xx in range(x, x + 7):
+                    if 0 <= xx < W:
+                        px[xx, y] = color
+        for xx in range(x - 1, x + 8):
+            if 0 <= xx < W and horizon - h >= 0:
+                px[xx, horizon - h] = color
+                if rng.random() < 0.6 and horizon - h - 1 >= 0:
+                    px[xx, horizon - h - 1] = color
+
+    palm(8, 14, 0.18)
+    x = 16
+    plan = [(11, 8), (9, 6), (12, 9), (13, 7), (10, 6), (12, 8), (9, 5)]
+    for j, (w, h) in enumerate(plan):
+        if x + w > W - 12:
             break
-    # 地面
-    for y in range(horizon, min(horizon + 6, H)):
-        for xx in range(W):
-            px[xx, y] = color
+        hh = max(4, h - (2 if broken and rng.random() < 0.4 else 0))
+        hut(x, w, hh)
+        x += w + rng.randint(2, 5)
+        if j == 3:
+            tower(x + 1, 13 if broken else 20)
+            x += 10
+    palm(min(W - 8, x + 3), 12, -0.15)
+    # 岸线上的木栅栏
+    for xx in range(2, W - 2):
+        if rng.random() < 0.3:
+            px[xx, horizon] = color
+            if rng.random() < 0.35:
+                px[xx, horizon - 1] = color
 
 
 def smoke(img, x_top, horizon, color, columns=3):
@@ -153,23 +214,28 @@ def dead_trees(img, horizon, color):
 
 
 def ships(img, horizon, color, count=6, sails=True):
+    """中式渔船剪影：两端翘头船体 + 单桅硬帆。"""
     px = img.load()
     for i in range(count):
         x = random.randint(4, W - 16)
         y = horizon + random.randint(2, 18)
-        # 桅
-        for k in range(5):
-            px[x + 4, y - k] = color
-        # 船体
+        # 船体（翘头）
         for dx in range(10):
             px[x + dx, y] = color
-            if dx in (0, 9):
-                px[x + dx, y + 1] = color
+        px[x, y - 1] = color
+        px[x - 1, y - 1] = color
+        px[x + 9, y - 1] = color
+        px[x + 10, y - 1] = color
+        # 单桅 + 硬帆面
+        for k in range(6):
+            px[x + 5, y - 1 - k] = color
         if sails:
-            for k in range(3):
-                px[x + 3, y - 3 - k] = color
-                px[x + 5, y - 3 - k] = color
-            px[x + 4, y - 4] = color
+            for k in range(1, 5):
+                px[x + 4, y - k] = color
+                px[x + 6, y - k] = color
+                if k < 4:
+                    px[x + 3, y - k] = color
+                    px[x + 7, y - k] = color
 
 
 def save(img, name):
@@ -192,7 +258,7 @@ for i in range(60):
     for dx in range(-w, w + 1):
         if random.random() < 0.6:
             px[min(W - 1, max(0, 106 + dx)), y] = (180, 160, 110)
-city(img, HOR, (10, 8, 14), 3, (232, 182, 92))
+village(img, HOR, (10, 8, 14), 3, (232, 182, 92))
 save(img, "bg-calm.png")
 
 # ---------------- 2) people：民怨之火 ----------------
@@ -202,7 +268,7 @@ sky_gradient(img, (30, 12, 12), (66, 24, 18), (110, 44, 26), HOR)
 stars(img, HOR, [(240, 160, 90)], 8)
 moon(img, 30, 30, 8, (150, 80, 50), (90, 50, 36))
 sea(img, HOR, (20, 12, 14), (60, 30, 24), 36)
-city(img, HOR, (12, 6, 8), 1, (240, 120, 60), broken=True)
+village(img, HOR, (12, 6, 8), 1, (240, 120, 60), broken=True)
 smoke(img, 30, HOR, (70, 56, 52), 4)
 smoke(img, 86, HOR, (60, 48, 46), 3)
 fires(img, HOR, (240, 120, 50), (200, 60, 30), 14)
@@ -213,9 +279,9 @@ img = Image.new("RGB", (W, H))
 HOR = 158
 sky_gradient(img, (36, 32, 20), (56, 48, 30), (86, 72, 44), HOR)
 stars(img, HOR, [(160, 150, 120)], 10)
-sea(img, HOR, (26, 26, 18), (58, 54, 38), 24)
+dryland(img, HOR, (44, 36, 22), (74, 60, 34))
 dead_trees(img, HOR, (34, 28, 20))
-city(img, HOR, (16, 14, 10), 1, (160, 130, 70), broken=True)
+village(img, HOR, (16, 14, 10), 1, (160, 130, 70), broken=True)
 # 地面裂纹
 px = img.load()
 for _ in range(9):
@@ -233,7 +299,7 @@ HOR = 148
 sky_gradient(img, (20, 16, 28), (48, 26, 36), (96, 40, 32), HOR)
 stars(img, HOR, [(200, 120, 90)], 8)
 sea(img, HOR, (14, 14, 24), (48, 34, 38), 34)
-city(img, HOR, (12, 8, 14), 2, (255, 140, 60))
+village(img, HOR, (12, 8, 14), 2, (255, 140, 60))
 # 烽燧冲天
 smoke(img, 44, HOR, (140, 70, 40), 2)
 smoke(img, 96, HOR, (120, 60, 36), 2)
@@ -255,7 +321,7 @@ for y in range(6, HOR - 10):
     if random.random() < 0.3:
         px[x, y + 1] = (90, 96, 112)
 sea(img, HOR, (16, 18, 24), (44, 46, 54), 30)
-city(img, HOR, (10, 10, 14), 2, (150, 140, 100))
+village(img, HOR, (10, 10, 14), 2, (150, 140, 100))
 save(img, "bg-council.png")
 
 # ---------------- 6) wind：风声之海 ----------------
@@ -265,7 +331,7 @@ sky_gradient(img, (16, 18, 30), (30, 34, 46), (52, 54, 60), HOR)
 stars(img, HOR, [(180, 180, 190)], 6)
 sea(img, HOR, (12, 16, 26), (40, 48, 60), 60)
 ships(img, HOR, (14, 16, 22), 8, sails=True)
-city(img, HOR, (10, 10, 16), 1, (200, 160, 90), broken=True)
+village(img, HOR, (10, 10, 16), 1, (200, 160, 90), broken=True)
 save(img, "bg-wind.png")
 
 # ---------------- 7) gold：全盛星夜 ----------------
@@ -282,7 +348,7 @@ for i in range(50):
     for dx in range(-w, w + 1):
         if random.random() < 0.5:
             px[min(W - 1, max(0, 40 + dx)), y] = (200, 180, 120)
-city(img, HOR, (10, 12, 22), 5, (255, 210, 120))
+village(img, HOR, (10, 12, 22), 5, (255, 210, 120))
 save(img, "bg-gold.png")
 
 # ---------------- 8) end-collapse：终局余烬 ----------------
@@ -291,7 +357,7 @@ HOR = 160
 sky_gradient(img, (18, 6, 6), (44, 12, 8), (84, 24, 12), HOR)
 stars(img, HOR, [(220, 90, 40)], 10)
 sea(img, HOR, (16, 8, 8), (50, 20, 14), 26)
-city(img, HOR, (10, 4, 4), 0, (200, 90, 40), broken=True)
+village(img, HOR, (10, 4, 4), 0, (200, 90, 40), broken=True)
 smoke(img, 24, HOR, (52, 30, 26), 3)
 smoke(img, 90, HOR, (44, 26, 22), 2)
 fires(img, HOR, (230, 100, 40), (180, 50, 20), 16)
@@ -320,6 +386,9 @@ def boat(x, y, s, mcolor):
         fpx[x + dx, y] = mcolor
         if dx in range(0, s * 2, 3):
             fpx[x + dx, y + 1] = mcolor
+    # 两端翘头（中式）
+    for ex in (0, 1, s * 2 - 2, s * 2 - 1):
+        fpx[x + ex, y - 1] = mcolor
     # 桅与帆
     for k in range(s + 4):
         fpx[x + s, y - k] = mcolor
