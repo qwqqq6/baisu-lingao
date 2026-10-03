@@ -77,6 +77,27 @@ h1, h2, h3 { font-weight: 700; letter-spacing: 0.06em; }
 .reign > * { position: relative; z-index: 1; }
 @keyframes candle { 0%, 100% { opacity: .75; } 50% { opacity: 1; } }
 
+/* —— 像素背景：data-bg 换图（view 层按四柱/风声挑选） ——
+   144x256 小图放大 + pixelated；压暗渐变保证卡面与文字可读 */
+.reign[data-bg] {
+  --bg-img: url("../assets/bg/bg-calm.png");
+  image-rendering: pixelated;
+  background-image:
+    radial-gradient(ellipse 62% 46% at 50% 34%, rgba(201, 164, 92, 0.08), transparent 70%),
+    linear-gradient(180deg, rgba(10, 7, 4, 0.58) 0%, rgba(9, 6, 3, 0.68) 100%),
+    var(--bg-img);
+  background-size: 100% 100%, 100% 100%, cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.reign[data-bg="calm"]       { --bg-img: url("../assets/bg/bg-calm.png"); }
+.reign[data-bg="people"]     { --bg-img: url("../assets/bg/bg-people.png"); }
+.reign[data-bg="livelihood"] { --bg-img: url("../assets/bg/bg-livelihood.png"); }
+.reign[data-bg="military"]   { --bg-img: url("../assets/bg/bg-military.png"); }
+.reign[data-bg="council"]    { --bg-img: url("../assets/bg/bg-council.png"); }
+.reign[data-bg="wind"]       { --bg-img: url("../assets/bg/bg-wind.png"); }
+.reign[data-bg="gold"]       { --bg-img: url("../assets/bg/bg-gold.png"); }
+
 /* —— 宝座行：金线图标 + 进度细条 —— */
 .meters { display: flex; gap: clamp(20px, 6.5vw, 72px); margin-top: clamp(14px, 2.6vh, 24px); }
 .meter { position: relative; display: flex; flex-direction: column; align-items: center; gap: 5px; }
@@ -400,8 +421,21 @@ h1, h2, h3 { font-weight: 700; letter-spacing: 0.06em; }
     radial-gradient(ellipse 60% 40% at 50% 26%, rgba(158, 36, 24, 0.12), transparent 70%),
     linear-gradient(180deg, #100c07, #1a1209);
 }
-.gameover h1 { font-size: 34px; color: var(--gold); text-shadow: 0 4px 20px rgba(0, 0, 0, 0.7); }
-.gameover-text { max-width: 640px; margin: 16px auto; line-height: 2.1; white-space: pre-line; color: var(--ink-light); }
+/* 结局像素背景：默认崩局余烬，专属结局（如 taiwan）各自覆盖 */
+.gameover[data-ending] {
+  --end-img: url("../assets/bg/end-collapse.png");
+  image-rendering: pixelated;
+  background-image:
+    radial-gradient(ellipse 60% 40% at 50% 26%, rgba(158, 36, 24, 0.10), transparent 70%),
+    linear-gradient(180deg, rgba(8, 5, 3, 0.55) 0%, rgba(9, 5, 3, 0.72) 100%),
+    var(--end-img);
+  background-size: 100% 100%, 100% 100%, cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.gameover[data-ending="taiwan"] { --end-img: url("../assets/bg/end-taiwan.png"); }
+.gameover h1 { font-size: 34px; color: var(--gold); text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9), 0 2px 6px rgba(0, 0, 0, 0.9); }
+.gameover-text { max-width: 640px; margin: 16px auto; line-height: 2.1; white-space: pre-line; color: var(--ink-light); text-shadow: 0 2px 8px rgba(0, 0, 0, 0.9); }
 .gameover-stats {
   display: inline-block; text-align: left;
   background: rgba(44, 35, 24, 0.85); border: 1px solid rgba(201, 164, 92, 0.4);

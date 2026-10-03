@@ -115,7 +115,8 @@ export function renderStart(characters, onSelect, onHelp) {
 
 /**
  * 结局画面（总崩局 / 继任危机 / 专属结局共用）。
- * 专属结局（effects.ending）带自定义标题/文案/按钮。
+ * 专属结局（effects.ending，如 taiwan）带自定义标题/文案/按钮与专属背景图；
+ * 其余结局共用崩局背景（data-ending 驱动 CSS 换图）。
  * @param {*} game
  */
 export function renderGameOver(game) {
@@ -131,7 +132,7 @@ export function renderGameOver(game) {
       : COLLAPSE_TEXTS[reason]?.text || "");
   const buttonLabel = game.gameOverButton || "重新开始";
   app.append(
-    h("div", { class: "gameover" },
+    h("div", { class: "gameover", dataset: { ending: reason } },
       h("h1", {}, title),
       h("p", { class: "gameover-text" }, text),
       h("div", { class: "gameover-stats" },

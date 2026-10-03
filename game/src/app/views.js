@@ -10,9 +10,12 @@ import { h, avatarElForName } from "./dom.js";
 import { TYPE_LABELS, PILLAR_LABELS } from "./labels.js";
 import { attachSwipe, flyOut } from "./swipe.js";
 
-/** 危险阈值（图标泛红）。 */
+/** 危险阈值（图标泛红、背景切换为危机图，两者对齐）。 */
 const DANGER_LOW = 20;
 const DANGER_HIGH = 80;
+/** 背景切换：风声高涨 / 全柱鼎盛阈值。 */
+const BG_WIND_HIGH = 70;
+const BG_GOLD_MIN = 65;
 /** 纪事在浮层中的显示条数。 */
 const LOG_ROWS = 40;
 
@@ -35,6 +38,27 @@ const PILLAR_SVGS = {
 // ---------------------------------------------------------------- 主界面
 
 /**
+ * 按局势挑像素背景键（挂 .reign 的 data-bg，CSS 换图）：
+ * 任一柱进入危险区（与图标泛红同阈值）→ 该柱危机图，多柱同危取离中点最远者；
+ * 风声高涨 → 暗潮涌动；四柱皆盛 → 金光普照；否则太平月夜。
+ * @param {*} game
+ * @returns {"people"|"livelihood"|"military"|"council"|"wind"|"gold"|"calm"}
+ */
+export function pickBackground(game) {
+  const pillars = Object.keys(PILLAR_LABELS).map((key) => {
+    const value = game.state.get(`core.pillar.${key}`);
+    return { key, value, extremity: Math.abs(value - 50) };
+  });
+  const worst = pillars
+    .filter((p) => p.value <= DANGER_LOW || p.value >= DANGER_HIGH)
+    .sort((a, b) => b.extremity - a.extremity)[0];
+  if (worst) return worst.key;
+  if (game.state.get("core.wind") >= BG_WIND_HIGH) return "wind";
+  if (pillars.every((p) => p.value >= BG_GOLD_MIN)) return "gold";
+  return "calm";
+}
+
+/**
  * 主界面：宝座行 + 卡台（斜向选项）+ 底部纪年 + 角落浮钮；随后渲染当前卡。
  * @param {*} game
  * @param {object} handlers
@@ -45,7 +69,7 @@ export function renderMain(game, handlers) {
   const ruler = game.ruler;
 
   app.append(
-    h("div", { class: "reign" },
+    h("div", { class: "reign", dataset: { bg: pickBackground(game) } },
       renderMeters(game),
       h("div", { class: "reign-stage" },
         h("button", { class: "choice choice-left", id: "choice-left", title: "向左滑动批复" }),
