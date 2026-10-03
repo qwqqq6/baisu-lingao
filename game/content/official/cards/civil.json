@@ -2209,5 +2209,1380 @@
     "line": "毕业生上台领证。有村里老人专程来看——自家娃穿学生服、领文书，老人捧着那张纸，手一直在抖。"
    }
   ]
+ },
+ {
+  "id": "MED-001",
+  "pool": "civil",
+  "series": "medic.safety",
+  "type": "key",
+  "title": "医务所扩编",
+  "source": {
+   "kind": "force",
+   "id": "naturalized",
+   "name": "归化民组织"
+  },
+  "tags": [
+   "医疗"
+  ],
+  "requires": [
+   {
+    "used": "LAB-003"
+   }
+  ],
+  "excludes": [],
+  "weight": 22,
+  "options": {
+   "left": {
+    "id": "kuobian",
+    "label": "扩。",
+    "hint": "病床多一张，人心稳一分",
+    "effects": {
+     "stats": {
+      "people": 3,
+      "livelihood": -1
+     },
+     "days": 1,
+     "states": [
+      {
+       "id": "series.medic_safety",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "xiankang",
+    "label": "先看眼前。",
+    "hint": "医的人手，比房的间数金贵",
+    "effects": {
+     "stats": {
+      "people": 1
+     },
+     "states": [
+      {
+       "id": "series.medic_safety",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "医务所的医生",
+    "line": "首长，医务所的六张床不够了：疟疾的、外伤的、生产的，挤在一处。再不扩，下一场病就要出人命。"
+   }
+  ]
+ },
+ {
+  "id": "MED-002",
+  "pool": "civil",
+  "series": "medic.safety",
+  "type": "key",
+  "title": "第一台手术",
+  "source": {
+   "kind": "force",
+   "id": "naturalized",
+   "name": "归化民组织"
+  },
+  "tags": [
+   "医疗",
+   "手术"
+  ],
+  "requires": [
+   {
+    "state": "series.medic_safety",
+    "gte": 1
+   }
+  ],
+  "excludes": [],
+  "weight": 24,
+  "options": {
+   "left": {
+    "id": "dangkai",
+    "label": "开刀。",
+    "hint": "不开刀，今夜人就没了",
+    "effects": {
+     "stats": {
+      "people": 3,
+      "military": 1
+     },
+     "wind": 2,
+     "days": 1,
+     "states": [
+      {
+       "id": "series.medic_safety",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "baoshou",
+    "label": "保守用药。",
+    "hint": "刀下亡人，医道就完了",
+    "effects": {
+     "stats": {
+      "people": -2
+     },
+     "personal": {
+      "faction_alarm": 1
+     },
+     "states": [
+      {
+       "id": "series.medic_safety",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "医务所的医生",
+    "line": "伏波军的班长腹中中了箭，草药顶不住了。剖开取箭、缝合，咱们做得到——就是这一刀下去，成了是救命，败了，全村都会说髡贼的医生拿人试刀。"
+   },
+   {
+    "who": "医务所的医生",
+    "line": "他家属在门外跪着。您批了，我就下手。"
+   }
+  ],
+  "variants": [
+   {
+    "id": "shoushu_kanjian",
+    "kind": "stage",
+    "when": {
+     "conditions": [
+      {
+       "day": {
+        "gte": 60
+       }
+      }
+     ]
+    },
+    "extraHint": "第二批归化民护士已能上台递器械，这一刀比头一回稳了。"
+   }
+  ]
+ },
+ {
+  "id": "MED-003",
+  "pool": "civil",
+  "series": "medic.safety",
+  "type": "backlash",
+  "title": "手术的风波",
+  "source": {
+   "kind": "force",
+   "id": "locals",
+   "name": "本地村社"
+  },
+  "tags": [
+   "医疗",
+   "流言"
+  ],
+  "requires": [
+   {
+    "used": "MED-002"
+   }
+  ],
+  "excludes": [],
+  "weight": 20,
+  "options": {
+   "left": {
+    "id": "zhangbang",
+    "label": "张榜说明。",
+    "hint": "谣言怕的就是白纸黑字",
+    "effects": {
+     "stats": {
+      "people": 2
+     },
+     "wind": -1,
+     "states": [
+      {
+       "id": "series.medic_safety",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "buli",
+    "label": "由它去。",
+    "hint": "救命的事，没工夫辩经",
+    "effects": {
+     "stats": {
+      "people": -2
+     },
+     "wind": 2,
+     "states": [
+      {
+       "id": "series.medic_safety",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "村里的郎中",
+    "line": "外头传开了：髡贼的医生开了膛又缝上，是取活人魂魄的妖法。昨夜起，看病的人少了一半——有病人宁可回家喝符水。"
+   }
+  ]
+ },
+ {
+  "id": "MED-004",
+  "pool": "civil",
+  "series": "medic.safety",
+  "type": "crisis",
+  "title": "药品见底",
+  "source": {
+   "kind": "force",
+   "id": "naturalized",
+   "name": "归化民组织"
+  },
+  "tags": [
+   "医疗",
+   "药材"
+  ],
+  "requires": [
+   {
+    "state": "series.medic_safety",
+    "gte": 2
+   }
+  ],
+  "excludes": [],
+  "weight": 20,
+  "options": {
+   "left": {
+    "id": "zhongyao",
+    "label": "自种药材。",
+    "hint": "求人的药，不如自己地里的",
+    "effects": {
+     "stats": {
+      "livelihood": -1,
+      "people": 2
+     },
+     "days": 2,
+     "states": [
+      {
+       "id": "series.medic_safety",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "gaojiashou",
+    "label": "高价收药。",
+    "hint": "银子花得出去，也是本事",
+    "effects": {
+     "stats": {
+      "livelihood": -2,
+      "people": 1
+     },
+     "wind": 1,
+     "states": [
+      {
+       "id": "series.medic_safety",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "医务所的医生",
+    "line": "奎宁、酒精、纱布，都在见底。广州的药市断了供，澳门的船一时到不了。疟疾可不等这些。"
+   }
+  ]
+ },
+ {
+  "id": "MED-005",
+  "pool": "civil",
+  "series": "medic.safety",
+  "type": "daily",
+  "title": "接生婆训练班",
+  "source": {
+   "kind": "force",
+   "id": "naturalized",
+   "name": "归化民组织"
+  },
+  "tags": [
+   "医疗",
+   "妇幼"
+  ],
+  "requires": [
+   {
+    "state": "series.medic_safety",
+    "gte": 2
+   }
+  ],
+  "excludes": [],
+  "weight": 16,
+  "options": {
+   "left": {
+    "id": "kaiban",
+    "label": "开班。",
+    "hint": "洗手的接生婆，救的是两代人",
+    "effects": {
+     "stats": {
+      "people": 3
+     },
+     "wind": 1,
+     "states": [
+      {
+       "id": "series.medic_safety",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "zhaomu",
+    "label": "先只管营里。",
+    "hint": "一步跨到村里，怕人家不领情",
+    "effects": {
+     "stats": {
+      "people": 1
+     },
+     "states": [
+      {
+       "id": "series.medic_safety",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "医务所的医生",
+    "line": "村里新生儿，十个里保不住九个半——产妇的命更是听天由命。想办个班，教接生婆洗手、消毒、剪脐带。杜主任说她来动员。"
+   }
+  ]
+ },
+ {
+  "id": "MED-006",
+  "pool": "civil",
+  "series": "medic.safety",
+  "type": "daily",
+  "title": "卫生条例",
+  "source": {
+   "kind": "force",
+   "id": "council",
+   "name": "扩大会议"
+  },
+  "tags": [
+   "医疗",
+   "条例"
+  ],
+  "requires": [
+   {
+    "state": "series.medic_safety",
+    "gte": 3
+   }
+  ],
+  "excludes": [],
+  "weight": 16,
+  "options": {
+   "left": {
+    "id": "zhunxing2",
+    "label": "全营推行。",
+    "hint": "卫生是管出来的，不是盼出来的",
+    "effects": {
+     "stats": {
+      "people": 3,
+      "council": -1
+     },
+     "wind": 1,
+     "states": [
+      {
+       "id": "series.medic_safety",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "zhongdian",
+    "label": "先管水源。",
+    "hint": "一口井的干净，赛过十贴药",
+    "effects": {
+     "stats": {
+      "people": 2
+     },
+     "states": [
+      {
+       "id": "series.medic_safety",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "医务所的医生",
+    "line": "草拟了卫生条例：饮水必沸、粪坑远离水井、灶房灭蝇、疫者隔离。条条都是小事，条条都要人管、要钱办。"
+   }
+  ]
+ },
+ {
+  "id": "MED-007",
+  "pool": "civil",
+  "series": "medic.safety",
+  "type": "crisis",
+  "title": "瞒报的疫病",
+  "source": {
+   "kind": "force",
+   "id": "naturalized",
+   "name": "归化民组织"
+  },
+  "tags": [
+   "医疗",
+   "疫病"
+  ],
+  "requires": [
+   {
+    "state": "series.medic_safety",
+    "gte": 3
+   }
+  ],
+  "excludes": [],
+  "weight": 22,
+  "options": {
+   "left": {
+    "id": "checha2",
+    "label": "彻查瞒报。",
+    "hint": "瞒疫比疫更毒",
+    "effects": {
+     "stats": {
+      "people": 2,
+      "council": 1
+     },
+     "wind": 1,
+     "days": 1,
+     "states": [
+      {
+       "id": "series.medic_safety",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "xianzhi",
+    "label": "先隔离病人。",
+    "hint": "追责以后说，救人现在办",
+    "effects": {
+     "stats": {
+      "people": 3,
+      "livelihood": -1
+     },
+     "states": [
+      {
+       "id": "series.medic_safety",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "医务所的医生",
+    "line": "坏消息：劳工棚里有痢疾，已有七人病倒——工头怕误了工期瞒了四天。病号还在一个灶上吃饭。"
+   }
+  ]
+ },
+ {
+  "id": "MED-008",
+  "pool": "civil",
+  "series": "medic.safety",
+  "type": "benefit",
+  "title": "药房盘点",
+  "source": {
+   "kind": "force",
+   "id": "naturalized",
+   "name": "归化民组织"
+  },
+  "tags": [
+   "医疗"
+  ],
+  "requires": [
+   {
+    "state": "series.medic_safety",
+    "gte": 4
+   }
+  ],
+  "excludes": [],
+  "weight": 14,
+  "options": {
+   "left": {
+    "id": "zhangbang2",
+    "label": "账目公开。",
+    "hint": "药房干净，人心才干净",
+    "effects": {
+     "stats": {
+      "people": 2,
+      "council": 1
+     },
+     "states": [
+      {
+       "id": "series.medic_safety",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "neibu",
+    "label": "内部存档。",
+    "hint": "账是给上面看的，不是给闲话看的",
+    "effects": {
+     "stats": {
+      "council": 1
+     },
+     "states": [
+      {
+       "id": "series.medic_safety",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "医务所的医生",
+    "line": "月底盘药：出进两抵，账物相符。归化民药剂员经手的每一两药都有签名画押——这一年，没出过一次错。"
+   }
+  ]
+ },
+ {
+  "id": "DLY-001",
+  "pool": "civil",
+  "series": "daily.life",
+  "type": "daily",
+  "title": "食堂加餐",
+  "source": {
+   "kind": "force",
+   "id": "naturalized",
+   "name": "归化民组织"
+  },
+  "tags": [
+   "市井"
+  ],
+  "requires": [
+   {
+    "day": {
+     "gte": 27
+    }
+   }
+  ],
+  "excludes": [],
+  "weight": 14,
+  "options": {
+   "left": {
+    "id": "jiacan",
+    "label": "加。",
+    "hint": "饭里有油水，手上有力气",
+    "effects": {
+     "stats": {
+      "people": 2,
+      "livelihood": -1
+     },
+     "states": [
+      {
+       "id": "series.daily_life",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "shengzhuo",
+    "label": "省着。",
+    "hint": "米缸见底的速度，比工程快",
+    "effects": {
+     "stats": {
+      "livelihood": 1
+     },
+     "states": [
+      {
+       "id": "series.daily_life",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "管灶的首长",
+    "line": "灶上想给夜工的加一餐：一碗粥、一撮盐。一个月多四十篓米——工地上撑不住的人，这一碗就能吊住。"
+   }
+  ]
+ },
+ {
+  "id": "DLY-002",
+  "pool": "civil",
+  "series": "daily.life",
+  "type": "daily",
+  "title": "澡堂开幕",
+  "source": {
+   "kind": "force",
+   "id": "naturalized",
+   "name": "归化民组织"
+  },
+  "tags": [
+   "市井"
+  ],
+  "requires": [
+   {
+    "day": {
+     "gte": 28
+    }
+   }
+  ],
+  "excludes": [],
+  "weight": 14,
+  "options": {
+   "left": {
+    "id": "mianfei",
+    "label": "头月免费。",
+    "hint": "洗过一回，就离不开了",
+    "effects": {
+     "stats": {
+      "people": 3
+     },
+     "wind": 1,
+     "states": [
+      {
+       "id": "series.daily_life",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "shoufei",
+    "label": "收两个铜元。",
+    "hint": "白给的东西，人不稀罕",
+    "effects": {
+     "stats": {
+      "people": -1,
+      "livelihood": 1
+     },
+     "states": [
+      {
+       "id": "series.daily_life",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "管民政的首长",
+    "line": "澡堂砌好了：男女分日，热水管够。村里人围着看稀奇，说髡贼讲究——洗干净了再看病，医生的话他们倒听得进。"
+   }
+  ]
+ },
+ {
+  "id": "DLY-003",
+  "pool": "civil",
+  "series": "daily.life",
+  "type": "key",
+  "title": "幻灯放映会",
+  "source": {
+   "kind": "force",
+   "id": "naturalized",
+   "name": "归化民组织"
+  },
+  "tags": [
+   "市井"
+  ],
+  "requires": [
+   {
+    "day": {
+     "gte": 30
+    }
+   }
+  ],
+  "excludes": [],
+  "weight": 14,
+  "options": {
+   "left": {
+    "id": "fangying",
+    "label": "放。",
+    "hint": "一张画片，胜过十场宣讲",
+    "effects": {
+     "stats": {
+      "people": 3
+     },
+     "wind": 2,
+     "days": 1,
+     "states": [
+      {
+       "id": "series.daily_life",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "huanyi",
+    "label": "缓一缓。",
+    "hint": "太扎眼的东西，慢慢来",
+    "effects": {
+     "stats": {
+      "council": 1
+     },
+     "states": [
+      {
+       "id": "series.daily_life",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "管文宣的首长",
+    "line": "汽灯改的幻灯能放画片了。想放一场：世界的地图、钢铁的船、还有咱们农庄的收成。营里和村里人都会来看。"
+   }
+  ]
+ },
+ {
+  "id": "DLY-004",
+  "pool": "civil",
+  "series": "daily.life",
+  "type": "daily",
+  "title": "球场",
+  "source": {
+   "kind": "force",
+   "id": "naturalized",
+   "name": "归化民组织"
+  },
+  "tags": [
+   "市井"
+  ],
+  "requires": [
+   {
+    "day": {
+     "gte": 32
+    }
+   }
+  ],
+  "excludes": [],
+  "weight": 14,
+  "options": {
+   "left": {
+    "id": "zhichi",
+    "label": "立个球队。",
+    "hint": "一个球，滚平两个世界",
+    "effects": {
+     "stats": {
+      "people": 2
+     },
+     "states": [
+      {
+       "id": "series.daily_life",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "buguan",
+    "label": "随他们闹。",
+    "hint": "大人的事，别沾娃娃",
+    "effects": {
+     "stats": {
+      "council": 1
+     },
+     "states": [
+      {
+       "id": "series.daily_life",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "管民政的首长",
+    "line": "空地上划了个球场，归化民的娃娃和穿越众的子弟混着踢。有首长说吵，有首长天天去看——看的是娃娃们说一样的口音。"
+   }
+  ]
+ },
+ {
+  "id": "DLY-005",
+  "pool": "civil",
+  "series": "daily.life",
+  "type": "daily",
+  "title": "歌咏队",
+  "source": {
+   "kind": "force",
+   "id": "naturalized",
+   "name": "归化民组织"
+  },
+  "tags": [
+   "市井"
+  ],
+  "requires": [
+   {
+    "day": {
+     "gte": 33
+    }
+   }
+  ],
+  "excludes": [],
+  "weight": 14,
+  "options": {
+   "left": {
+    "id": "zhunchang",
+    "label": "多排几首。",
+    "hint": "歌声到的地方，道理才到",
+    "effects": {
+     "stats": {
+      "people": 2
+     },
+     "states": [
+      {
+       "id": "series.daily_life",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "shouzhuo",
+    "label": "少唱些。",
+    "hint": "歌多了，怕误了做活",
+    "effects": {
+     "stats": {
+      "livelihood": 1
+     },
+     "states": [
+      {
+       "id": "series.daily_life",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "杜雯",
+    "line": "归化民里嗓子好的不少，组了个歌咏队，唱新编的歌。有人嫌洋调子，有人嫌太热闹——可营里夜里织布的，都在哼。"
+   }
+  ]
+ },
+ {
+  "id": "DLY-006",
+  "pool": "civil",
+  "series": "daily.life",
+  "type": "daily",
+  "title": "烟丝配给",
+  "source": {
+   "kind": "force",
+   "id": "naturalized",
+   "name": "归化民组织"
+  },
+  "tags": [
+   "市井"
+  ],
+  "requires": [
+   {
+    "day": {
+     "gte": 34
+    }
+   }
+  ],
+  "excludes": [],
+  "weight": 14,
+  "options": {
+   "left": {
+    "id": "renren",
+    "label": "按人头配。",
+    "hint": "一撮烟丝面前，人人平等",
+    "effects": {
+     "stats": {
+      "people": 3,
+      "council": -1
+     },
+     "states": [
+      {
+       "id": "series.daily_life",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "zhiyuanlao",
+    "label": "先紧元老。",
+    "hint": "老人得有老人的体面",
+    "effects": {
+     "stats": {
+      "council": 1,
+      "people": -2
+     },
+     "states": [
+      {
+       "id": "series.daily_life",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "管灶的首长",
+    "line": "烟叶到货了。老资格的元老们要抽烟丝，归化民里的老汉也眼馋。按人头配，还是只给元老留?"
+   }
+  ]
+ },
+ {
+  "id": "DLY-007",
+  "pool": "civil",
+  "series": "daily.life",
+  "type": "daily",
+  "title": "咖啡来了",
+  "source": {
+   "kind": "force",
+   "id": "naturalized",
+   "name": "归化民组织"
+  },
+  "tags": [
+   "市井"
+  ],
+  "requires": [
+   {
+    "day": {
+     "gte": 35
+    }
+   }
+  ],
+  "excludes": [],
+  "weight": 14,
+  "options": {
+   "left": {
+    "id": "liuxia",
+    "label": "留下当招待。",
+    "hint": "紫明楼的桌上，就缺这一口",
+    "effects": {
+     "stats": {
+      "livelihood": 1,
+      "council": 1
+     },
+     "states": [
+      {
+       "id": "series.daily_life",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "zhuanshou",
+    "label": "转手卖了。",
+    "hint": "有人肯出十倍的价",
+    "effects": {
+     "stats": {
+      "livelihood": 2
+     },
+     "states": [
+      {
+       "id": "series.daily_life",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "澳门通事",
+    "line": "澳门船捎来两麻袋咖啡豆——几位首长见了如获至宝，磨了煮上，满楼道都是味儿。归化民说这是「炒糊的药汤」。"
+   }
+  ]
+ },
+ {
+  "id": "DLY-008",
+  "pool": "civil",
+  "series": "daily.life",
+  "type": "daily",
+  "title": "灯油钱",
+  "source": {
+   "kind": "force",
+   "id": "naturalized",
+   "name": "归化民组织"
+  },
+  "tags": [
+   "市井"
+  ],
+  "requires": [
+   {
+    "day": {
+     "gte": 36
+    }
+   }
+  ],
+  "excludes": [],
+  "weight": 14,
+  "options": {
+   "left": {
+    "id": "baodeng",
+    "label": "灯照点。",
+    "hint": "夜里亮着的地方，才是营地的白天",
+    "effects": {
+     "stats": {
+      "people": 2,
+      "livelihood": -1
+     },
+     "states": [
+      {
+       "id": "series.daily_life",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "xiandeng",
+    "label": "限灯。",
+    "hint": "日出而作，日入而息",
+    "effects": {
+     "stats": {
+      "people": -2,
+      "livelihood": 2
+     },
+     "states": [
+      {
+       "id": "series.daily_life",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "管账的首长",
+    "line": "夜校、夜工、夜巡都要点灯，灯油一个月烧掉小两百两。有人算账：菜油点灯，不如多榨几篓糖。"
+   }
+  ]
+ },
+ {
+  "id": "DLY-009",
+  "pool": "civil",
+  "series": "daily.life",
+  "type": "daily",
+  "title": "灭蝇周",
+  "source": {
+   "kind": "force",
+   "id": "naturalized",
+   "name": "归化民组织"
+  },
+  "tags": [
+   "市井"
+  ],
+  "requires": [
+   {
+    "day": {
+     "gte": 38
+    }
+   }
+  ],
+  "excludes": [],
+  "weight": 14,
+  "options": {
+   "left": {
+    "id": "dali",
+    "label": "大搞。",
+    "hint": "苍蝇灭一成，痢疾少三成",
+    "effects": {
+     "stats": {
+      "people": 3,
+      "livelihood": -1
+     },
+     "days": 1,
+     "states": [
+      {
+       "id": "series.daily_life",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "geyao",
+    "label": "各口自理。",
+    "hint": "医生命令不了灶房",
+    "effects": {
+     "stats": {
+      "people": 1
+     },
+     "states": [
+      {
+       "id": "series.daily_life",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "医务所的医生",
+    "line": "入夏苍蝇成灾，灶房、粪坑、垃圾堆都在生蛆。想搞一场「灭蝇周」：清垃圾、发纱罩、蛆换铜元。"
+   }
+  ]
+ },
+ {
+  "id": "DLY-010",
+  "pool": "civil",
+  "series": "daily.life",
+  "type": "daily",
+  "title": "厕所改良",
+  "source": {
+   "kind": "force",
+   "id": "naturalized",
+   "name": "归化民组织"
+  },
+  "tags": [
+   "市井"
+  ],
+  "requires": [
+   {
+    "day": {
+     "gte": 39
+    }
+   }
+  ],
+  "excludes": [],
+  "weight": 14,
+  "options": {
+   "left": {
+    "id": "pukai",
+    "label": "全营推广。",
+    "hint": "看不见的地方干净，才是真干净",
+    "effects": {
+     "stats": {
+      "people": 3
+     },
+     "wind": 1,
+     "days": 2,
+     "states": [
+      {
+       "id": "series.daily_life",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "shidian",
+    "label": "先试两座。",
+    "hint": "好东西也得让人慢慢认",
+    "effects": {
+     "stats": {
+      "people": 1
+     },
+     "states": [
+      {
+       "id": "series.daily_life",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "独孤求婚",
+    "line": "按新图纸砌了一批公共厕所：深坑、加盖、远离水井。村里人说髡贼连拉屎都要管——骂归骂，用得比谁都勤。"
+   }
+  ]
+ },
+ {
+  "id": "DLY-011",
+  "pool": "civil",
+  "series": "daily.life",
+  "type": "daily",
+  "title": "洗衣坊",
+  "source": {
+   "kind": "force",
+   "id": "naturalized",
+   "name": "归化民组织"
+  },
+  "tags": [
+   "市井"
+  ],
+  "requires": [
+   {
+    "day": {
+     "gte": 41
+    }
+   }
+  ],
+  "excludes": [],
+  "weight": 14,
+  "options": {
+   "left": {
+    "id": "kuoda",
+    "label": "扩到村里。",
+    "hint": "一件衣裳的工钱，是一个人的底气",
+    "effects": {
+     "stats": {
+      "people": 3
+     },
+     "wind": 2,
+     "states": [
+      {
+       "id": "series.daily_life",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "xianying",
+    "label": "先管营里。",
+    "hint": "步子太大，村里的闲话淹死人",
+    "effects": {
+     "stats": {
+      "people": 1
+     },
+     "states": [
+      {
+       "id": "series.daily_life",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "杜雯",
+    "line": "洗衣坊开张了：热水、肥皂、大木盆。妇人来洗衣按件计工钱——头一回，有人为女人的活计付钱。"
+   }
+  ]
+ },
+ {
+  "id": "DLY-012",
+  "pool": "civil",
+  "series": "daily.life",
+  "type": "key",
+  "title": "东门市夜市",
+  "source": {
+   "kind": "force",
+   "id": "naturalized",
+   "name": "归化民组织"
+  },
+  "tags": [
+   "市井"
+  ],
+  "requires": [
+   {
+    "day": {
+     "gte": 44
+    }
+   }
+  ],
+  "excludes": [],
+  "weight": 14,
+  "options": {
+   "left": {
+    "id": "kaiyeshi",
+    "label": "开夜市。",
+    "hint": "灯火多了，市面才算活了",
+    "effects": {
+     "stats": {
+      "livelihood": 3,
+      "people": 2
+     },
+     "wind": 2,
+     "states": [
+      {
+       "id": "series.daily_life",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "zhibaitian",
+    "label": "只开白天。",
+    "hint": "夜里人多眼杂，治安难管",
+    "effects": {
+     "stats": {
+      "military": 1
+     },
+     "states": [
+      {
+       "id": "series.daily_life",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "东门市的行家",
+    "line": "天一黑，东门市就散市。有小贩来问：能不能点起汽灯摆夜市？卖点吃食杂货——白天做工人，晚上才有闲。"
+   }
+  ]
  }
 ]

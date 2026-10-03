@@ -2014,5 +2014,1146 @@
     }
    }
   }
+ },
+ {
+  "id": "WAR-040",
+  "pool": "security",
+  "series": "war.local",
+  "type": "key",
+  "title": "苟家庄的探报",
+  "source": {
+   "kind": "force",
+   "id": "guard",
+   "name": "保卫系统"
+  },
+  "tags": [
+   "苟家庄",
+   "情报"
+  ],
+  "requires": [
+   {
+    "day": {
+     "gte": 34
+    }
+   }
+  ],
+  "excludes": [],
+  "weight": 24,
+  "options": {
+   "left": {
+    "id": "xitan",
+    "label": "细探。",
+    "hint": "知己知彼，先探后动",
+    "effects": {
+     "stats": {
+      "military": 2
+     },
+     "wind": -1,
+     "days": 1,
+     "forces": {
+      "guard": {
+       "influence": 3
+      }
+     },
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "jigong",
+    "label": "就现在动手。",
+    "hint": "夜长梦多，兵贵神速",
+    "effects": {
+     "stats": {
+      "military": 1
+     },
+     "wind": 2,
+     "personal": {
+      "violence_risk": 1
+     },
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "WAR-042"
+    ]
+   }
+  },
+  "lines": [
+   {
+    "who": "冉耀",
+    "line": "执政者，苟家庄的底摸清了：庄丁一百六，土炮四门，囤粮够吃半年。周围三个村被他家盘剥得敢怒不敢言。"
+   },
+   {
+    "who": "冉耀",
+    "line": "这颗钉子，早晚要拔。是探清楚了再动，还是趁他没防备先下手？"
+   }
+  ]
+ },
+ {
+  "id": "WAR-041",
+  "pool": "security",
+  "series": "war.local",
+  "type": "crisis",
+  "title": "苟家庄的说客",
+  "source": {
+   "kind": "force",
+   "id": "guard",
+   "name": "保卫系统"
+  },
+  "tags": [
+   "苟家庄",
+   "外交"
+  ],
+  "requires": [
+   {
+    "used": "WAR-040"
+   },
+   {
+    "state": "series.war_local",
+    "gte": 1
+   }
+  ],
+  "excludes": [],
+  "weight": 20,
+  "options": {
+   "left": {
+    "id": "bujian",
+    "label": "闭门不见。",
+    "hint": "跟坐地虎没甚么好谈的",
+    "effects": {
+     "stats": {
+      "military": 1
+     },
+     "wind": 1,
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "shouli",
+    "label": "收礼虚与。",
+    "hint": "礼照收，刀照磨",
+    "effects": {
+     "stats": {
+      "livelihood": 2,
+      "people": -1
+     },
+     "wind": -1,
+     "personal": {
+      "faction_alarm": 1
+     },
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "值班秘书",
+    "line": "苟家庄的管家递了帖子，抬来两箱礼物：一箱银，一箱苏杭绸子。话里话外一个意思——河两岸的水，两家分着用。"
+   },
+   {
+    "who": "值班秘书",
+    "line": "村里人都在看：这礼收是不收。"
+   }
+  ]
+ },
+ {
+  "id": "WAR-042",
+  "pool": "security",
+  "series": "war.local",
+  "type": "key",
+  "title": "夜谋苟家庄",
+  "source": {
+   "kind": "force",
+   "id": "guard",
+   "name": "保卫系统"
+  },
+  "tags": [
+   "苟家庄",
+   "战事"
+  ],
+  "requires": [
+   {
+    "used": "WAR-041"
+   },
+   {
+    "state": "series.war_local",
+    "gte": 2
+   }
+  ],
+  "excludes": [],
+  "weight": 26,
+  "options": {
+   "left": {
+    "id": "yexi",
+    "label": "夜袭。",
+    "hint": "打他就是护三个村子",
+    "effects": {
+     "stats": {
+      "military": 6,
+      "people": 3,
+      "livelihood": -1
+     },
+     "wind": 4,
+     "days": 2,
+     "forces": {
+      "guard": {
+       "influence": 6
+      }
+     },
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "WAR-043"
+    ]
+   },
+   "right": {
+    "id": "weicheng",
+    "label": "围而不打。",
+    "hint": "困到他自己开门",
+    "effects": {
+     "stats": {
+      "military": 3,
+      "livelihood": -2
+     },
+     "wind": 2,
+     "days": 3,
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "WAR-043"
+    ]
+   }
+  },
+  "lines": [
+   {
+    "who": "石志奇",
+    "line": "作战方案两套：甲案夜袭，翻墙破门，半个时辰解决，可能伤及妇孺；乙案围庄，断水断粮，三五日必降，就是耗。"
+   },
+   {
+    "who": "石志奇",
+    "line": "各有利弊。您签哪个，今晚就动。"
+   }
+  ]
+ },
+ {
+  "id": "WAR-043",
+  "pool": "security",
+  "series": "war.local",
+  "type": "daily",
+  "title": "苟家庄的善后",
+  "source": {
+   "kind": "force",
+   "id": "locals",
+   "name": "本地村社"
+  },
+  "tags": [
+   "苟家庄",
+   "善后"
+  ],
+  "requires": [
+   {
+    "used": "WAR-042"
+   },
+   {
+    "state": "series.war_local",
+    "gte": 3
+   }
+  ],
+  "excludes": [],
+  "weight": 22,
+  "options": {
+   "left": {
+    "id": "fentian",
+    "label": "田分给村里。",
+    "hint": "拿他的地，买四方的心",
+    "effects": {
+     "stats": {
+      "people": 5,
+      "livelihood": 2
+     },
+     "wind": 2,
+     "forces": {
+      "locals": {
+       "satisfaction": 5
+      }
+     },
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "chonggong",
+    "label": "充作营产。",
+    "hint": "缴获归公，往后办事有底",
+    "effects": {
+     "stats": {
+      "livelihood": 4,
+      "people": -2
+     },
+     "wind": 1,
+     "forces": {
+      "planning": {
+       "influence": 4
+      }
+     },
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "管民政的首长",
+    "line": "庄破了好办，庄后的账难算：苟家的地契堆了半屋子，佃户二百多户，租子重得压死人。地，怎么发？"
+   }
+  ]
+ },
+ {
+  "id": "WAR-044",
+  "pool": "security",
+  "series": "war.local",
+  "type": "daily",
+  "title": "雷州买粮船",
+  "source": {
+   "kind": "force",
+   "id": "trade",
+   "name": "商贸网络"
+  },
+  "tags": [
+   "雷州",
+   "粮道"
+  ],
+  "requires": [
+   {
+    "state": "trade.contact",
+    "equals": true
+   },
+   {
+    "day": {
+     "gte": 30
+    }
+   }
+  ],
+  "excludes": [],
+  "weight": 18,
+  "options": {
+   "left": {
+    "id": "zuokao",
+    "label": "装满就回。",
+    "hint": "粮船一到，仓里有底",
+    "effects": {
+     "stats": {
+      "livelihood": 4
+     },
+     "wind": 1,
+     "days": 2,
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "dunhuo",
+    "label": "压价囤一批。",
+    "hint": "现银花在刀刃上",
+    "effects": {
+     "stats": {
+      "livelihood": 3,
+      "council": -1
+     },
+     "days": 1,
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "澳门通事",
+    "line": "雷州的粮价松了：早稻下来，米贱。船主问要不要多装——就怕海峡里不太平，多装一趟多一趟险。"
+   }
+  ]
+ },
+ {
+  "id": "WAR-045",
+  "pool": "security",
+  "series": "war.local",
+  "type": "crisis",
+  "title": "炭市的风波",
+  "source": {
+   "kind": "force",
+   "id": "trade",
+   "name": "商贸网络"
+  },
+  "tags": [
+   "炭市",
+   "治安"
+  ],
+  "requires": [
+   {
+    "used": "WAR-044"
+   }
+  ],
+  "excludes": [],
+  "weight": 18,
+  "options": {
+   "left": {
+    "id": "zhengzhi",
+    "label": "当场拿人。",
+    "hint": "砸行市的秤，就得砸他的饭碗",
+    "effects": {
+     "stats": {
+      "people": 2,
+      "livelihood": 1
+     },
+     "wind": 1,
+     "forces": {
+      "trade": {
+       "satisfaction": 2
+      }
+     },
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "huanren",
+    "label": "换家买。",
+    "hint": "惹不起躲得起",
+    "effects": {
+     "stats": {
+      "livelihood": -2
+     },
+     "forces": {
+      "trade": {
+       "satisfaction": -2
+      }
+     },
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "雷州的炭商",
+    "line": "海峡北岸的炭市有人使坏：见是髡字的船，价钱翻倍，秤上还做手脚。焦炭断不得——坩埚炉和锅炉都张着嘴等。"
+   }
+  ]
+ },
+ {
+  "id": "WAR-046",
+  "pool": "security",
+  "series": "war.local",
+  "type": "daily",
+  "title": "琼山的礼单",
+  "source": {
+   "kind": "force",
+   "id": "council",
+   "name": "扩大会议"
+  },
+  "tags": [
+   "琼山",
+   "外交"
+  ],
+  "requires": [
+   {
+    "state": "trade.contact",
+    "equals": true
+   },
+   {
+    "day": {
+     "gte": 36
+    }
+   }
+  ],
+  "excludes": [],
+  "weight": 16,
+  "options": {
+   "left": {
+    "id": "huili",
+    "label": "还一份更厚的。",
+    "hint": "礼数上压他一头，气度上也是",
+    "effects": {
+     "stats": {
+      "livelihood": -1,
+      "council": 2
+     },
+     "wind": -1,
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "zhibuhui",
+    "label": "只收不回。",
+    "hint": "让县衙先琢磨咱们的意思",
+    "effects": {
+     "stats": {
+      "council": 1
+     },
+     "wind": 1,
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "值班秘书",
+    "line": "琼山县衙递了礼单：岁末的例礼，绸缎茶砖，还有一句「髡商勤顺，郡县相安」。这是官府头一回落到纸面上的客气。"
+   }
+  ]
+ },
+ {
+  "id": "WAR-047",
+  "pool": "security",
+  "series": "war.local",
+  "type": "crisis",
+  "title": "琼山来的暗探",
+  "source": {
+   "kind": "force",
+   "id": "guard",
+   "name": "保卫系统"
+  },
+  "tags": [
+   "琼山",
+   "细作"
+  ],
+  "requires": [
+   {
+    "used": "WAR-046"
+   }
+  ],
+  "excludes": [],
+  "weight": 22,
+  "options": {
+   "left": {
+    "id": "zhuaqi",
+    "label": "人赃并获。",
+    "hint": "拿了探子，礼也不必回了",
+    "effects": {
+     "stats": {
+      "military": 2,
+      "council": 1
+     },
+     "wind": 2,
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "zhuangbuzhi",
+    "label": "装不知道。",
+    "hint": "他在明处待得越久，咱们越安全",
+    "effects": {
+     "stats": {
+      "council": 1
+     },
+     "wind": -1,
+     "days": 1,
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "午木",
+    "line": "琼山来的货郎在营地周边转了三天，画图的手法是行伍出身。政保盯上了，就等您一句话：抓，还是养着？"
+   }
+  ]
+ },
+ {
+  "id": "WAR-048",
+  "pool": "security",
+  "series": "war.local",
+  "type": "daily",
+  "title": "澄迈的民夫",
+  "source": {
+   "kind": "force",
+   "id": "naturalized",
+   "name": "归化民组织"
+  },
+  "tags": [
+   "澄迈",
+   "后勤"
+  ],
+  "requires": [
+   {
+    "state": "war.outcome",
+    "notEquals": "none"
+   }
+  ],
+  "excludes": [],
+  "weight": 18,
+  "options": {
+   "left": {
+    "id": "jiaqian",
+    "label": "工钱翻倍。",
+    "hint": "火线上的活，就得给火线的钱",
+    "effects": {
+     "stats": {
+      "livelihood": -2,
+      "people": 3,
+      "military": 1
+     },
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "paigong",
+    "label": "按工分派。",
+    "hint": "规矩之内，一视同仁",
+    "effects": {
+     "stats": {
+      "people": -1,
+      "military": 1
+     },
+     "forces": {
+      "naturalized": {
+       "satisfaction": -1
+      }
+     },
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "管民政的首长",
+    "line": "战事吃紧，澄迈方向的转运要民夫两百：弹药、粮秣、伤员。有人怕上前沿，加钱还是派差，得快。"
+   }
+  ]
+ },
+ {
+  "id": "WAR-049",
+  "pool": "security",
+  "series": "war.local",
+  "type": "daily",
+  "title": "盐场的灶户",
+  "source": {
+   "kind": "force",
+   "id": "locals",
+   "name": "本地村社"
+  },
+  "tags": [
+   "盐场",
+   "灶户"
+  ],
+  "requires": [
+   {
+    "state": "external.threat",
+    "equals": true
+   },
+   {
+    "day": {
+     "gte": 40
+    }
+   }
+  ],
+  "excludes": [],
+  "weight": 16,
+  "options": {
+   "left": {
+    "id": "shoubian",
+    "label": "收编灶户。",
+    "hint": "煮盐的手艺，比盐还值钱",
+    "effects": {
+     "stats": {
+      "livelihood": 3,
+      "people": 2
+     },
+     "wind": 1,
+     "forces": {
+      "locals": {
+       "satisfaction": 3
+      }
+     },
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "guyong",
+    "label": "只雇短工。",
+    "hint": "人来得快，走得也快",
+    "effects": {
+     "stats": {
+      "livelihood": 1
+     },
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "管灶的首长",
+    "line": "马袅盐场的老灶户来投：一家三代煮盐，看天色知卤性。官府的盐课把人榨干了——咱们收不收？"
+   }
+  ]
+ },
+ {
+  "id": "WAR-050",
+  "pool": "security",
+  "series": "war.local",
+  "type": "crisis",
+  "title": "岭后的火光",
+  "source": {
+   "kind": "force",
+   "id": "guard",
+   "name": "保卫系统"
+  },
+  "tags": [
+   "哨防",
+   "预警"
+  ],
+  "requires": [
+   {
+    "used": "WAR-042"
+   }
+  ],
+  "excludes": [],
+  "weight": 20,
+  "options": {
+   "left": {
+    "id": "qingcha",
+    "label": "黎明清查。",
+    "hint": "看清楚再动手，不打糊涂仗",
+    "effects": {
+     "stats": {
+      "military": 1
+     },
+     "wind": -1,
+     "days": 1,
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "fengsuo",
+    "label": "封锁山口。",
+    "hint": "宁可错封，不可放进",
+    "effects": {
+     "stats": {
+      "military": 2,
+      "people": -2
+     },
+     "wind": 1,
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "哨长",
+    "line": "岭后的火光又出现了，这回是两处。老兵说不是猎户的烧山——猎户的火不会过半夜。"
+   }
+  ]
+ },
+ {
+  "id": "WAR-051",
+  "pool": "security",
+  "series": "war.local",
+  "type": "benefit",
+  "title": "四邻来投",
+  "source": {
+   "kind": "force",
+   "id": "locals",
+   "name": "本地村社"
+  },
+  "tags": [
+   "民心",
+   "归附"
+  ],
+  "requires": [
+   {
+    "state": "series.war_local",
+    "gte": 5
+   },
+   {
+    "day": {
+     "gte": 55
+    }
+   }
+  ],
+  "excludes": [],
+  "weight": 18,
+  "options": {
+   "left": {
+    "id": "jinshou",
+    "label": "挑着收。",
+    "hint": "来投的里头，也有别人的眼睛",
+    "effects": {
+     "stats": {
+      "people": 3,
+      "livelihood": 2
+     },
+     "wind": -1,
+     "days": 1,
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "dakaimen",
+    "label": "都收下。",
+    "hint": "人心是最大的城",
+    "effects": {
+     "stats": {
+      "people": 5,
+      "livelihood": -2
+     },
+     "wind": 2,
+     "forces": {
+      "locals": {
+       "satisfaction": 4
+      }
+     },
+     "states": [
+      {
+       "id": "series.war_local",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "管民政的首长",
+    "line": "消息传开了：河对岸、岭后头，三个村寨托了人来说，愿意「入髡」——上户籍、纳糖税、送娃念书。"
+   }
+  ]
+ },
+ {
+  "id": "SEC-027",
+  "pool": "security",
+  "series": "security.guard",
+  "type": "daily",
+  "title": "哨所网",
+  "source": {
+   "kind": "force",
+   "id": "guard",
+   "name": "保卫系统"
+  },
+  "tags": [
+   "哨防"
+  ],
+  "requires": [
+   {
+    "state": "series.security_guard",
+    "gte": 3
+   }
+  ],
+  "excludes": [],
+  "weight": 16,
+  "options": {
+   "left": {
+    "id": "miwang",
+    "label": "成网布哨。",
+    "hint": "十双眼睛，顶一堵城墙",
+    "effects": {
+     "stats": {
+      "military": 3,
+      "livelihood": -1
+     },
+     "wind": -1,
+     "days": 2,
+     "states": [
+      {
+       "id": "series.security_guard",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "zhongdianshao",
+    "label": "只守要冲。",
+    "hint": "兵就这些，摊薄了就都不守",
+    "effects": {
+     "stats": {
+      "military": 1
+     },
+     "states": [
+      {
+       "id": "series.security_guard",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "石志奇",
+    "line": "拟沿文澜江和官道设哨所九处，昼夜轮值、烽燧接力——从岭口到博铺，警讯半个时辰能到营里。"
+   }
+  ]
+ },
+ {
+  "id": "SEC-028",
+  "pool": "security",
+  "series": "security.guard",
+  "type": "daily",
+  "title": "靶场",
+  "source": {
+   "kind": "force",
+   "id": "guard",
+   "name": "保卫系统"
+  },
+  "tags": [
+   "训练"
+  ],
+  "requires": [
+   {
+    "state": "series.security_guard",
+    "gte": 3
+   }
+  ],
+  "excludes": [],
+  "weight": 14,
+  "options": {
+   "left": {
+    "id": "jiazidan",
+    "label": "放开打。",
+    "hint": "子弹喂出来的枪法",
+    "effects": {
+     "stats": {
+      "military": 4,
+      "livelihood": -1
+     },
+     "states": [
+      {
+       "id": "series.security_guard",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "kongbao",
+    "label": "空枪练。",
+    "hint": "枪法靠练，弹药靠省",
+    "effects": {
+     "stats": {
+      "military": 1
+     },
+     "forces": {
+      "guard": {
+       "satisfaction": -2
+      }
+     },
+     "states": [
+      {
+       "id": "series.security_guard",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "管军械的首长",
+    "line": "靶场修好了。有人算账：一个兵练到能打中百步人形，得吃掉四十发弹——这四十发，能换两支鸟铳。"
+   }
+  ]
+ },
+ {
+  "id": "SEC-029",
+  "pool": "security",
+  "series": "security.guard",
+  "type": "daily",
+  "title": "军械修配",
+  "source": {
+   "kind": "force",
+   "id": "planning",
+   "name": "计划委员会"
+  },
+  "tags": [
+   "军械"
+  ],
+  "requires": [
+   {
+    "state": "industry.workshop_level",
+    "gte": 1
+   }
+  ],
+  "excludes": [],
+  "weight": 16,
+  "options": {
+   "left": {
+    "id": "jianxiu",
+    "label": "设修械所。",
+    "hint": "枪是修出来的战斗力",
+    "effects": {
+     "stats": {
+      "military": 3,
+      "livelihood": -1
+     },
+     "states": [
+      {
+       "id": "series.security_guard",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "baofei",
+    "label": "坏了就换。",
+    "hint": "新枪管够，修它作甚",
+    "effects": {
+     "stats": {
+      "military": 1,
+      "livelihood": -2
+     },
+     "states": [
+      {
+       "id": "series.security_guard",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "管军械的首长",
+    "line": "枪用久了，膛线磨平、击发打滑。修械所一开，老枪能再顶一年——就是又得从工口抢三个匠人。"
+   }
+  ]
  }
 ]

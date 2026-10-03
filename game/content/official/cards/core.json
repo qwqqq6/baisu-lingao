@@ -1855,5 +1855,443 @@
     "line": "两边都在等您表态。"
    }
   ]
+ },
+ {
+  "id": "LAW-001",
+  "pool": "core",
+  "series": "court.law",
+  "type": "key",
+  "title": "第一场公审",
+  "source": {
+   "kind": "force",
+   "id": "council",
+   "name": "扩大会议"
+  },
+  "tags": [
+   "司法"
+  ],
+  "requires": [
+   {
+    "state": "trade.dongmen_established",
+    "equals": true
+   },
+   {
+    "day": {
+     "gte": 50
+    }
+   }
+  ],
+  "excludes": [],
+  "weight": 24,
+  "options": {
+   "left": {
+    "id": "gongshen",
+    "label": "当众审。",
+    "hint": "法要是看不见，就不是法",
+    "effects": {
+     "stats": {
+      "people": 4,
+      "council": 2
+     },
+     "wind": 1,
+     "days": 1,
+     "states": [
+      {
+       "id": "series.court_law",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "tangxun",
+    "label": "升堂问案。",
+    "hint": "官老爷的做派，先不要",
+    "effects": {
+     "stats": {
+      "people": -1,
+      "council": 1
+     },
+     "states": [
+      {
+       "id": "series.court_law",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "值班秘书",
+    "line": "偷仓粮的、斗殴伤人的，押着好几个，各口都在等怎么发落。拟开一场公审：摆出证据、当众断案——照咱们自己的条例，不用大清律。"
+   }
+  ]
+ },
+ {
+  "id": "LAW-002",
+  "pool": "core",
+  "series": "court.law",
+  "type": "daily",
+  "title": "争田的官司",
+  "source": {
+   "kind": "force",
+   "id": "council",
+   "name": "扩大会议"
+  },
+  "tags": [
+   "司法",
+   "田土"
+  ],
+  "requires": [
+   {
+    "state": "series.court_law",
+    "gte": 1
+   }
+  ],
+  "excludes": [],
+  "weight": 18,
+  "options": {
+   "left": {
+    "id": "pingduan",
+    "label": "按契断。",
+    "hint": "地契说话，人情靠边",
+    "effects": {
+     "stats": {
+      "people": 2,
+      "council": 2
+     },
+     "states": [
+      {
+       "id": "series.court_law",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "diaojie",
+    "label": "两头劝和。",
+    "hint": "官司好断，乡邻难做",
+    "effects": {
+     "stats": {
+      "people": 1
+     },
+     "forces": {
+      "locals": {
+       "satisfaction": 2
+      }
+     },
+     "states": [
+      {
+       "id": "series.court_law",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "值班秘书",
+    "line": "归化的两户人家争一块水田：一户拿的是万历年的老契，一户拿的是苟家倒台后新发的。两纸地契，一个「法理」，一个「新政」。"
+   }
+  ]
+ },
+ {
+  "id": "LAW-003",
+  "pool": "core",
+  "series": "court.law",
+  "type": "crisis",
+  "title": "军法从事",
+  "source": {
+   "kind": "force",
+   "id": "guard",
+   "name": "保卫系统"
+  },
+  "tags": [
+   "司法",
+   "军法"
+  ],
+  "requires": [
+   {
+    "state": "series.court_law",
+    "gte": 1
+   },
+   {
+    "state": "security.guard_authorized",
+    "equals": true
+   }
+  ],
+  "excludes": [],
+  "weight": 22,
+  "options": {
+   "left": {
+    "id": "junfa",
+    "label": "执行军法。",
+    "hint": "战时的法，快过刀",
+    "effects": {
+     "stats": {
+      "military": 3,
+      "people": -1
+     },
+     "wind": 1,
+     "forces": {
+      "guard": {
+       "satisfaction": 2
+      }
+     },
+     "states": [
+      {
+       "id": "series.court_law",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "jianyi",
+    "label": "减一等。",
+    "hint": "刀下留人，军心也留",
+    "effects": {
+     "stats": {
+      "military": -1,
+      "people": 2
+     },
+     "forces": {
+      "guard": {
+       "satisfaction": -3
+      }
+     },
+     "states": [
+      {
+       "id": "series.court_law",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "石志奇",
+    "line": "看守哨的兵打瞌睡，私放的竟是细作——虽又抓回来了，按军法是死罪。他才十七，是村里头一批送来的娃。"
+   }
+  ]
+ },
+ {
+  "id": "LAW-004",
+  "pool": "core",
+  "series": "court.law",
+  "type": "daily",
+  "title": "申诉箱",
+  "source": {
+   "kind": "force",
+   "id": "council",
+   "name": "扩大会议"
+  },
+  "tags": [
+   "司法",
+   "申诉"
+  ],
+  "requires": [
+   {
+    "state": "series.court_law",
+    "gte": 2
+   }
+  ],
+  "excludes": [],
+  "weight": 14,
+  "options": {
+   "left": {
+    "id": "qinyue",
+    "label": "封封亲阅。",
+    "hint": "箱子里的委屈，都是堤坝的缝",
+    "effects": {
+     "stats": {
+      "people": 2,
+      "council": 1
+     },
+     "days": 1,
+     "states": [
+      {
+       "id": "series.court_law",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "zhuanyuan",
+    "label": "专员摘报。",
+    "hint": "分身乏术，先抓要案",
+    "effects": {
+     "stats": {
+      "council": 1
+     },
+     "states": [
+      {
+       "id": "series.court_law",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "值班秘书",
+    "line": "军法处门口挂了申诉箱，钥匙归您。头一个月就塞了十九封：克扣的、冤枉的、还有一封——告各口首长「任用私人」的。"
+   }
+  ]
+ },
+ {
+  "id": "LAW-005",
+  "pool": "core",
+  "series": "court.law",
+  "type": "daily",
+  "title": "判词布告",
+  "source": {
+   "kind": "force",
+   "id": "council",
+   "name": "扩大会议"
+  },
+  "tags": [
+   "司法",
+   "宣传"
+  ],
+  "requires": [
+   {
+    "state": "series.court_law",
+    "gte": 2
+   },
+   {
+    "state": "times.established",
+    "equals": true
+   }
+  ],
+  "excludes": [],
+  "weight": 14,
+  "options": {
+   "left": {
+    "id": "dengbao",
+    "label": "连判词一起登。",
+    "hint": "判得明白，法才立得住",
+    "effects": {
+     "stats": {
+      "people": 3,
+      "council": 1
+     },
+     "wind": 1,
+     "states": [
+      {
+       "id": "series.court_law",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "zhidengjieguo",
+    "label": "只登结果。",
+    "hint": "是非自有公论，细节徒惹口舌",
+    "effects": {
+     "stats": {
+      "people": 1
+     },
+     "states": [
+      {
+       "id": "series.court_law",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "管文宣的首长",
+    "line": "《时报》想开个「判牍」版：把每月的判案登出去——谁告谁、凭的什么据、断的什么罪。有人说好，有人说家丑外扬。"
+   }
+  ]
+ },
+ {
+  "id": "LAW-006",
+  "pool": "core",
+  "series": "court.law",
+  "type": "crisis",
+  "title": "律条之争",
+  "source": {
+   "kind": "force",
+   "id": "council",
+   "name": "扩大会议"
+  },
+  "tags": [
+   "司法",
+   "立法"
+  ],
+  "requires": [
+   {
+    "state": "series.court_law",
+    "gte": 3
+   }
+  ],
+  "excludes": [],
+  "weight": 20,
+  "options": {
+   "left": {
+    "id": "xinlv",
+    "label": "立新律。",
+    "hint": "新时代的罪，得有新时代的名目",
+    "effects": {
+     "stats": {
+      "council": 3,
+      "people": 2
+     },
+     "wind": 2,
+     "days": 2,
+     "states": [
+      {
+       "id": "series.court_law",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "yuangu",
+    "label": "援旧例。",
+    "hint": "旧例虽糙，人人心里有杆秤",
+    "effects": {
+     "stats": {
+      "council": 1
+     },
+     "states": [
+      {
+       "id": "series.court_law",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "值班秘书",
+    "line": "断案的越来越多，律条不够用了：贪墨多少两算重罪？抗工几日算犯法？旧律没有的，各口断得五花八门——同一个罪，东门市打二十板，工地上只罚三天工分。"
+   }
+  ]
  }
 ]

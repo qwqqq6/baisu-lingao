@@ -1,0 +1,3000 @@
+[
+ {
+  "id": "FIG-WDS-001",
+  "pool": "core",
+  "series": "figures.elders",
+  "type": "key",
+  "title": "文德嗣递章程",
+  "source": {
+   "kind": "force",
+   "id": "council",
+   "name": "扩大会议"
+  },
+  "tags": [
+   "元老",
+   "政治"
+  ],
+  "requires": [
+   {
+    "day": {
+     "gte": 16
+    }
+   }
+  ],
+  "excludes": [],
+  "weight": 24,
+  "options": {
+   "left": {
+    "id": "shou_xia",
+    "label": "照此办。",
+    "hint": "章程压得住台面，也压得住人心",
+    "effects": {
+     "stats": {
+      "council": 4
+     },
+     "personal": {
+      "faction_alarm": -2
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "gai_yi_gai",
+    "label": "再改改。",
+    "hint": "头一个章程，得没有一处含糊",
+    "effects": {
+     "stats": {
+      "council": 2
+     },
+     "personal": {
+      "faction_alarm": 1
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "文德嗣",
+    "line": "执政者，会议的章程我誊清了。谁提议、谁附议、几票成案，白纸黑字。往后咱们吵架，也得吵得有规矩。"
+   },
+   {
+    "who": "文德嗣",
+    "line": "只有一句话我不许改：大会的代表权，归穿越众全体，不归哪一个口。"
+   }
+  ]
+ },
+ {
+  "id": "FIG-WDS-002",
+  "pool": "core",
+  "series": "figures.elders",
+  "type": "daily",
+  "title": "文德嗣的周报",
+  "source": {
+   "kind": "force",
+   "id": "council",
+   "name": "扩大会议"
+  },
+  "tags": [
+   "元老",
+   "政治"
+  ],
+  "requires": [
+   {
+    "used": "FIG-WDS-001"
+   }
+  ],
+  "excludes": [],
+  "weight": 16,
+  "options": {
+   "left": {
+    "id": "pi_yue",
+    "label": "逐条批。",
+    "hint": "他写的每一条，都是替你挡过的刀",
+    "effects": {
+     "stats": {
+      "council": 2
+     },
+     "days": 1,
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "shu_lve",
+    "label": "挑要紧的。",
+    "hint": "时间要花在刀刃上",
+    "effects": {
+     "stats": {
+      "council": 1
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "文德嗣",
+    "line": "周报送来了。十件事，我按轻重排过：头一件是粮，末一件还是粮。中间那八件，您扫一眼就成——别让案牍把人淹了。"
+   }
+  ]
+ },
+ {
+  "id": "FIG-WDS-003",
+  "pool": "core",
+  "series": "figures.elders",
+  "type": "crisis",
+  "title": "文德嗣的调解",
+  "source": {
+   "kind": "force",
+   "id": "council",
+   "name": "扩大会议"
+  },
+  "tags": [
+   "元老",
+   "政治"
+  ],
+  "requires": [
+   {
+    "used": "FIG-WDS-002"
+   }
+  ],
+  "excludes": [],
+  "weight": 20,
+  "options": {
+   "left": {
+    "id": "mai_mian",
+    "label": "给他面子。",
+    "hint": "主席的面子，就是大会的里子",
+    "effects": {
+     "stats": {
+      "council": 3
+     },
+     "personal": {
+      "faction_alarm": -3
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "dang_mian_pi",
+    "label": "当面驳回。",
+    "hint": "调解可以，和稀泥不行",
+    "effects": {
+     "stats": {
+      "council": -2
+     },
+     "personal": {
+      "faction_alarm": 2,
+      "violence_risk": 1
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "文德嗣",
+    "line": "民政口和计委在排期会上拍了桌子，我压了一晚上。给您递个话：各让一步，排期照计委的，人手照民政的——您点个头，这事就翻篇。"
+   },
+   {
+    "who": "文德嗣",
+    "line": "您要不点头……我这个主席，往后说话就不值钱了。"
+   }
+  ]
+ },
+ {
+  "id": "FIG-WDS-004",
+  "pool": "core",
+  "series": "figures.elders",
+  "type": "backlash",
+  "title": "文德嗣的疲惫",
+  "source": {
+   "kind": "force",
+   "id": "council",
+   "name": "扩大会议"
+  },
+  "tags": [
+   "元老",
+   "政治"
+  ],
+  "requires": [
+   {
+    "used": "FIG-WDS-003"
+   }
+  ],
+  "excludes": [],
+  "weight": 16,
+  "options": {
+   "left": {
+    "id": "fang_jia",
+    "label": "放他十天假。",
+    "hint": "机器也得歇，何况是人",
+    "effects": {
+     "stats": {
+      "council": -1
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "xu_yi_xu",
+    "label": "再撑撑。",
+    "hint": "这时候换谁都接不上",
+    "effects": {
+     "stats": {
+      "council": 2
+     },
+     "personal": {
+      "faction_alarm": 1
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "值班秘书",
+    "line": "文主席三天没出办公室了，灯亮到后半夜。今早递出来的条子只有一句话：近来诸事丛集，精神有不济之感，乞假数日，另行选贤。"
+   },
+   {
+    "who": "值班秘书",
+    "line": "下面的人都在看——主席要是倒了，大会那杆秤还给不给得出分量。"
+   }
+  ]
+ },
+ {
+  "id": "FIG-MQZ-001",
+  "pool": "core",
+  "series": "figures.elders",
+  "type": "key",
+  "title": "马千瞩的对表会",
+  "source": {
+   "kind": "force",
+   "id": "planning",
+   "name": "计划委员会"
+  },
+  "tags": [
+   "元老",
+   "计划"
+  ],
+  "requires": [
+   {
+    "day": {
+     "gte": 18
+    }
+   }
+  ],
+  "excludes": [],
+  "weight": 24,
+  "options": {
+   "left": {
+    "id": "dui_biao",
+    "label": "开对表会。",
+    "hint": "所有的钟，对成一座钟",
+    "effects": {
+     "stats": {
+      "livelihood": 3,
+      "council": -1
+     },
+     "forces": {
+      "planning": {
+       "influence": 5
+      }
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "ge_kou_gan",
+    "label": "各口自便。",
+    "hint": "条条大路通百仞，何必都走一条",
+    "effects": {
+     "stats": {
+      "council": 1
+     },
+     "personal": {
+      "faction_alarm": -1
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "马千瞩",
+    "line": "执政者，我在计委立了个规矩：每月初一，各口来对表——不是对钟表，是对进度。钢几吨、糖几篓、药几瓶，报不上实数的，当场说清楚。"
+   },
+   {
+    "who": "马千瞩",
+    "line": "有人说这是拿算盘管人。我说，算盘不认人，所以它比人公道。"
+   }
+  ]
+ },
+ {
+  "id": "FIG-MQZ-002",
+  "pool": "core",
+  "series": "figures.elders",
+  "type": "daily",
+  "title": "马千瞩砍预算",
+  "source": {
+   "kind": "force",
+   "id": "planning",
+   "name": "计划委员会"
+  },
+  "tags": [
+   "元老",
+   "计划"
+  ],
+  "requires": [
+   {
+    "used": "FIG-MQZ-001"
+   }
+  ],
+  "excludes": [],
+  "weight": 18,
+  "options": {
+   "left": {
+    "id": "zhun_kan",
+    "label": "准砍。",
+    "hint": "省下的就是赚下的",
+    "effects": {
+     "stats": {
+      "livelihood": 3,
+      "council": -2
+     },
+     "forces": {
+      "planning": {
+       "influence": 3
+      }
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "bo_hui",
+    "label": "驳回去。",
+    "hint": "钱是花出来的，不是省出来的",
+    "effects": {
+     "stats": {
+      "livelihood": -1,
+      "council": 2
+     },
+     "personal": {
+      "faction_alarm": 1
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "马千瞩",
+    "line": "各口的预算书我砍了三成本。保卫组要的军械、民政要的口粮、工口要的焦炭，我都留了——砍掉的是排场：新楼、新服、新家具。"
+   },
+   {
+    "who": "马千瞩",
+    "line": "有人骂我抠。等粮价再涨一回，他们就知道我抠得对不对。"
+   }
+  ]
+ },
+ {
+  "id": "FIG-MQZ-003",
+  "pool": "core",
+  "series": "figures.elders",
+  "type": "crisis",
+  "title": "马千瞩的坏消息",
+  "source": {
+   "kind": "force",
+   "id": "planning",
+   "name": "计划委员会"
+  },
+  "tags": [
+   "元老",
+   "计划"
+  ],
+  "requires": [
+   {
+    "used": "FIG-MQZ-002"
+   }
+  ],
+  "excludes": [],
+  "weight": 20,
+  "options": {
+   "left": {
+    "id": "ting_ta_suan",
+    "label": "听他算完。",
+    "hint": "他递来的坏消息，从来都是真的",
+    "effects": {
+     "stats": {
+      "livelihood": 2
+     },
+     "wind": 1,
+     "days": 1,
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "bu_xiang_ting",
+    "label": "不许再报。",
+    "hint": "报忧的嘴堵住了，忧还在",
+    "effects": {
+     "stats": {
+      "livelihood": -2
+     },
+     "personal": {
+      "faction_alarm": 2
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "马千瞩",
+    "line": "执政者，三张表我都重算了一遍：照现在的消耗，糖和盐的进项撑不过五十天。缺口两千三百两。"
+   },
+   {
+    "who": "马千瞩",
+    "line": "我有三个补法，一个比一个得罪人。您听完再选，别听完就骂。"
+   }
+  ]
+ },
+ {
+  "id": "FIG-MQZ-004",
+  "pool": "core",
+  "series": "figures.elders",
+  "type": "benefit",
+  "title": "马千瞩的报表",
+  "source": {
+   "kind": "force",
+   "id": "planning",
+   "name": "计划委员会"
+  },
+  "tags": [
+   "元老",
+   "计划"
+  ],
+  "requires": [
+   {
+    "used": "FIG-MQZ-003"
+   }
+  ],
+  "excludes": [],
+  "weight": 16,
+  "options": {
+   "left": {
+    "id": "zhang_bang",
+    "label": "张榜公布。",
+    "hint": "数字见人，人心才定",
+    "effects": {
+     "stats": {
+      "people": 3,
+      "council": 1
+     },
+     "wind": 1,
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "nei_chuan",
+    "label": "内部传阅。",
+    "hint": "数字出了营地，就是行情",
+    "effects": {
+     "stats": {
+      "council": 1
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "马千瞩",
+    "line": "这个月的表做完了：糖三百一十七篓、盐二百六十石、罐头八千二百听，进出两抵，净余四百两——头一回，账是黑字。"
+   },
+   {
+    "who": "马千瞩",
+    "line": "要不要贴出去？贴了，人心稳；也贴给了广商和官府——咱们的家底。"
+   }
+  ]
+ },
+ {
+  "id": "FIG-XZS-001",
+  "pool": "core",
+  "series": "figures.elders",
+  "type": "daily",
+  "title": "萧子山的条陈",
+  "source": {
+   "kind": "force",
+   "id": "council",
+   "name": "扩大会议"
+  },
+  "tags": [
+   "元老",
+   "秘书"
+  ],
+  "requires": [
+   {
+    "day": {
+     "gte": 20
+    }
+   }
+  ],
+  "excludes": [],
+  "weight": 16,
+  "options": {
+   "left": {
+    "id": "zhao_ban",
+    "label": "照办。",
+    "hint": "他把你要想的都替你想了",
+    "effects": {
+     "stats": {
+      "council": 2
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "jianban",
+    "label": "拣一半。",
+    "hint": "全听秘书的，首长成了谁",
+    "effects": {
+     "stats": {
+      "council": 1
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "萧子山",
+    "line": "执政者，今日待批的共十一件：三件急、四件缓、四件其实不用您批——我拟了意见，附在后面，您勾掉不同意的就行。"
+   },
+   {
+    "who": "萧子山",
+    "line": "另外，秘书处的茶炉该换了，批牍的诸位首长，喝口热的也好干活。"
+   }
+  ]
+ },
+ {
+  "id": "FIG-XZS-002",
+  "pool": "core",
+  "series": "figures.elders",
+  "type": "crisis",
+  "title": "萧子山的备忘",
+  "source": {
+   "kind": "force",
+   "id": "council",
+   "name": "扩大会议"
+  },
+  "tags": [
+   "元老",
+   "秘书"
+  ],
+  "requires": [
+   {
+    "used": "FIG-XZS-001"
+   }
+  ],
+  "excludes": [],
+  "weight": 18,
+  "options": {
+   "left": {
+    "id": "bu_lou",
+    "label": "补上漏洞。",
+    "hint": "忘性是权力最大的漏洞",
+    "effects": {
+     "stats": {
+      "council": 3
+     },
+     "days": 1,
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "tuo_gei_ta",
+    "label": "以后都交他。",
+    "hint": "备忘录比人可靠",
+    "effects": {
+     "stats": {
+      "council": 1
+     },
+     "personal": {
+      "faction_alarm": 1
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "萧子山",
+    "line": "执政者，翻三个月前的卷宗，发现一件事没人接手：官府那边递过一份照会，答应的海图至今没给，咱们应的药材也没送。两边都在拖，拖成了悬案。"
+   },
+   {
+    "who": "萧子山",
+    "line": "外交上的账，拖久了两头都当没这回事——可对方记性比咱们好。"
+   }
+  ]
+ },
+ {
+  "id": "FIG-XZS-003",
+  "pool": "core",
+  "series": "figures.elders",
+  "type": "daily",
+  "title": "萧子山的请辞",
+  "source": {
+   "kind": "force",
+   "id": "council",
+   "name": "扩大会议"
+  },
+  "tags": [
+   "元老",
+   "秘书"
+  ],
+  "requires": [
+   {
+    "used": "FIG-XZS-002"
+   }
+  ],
+  "excludes": [],
+  "weight": 14,
+  "options": {
+   "left": {
+    "id": "wei_liu",
+    "label": "不批。",
+    "hint": "秘书长这个位子，离了他就得乱",
+    "effects": {
+     "stats": {
+      "council": 1
+     },
+     "forces": {
+      "council": {
+       "satisfaction": 2
+      }
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "pei_fu",
+    "label": "给他配副手。",
+    "hint": "人是铁打的也不行",
+    "effects": {
+     "stats": {
+      "council": 2
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "萧子山",
+    "line": "执政者，秘书处的事越来越杂，我一人两头烧。递个折子：要么给我配两个归化民副手，要么另请高明——我回仓库管账去，那儿清静。"
+   }
+  ]
+ },
+ {
+  "id": "FIG-XZS-004",
+  "pool": "core",
+  "series": "figures.elders",
+  "type": "backlash",
+  "title": "萧子山的黑账",
+  "source": {
+   "kind": "force",
+   "id": "council",
+   "name": "扩大会议"
+  },
+  "tags": [
+   "元老",
+   "秘书"
+  ],
+  "requires": [
+   {
+    "used": "FIG-XZS-003"
+   }
+  ],
+  "excludes": [],
+  "weight": 18,
+  "options": {
+   "left": {
+    "id": "shou_ben",
+    "label": "收进密档。",
+    "hint": "有些账，只能留给后来人",
+    "effects": {
+     "stats": {
+      "council": 2
+     },
+     "wind": 1,
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "shao_diao",
+    "label": "烧了。",
+    "hint": "灰烬里长不出第二本",
+    "effects": {
+     "stats": {
+      "council": -1
+     },
+     "personal": {
+      "faction_alarm": -2
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "萧子山",
+    "line": "执政者，秘书处的旧箱底翻出一本黑账——是头几个月，各口首长支用的记录。有几位如今位子坐得很稳的人，名字在头一页。"
+   },
+   {
+    "who": "萧子山",
+    "line": "账要不要留？留着是把刀，烧了是场体面。"
+   }
+  ]
+ },
+ {
+  "id": "FIG-RY-001",
+  "pool": "core",
+  "series": "figures.elders",
+  "type": "key",
+  "title": "冉耀的治安条陈",
+  "source": {
+   "kind": "force",
+   "id": "guard",
+   "name": "保卫系统"
+  },
+  "tags": [
+   "元老",
+   "治安"
+  ],
+  "requires": [
+   {
+    "day": {
+     "gte": 15
+    }
+   }
+  ],
+  "excludes": [],
+  "weight": 22,
+  "options": {
+   "left": {
+    "id": "zhun_xing",
+    "label": "照准。",
+    "hint": "宵小最怕的就是规矩",
+    "effects": {
+     "stats": {
+      "people": 2,
+      "military": 2
+     },
+     "wind": -1,
+     "forces": {
+      "guard": {
+       "influence": 4
+      }
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "xian_wen",
+    "label": "先问民意。",
+    "hint": "保甲连坐，一步走错就是怨声",
+    "effects": {
+     "stats": {
+      "people": 1
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "冉耀",
+    "line": "执政者，营地夜里的贼多起来了——偷的都是小东西：铁钉、灯油、盐。我拟了治安条陈：编保甲、发门牌、夜巡加倍。"
+   },
+   {
+    "who": "冉耀",
+    "line": "丑话在前：这法子一立，就得抓人。抓的第一个，多半是归化民。"
+   }
+  ]
+ },
+ {
+  "id": "FIG-RY-002",
+  "pool": "core",
+  "series": "figures.elders",
+  "type": "crisis",
+  "title": "冉耀的审讯",
+  "source": {
+   "kind": "force",
+   "id": "guard",
+   "name": "保卫系统"
+  },
+  "tags": [
+   "元老",
+   "治安"
+  ],
+  "requires": [
+   {
+    "used": "FIG-RY-001"
+   }
+  ],
+  "excludes": [],
+  "weight": 20,
+  "options": {
+   "left": {
+    "id": "ding_zui",
+    "label": "定了。",
+    "hint": "证据链比口供硬",
+    "effects": {
+     "stats": {
+      "people": 2,
+      "military": 1
+     },
+     "wind": 1,
+     "forces": {
+      "guard": {
+       "influence": 3
+      }
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "fang_ren",
+    "label": "放了。",
+    "hint": "屈打成招的案子，古今还少吗",
+    "effects": {
+     "stats": {
+      "people": -1
+     },
+     "personal": {
+      "faction_alarm": -1
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "冉耀",
+    "line": "抓到了。是仓房的归化民，偷盐接济村里的舅家。人证物证俱在，他自己也认了。"
+   },
+   {
+    "who": "冉耀",
+    "line": "按条陈是逐出营地。可他舅家一家五口，就指着这点盐……您定。"
+   }
+  ]
+ },
+ {
+  "id": "FIG-RY-003",
+  "pool": "core",
+  "series": "figures.elders",
+  "type": "crisis",
+  "title": "冉耀的名单",
+  "source": {
+   "kind": "force",
+   "id": "guard",
+   "name": "保卫系统"
+  },
+  "tags": [
+   "元老",
+   "治安"
+  ],
+  "requires": [
+   {
+    "used": "FIG-RY-002"
+   }
+  ],
+  "excludes": [],
+  "weight": 22,
+  "options": {
+   "left": {
+    "id": "shou_qi",
+    "label": "收起来。",
+    "hint": "名单收进铁柜，威慑留在人心",
+    "effects": {
+     "stats": {
+      "council": 1
+     },
+     "personal": {
+      "faction_alarm": -1
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "yong_qi",
+    "label": "动他一动。",
+    "hint": "名单不咬人，咬人的是时机",
+    "effects": {
+     "stats": {
+      "council": -2,
+      "military": 2
+     },
+     "wind": 2,
+     "personal": {
+      "faction_alarm": 3,
+      "violence_risk": 2
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "冉耀",
+    "line": "执政者，我在各口安了眼线——不是查案，是查人。有七个归化民，白天当差，夜里和官府的探子喝酒。名单在这儿。"
+   },
+   {
+    "who": "冉耀",
+    "line": "我只要您一句话：这七个人，现在动，还是留着钓更大的鱼？"
+   }
+  ]
+ },
+ {
+  "id": "FIG-RY-004",
+  "pool": "core",
+  "series": "figures.elders",
+  "type": "backlash",
+  "title": "冉耀的告诫",
+  "source": {
+   "kind": "force",
+   "id": "guard",
+   "name": "保卫系统"
+  },
+  "tags": [
+   "元老",
+   "治安"
+  ],
+  "requires": [
+   {
+    "used": "FIG-RY-003"
+   }
+  ],
+  "excludes": [],
+  "weight": 18,
+  "options": {
+   "left": {
+    "id": "xie_zhang",
+    "label": "卸他的权。",
+    "hint": "刀太快了，握刀的手也得防",
+    "effects": {
+     "stats": {
+      "council": 2,
+      "military": -1
+     },
+     "forces": {
+      "guard": {
+       "satisfaction": -3
+      }
+     },
+     "personal": {
+      "faction_alarm": -2
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "xin_ren",
+    "label": "深信之。",
+    "hint": "用他，就得容他的阴面",
+    "effects": {
+     "stats": {
+      "military": 2
+     },
+     "forces": {
+      "guard": {
+       "influence": 3
+      }
+     },
+     "personal": {
+      "faction_alarm": 1
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "冉耀",
+    "line": "执政者，说句僭越的话。您现在批的每一张卡，我那边都有一份抄本——这不是我要的，是局面变成这样的：想知道谁要动您，就得什么都看。"
+   },
+   {
+    "who": "冉耀",
+    "line": "您要是觉得这份权太重了，现在就能收走。趁我还没用它做过一件私事。"
+   }
+  ]
+ },
+ {
+  "id": "FIG-DQ-001",
+  "pool": "core",
+  "series": "figures.elders",
+  "type": "key",
+  "title": "独孤求婚的图纸",
+  "source": {
+   "kind": "force",
+   "id": "planning",
+   "name": "计划委员会"
+  },
+  "tags": [
+   "元老",
+   "土建"
+  ],
+  "requires": [
+   {
+    "day": {
+     "gte": 22
+    }
+   }
+  ],
+  "excludes": [],
+  "weight": 22,
+  "options": {
+   "left": {
+    "id": "zhao_tu",
+    "label": "照图施工。",
+    "hint": "先有图纸，后有城",
+    "effects": {
+     "stats": {
+      "livelihood": 3,
+      "military": 1
+     },
+     "days": 2,
+     "forces": {
+      "planning": {
+       "influence": 4
+      }
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "xian_gai",
+    "label": "先盖茅屋。",
+    "hint": "图纸是好，眼下要的是遮雨",
+    "effects": {
+     "stats": {
+      "livelihood": 1
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "独孤求婚",
+    "line": "执政者，百仞的规划图出来了。道路、水渠、仓库、住区，五十年的地都留出来了——眼下用不上，占住就是。"
+   },
+   {
+    "who": "独孤求婚",
+    "line": "就是头一期要拆四十间茅屋。住茅屋的骂归骂，路总得从谁家门口过。"
+   }
+  ]
+ },
+ {
+  "id": "FIG-DQ-002",
+  "pool": "core",
+  "series": "figures.elders",
+  "type": "daily",
+  "title": "独孤求婚的民夫",
+  "source": {
+   "kind": "force",
+   "id": "planning",
+   "name": "计划委员会"
+  },
+  "tags": [
+   "元老",
+   "土建"
+  ],
+  "requires": [
+   {
+    "used": "FIG-DQ-001"
+   }
+  ],
+  "excludes": [],
+  "weight": 16,
+  "options": {
+   "left": {
+    "id": "jia_gong",
+    "label": "加工钱。",
+    "hint": "工地上没人，图纸就是废纸",
+    "effects": {
+     "stats": {
+      "livelihood": -2,
+      "people": 3
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "pa_bing",
+    "label": "派兵督工。",
+    "hint": "进度就是命，拖不得",
+    "effects": {
+     "stats": {
+      "people": -3,
+      "military": 1
+     },
+     "wind": 1,
+     "personal": {
+      "violence_risk": 1
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "独孤求婚",
+    "line": "工地缺人。工钱按日结的，村里人来得勤；派差的，来了也是磨洋工。您给句准话：是要快，还是要不惹怨？"
+   }
+  ]
+ },
+ {
+  "id": "FIG-DQ-003",
+  "pool": "core",
+  "series": "figures.elders",
+  "type": "crisis",
+  "title": "独孤求婚的雨夜",
+  "source": {
+   "kind": "force",
+   "id": "planning",
+   "name": "计划委员会"
+  },
+  "tags": [
+   "元老",
+   "土建"
+  ],
+  "requires": [
+   {
+    "used": "FIG-DQ-002"
+   }
+  ],
+  "excludes": [],
+  "weight": 20,
+  "options": {
+   "left": {
+    "id": "qiang_xiu",
+    "label": "连夜抢。",
+    "hint": "堤在田在，堤破田荒",
+    "effects": {
+     "stats": {
+      "livelihood": 3,
+      "people": 1
+     },
+     "days": 1,
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "che_ren",
+    "label": "先撤人。",
+    "hint": "人淹死了，堤修好给谁看",
+    "effects": {
+     "stats": {
+      "livelihood": -2,
+      "people": 2
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "独孤求婚",
+    "line": "执政者，文澜江的水一夜涨了三尺，新修的堤裂了一道缝。民夫蹲在雨里看着我——抢修，可能伤人；撤人，堤就没了。"
+   },
+   {
+    "who": "独孤求婚",
+    "line": "我这辈子没求过人。现在替堤上那三十个民夫，求您一句快话。"
+   }
+  ]
+ },
+ {
+  "id": "FIG-DQ-004",
+  "pool": "core",
+  "series": "figures.elders",
+  "type": "benefit",
+  "title": "独孤求婚的桥",
+  "source": {
+   "kind": "force",
+   "id": "planning",
+   "name": "计划委员会"
+  },
+  "tags": [
+   "元老",
+   "土建"
+  ],
+  "requires": [
+   {
+    "used": "FIG-DQ-003"
+   }
+  ],
+  "excludes": [],
+  "weight": 16,
+  "options": {
+   "left": {
+    "id": "tong_qing",
+    "label": "通行。",
+    "hint": "一座桥，两岸都是一个市场",
+    "effects": {
+     "stats": {
+      "livelihood": 4,
+      "people": 2
+     },
+     "wind": 1,
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "she_ka",
+    "label": "设卡收钱。",
+    "hint": "过桥钱，五年回本",
+    "effects": {
+     "stats": {
+      "livelihood": 2
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "独孤求婚",
+    "line": "桥合龙了。混凝土的桩，木头的大梁，能走牛车。两岸的村里人过来看了三天，没人敢先上去走。"
+   },
+   {
+    "who": "独孤求婚",
+    "line": "头一拨踩桥的，要不要请村里老人？他们信了这个，桥才算真的通了。"
+   }
+  ]
+ },
+ {
+  "id": "FIG-DW-001",
+  "pool": "core",
+  "series": "figures.elders",
+  "type": "key",
+  "title": "杜雯的宣讲队",
+  "source": {
+   "kind": "force",
+   "id": "naturalized",
+   "name": "归化民组织"
+  },
+  "tags": [
+   "元老",
+   "文宣"
+  ],
+  "requires": [
+   {
+    "day": {
+     "gte": 20
+    }
+   }
+  ],
+  "excludes": [],
+  "weight": 22,
+  "options": {
+   "left": {
+    "id": "fang_xing",
+    "label": "准了。",
+    "hint": "嘴皮子也是生产力",
+    "effects": {
+     "stats": {
+      "people": 3
+     },
+     "wind": 1,
+     "forces": {
+      "naturalized": {
+       "influence": 4
+      }
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "shou_jian",
+    "label": "收敛些。",
+    "hint": "宣讲过头，就成了另一个衙门",
+    "effects": {
+     "stats": {
+      "people": 1
+     },
+     "personal": {
+      "faction_alarm": -1
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "杜雯",
+    "line": "执政者，我要组宣讲队：下村、下营、下灶房，讲卫生、讲工分、讲妇女也是人。有人说我煽动——我煽动他们讲卫生、多打粮，这也有罪？"
+   }
+  ]
+ },
+ {
+  "id": "FIG-DW-002",
+  "pool": "core",
+  "series": "figures.elders",
+  "type": "crisis",
+  "title": "杜雯放人",
+  "source": {
+   "kind": "force",
+   "id": "naturalized",
+   "name": "归化民组织"
+  },
+  "tags": [
+   "元老",
+   "文宣",
+   "妇女"
+  ],
+  "requires": [
+   {
+    "used": "FIG-DW-001"
+   }
+  ],
+  "excludes": [],
+  "weight": 20,
+  "options": {
+   "left": {
+    "id": "gei_ren",
+    "label": "给人。",
+    "hint": "她庇护的人，各口抢着要",
+    "effects": {
+     "stats": {
+      "people": 2,
+      "council": 1
+     },
+     "forces": {
+      "naturalized": {
+       "satisfaction": 3
+      }
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "tui_hui",
+    "label": "退回去。",
+    "hint": "家务事归族规，营地法才立得住",
+    "effects": {
+     "stats": {
+      "people": -3
+     },
+     "wind": 2,
+     "personal": {
+      "faction_alarm": 1
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "杜雯",
+    "line": "执政者，村里一个媳妇，被夫家打断了腿，逃到营地门口。我把人留下了——她夫家带着族老来要人，说这是他们家的家务事。"
+   },
+   {
+    "who": "杜雯",
+    "line": "我把话放这儿：交人可以，先过我这道门槛。您要也为难，我自担。"
+   }
+  ]
+ },
+ {
+  "id": "FIG-DW-003",
+  "pool": "core",
+  "series": "figures.elders",
+  "type": "daily",
+  "title": "杜雯的报头",
+  "source": {
+   "kind": "force",
+   "id": "council",
+   "name": "扩大会议"
+  },
+  "tags": [
+   "元老",
+   "文宣"
+  ],
+  "requires": [
+   {
+    "used": "FIG-DW-002"
+   },
+   {
+    "state": "times.established",
+    "equals": true
+   }
+  ],
+  "excludes": [],
+  "weight": 16,
+  "options": {
+   "left": {
+    "id": "gei_ban",
+    "label": "给她一版。",
+    "hint": "骂人的笔，也是笔",
+    "effects": {
+     "stats": {
+      "people": 2,
+      "council": -1
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "bugei",
+    "label": "不批。",
+    "hint": "报纸不是吵架的地方",
+    "effects": {
+     "stats": {
+      "council": 1
+     },
+     "personal": {
+      "faction_alarm": -1
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "杜雯",
+    "line": "《时报》给我留半个版，叫「妇女与工」。有人嫌我话多——话多总比没话强。归化民里一半是女人，报纸上连她们的影子都没有。"
+   }
+  ]
+ },
+ {
+  "id": "FIG-DW-004",
+  "pool": "core",
+  "series": "figures.elders",
+  "type": "backlash",
+  "title": "杜雯的争吵",
+  "source": {
+   "kind": "force",
+   "id": "council",
+   "name": "扩大会议"
+  },
+  "tags": [
+   "元老",
+   "文宣"
+  ],
+  "requires": [
+   {
+    "used": "FIG-DW-003"
+   }
+  ],
+  "excludes": [],
+  "weight": 18,
+  "options": {
+   "left": {
+    "id": "heyi_he",
+    "label": "各打五十大板。",
+    "hint": "都是为公，撕破了脸就都输了",
+    "effects": {
+     "stats": {
+      "council": 1
+     },
+     "personal": {
+      "faction_alarm": -1
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "zhandu",
+    "label": "站杜雯。",
+    "hint": "方向是对的，脾气另说",
+    "effects": {
+     "stats": {
+      "people": 2,
+      "council": -2
+     },
+     "personal": {
+      "faction_alarm": 2
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "值班秘书",
+    "line": "杜雯和管民政的首长在走廊里吵起来了，半层楼都听见。起因是女工夜班的工钱，杜雯要加三成，民政说账上没有这笔。"
+   },
+   {
+    "who": "值班秘书",
+    "line": "杜雯撂了话：不给，她就在报上把这笔账算给全临高看。"
+   }
+  ]
+ },
+ {
+  "id": "FIG-WM-001",
+  "pool": "core",
+  "series": "figures.elders",
+  "type": "key",
+  "title": "午木的卷宗",
+  "source": {
+   "kind": "force",
+   "id": "guard",
+   "name": "保卫系统"
+  },
+  "tags": [
+   "元老",
+   "政保"
+  ],
+  "requires": [
+   {
+    "state": "polbur.established",
+    "equals": true
+   }
+  ],
+  "excludes": [],
+  "weight": 22,
+  "options": {
+   "left": {
+    "id": "fan_yue",
+    "label": "翻阅。",
+    "hint": "影子里的账，也得有人看",
+    "effects": {
+     "stats": {
+      "council": 1
+     },
+     "wind": -1,
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "fengcun",
+    "label": "封存。",
+    "hint": "知道得越多，睡得越少",
+    "effects": {
+     "stats": {
+      "council": 1
+     },
+     "personal": {
+      "faction_alarm": -1
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "午木",
+    "line": "执政者，政保局的卷宗按您的意思，每月呈一次。这月三件：东门市的牙行换了新东家，背后是琼山的秀才；渔行多了两个生面孔，疍家说不认识；学堂的新杂役，自称雷州人，口音是肇庆的。"
+   },
+   {
+    "who": "午木",
+    "line": "都不算案子。都记下了。"
+   }
+  ]
+ },
+ {
+  "id": "FIG-WM-002",
+  "pool": "core",
+  "series": "figures.elders",
+  "type": "crisis",
+  "title": "午木的线报",
+  "source": {
+   "kind": "force",
+   "id": "guard",
+   "name": "保卫系统"
+  },
+  "tags": [
+   "元老",
+   "政保"
+  ],
+  "requires": [
+   {
+    "used": "FIG-WM-001"
+   }
+  ],
+  "excludes": [],
+  "weight": 20,
+  "options": {
+   "left": {
+    "id": "jiang_luo",
+    "label": "将计就计。",
+    "hint": "探子最好的用处，是替咱们递假话",
+    "effects": {
+     "stats": {
+      "military": 2,
+      "council": 1
+     },
+     "wind": -2,
+     "days": 1,
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "dai_ren",
+    "label": "连根拔。",
+    "hint": "留下一个，就是留下十个",
+    "effects": {
+     "stats": {
+      "military": 1,
+      "people": -1
+     },
+     "wind": 1,
+     "personal": {
+      "violence_risk": 1
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "午木",
+    "line": "线报坐实了：县衙的师爷每月初五在东门市茶棚收一份「髡情」——写的人，摸到了咱们学堂杂役头上。"
+   },
+   {
+    "who": "午木",
+    "line": "拔掉他容易。可我更想让他继续写——往后写什么，咱们说了算。"
+   }
+  ]
+ },
+ {
+  "id": "FIG-WM-003",
+  "pool": "core",
+  "series": "figures.elders",
+  "type": "crisis",
+  "title": "午木的请示",
+  "source": {
+   "kind": "force",
+   "id": "guard",
+   "name": "保卫系统"
+  },
+  "tags": [
+   "元老",
+   "政保"
+  ],
+  "requires": [
+   {
+    "used": "FIG-WM-002"
+   }
+  ],
+  "excludes": [],
+  "weight": 20,
+  "options": {
+   "left": {
+    "id": "pizhun",
+    "label": "照章办。",
+    "hint": "程序是给别人看的，也是给自己拴的",
+    "effects": {
+     "stats": {
+      "council": 2
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "teban",
+    "label": "特事特办。",
+    "hint": "非常之时，从权",
+    "effects": {
+     "stats": {
+      "council": -2,
+      "military": 1
+     },
+     "personal": {
+      "faction_alarm": 2
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "午木",
+    "line": "按新章程，政保拿人要过军法处。可这次牵的是军需口的办事员，人证在军营里——走章程，消息就走漏；不走，章程头一个月就破了。"
+   },
+   {
+    "who": "午木",
+    "line": "您批哪条，哪条就是先例。"
+   }
+  ]
+ },
+ {
+  "id": "FIG-WM-004",
+  "pool": "core",
+  "series": "figures.elders",
+  "type": "backlash",
+  "title": "午木的辞职信",
+  "source": {
+   "kind": "force",
+   "id": "guard",
+   "name": "保卫系统"
+  },
+  "tags": [
+   "元老",
+   "政保"
+  ],
+  "requires": [
+   {
+    "used": "FIG-WM-003"
+   }
+  ],
+  "excludes": [],
+  "weight": 16,
+  "options": {
+   "left": {
+    "id": "weiliu",
+    "label": "驳回。",
+    "hint": "他走了，影子里的活谁接",
+    "effects": {
+     "stats": {
+      "military": 1
+     },
+     "personal": {
+      "faction_alarm": 1
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "fangxing",
+    "label": "放行。",
+    "hint": "愿意从影子里出来的人，该让他见光",
+    "effects": {
+     "stats": {
+      "council": 2,
+      "military": -1
+     },
+     "wind": -1,
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "午木",
+    "line": "执政者，递一封信。我干这行的日子越久，夜里睡得越少——不是怕事，是怕自己。哪天我分不清忠奸、只认好恶了，我就是最危险的那个。"
+   },
+   {
+    "who": "午木",
+    "line": "求放我去管图书馆。书不会说谎，人也教得诚实。"
+   }
+  ]
+ },
+ {
+  "id": "FIG-CHY-001",
+  "pool": "core",
+  "series": "figures.elders",
+  "type": "key",
+  "title": "陈海阳要船",
+  "source": {
+   "kind": "force",
+   "id": "guard",
+   "name": "保卫系统"
+  },
+  "tags": [
+   "元老",
+   "海军"
+  ],
+  "requires": [
+   {
+    "day": {
+     "gte": 24
+    }
+   }
+  ],
+  "excludes": [],
+  "weight": 22,
+  "options": {
+   "left": {
+    "id": "gei_chan",
+    "label": "拨两条。",
+    "hint": "海上没有船，说的话都是浪",
+    "effects": {
+     "stats": {
+      "military": 4,
+      "livelihood": -2
+     },
+     "wind": 2,
+     "forces": {
+      "guard": {
+       "influence": 4
+      }
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "xianxiu",
+    "label": "先修船台。",
+    "hint": "磨刀不误砍柴工",
+    "effects": {
+     "stats": {
+      "military": 1,
+      "livelihood": 1
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "陈海阳",
+    "line": "执政者，我带人看了缴来的三条广船：龙骨还硬，帆索全烂。修好两条，配上人，海峡里就能巡逻——糖船出港，得有人跟着。"
+   },
+   {
+    "who": "陈海阳",
+    "line": "海上人说话直：给我船，海面归我管；不给船，我就只能在岸上喝风。"
+   }
+  ]
+ },
+ {
+  "id": "FIG-CHY-002",
+  "pool": "core",
+  "series": "figures.elders",
+  "type": "crisis",
+  "title": "陈海阳的缉私",
+  "source": {
+   "kind": "force",
+   "id": "guard",
+   "name": "保卫系统"
+  },
+  "tags": [
+   "元老",
+   "海军"
+  ],
+  "requires": [
+   {
+    "used": "FIG-CHY-001"
+   }
+  ],
+  "excludes": [],
+  "weight": 20,
+  "options": {
+   "left": {
+    "id": "yanban",
+    "label": "连船带货都扣。",
+    "hint": "私货过三巡，官盐变私盐",
+    "effects": {
+     "stats": {
+      "military": 2,
+      "livelihood": 1
+     },
+     "wind": -1,
+     "days": 1,
+     "forces": {
+      "guard": {
+       "influence": 3
+      }
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "fangxing2",
+    "label": "放一马。",
+    "hint": "水至清则无鱼，海至清则无友",
+    "effects": {
+     "stats": {
+      "livelihood": 1
+     },
+     "forces": {
+      "trade": {
+       "satisfaction": 3
+      }
+     },
+     "personal": {
+      "faction_alarm": 1
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "陈海阳",
+    "line": "夜里堵住一条不带旗的快船，舱里是硝和铁器——往来的路子，牵到咱们自己的补给商头上。"
+   },
+   {
+    "who": "陈海阳",
+    "line": "扣了，军需断三天；放了，这个口子就再也合不上。您批。"
+   }
+  ]
+ },
+ {
+  "id": "FIG-CHY-003",
+  "pool": "core",
+  "series": "figures.elders",
+  "type": "daily",
+  "title": "陈海阳的水手",
+  "source": {
+   "kind": "force",
+   "id": "guard",
+   "name": "保卫系统"
+  },
+  "tags": [
+   "元老",
+   "海军"
+  ],
+  "requires": [
+   {
+    "used": "FIG-CHY-002"
+   }
+  ],
+  "excludes": [],
+  "weight": 16,
+  "options": {
+   "left": {
+    "id": "shoulu",
+    "label": "收疍家子弟。",
+    "hint": "浪里长的娃娃，天生水手",
+    "effects": {
+     "stats": {
+      "military": 3,
+      "people": 2
+     },
+     "forces": {
+      "locals": {
+       "satisfaction": 3
+      }
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "zipei",
+    "label": "自己练。",
+    "hint": "疍家人上得了船，上不得战船",
+    "effects": {
+     "stats": {
+      "military": 1
+     },
+     "days": 1,
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "陈海阳",
+    "line": "水手不够了。疍家送来一批后生，浪里钻大的，闭眼都使得桨——就是规矩差些：光膀子、骂粗话、不排队。"
+   },
+   {
+    "who": "陈海阳",
+    "line": "我说能要。有人说，军中收渔家子，成何体统——体统能开船吗？"
+   }
+  ]
+ },
+ {
+  "id": "FIG-CHY-004",
+  "pool": "core",
+  "series": "figures.elders",
+  "type": "crisis",
+  "title": "陈海阳的台风眼",
+  "source": {
+   "kind": "force",
+   "id": "guard",
+   "name": "保卫系统"
+  },
+  "tags": [
+   "元老",
+   "海军"
+  ],
+  "requires": [
+   {
+    "used": "FIG-CHY-003"
+   }
+  ],
+  "excludes": [],
+  "weight": 22,
+  "options": {
+   "left": {
+    "id": "maohang",
+    "label": "抢在风前回港。",
+    "hint": "跟天赌，输一次就没了",
+    "effects": {
+     "stats": {
+      "military": -1,
+      "livelihood": -1
+     },
+     "days": 1,
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "zaihaishang",
+    "label": "海上再留一天。",
+    "hint": "多跑一趟，糖仓就满一成",
+    "effects": {
+     "stats": {
+      "livelihood": 2
+     },
+     "personal": {
+      "violence_risk": 2
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "陈海阳",
+    "line": "巡逻队在海上，老船工看云说三日内有大风。让他们照跑完这趟糖货再回，还是现在就空船返港？"
+   },
+   {
+    "who": "陈海阳",
+    "line": "跑完这趟，广商的现银就到手了。老船工看云，从来没有错过——我也从来没有全信过。"
+   }
+  ]
+ },
+ {
+  "id": "FIG-SZQ-001",
+  "pool": "core",
+  "series": "figures.elders",
+  "type": "key",
+  "title": "石志奇的操典",
+  "source": {
+   "kind": "force",
+   "id": "guard",
+   "name": "保卫系统"
+  },
+  "tags": [
+   "元老",
+   "陆军"
+  ],
+  "requires": [
+   {
+    "state": "security.guard_authorized",
+    "equals": true
+   },
+   {
+    "day": {
+     "gte": 26
+    }
+   }
+  ],
+  "excludes": [],
+  "weight": 22,
+  "options": {
+   "left": {
+    "id": "xuecao",
+    "label": "照新操典。",
+    "hint": "队列不会打仗，但会打赢",
+    "effects": {
+     "stats": {
+      "military": 4
+     },
+     "days": 2,
+     "forces": {
+      "guard": {
+       "influence": 4
+      }
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "laobanfa",
+    "label": "老办法带。",
+    "hint": "打过硬仗的土办法，也别丢",
+    "effects": {
+     "stats": {
+      "military": 2
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "石志奇",
+    "line": "执政者，新操典编完了：立正、转向、装弹、齐射，一天两个时辰，风雨不改。有人嘀咕排队摆样子——米尼铳齐射一轮，队列不齐就是白给。"
+   }
+  ]
+ },
+ {
+  "id": "FIG-SZQ-002",
+  "pool": "core",
+  "series": "figures.elders",
+  "type": "daily",
+  "title": "石志奇的军棍",
+  "source": {
+   "kind": "force",
+   "id": "guard",
+   "name": "保卫系统"
+  },
+  "tags": [
+   "元老",
+   "陆军"
+  ],
+  "requires": [
+   {
+    "used": "FIG-SZQ-001"
+   }
+  ],
+  "excludes": [],
+  "weight": 18,
+  "options": {
+   "left": {
+    "id": "dajungun",
+    "label": "依军法。",
+    "hint": "赏罚不明，操典就是纸",
+    "effects": {
+     "stats": {
+      "military": 3,
+      "people": -1
+     },
+     "forces": {
+      "guard": {
+       "satisfaction": 2
+      }
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "jiajiao",
+    "label": "先教育。",
+    "hint": "兵是骂不齐的，是带齐的",
+    "effects": {
+     "stats": {
+      "military": 1,
+      "people": 2
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "石志奇",
+    "line": "操练迟到的有四个，带头的是个老兵——打过硬仗、救过战友的那种。按操典，军棍二十。"
+   },
+   {
+    "who": "石志奇",
+    "line": "打，军法立住了，人心可能凉；不打，往后操典就是墙上的字。您定。"
+   }
+  ]
+ },
+ {
+  "id": "FIG-SZQ-003",
+  "pool": "core",
+  "series": "figures.elders",
+  "type": "crisis",
+  "title": "石志奇的哨报",
+  "source": {
+   "kind": "force",
+   "id": "guard",
+   "name": "保卫系统"
+  },
+  "tags": [
+   "元老",
+   "陆军"
+  ],
+  "requires": [
+   {
+    "used": "FIG-SZQ-002"
+   }
+  ],
+  "excludes": [],
+  "weight": 22,
+  "options": {
+   "left": {
+    "id": "paibing",
+    "label": "增哨。",
+    "hint": "宁可白跑十趟，不可漏过一次",
+    "effects": {
+     "stats": {
+      "military": 2,
+      "livelihood": -1
+     },
+     "days": 1,
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "anbing",
+    "label": "按兵不动。",
+    "hint": "狼来了喊多了，真狼就没人信",
+    "effects": {
+     "stats": {
+      "military": -1
+     },
+     "personal": {
+      "violence_risk": 1
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "石志奇",
+    "line": "北面哨所报：三夜里都有火光在岭后移动，数不清是猎户还是探马。上回也是这个方向——虚惊一场。"
+   },
+   {
+    "who": "石志奇",
+    "line": "我倾向再增一哨。可增哨的兵，得从工地和盐场抽人。"
+   }
+  ]
+ },
+ {
+  "id": "FIG-SZQ-004",
+  "pool": "core",
+  "series": "figures.elders",
+  "type": "benefit",
+  "title": "石志奇的阅操",
+  "source": {
+   "kind": "force",
+   "id": "guard",
+   "name": "保卫系统"
+  },
+  "tags": [
+   "元老",
+   "陆军"
+  ],
+  "requires": [
+   {
+    "used": "FIG-SZQ-003"
+   }
+  ],
+  "excludes": [],
+  "weight": 16,
+  "options": {
+   "left": {
+    "id": "dayue",
+    "label": "大会检阅。",
+    "hint": "让穿西装的和穿蓑衣的都看看这支军队",
+    "effects": {
+     "stats": {
+      "military": 3,
+      "council": 1,
+      "people": 1
+     },
+     "wind": 2,
+     "days": 1,
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "neibuyue",
+    "label": "只演给自己。",
+    "hint": "獠牙露给外人看，就得真咬人",
+    "effects": {
+     "stats": {
+      "military": 2
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "石志奇",
+    "line": "全营会操完毕：三段击轮放，齐整如墙。请示要不要请大会诸首长来看一回——军心要人捧，军威要人怕。"
+   }
+  ]
+ },
+ {
+  "id": "FIG-MD-001",
+  "pool": "core",
+  "series": "figures.elders",
+  "type": "key",
+  "title": "蒙德的锅炉",
+  "source": {
+   "kind": "force",
+   "id": "planning",
+   "name": "计划委员会"
+  },
+  "tags": [
+   "元老",
+   "动力"
+  ],
+  "requires": [
+   {
+    "day": {
+     "gte": 28
+    }
+   }
+  ],
+  "excludes": [],
+  "weight": 22,
+  "options": {
+   "left": {
+    "id": "dianhuo",
+    "label": "点火。",
+    "hint": "蒸汽一响，时代换挡",
+    "effects": {
+     "stats": {
+      "livelihood": 4,
+      "military": 1
+     },
+     "wind": 3,
+     "days": 2,
+     "forces": {
+      "planning": {
+       "influence": 5
+      }
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "zaiyan",
+    "label": "再验三天。",
+    "hint": "锅炉不炸，比什么都快",
+    "effects": {
+     "stats": {
+      "livelihood": 1
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "蒙德",
+    "line": "执政者，锅驼机改造完了：汽压翻倍，带得动两台锯。就一句丑话——焊缝是我盯的，我信；再验三天水压，我更信。"
+   },
+   {
+    "who": "蒙德",
+    "line": "您要现在点火，我亲自守在旁边。"
+   }
+  ]
+ },
+ {
+  "id": "FIG-MD-002",
+  "pool": "core",
+  "series": "figures.elders",
+  "type": "daily",
+  "title": "蒙德的备件",
+  "source": {
+   "kind": "force",
+   "id": "planning",
+   "name": "计划委员会"
+  },
+  "tags": [
+   "元老",
+   "动力"
+  ],
+  "requires": [
+   {
+    "used": "FIG-MD-001"
+   }
+  ],
+  "excludes": [],
+  "weight": 14,
+  "options": {
+   "left": {
+    "id": "duozao",
+    "label": "多造备件。",
+    "hint": "机器停一天，流水线瘫一片",
+    "effects": {
+     "stats": {
+      "livelihood": -1,
+      "military": 1
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "huailezaixiu",
+    "label": "坏了再修。",
+    "hint": "铁就这么多，先紧新机器",
+    "effects": {
+     "stats": {
+      "livelihood": 1
+     },
+     "personal": {
+      "faction_alarm": 1
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "蒙德",
+    "line": "锯木机的曲轴是易损件，全营就两根备的。我建议再铸六根——工时得从坩埚钢里抢。"
+   }
+  ]
+ },
+ {
+  "id": "FIG-MD-003",
+  "pool": "core",
+  "series": "figures.elders",
+  "type": "crisis",
+  "title": "蒙德的疲态",
+  "source": {
+   "kind": "force",
+   "id": "planning",
+   "name": "计划委员会"
+  },
+  "tags": [
+   "元老",
+   "动力"
+  ],
+  "requires": [
+   {
+    "used": "FIG-MD-002"
+   }
+  ],
+  "excludes": [],
+  "weight": 18,
+  "options": {
+   "left": {
+    "id": "tiaoji",
+    "label": "强制歇。",
+    "hint": "工程师倒下，机器没人懂",
+    "effects": {
+     "stats": {
+      "livelihood": -1,
+      "council": 1
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "chongya",
+    "label": "冲一把。",
+    "hint": "就差最后一口气，散了可惜",
+    "effects": {
+     "stats": {
+      "livelihood": 3
+     },
+     "personal": {
+      "faction_alarm": 1
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "值班秘书",
+    "line": "蒙德在工棚连着干了两天两夜，蒸汽锤的图纸画到一半，人趴在图板上睡着了。叫醒他，他说「画完这条线」；不叫，怕他熬出事。"
+   }
+  ]
+ },
+ {
+  "id": "FIG-MD-004",
+  "pool": "core",
+  "series": "figures.elders",
+  "type": "benefit",
+  "title": "蒙德的联动轴",
+  "source": {
+   "kind": "force",
+   "id": "planning",
+   "name": "计划委员会"
+  },
+  "tags": [
+   "元老",
+   "动力"
+  ],
+  "requires": [
+   {
+    "used": "FIG-MD-003"
+   }
+  ],
+  "excludes": [],
+  "weight": 16,
+  "options": {
+   "left": {
+    "id": "chuanqilai",
+    "label": "全线联动。",
+    "hint": "一根轴，带活一条街的工坊",
+    "effects": {
+     "stats": {
+      "livelihood": 5,
+      "council": 1
+     },
+     "wind": 2,
+     "days": 2,
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "liuyitai",
+    "label": "留一台手动。",
+    "hint": "手艺不能全断根",
+    "effects": {
+     "stats": {
+      "livelihood": 2,
+      "people": 1
+     },
+     "states": [
+      {
+       "id": "series.figures_elders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "蒙德",
+    "line": "成了！蒸汽机一机拖三坊：锯木、碾米、磨面，一根天轴串起来。原来三十个人的活，现在八个人看着就行。"
+   },
+   {
+    "who": "蒙德",
+    "line": "省下的二十二个人手，您看着派——他们站在工坊门口，一时不知道该去哪。"
+   }
+  ]
+ }
+]

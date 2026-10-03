@@ -1188,5 +1188,125 @@
    "series"
   ],
   "desc": "整饬吏治系列进度。"
+ },
+ {
+  "id": "series.figures_elders",
+  "name": "元老列传系列进度",
+  "type": "level",
+  "scope": "global",
+  "default": 0,
+  "min": 0,
+  "max": 40,
+  "visibility": "hidden",
+  "mutability": "reversible",
+  "tags": [
+   "series"
+  ],
+  "desc": "元老列传系列进度。"
+ },
+ {
+  "id": "series.war_local",
+  "name": "war_local系列进度",
+  "type": "level",
+  "scope": "global",
+  "default": 0,
+  "min": 0,
+  "max": 12,
+  "visibility": "hidden",
+  "mutability": "reversible",
+  "tags": [
+   "series"
+  ],
+  "desc": "series.war_local 系列进度。"
+ },
+ {
+  "id": "series.medic_safety",
+  "name": "medic_safety系列进度",
+  "type": "level",
+  "scope": "global",
+  "default": 0,
+  "min": 0,
+  "max": 12,
+  "visibility": "hidden",
+  "mutability": "reversible",
+  "tags": [
+   "series"
+  ],
+  "desc": "series.medic_safety 系列进度。"
+ },
+ {
+  "id": "series.finance_notes",
+  "name": "finance_notes系列进度",
+  "type": "level",
+  "scope": "global",
+  "default": 0,
+  "min": 0,
+  "max": 12,
+  "visibility": "hidden",
+  "mutability": "reversible",
+  "tags": [
+   "series"
+  ],
+  "desc": "series.finance_notes 系列进度。"
+ },
+ {
+  "id": "series.court_law",
+  "name": "court_law系列进度",
+  "type": "level",
+  "scope": "global",
+  "default": 0,
+  "min": 0,
+  "max": 12,
+  "visibility": "hidden",
+  "mutability": "reversible",
+  "tags": [
+   "series"
+  ],
+  "desc": "series.court_law 系列进度。"
+ },
+ {
+  "id": "series.daily_life",
+  "name": "daily_life系列进度",
+  "type": "level",
+  "scope": "global",
+  "default": 0,
+  "min": 0,
+  "max": 12,
+  "visibility": "hidden",
+  "mutability": "reversible",
+  "tags": [
+   "series"
+  ],
+  "desc": "series.daily_life 系列进度。"
+ },
+ {
+  "id": "series.nature_wrath",
+  "name": "nature_wrath系列进度",
+  "type": "level",
+  "scope": "global",
+  "default": 0,
+  "min": 0,
+  "max": 12,
+  "visibility": "hidden",
+  "mutability": "reversible",
+  "tags": [
+   "series"
+  ],
+  "desc": "series.nature_wrath 系列进度。"
+ },
+ {
+  "id": "series.leeq_workers",
+  "name": "leeq_workers系列进度",
+  "type": "level",
+  "scope": "global",
+  "default": 0,
+  "min": 0,
+  "max": 12,
+  "visibility": "hidden",
+  "mutability": "reversible",
+  "tags": [
+   "series"
+  ],
+  "desc": "series.leeq_workers 系列进度。"
  }
 ]

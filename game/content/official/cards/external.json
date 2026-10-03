@@ -2708,5 +2708,1168 @@
     "line": "邻村出了天花，一家死了三个娃。咱们的人胳膊上种的牛痘都验过了，一个没染。村里人跪在医务所门口，求给娃也种一个。"
    }
   ]
+ },
+ {
+  "id": "NAT-001",
+  "pool": "external",
+  "series": "nature.wrath",
+  "type": "crisis",
+  "title": "蝗群过境",
+  "source": {
+   "kind": "force",
+   "id": "farm",
+   "name": "南海农庄"
+  },
+  "tags": [
+   "天灾",
+   "蝗"
+  ],
+  "requires": [
+   {
+    "day": {
+     "gte": 48
+    }
+   }
+  ],
+  "excludes": [],
+  "weight": 22,
+  "options": {
+   "left": {
+    "id": "busha",
+    "label": "鸣锣扑杀。",
+    "hint": "蝗虫怕响，人多就能赢",
+    "effects": {
+     "stats": {
+      "livelihood": 3,
+      "people": 1
+     },
+     "wind": 1,
+     "days": 2,
+     "states": [
+      {
+       "id": "series.nature_wrath",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "gaizhong",
+    "label": "改种补种。",
+    "hint": "抢不回来的，就换一茬",
+    "effects": {
+     "stats": {
+      "livelihood": 1
+     },
+     "days": 1,
+     "states": [
+      {
+       "id": "series.nature_wrath",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "吴南海",
+    "line": "蝗群！从西北压过来，遮了半边天。蔗田和晚稻都在口上——老农说点火烟、敲锣能驱，可从没听说谁真赢过蝗虫。"
+   }
+  ]
+ },
+ {
+  "id": "NAT-002",
+  "pool": "external",
+  "series": "nature.wrath",
+  "type": "crisis",
+  "title": "连旱四十天",
+  "source": {
+   "kind": "force",
+   "id": "farm",
+   "name": "南海农庄"
+  },
+  "tags": [
+   "天灾",
+   "旱"
+  ],
+  "requires": [
+   {
+    "day": {
+     "gte": 52
+    }
+   }
+  ],
+  "excludes": [],
+  "weight": 20,
+  "options": {
+   "left": {
+    "id": "dajing",
+    "label": "打井修渠。",
+    "hint": "天不给水，自己挖",
+    "effects": {
+     "stats": {
+      "livelihood": 3
+     },
+     "days": 3,
+     "states": [
+      {
+       "id": "series.nature_wrath",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "tiaoji",
+    "label": "节水调粮。",
+    "hint": "熬到雨季，就是赢",
+    "effects": {
+     "stats": {
+      "people": -1,
+      "livelihood": -1
+     },
+     "states": [
+      {
+       "id": "series.nature_wrath",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "吴南海",
+    "line": "四十天没下透雨了，文澜江见了滩。秧田裂成龟背——再旱十天，晚稻就真的没了。"
+   }
+  ]
+ },
+ {
+  "id": "NAT-003",
+  "pool": "external",
+  "series": "nature.wrath",
+  "type": "crisis",
+  "title": "大潮倒灌",
+  "source": {
+   "kind": "force",
+   "id": "locals",
+   "name": "本地村社"
+  },
+  "tags": [
+   "天灾",
+   "潮"
+  ],
+  "requires": [
+   {
+    "day": {
+     "gte": 56
+    }
+   }
+  ],
+  "excludes": [],
+  "weight": 18,
+  "options": {
+   "left": {
+    "id": "zhudi",
+    "label": "筑堤御潮。",
+    "hint": "海进一寸，堤高一尺",
+    "effects": {
+     "stats": {
+      "livelihood": -1,
+      "people": 2
+     },
+     "days": 2,
+     "states": [
+      {
+       "id": "series.nature_wrath",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "chezou",
+    "label": "沿海后撤。",
+    "hint": "斗不过海，先让一步",
+    "effects": {
+     "stats": {
+      "people": -2,
+      "livelihood": -2
+     },
+     "states": [
+      {
+       "id": "series.nature_wrath",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "管民政的首长",
+    "line": "七月大潮，海水倒灌进沿海三村的田和井——井水咸得发苦，田里的苗一夜枯黄。"
+   }
+  ]
+ },
+ {
+  "id": "NAT-004",
+  "pool": "external",
+  "series": "nature.wrath",
+  "type": "crisis",
+  "title": "山洪",
+  "source": {
+   "kind": "force",
+   "id": "farm",
+   "name": "南海农庄"
+  },
+  "tags": [
+   "天灾",
+   "洪"
+  ],
+  "requires": [
+   {
+    "day": {
+     "gte": 58
+    }
+   }
+  ],
+  "excludes": [],
+  "weight": 18,
+  "options": {
+   "left": {
+    "id": "qiangjiu",
+    "label": "全营抢救。",
+    "hint": "仓里的种子，比金子金贵",
+    "effects": {
+     "stats": {
+      "livelihood": 2,
+      "people": 2
+     },
+     "days": 1,
+     "states": [
+      {
+       "id": "series.nature_wrath",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "baocang",
+    "label": "保人就好。",
+    "hint": "东西没了可以再造",
+    "effects": {
+     "stats": {
+      "people": 3,
+      "livelihood": -3
+     },
+     "states": [
+      {
+       "id": "series.nature_wrath",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "管民政的首长",
+    "line": "山洪下来了，冲了半坡的薯田和两间仓房。人都撤出来了——粮还压在里头，下去捞，堤还可能垮。"
+   }
+  ]
+ },
+ {
+  "id": "NAT-005",
+  "pool": "external",
+  "series": "nature.wrath",
+  "type": "crisis",
+  "title": "虎患",
+  "source": {
+   "kind": "force",
+   "id": "guard",
+   "name": "保卫系统"
+  },
+  "tags": [
+   "天灾",
+   "虎"
+  ],
+  "requires": [
+   {
+    "day": {
+     "gte": 60
+    }
+   }
+  ],
+  "excludes": [],
+  "weight": 20,
+  "options": {
+   "left": {
+    "id": "zulie",
+    "label": "组织围猎。",
+    "hint": "山君下山，就得请它上路",
+    "effects": {
+     "stats": {
+      "military": 2,
+      "people": 2
+     },
+     "wind": 1,
+     "days": 2,
+     "forces": {
+      "guard": {
+       "influence": 2
+      }
+     },
+     "states": [
+      {
+       "id": "series.nature_wrath",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "fengshan",
+    "label": "封山禁行。",
+    "hint": "它的山还它，咱们的路绕开",
+    "effects": {
+     "stats": {
+      "people": -1,
+      "livelihood": -1
+     },
+     "states": [
+      {
+       "id": "series.nature_wrath",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "哨长",
+    "line": "夜巡的哨兵在岭口撞见华南虎，开了两枪才吓退。樵夫和采药的不敢上山了——柴价三天涨了一倍。"
+   }
+  ]
+ },
+ {
+  "id": "NAT-006",
+  "pool": "external",
+  "series": "nature.wrath",
+  "type": "crisis",
+  "title": "瘴气",
+  "source": {
+   "kind": "force",
+   "id": "naturalized",
+   "name": "归化民组织"
+  },
+  "tags": [
+   "天灾",
+   "瘴"
+  ],
+  "requires": [
+   {
+    "day": {
+     "gte": 62
+    }
+   }
+  ],
+  "excludes": [],
+  "weight": 18,
+  "options": {
+   "left": {
+    "id": "bikai",
+    "label": "停工避瘴。",
+    "hint": "工期再紧，紧不过人命",
+    "effects": {
+     "stats": {
+      "livelihood": -2,
+      "people": 2
+     },
+     "states": [
+      {
+       "id": "series.nature_wrath",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "yaowu",
+    "label": "发药硬扛。",
+    "hint": "奎宁顶着，工期不断",
+    "effects": {
+     "stats": {
+      "people": -2,
+      "livelihood": 1
+     },
+     "wind": 1,
+     "personal": {
+      "faction_alarm": 1
+     },
+     "states": [
+      {
+       "id": "series.nature_wrath",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "医务所的医生",
+    "line": "雨季一开，岭脚的工棚区就「瘴」了：发热的一批接一批。老话说那地方不能住人——可新路正好从那儿过。"
+   }
+  ]
+ },
+ {
+  "id": "NAT-007",
+  "pool": "external",
+  "series": "nature.wrath",
+  "type": "crisis",
+  "title": "寒潮",
+  "source": {
+   "kind": "force",
+   "id": "naturalized",
+   "name": "归化民组织"
+  },
+  "tags": [
+   "天灾",
+   "寒"
+  ],
+  "requires": [
+   {
+    "day": {
+     "gte": 66
+    }
+   }
+  ],
+  "excludes": [],
+  "weight": 16,
+  "options": {
+   "left": {
+    "id": "famianyi",
+    "label": "发冬衣。",
+    "hint": "布匹再紧，也紧不过冻疮",
+    "effects": {
+     "stats": {
+      "people": 3,
+      "livelihood": -1
+     },
+     "states": [
+      {
+       "id": "series.nature_wrath",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "jiyaocao",
+    "label": "发干草御寒。",
+    "hint": "土法子熬一熬，布留给军需",
+    "effects": {
+     "stats": {
+      "people": -1,
+      "military": 1
+     },
+     "states": [
+      {
+       "id": "series.nature_wrath",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "管民政的首长",
+    "line": "寒潮南下，一夜之间冻死了两棚鸡鸭。归化民家里更冷——茅屋四面透风，娃娃的手都裂了口。"
+   }
+  ]
+ },
+ {
+  "id": "NAT-008",
+  "pool": "external",
+  "series": "nature.wrath",
+  "type": "crisis",
+  "title": "渔汛失约",
+  "source": {
+   "kind": "force",
+   "id": "locals",
+   "name": "本地村社"
+  },
+  "tags": [
+   "天灾",
+   "渔"
+  ],
+  "requires": [
+   {
+    "day": {
+     "gte": 68
+    }
+   }
+  ],
+  "excludes": [],
+  "weight": 16,
+  "options": {
+   "left": {
+    "id": "buzhu",
+    "label": "开仓接济。",
+    "hint": "渔家断了顿，营地得管",
+    "effects": {
+     "stats": {
+      "livelihood": -2,
+      "people": 3
+     },
+     "forces": {
+      "locals": {
+       "satisfaction": 3
+      }
+     },
+     "states": [
+      {
+       "id": "series.nature_wrath",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "zhuanyun",
+    "label": "转运输出工。",
+    "hint": "以工代赈，两头都活",
+    "effects": {
+     "stats": {
+      "people": 1,
+      "livelihood": 1
+     },
+     "days": 1,
+     "states": [
+      {
+       "id": "series.nature_wrath",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "疍家老船主",
+    "line": "今年的大渔汛没来——海里的鱼像躲开了这片海。疍家的船一无所获，岸上的鱼干行也断了货。"
+   }
+  ]
+ },
+ {
+  "id": "LEQ-001",
+  "pool": "external",
+  "series": "leeq.workers",
+  "type": "key",
+  "title": "工作队进山",
+  "source": {
+   "kind": "force",
+   "id": "naturalized",
+   "name": "归化民组织"
+  },
+  "tags": [
+   "黎区",
+   "工作队"
+  ],
+  "requires": [
+   {
+    "used": "EXT-011"
+   },
+   {
+    "day": {
+     "gte": 42
+    }
+   }
+  ],
+  "excludes": [],
+  "weight": 24,
+  "options": {
+   "left": {
+    "id": "jinshan2",
+    "label": "进山。",
+    "hint": "山里的五指山，也是地图上的",
+    "effects": {
+     "stats": {
+      "people": 2
+     },
+     "wind": 1,
+     "days": 2,
+     "forces": {
+      "naturalized": {
+       "influence": 3
+      }
+     },
+     "states": [
+      {
+       "id": "series.leeq_workers",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "zhaomu2",
+    "label": "先招黎青。",
+    "hint": "山门要黎家人自己开",
+    "effects": {
+     "stats": {
+      "people": 1
+     },
+     "states": [
+      {
+       "id": "series.leeq_workers",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "管民政的首长",
+    "line": "黎峒的路子通了，想派工作队常驻：带药、带盐针、带犁。人从芳草地毕业生里挑——他们年轻，学得快黎话。"
+   }
+  ]
+ },
+ {
+  "id": "LEQ-002",
+  "pool": "external",
+  "series": "leeq.workers",
+  "type": "daily",
+  "title": "峒长会议",
+  "source": {
+   "kind": "force",
+   "id": "locals",
+   "name": "本地村社"
+  },
+  "tags": [
+   "黎区",
+   "议事"
+  ],
+  "requires": [
+   {
+    "state": "series.leeq_workers",
+    "gte": 1
+   }
+  ],
+  "excludes": [],
+  "weight": 18,
+  "options": {
+   "left": {
+    "id": "kaihui",
+    "label": "开起来。",
+    "hint": "峒里的事，峒里人议",
+    "effects": {
+     "stats": {
+      "people": 3
+     },
+     "forces": {
+      "locals": {
+       "satisfaction": 3
+      }
+     },
+     "states": [
+      {
+       "id": "series.leeq_workers",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "dangan",
+    "label": "只走单线。",
+    "hint": "头人认咱们，比什么都快",
+    "effects": {
+     "stats": {
+      "people": 1
+     },
+     "wind": 1,
+     "states": [
+      {
+       "id": "series.leeq_workers",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "工作队队长",
+    "line": "五个峒的峒长愿意见面了，想请他们下山来营里开一回「会议」——让他们看看盐场、学堂和医务所。"
+   }
+  ]
+ },
+ {
+  "id": "LEQ-003",
+  "pool": "external",
+  "series": "leeq.workers",
+  "type": "daily",
+  "title": "铁犁换山兰",
+  "source": {
+   "kind": "force",
+   "id": "farm",
+   "name": "南海农庄"
+  },
+  "tags": [
+   "黎区",
+   "农具"
+  ],
+  "requires": [
+   {
+    "state": "series.leeq_workers",
+    "gte": 1
+   }
+  ],
+  "excludes": [],
+  "weight": 16,
+  "options": {
+   "left": {
+    "id": "huanfa",
+    "label": "以犁换粮。",
+    "hint": "一把铁犁，换三年的收成",
+    "effects": {
+     "stats": {
+      "livelihood": 3,
+      "people": 2
+     },
+     "wind": 1,
+     "states": [
+      {
+       "id": "series.leeq_workers",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "zengsong",
+    "label": "先送十把。",
+    "hint": "头一回的便宜，是买路钱",
+    "effects": {
+     "stats": {
+      "livelihood": -1,
+      "people": 3
+     },
+     "forces": {
+      "locals": {
+       "satisfaction": 4
+      }
+     },
+     "states": [
+      {
+       "id": "series.leeq_workers",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "工作队队长",
+    "line": "山兰稻种在坡上，一把砍刀种一年。铁犁 demo 过了——峒里人围着看了半天，问换不换：一把犁，换两担谷。"
+   }
+  ]
+ },
+ {
+  "id": "LEQ-004",
+  "pool": "external",
+  "series": "leeq.workers",
+  "type": "daily",
+  "title": "盐针进山",
+  "source": {
+   "kind": "force",
+   "id": "trade",
+   "name": "商贸网络"
+  },
+  "tags": [
+   "黎区",
+   "盐"
+  ],
+  "requires": [
+   {
+    "state": "series.leeq_workers",
+    "gte": 2
+   }
+  ],
+  "excludes": [],
+  "weight": 14,
+  "options": {
+   "left": {
+    "id": "pingjia",
+    "label": "平价常供。",
+    "hint": "盐比刀兵开山更快",
+    "effects": {
+     "stats": {
+      "people": 2,
+      "livelihood": 1
+     },
+     "states": [
+      {
+       "id": "series.leeq_workers",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "suishi",
+    "label": "随行就市。",
+    "hint": "买卖是买卖，恩情是恩情",
+    "effects": {
+     "stats": {
+      "livelihood": 2
+     },
+     "states": [
+      {
+       "id": "series.leeq_workers",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "工作队队长",
+    "line": "山里最缺盐。汉商历年拿一把盐换一张鹿皮——咱们若是平价供盐，山货的口子就全开了。"
+   }
+  ]
+ },
+ {
+  "id": "LEQ-005",
+  "pool": "external",
+  "series": "leeq.workers",
+  "type": "daily",
+  "title": "黎童入学",
+  "source": {
+   "kind": "force",
+   "id": "naturalized",
+   "name": "归化民组织"
+  },
+  "tags": [
+   "黎区",
+   "教育"
+  ],
+  "requires": [
+   {
+    "state": "school.established",
+    "equals": true
+   },
+   {
+    "state": "series.leeq_workers",
+    "gte": 2
+   }
+  ],
+  "excludes": [],
+  "weight": 14,
+  "options": {
+   "left": {
+    "id": "shouxia2",
+    "label": "收进学堂。",
+    "hint": "黎家的娃识了字，山就矮了",
+    "effects": {
+     "stats": {
+      "people": 3
+     },
+     "wind": 1,
+     "states": [
+      {
+       "id": "series.leeq_workers",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "banzhushan",
+    "label": "山里办学。",
+    "hint": "娃不用出山，先生进山",
+    "effects": {
+     "stats": {
+      "people": 2
+     },
+     "days": 1,
+     "states": [
+      {
+       "id": "series.leeq_workers",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "教导主任",
+    "line": "峒长送来七个娃，说让跟汉家娃一起念书——这是头一回，黎家的娃自己愿意下山。"
+   }
+  ]
+ },
+ {
+  "id": "LEQ-006",
+  "pool": "external",
+  "series": "leeq.workers",
+  "type": "benefit",
+  "title": "峒兵操演",
+  "source": {
+   "kind": "force",
+   "id": "guard",
+   "name": "保卫系统"
+  },
+  "tags": [
+   "黎区",
+   "军事"
+  ],
+  "requires": [
+   {
+    "state": "series.leeq_workers",
+    "gte": 3
+   },
+   {
+    "state": "external.threat",
+    "equals": true
+   }
+  ],
+  "excludes": [],
+  "weight": 18,
+  "options": {
+   "left": {
+    "id": "hebian",
+    "label": "合编操演。",
+    "hint": "黎峒的弓手，伏波军的鼓",
+    "effects": {
+     "stats": {
+      "military": 4,
+      "people": 1
+     },
+     "wind": 1,
+     "days": 2,
+     "forces": {
+      "guard": {
+       "influence": 3
+      },
+      "locals": {
+       "satisfaction": 2
+      }
+     },
+     "states": [
+      {
+       "id": "series.leeq_workers",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "gezi",
+    "label": "各练各的。",
+    "hint": "客军入境，峒里犯疑",
+    "effects": {
+     "stats": {
+      "military": 1
+     },
+     "states": [
+      {
+       "id": "series.leeq_workers",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "石志奇",
+    "line": "黎峒的弓手下山了，说是官军若来，愿听调遣。合编操演一场，往后才真调得动——峒里也怕，怕这是收兵权的第一步。"
+   }
+  ]
+ },
+ {
+  "id": "EXT-037",
+  "pool": "external",
+  "series": "sea.raiders",
+  "type": "daily",
+  "title": "灯塔",
+  "source": {
+   "kind": "force",
+   "id": "planning",
+   "name": "计划委员会"
+  },
+  "tags": [
+   "航海",
+   "灯塔"
+  ],
+  "requires": [
+   {
+    "state": "series.sea_raiders",
+    "gte": 2
+   }
+  ],
+  "excludes": [],
+  "weight": 14,
+  "options": {
+   "left": {
+    "id": "xiuta",
+    "label": "修起来。",
+    "hint": "一盏灯，救一船人",
+    "effects": {
+     "stats": {
+      "livelihood": 2,
+      "people": 2
+     },
+     "wind": -1,
+     "days": 2,
+     "forces": {
+      "locals": {
+       "satisfaction": 3
+      }
+     },
+     "states": [
+      {
+       "id": "series.sea_raiders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "huanxiu",
+    "label": "先立竿挂牌。",
+    "hint": "白天看得见的，先便宜办",
+    "effects": {
+     "stats": {
+      "people": 1
+     },
+     "states": [
+      {
+       "id": "series.sea_raiders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "工地的首长",
+    "line": "文澜江口外的暗礁吃了三条船了。想在那礁石上立座灯塔：汽灯、反光镜、守塔人——夜里十里外都看得见。"
+   }
+  ]
+ },
+ {
+  "id": "EXT-038",
+  "pool": "external",
+  "series": "sea.raiders",
+  "type": "daily",
+  "title": "引水员",
+  "source": {
+   "kind": "force",
+   "id": "locals",
+   "name": "本地村社"
+  },
+  "tags": [
+   "航海",
+   "引水"
+  ],
+  "requires": [
+   {
+    "state": "series.sea_raiders",
+    "gte": 2
+   }
+  ],
+  "excludes": [],
+  "weight": 14,
+  "options": {
+   "left": {
+    "id": "guyong2",
+    "label": "雇为正式引水。",
+    "hint": "老船工的水路图，在脑子里",
+    "effects": {
+     "stats": {
+      "military": 2,
+      "people": 2
+     },
+     "forces": {
+      "locals": {
+       "satisfaction": 3
+      }
+     },
+     "states": [
+      {
+       "id": "series.sea_raiders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "zhipeixun",
+    "label": "只做培训。",
+    "hint": "路子要学来，不能租来",
+    "effects": {
+     "stats": {
+      "military": 1
+     },
+     "days": 1,
+     "states": [
+      {
+       "id": "series.sea_raiders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "疍家老船主",
+    "line": "大船进博铺，非得本地引水不可——水道一年一变。老船工们愿意受雇，就一条：得给「师傅」的名分，不能当杂役使。"
+   }
+  ]
  }
 ]

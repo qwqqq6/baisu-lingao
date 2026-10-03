@@ -35,7 +35,7 @@ CARD_ID_RE = re.compile(r"^[A-Z0-9\-]+$")
 
 CARD_FILES = [
     "cards/core.json", "cards/external.json", "cards/farm.json", "cards/civil.json",
-    "cards/security.json", "cards/planning.json", "cards/trade.json", "cards/characters.json",
+    "cards/security.json", "cards/planning.json", "cards/trade.json", "cards/figures.json", "cards/characters.json",
 ]
 
 CONDITION_KEYS = {

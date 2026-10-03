@@ -242,5 +242,135 @@
   "entryCards": [
    "CORE-020"
   ]
+ },
+ {
+  "id": "figures.elders",
+  "name": "元老列传",
+  "pool": "core",
+  "tags": [
+   "元老",
+   "人物",
+   "政治"
+  ],
+  "weight": 9,
+  "requires": [],
+  "excludes": [],
+  "dependsOn": [],
+  "entryCards": [
+   "FIG-WDS-001"
+  ]
+ },
+ {
+  "id": "war.local",
+  "name": "经略周边",
+  "pool": "security",
+  "tags": [
+   "苟家庄",
+   "琼山",
+   "雷州"
+  ],
+  "weight": 9,
+  "requires": [],
+  "excludes": [],
+  "dependsOn": [],
+  "entryCards": [
+   "WAR-040"
+  ]
+ },
+ {
+  "id": "medic.safety",
+  "name": "医疗卫生",
+  "pool": "civil",
+  "tags": [
+   "医疗",
+   "防疫"
+  ],
+  "weight": 8,
+  "requires": [],
+  "excludes": [],
+  "dependsOn": [],
+  "entryCards": [
+   "MED-001"
+  ]
+ },
+ {
+  "id": "finance.notes",
+  "name": "财政金融",
+  "pool": "trade",
+  "tags": [
+   "财政",
+   "流通券"
+  ],
+  "weight": 8,
+  "requires": [],
+  "excludes": [],
+  "dependsOn": [],
+  "entryCards": [
+   "FIN-001"
+  ]
+ },
+ {
+  "id": "court.law",
+  "name": "司法",
+  "pool": "core",
+  "tags": [
+   "司法",
+   "律条"
+  ],
+  "weight": 8,
+  "requires": [],
+  "excludes": [],
+  "dependsOn": [],
+  "entryCards": [
+   "LAW-001"
+  ]
+ },
+ {
+  "id": "daily.life",
+  "name": "营地市井",
+  "pool": "civil",
+  "tags": [
+   "市井",
+   "民生"
+  ],
+  "weight": 7,
+  "requires": [],
+  "excludes": [],
+  "dependsOn": [],
+  "entryCards": [
+   "DLY-003"
+  ]
+ },
+ {
+  "id": "nature.wrath",
+  "name": "天时灾异",
+  "pool": "external",
+  "tags": [
+   "天灾",
+   "疫病"
+  ],
+  "weight": 7,
+  "requires": [],
+  "excludes": [],
+  "dependsOn": [],
+  "entryCards": [
+   "NAT-001"
+  ]
+ },
+ {
+  "id": "leeq.workers",
+  "name": "黎区工作队",
+  "pool": "external",
+  "tags": [
+   "黎区",
+   "工作队"
+  ],
+  "weight": 8,
+  "requires": [],
+  "excludes": [],
+  "dependsOn": [],
+  "entryCards": [
+   "LEQ-001"
+  ]
  }
 ]

@@ -79,6 +79,7 @@ export async function loadOfficialContent() {
     fetchJson(`${BASE}/cards/security.json`),
     fetchJson(`${BASE}/cards/planning.json`),
     fetchJson(`${BASE}/cards/trade.json`),
+    fetchJson(`${BASE}/cards/figures.json`),
     fetchJson(`${BASE}/cards/characters.json`),
   ]);
 

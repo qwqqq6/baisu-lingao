@@ -1109,5 +1109,920 @@
     "line": "首长，味精又空了。广州来的船押在港里等货，现银都拍在柜上。有人开始拿假货充数——再断下去，砸的是咱们的字号。"
    }
   ]
+ },
+ {
+  "id": "FIN-001",
+  "pool": "trade",
+  "series": "finance.notes",
+  "type": "key",
+  "title": "流通券发行",
+  "source": {
+   "kind": "force",
+   "id": "trade",
+   "name": "商贸网络"
+  },
+  "tags": [
+   "财政",
+   "流通券"
+  ],
+  "requires": [
+   {
+    "state": "trade.dongmen_established",
+    "equals": true
+   },
+   {
+    "day": {
+     "gte": 45
+    }
+   }
+  ],
+  "excludes": [],
+  "weight": 26,
+  "options": {
+   "left": {
+    "id": "faxing",
+    "label": "发行。",
+    "hint": "纸比银子跑得快",
+    "effects": {
+     "stats": {
+      "livelihood": 5,
+      "council": -1
+     },
+     "wind": 2,
+     "days": 1,
+     "forces": {
+      "trade": {
+       "influence": 5
+      }
+     },
+     "states": [
+      {
+       "id": "series.finance_notes",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "xianyin",
+    "label": "还用现银。",
+    "hint": "银子是死的，可它不作假",
+    "effects": {
+     "stats": {
+      "livelihood": 1
+     },
+     "states": [
+      {
+       "id": "series.finance_notes",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "管账的首长",
+    "line": "首长，市面上现银不够转了——糖换盐、盐换米，全卡在银子上。拟发行流通券：纸印的，一两兑一两，东门市全认。"
+   },
+   {
+    "who": "管账的首长",
+    "line": "就怕一条：村里人攥着纸片，夜里睡不着。"
+   }
+  ]
+ },
+ {
+  "id": "FIN-002",
+  "pool": "trade",
+  "series": "finance.notes",
+  "type": "crisis",
+  "title": "兑付风波",
+  "source": {
+   "kind": "force",
+   "id": "trade",
+   "name": "商贸网络"
+  },
+  "tags": [
+   "财政",
+   "兑付"
+  ],
+  "requires": [
+   {
+    "used": "FIN-001"
+   }
+  ],
+  "excludes": [],
+  "weight": 24,
+  "options": {
+   "left": {
+    "id": "rushu",
+    "label": "如数兑付。",
+    "hint": "信字比银子沉，兑得起的",
+    "effects": {
+     "stats": {
+      "livelihood": -2,
+      "people": 3,
+      "council": 1
+     },
+     "wind": -2,
+     "states": [
+      {
+       "id": "series.finance_notes",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "tuoyan",
+    "label": "拖一拖。",
+    "hint": "缓过这阵就都明白了",
+    "effects": {
+     "stats": {
+      "livelihood": 1,
+      "people": -4
+     },
+     "wind": 3,
+     "personal": {
+      "faction_alarm": 1
+     },
+     "states": [
+      {
+       "id": "series.finance_notes",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "管账的首长",
+    "line": "东门市门口排起队了——起头一个广商用大额流通券要兑银，后头的人跟着慌。库里现银够兑，可一兑空，往后谁还收券？"
+   }
+  ]
+ },
+ {
+  "id": "FIN-003",
+  "pool": "trade",
+  "series": "finance.notes",
+  "type": "daily",
+  "title": "盐税定额",
+  "source": {
+   "kind": "force",
+   "id": "council",
+   "name": "扩大会议"
+  },
+  "tags": [
+   "财政",
+   "税"
+  ],
+  "requires": [
+   {
+    "state": "series.finance_notes",
+    "gte": 1
+   }
+  ],
+  "excludes": [],
+  "weight": 18,
+  "options": {
+   "left": {
+    "id": "qingshui",
+    "label": "从轻定额。",
+    "hint": "税轻人心附，账慢慢算",
+    "effects": {
+     "stats": {
+      "people": 3,
+      "livelihood": -1
+     },
+     "forces": {
+      "locals": {
+       "satisfaction": 3
+      }
+     },
+     "states": [
+      {
+       "id": "series.finance_notes",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "zue",
+    "label": "足额征收。",
+    "hint": "没有税，就没有炮",
+    "effects": {
+     "stats": {
+      "people": -3,
+      "livelihood": 3
+     },
+     "wind": 2,
+     "states": [
+      {
+       "id": "series.finance_notes",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "管账的首长",
+    "line": "归化的村寨该纳税了：折糖、折盐、折工，三选一。定多定少，定的是往后的规矩。"
+   }
+  ]
+ },
+ {
+  "id": "FIN-004",
+  "pool": "trade",
+  "series": "finance.notes",
+  "type": "crisis",
+  "title": "预算之争",
+  "source": {
+   "kind": "force",
+   "id": "council",
+   "name": "扩大会议"
+  },
+  "tags": [
+   "财政",
+   "预算"
+  ],
+  "requires": [
+   {
+    "state": "series.finance_notes",
+    "gte": 2
+   }
+  ],
+  "excludes": [],
+  "weight": 20,
+  "options": {
+   "left": {
+    "id": "zhongshe",
+    "label": "各砍三成。",
+    "hint": "一碗水端平，谁也别吵",
+    "effects": {
+     "stats": {
+      "livelihood": 1,
+      "council": 2
+     },
+     "personal": {
+      "faction_alarm": -1
+     },
+     "states": [
+      {
+       "id": "series.finance_notes",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "baoyao",
+    "label": "保军事。",
+    "hint": "枪杆子饿着，别的都白搭",
+    "effects": {
+     "stats": {
+      "military": 3,
+      "council": -2,
+      "livelihood": -1
+     },
+     "forces": {
+      "guard": {
+       "influence": 3
+      }
+     },
+     "personal": {
+      "faction_alarm": 2
+     },
+     "states": [
+      {
+       "id": "series.finance_notes",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "马千瞩",
+    "line": "预算会开成了吵架会。军费、工费、农费，三个口都喊饿。总盘子就这么多——您切这一刀，切哪边？"
+   }
+  ]
+ },
+ {
+  "id": "FIN-005",
+  "pool": "trade",
+  "series": "finance.notes",
+  "type": "daily",
+  "title": "复式记账",
+  "source": {
+   "kind": "force",
+   "id": "trade",
+   "name": "商贸网络"
+  },
+  "tags": [
+   "财政",
+   "账法"
+  ],
+  "requires": [
+   {
+    "state": "series.finance_notes",
+    "gte": 2
+   }
+  ],
+  "excludes": [],
+  "weight": 14,
+  "options": {
+   "left": {
+    "id": "tuixing",
+    "label": "推行新账法。",
+    "hint": "两本账对着记，谎就藏不住",
+    "effects": {
+     "stats": {
+      "council": 2,
+      "livelihood": 1
+     },
+     "days": 1,
+     "states": [
+      {
+       "id": "series.finance_notes",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "laozhang",
+    "label": "旧账先凑合。",
+    "hint": "旧账虽乱，人人都会",
+    "effects": {
+     "stats": {
+      "council": -1
+     },
+     "states": [
+      {
+       "id": "series.finance_notes",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "管账的首长",
+    "line": "新账法在东门市试了两个月：每笔进出，两边各记一笔，月底一碰就知道差在哪。要推到各口——各口的账房得重学。"
+   }
+  ]
+ },
+ {
+  "id": "FIN-006",
+  "pool": "trade",
+  "series": "finance.notes",
+  "type": "crisis",
+  "title": "小金库",
+  "source": {
+   "kind": "force",
+   "id": "council",
+   "name": "扩大会议"
+  },
+  "tags": [
+   "财政",
+   "贪腐"
+  ],
+  "requires": [
+   {
+    "state": "series.finance_notes",
+    "gte": 3
+   }
+  ],
+  "excludes": [],
+  "weight": 20,
+  "options": {
+   "left": {
+    "id": "shoujiao",
+    "label": "限期缴回。",
+    "hint": "给他一个体面的台阶",
+    "effects": {
+     "stats": {
+      "council": 2,
+      "livelihood": 1
+     },
+     "wind": 1,
+     "states": [
+      {
+       "id": "series.finance_notes",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "jiuban",
+    "label": "依律严办。",
+    "hint": "第一笔歪账不办，往后笔笔歪",
+    "effects": {
+     "stats": {
+      "council": -1,
+      "people": 2
+     },
+     "wind": 2,
+     "personal": {
+      "faction_alarm": 2
+     },
+     "states": [
+      {
+       "id": "series.finance_notes",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "午木",
+    "line": "政保查出个事：工口有个办事员，把卖边角料的碎银另立了一本账——数目不大，两年积了七十两。他说这钱留着「应急」，没进过自己腰包。"
+   }
+  ]
+ },
+ {
+  "id": "FIN-007",
+  "pool": "trade",
+  "series": "finance.notes",
+  "type": "daily",
+  "title": "赊账的广商",
+  "source": {
+   "kind": "force",
+   "id": "trade",
+   "name": "商贸网络"
+  },
+  "tags": [
+   "财政",
+   "赊销"
+  ],
+  "requires": [
+   {
+    "state": "series.finance_notes",
+    "gte": 3
+   }
+  ],
+  "excludes": [],
+  "weight": 16,
+  "options": {
+   "left": {
+    "id": "kaie",
+    "label": "给定赊。",
+    "hint": "有借有还，再借才不难",
+    "effects": {
+     "stats": {
+      "livelihood": 2,
+      "council": 1
+     },
+     "wind": -1,
+     "forces": {
+      "trade": {
+       "satisfaction": 1
+      }
+     },
+     "states": [
+      {
+       "id": "series.finance_notes",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "yilv",
+    "label": "一律现结。",
+    "hint": "现银过手，心里踏实",
+    "effects": {
+     "stats": {
+      "livelihood": -1
+     },
+     "forces": {
+      "trade": {
+       "satisfaction": -2
+      }
+     },
+     "states": [
+      {
+       "id": "series.finance_notes",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "广商的代表",
+    "line": "广行的东家想赊三船糖的货款，三个月后连本带利结——利钱给得厚。老东家的信用，海峡两边的商号都认。"
+   }
+  ]
+ },
+ {
+  "id": "FIN-008",
+  "pool": "trade",
+  "series": "finance.notes",
+  "type": "benefit",
+  "title": "关税自主",
+  "source": {
+   "kind": "force",
+   "id": "trade",
+   "name": "商贸网络"
+  },
+  "tags": [
+   "财政",
+   "关税"
+  ],
+  "requires": [
+   {
+    "state": "series.finance_notes",
+    "gte": 4
+   },
+   {
+    "day": {
+     "gte": 70
+    }
+   }
+  ],
+  "excludes": [],
+  "weight": 20,
+  "options": {
+   "left": {
+    "id": "zhengshui",
+    "label": "开征。",
+    "hint": "自家的海口，自家收钱",
+    "effects": {
+     "stats": {
+      "livelihood": 4,
+      "military": 1,
+      "council": 1
+     },
+     "wind": 3,
+     "forces": {
+      "trade": {
+       "influence": 4
+      }
+     },
+     "states": [
+      {
+       "id": "series.finance_notes",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "mianzheng",
+    "label": "暂免三年。",
+    "hint": "市面先养肥，再谈抽头",
+    "effects": {
+     "stats": {
+      "people": 2,
+      "livelihood": 2
+     },
+     "wind": -1,
+     "forces": {
+      "trade": {
+       "satisfaction": 4
+      }
+     },
+     "states": [
+      {
+       "id": "series.finance_notes",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "管账的首长",
+    "line": "博铺口进出的船，一天二十条。拟开征关税：糖盐铁木，值百抽五。官府的关税是横征，咱们的税，得让商人觉得公道。"
+   }
+  ]
+ },
+ {
+  "id": "TRADE-019",
+  "pool": "trade",
+  "series": "trade.dongmen",
+  "type": "daily",
+  "title": "广州行栈",
+  "source": {
+   "kind": "force",
+   "id": "trade",
+   "name": "商贸网络"
+  },
+  "tags": [
+   "广州",
+   "行栈"
+  ],
+  "requires": [
+   {
+    "state": "trade.contact",
+    "equals": true
+   },
+   {
+    "day": {
+     "gte": 46
+    }
+   }
+  ],
+  "excludes": [],
+  "weight": 16,
+  "options": {
+   "left": {
+    "id": "shezhan",
+    "label": "设行栈。",
+    "hint": "珠江边有了咱们的门面",
+    "effects": {
+     "stats": {
+      "livelihood": 3
+     },
+     "wind": 2,
+     "days": 1,
+     "forces": {
+      "trade": {
+       "influence": 4
+      }
+     },
+     "states": [
+      {
+       "id": "series.trade_dongmen",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "tuoren",
+    "label": "托广商代销。",
+    "hint": "借船出海，风浪归他",
+    "effects": {
+     "stats": {
+      "livelihood": 2
+     },
+     "states": [
+      {
+       "id": "series.trade_dongmen",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "广商的代表",
+    "line": "想在广州十三行外赁个铺面，立咱们自己的行栈——糖、盐、玻璃直接发卖。只是官府的眼皮底下，动静小不了。"
+   }
+  ]
+ },
+ {
+  "id": "TRADE-020",
+  "pool": "trade",
+  "series": "trade.dongmen",
+  "type": "crisis",
+  "title": "私硝的路子",
+  "source": {
+   "kind": "force",
+   "id": "guard",
+   "name": "保卫系统"
+  },
+  "tags": [
+   "硝石",
+   "军需"
+  ],
+  "requires": [
+   {
+    "state": "industry.gunpowder",
+    "equals": true
+   }
+  ],
+  "excludes": [],
+  "weight": 20,
+  "options": {
+   "left": {
+    "id": "zousi",
+    "label": "走私路子。",
+    "hint": "官禁越严，私硝越贵也得买",
+    "effects": {
+     "stats": {
+      "military": 3,
+      "livelihood": -1
+     },
+     "wind": -2,
+     "states": [
+      {
+       "id": "series.trade_dongmen",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "tuoshou",
+    "label": "托澳门正规采买。",
+    "hint": "佛郎人的船，官府不敢拦",
+    "effects": {
+     "stats": {
+      "military": 2,
+      "livelihood": -2
+     },
+     "wind": 1,
+     "states": [
+      {
+       "id": "series.trade_dongmen",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "管军械的首长",
+    "line": "火药坊的硝石见底了。广东官硝严禁出海——可私硝的路子永远有，就是要加三成价，还得走夜船。"
+   }
+  ]
+ },
+ {
+  "id": "TRADE-021",
+  "pool": "trade",
+  "series": "trade.dongmen",
+  "type": "daily",
+  "title": "猪苗鸡苗",
+  "source": {
+   "kind": "force",
+   "id": "farm",
+   "name": "南海农庄"
+  },
+  "tags": [
+   "畜牧"
+  ],
+  "requires": [
+   {
+    "state": "farm.established",
+    "equals": true
+   }
+  ],
+  "excludes": [],
+  "weight": 14,
+  "options": {
+   "left": {
+    "id": "yinzhong",
+    "label": "重金引种。",
+    "hint": "好种值千金，肉蛋是硬道理",
+    "effects": {
+     "stats": {
+      "livelihood": 3
+     },
+     "wind": 1,
+     "days": 1,
+     "states": [
+      {
+       "id": "series.trade_dongmen",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "jiuzhong",
+    "label": "用本地种。",
+    "hint": "本地种皮实，就是长得慢",
+    "effects": {
+     "stats": {
+      "livelihood": 1
+     },
+     "states": [
+      {
+       "id": "series.trade_dongmen",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "吴南海",
+    "line": "雷州的猪苗、琼山的鸡苗，贩子送来了单子。要快长肉的洋种没有——本地种耐病，就是一年才出栏。"
+   }
+  ]
+ },
+ {
+  "id": "TRADE-022",
+  "pool": "trade",
+  "series": "trade.dongmen",
+  "type": "daily",
+  "title": "牙行改制",
+  "source": {
+   "kind": "force",
+   "id": "trade",
+   "name": "商贸网络"
+  },
+  "tags": [
+   "市易",
+   "牙行"
+  ],
+  "requires": [
+   {
+    "state": "trade.dongmen_established",
+    "equals": true
+   },
+   {
+    "day": {
+     "gte": 50
+    }
+   }
+  ],
+  "excludes": [],
+  "weight": 16,
+  "options": {
+   "left": {
+    "id": "gaizhi",
+    "label": "发牌登记。",
+    "hint": "牙人领牌抽佣，明码标价",
+    "effects": {
+     "stats": {
+      "people": 2,
+      "livelihood": 2
+     },
+     "wind": 1,
+     "forces": {
+      "trade": {
+       "satisfaction": 2
+      }
+     },
+     "states": [
+      {
+       "id": "series.trade_dongmen",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "qudiye",
+    "label": "取缔牙行。",
+    "hint": "中间商一去，买卖两家直接谈",
+    "effects": {
+     "stats": {
+      "people": 3,
+      "livelihood": -1
+     },
+     "wind": 2,
+     "forces": {
+      "trade": {
+       "satisfaction": -3
+      }
+     },
+     "states": [
+      {
+       "id": "series.trade_dongmen",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "东门市的行家",
+    "line": "市面上的牙人（中介）两头吃：压农户的价、抬买家的钱。要立规矩——还是干脆不要牙人？"
+   }
+  ]
  }
 ]
