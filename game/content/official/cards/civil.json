@@ -14,7 +14,29 @@
    "俘虏",
    "民政"
   ],
-  "requires": [],
+  "requires": [
+   {
+    "any": [
+     {
+      "state": "external.threat",
+      "equals": true
+     },
+     {
+      "state": "pirate.hostile",
+      "equals": true
+     },
+     {
+      "state": "official.beaten",
+      "equals": true
+     },
+     {
+      "day": {
+       "gte": 10
+      }
+     }
+    ]
+   }
+  ],
   "excludes": [],
   "weight": 100,
   "options": {
