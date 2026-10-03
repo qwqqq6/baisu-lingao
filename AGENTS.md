@@ -20,6 +20,7 @@
 - 运行：`cd game && python serve.py 8080` → http://localhost:8080 （serve.py 带 no-cache 响应头；`file://` 直接打开会被浏览器拦 JSON，不可用）。
 - **浏览器缓存纪元**：模块/内容/样式 URL 带统一版本号 `?v=1`（index.html 的入口 script 与 css link、各 js 的 import、content.js 的 CACHE 常量）。改动代码或样式后若页面不更新，把所有 `?v=1` 递增成 `?v=2`（一次性全局替换即可）。
 - 内容校验：`python tools/validate_content.py`（改任何内容包后必跑）。
+- 卡牌审计：`python tools/audit_cards.py ABC`（A 引用可达性=被 requires 引用但无人置真的状态；B 叙事预设=卡面提到实体（俘虏/玻璃/芳草地……）但既不前置也不引入；C followup 前置链；D 逐卡清单）。加新卡后必跑并逐条人工判定 `[审]` 输出——B 有已知误报模式：势力门槛暗含解锁状态、used 链传导、穿越者知识语境（澳门/大员地名、旧档、对方礼品）。
 - UI 无法自动化点击时，可在浏览器控制台用 `window.__game` 直接驱动引擎调试。
 
 ## 当前状态

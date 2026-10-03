@@ -196,13 +196,13 @@
     "weight": 12,
     "options": {
       "left": {
-        "id": "choudiao_fulu",
-        "label": "抽俘虏。",
-        "hint": "力气现成，就是得派人看着",
+        "id": "chou_ding",
+        "label": "各口抽丁。",
+        "hint": "哨位抽空一半，秧不等人",
         "effects": {
           "stats": {
-            "livelihood": 3,
-            "people": -1
+            "livelihood": 2,
+            "military": -1
           }
         }
       },
@@ -226,7 +226,33 @@
     "lines": [
       {
         "who": "管庄的",
-        "line": "首长，秧不等人啊。缺一百二十个劳力——抽俘虏，还是雇短工？短工日结三合米，村里人已经探头探脑了。"
+        "line": "首长，秧不等人啊。缺一百二十个劳力——各口抽丁要误工，雇短工日结三合米。短工日结三合米，村里人已经探头探脑了。"
+      }
+    ],
+    "variants": [
+      {
+        "id": "chou_fulu",
+        "kind": "history",
+        "when": {
+          "conditions": [
+            {
+              "state": "civil.captives_arrived",
+              "equals": true
+            }
+          ]
+        },
+        "replaceOption": "left",
+        "option": {
+          "id": "chou_fulu",
+          "label": "抽俘虏。",
+          "hint": "力气现成，就是得派人看着",
+          "effects": {
+            "stats": {
+              "livelihood": 3,
+              "people": -1
+            }
+          }
+        }
       }
     ]
   },
@@ -786,8 +812,8 @@
     ],
     "requires": [
       {
-        "state": "farm.destroyed",
-        "equals": true
+        "state": "farm.autonomy_level",
+        "gte": 2
       }
     ],
     "excludes": [],
@@ -821,7 +847,7 @@
     "lines": [
       {
         "who": "文书",
-        "line": "农庄散了，账还在：预付糖款、赊出的谷种、编外的工钱……我对册对了半宿。债主，明早堵庄口。"
+        "line": "庄里的账越理越乱：预付糖款、赊出的谷种、编外的工钱……我对册对了半宿。债主，明早堵庄口。"
       }
     ]
   },

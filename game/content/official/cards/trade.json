@@ -497,6 +497,10 @@
    {
     "state": "trade.dongmen_established",
     "equals": true
+   },
+   {
+    "state": "industry.glass",
+    "equals": true
    }
   ],
   "excludes": [],
@@ -1802,7 +1806,7 @@
   "lines": [
    {
     "who": "广商的代表",
-    "line": "想在广州十三行外赁个铺面，立咱们自己的行栈——糖、盐、玻璃直接发卖。只是官府的眼皮底下，动静小不了。"
+    "line": "想在广州十三行外赁个铺面，立咱们自己的行栈——糖、盐、杂货直接发卖。只是官府的眼皮底下，动静小不了。"
    }
   ]
  },

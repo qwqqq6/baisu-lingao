@@ -508,6 +508,10 @@
    {
     "state": "ruler.pressure_violence",
     "gte": 45
+   },
+   {
+    "state": "security.guard_authorized",
+    "equals": true
    }
   ],
   "excludes": [],
@@ -574,6 +578,10 @@
    {
     "state": "ruler.pressure_violence",
     "gte": 60
+   },
+   {
+    "state": "security.guard_authorized",
+    "equals": true
    }
   ],
   "excludes": [],
@@ -1876,7 +1884,7 @@
    },
    {
     "who": "农委会委员",
-    "line": "糖寮、水田、东门市……八年的心血，说丢就丢？我不同意， Marina 我也不签。"
+    "line": "工地、仓廪、市面……八年的心血，说丢就丢？我不同意， Marina 我也不签。"
    },
    {
     "who": "值班秘书",
@@ -3702,6 +3710,11 @@
        "id": "series.war_local",
        "op": "add",
        "value": 1
+      },
+      {
+       "id": "civil.captives_arrived",
+       "op": "set",
+       "value": true
       }
      ]
     },
@@ -4578,6 +4591,11 @@
        "id": "series.war_local",
        "op": "add",
        "value": 1
+      },
+      {
+       "id": "civil.captives_arrived",
+       "op": "set",
+       "value": true
       }
      ]
     },
@@ -4598,6 +4616,11 @@
        "id": "series.war_local",
        "op": "add",
        "value": 1
+      },
+      {
+       "id": "civil.captives_arrived",
+       "op": "set",
+       "value": true
       }
      ]
     },
@@ -5211,6 +5234,11 @@
        "id": "series.war_local",
        "op": "add",
        "value": 1
+      },
+      {
+       "id": "civil.captives_arrived",
+       "op": "set",
+       "value": true
       }
      ]
     },
@@ -5486,7 +5514,7 @@
    },
    {
     "who": "值班秘书",
-    "line": "芳草地的教员把名单退回来了，附了一句：走可以，我的学生一个不带，我上不了船。"
+    "line": "识字班的教习把名单退回来了，附了一句：走可以，我的学生一个不带，我上不了船。"
    }
   ]
  },

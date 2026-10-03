@@ -501,6 +501,10 @@
    {
     "state": "history.former_rulers",
     "exists": true
+   },
+   {
+    "state": "civil.captives_arrived",
+    "equals": true
    }
   ],
   "excludes": [],
@@ -2526,7 +2530,7 @@
   "lines": [
    {
     "who": "医务所的医生",
-    "line": "奎宁、酒精、纱布，都在见底。广州的药市断了供，澳门的船一时到不了。疟疾可不等这些。"
+    "line": "奎宁、酒精、纱布，都在见底。广州的药市断了供，海路的船一时到不了。疟疾可不等这些。"
    }
   ]
  },
@@ -3000,7 +3004,7 @@
   "lines": [
    {
     "who": "管文宣的首长",
-    "line": "汽灯改的幻灯能放画片了。想放一场：世界的地图、钢铁的船、还有咱们农庄的收成。营里和村里人都会来看。"
+    "line": "汽灯改的幻灯能放画片了。想放一场：世界的地图、钢铁的船、还有咱们的收成。营里和村里人都会来看。"
    }
   ]
  },
@@ -3223,6 +3227,10 @@
     "day": {
      "gte": 35
     }
+   },
+   {
+    "state": "macao.trade",
+    "equals": true
    }
   ],
   "excludes": [],
@@ -3561,6 +3569,10 @@
     "day": {
      "gte": 44
     }
+   },
+   {
+    "state": "trade.dongmen_established",
+    "equals": true
    }
   ],
   "excludes": [],
