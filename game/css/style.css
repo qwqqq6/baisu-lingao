@@ -147,7 +147,7 @@ h1, h2, h3 { font-weight: 700; letter-spacing: 0.06em; }
   position: absolute; top: 34%;
   width: clamp(140px, 24vmin, 216px); padding: 24px 10px;
   background: none; border: none; cursor: pointer; font: inherit; color: var(--ink-light);
-  opacity: calc(0.3 + var(--lit, 0) * 0.7);
+  opacity: calc(0.92 + var(--lit, 0) * 0.08);
   transition: opacity 0.12s linear;
   z-index: 2;
 }
@@ -158,7 +158,13 @@ h1, h2, h3 { font-weight: 700; letter-spacing: 0.06em; }
   display: block;
   font-size: clamp(21px, 3.6vmin, 32px); font-weight: 700; line-height: 1.32; text-align: center;
   color: var(--ink-light);
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.95), 0 0 22px rgba(0, 0, 0, 0.6);
+  transform: scale(calc(1 + var(--lit, 0) * 0.1));
+  transition: transform 0.12s ease;
+  text-shadow:
+    0 0 2px rgba(0, 0, 0, 0.95),
+    0 1px 2px rgba(0, 0, 0, 0.95),
+    0 2px 10px rgba(0, 0, 0, 0.95),
+    0 0 22px rgba(0, 0, 0, 0.75);
 }
 .choice-right .choice-text { color: var(--gold); }
 .choice.inactive { opacity: 0.12; pointer-events: none; }
@@ -524,5 +530,5 @@ h1, h2, h3 { font-weight: 700; letter-spacing: 0.06em; }
 @media (prefers-reduced-motion: reduce) {
   .flag, .flag-slice, .ember, .title-inner, .rcard, .meter.danger .meter-icon,
   .meter-delta, .reign::before { animation: none !important; }
-  .toast, .choice, .fab { transition: none !important; }
+  .toast, .choice, .choice-text, .fab { transition: none !important; }
 }
