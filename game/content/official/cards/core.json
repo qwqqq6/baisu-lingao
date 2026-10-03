@@ -1,1203 +1,1859 @@
 [
-  {
-    "id": "CORE-001",
-    "pool": "core",
-    "series": "politics.council",
-    "type": "key",
-    "title": "全体大会：下一步怎么办",
-    "source": {
-      "kind": "force",
-      "id": "council",
-      "name": "执委会"
-    },
-    "tags": [
-      "会议",
-      "政治"
-    ],
-    "requires": [],
-    "excludes": [],
-    "weight": 100,
-    "options": {
-      "left": {
-        "id": "xian_fen_gong",
-        "label": "立规矩。",
-        "hint": "先把架子搭起来，散会睡觉",
-        "effects": {
-          "stats": {
-            "council": 6,
-            "people": 2
-          },
-          "personal": {
-            "faction_alarm": -2
-          },
-          "states": [
-            {
-              "id": "series.politics_council",
-              "op": "add",
-              "value": 1
-            }
-          ]
-        }
-      },
-      "right": {
-        "id": "xian_zhua_yaowu",
-        "label": "先办事。",
-        "hint": "粮食、营防、土著，一件件来",
-        "effects": {
-          "stats": {
-            "military": 4,
-            "council": -2
-          },
-          "personal": {
-            "personal_pressure": 2,
-            "faction_alarm": 2
-          },
-          "states": [
-            {
-              "id": "series.politics_council",
-              "op": "add",
-              "value": 1
-            }
-          ]
-        }
-      }
-    },
-    "lines": [
-      {
-        "who": "元老甲",
-        "line": "筑城要紧。没有棱堡，土匪一把火我们就散了。"
-      },
-      {
-        "who": "元老乙",
-        "line": "话不能这么说。人不吃饭，筑什么城？先开荒，先种地。"
-      },
-      {
-        "who": "军职元老",
-        "line": "都别争了。船才是命根子——能通澳门，我们才有外援。"
-      }
-    ]
+ {
+  "id": "CORE-001",
+  "pool": "core",
+  "series": "politics.council",
+  "type": "key",
+  "title": "全体大会：下一步怎么办",
+  "source": {
+   "kind": "force",
+   "id": "council",
+   "name": "执委会"
   },
-  {
-    "id": "CORE-002",
-    "pool": "core",
-    "series": "politics.council",
-    "type": "daily",
-    "title": "执委会例会",
-    "source": {
-      "kind": "force",
-      "id": "council",
-      "name": "执委会"
-    },
-    "tags": [
-      "会议"
-    ],
-    "requires": [],
-    "excludes": [],
-    "weight": 10,
-    "options": {
-      "left": {
-        "id": "ge_da_50",
-        "label": "对半分。",
-        "hint": "今天能散会，明天接着吵",
-        "effects": {
-          "stats": {
-            "council": 1
-          },
-          "personal": {
-            "personal_pressure": 1
-          }
-        }
-      },
-      "right": {
-        "id": "pai_ban_nong",
-        "label": "工地优先。",
-        "hint": "事情推得动，计委的排期表又得重画",
-        "effects": {
-          "stats": {
-            "people": 2,
-            "council": -2
-          }
-        }
-      }
-    },
-    "lines": [
+  "tags": [
+   "会议",
+   "政治"
+  ],
+  "requires": [],
+  "excludes": [],
+  "weight": 100,
+  "options": {
+   "left": {
+    "id": "xian_fen_gong",
+    "label": "立规矩。",
+    "hint": "先把架子搭起来，散会睡觉",
+    "effects": {
+     "stats": {
+      "council": 6,
+      "people": 2
+     },
+     "personal": {
+      "faction_alarm": -2
+     },
+     "states": [
       {
-        "who": "农委会委员",
-        "line": "首长，柴油就这么一桶，抽水机等着灌渠。"
-      },
-      {
-        "who": "军工委员",
-        "line": "船坞也等着它。停工一天，就是白花花的银元。"
+       "id": "series.politics_council",
+       "op": "add",
+       "value": 1
       }
-    ]
-  },
-  {
-    "id": "CORE-003",
-    "pool": "core",
-    "series": "politics.council",
-    "type": "daily",
-    "title": "住房分配",
-    "source": {
-      "kind": "character",
-      "id": "any",
-      "name": "总务组"
-    },
-    "tags": [
-      "会议",
-      "民政"
-    ],
-    "requires": [],
-    "excludes": [],
-    "weight": 9,
-    "options": {
-      "left": {
-        "id": "an_gongxian",
-        "label": "照名单。",
-        "hint": "老同志们满意了",
-        "effects": {
-          "stats": {
-            "council": 3,
-            "people": -3
-          }
-        }
-      },
-      "right": {
-        "id": "chong_fen",
-        "label": "抓阄。",
-        "hint": "听天由命，谁也没话说",
-        "effects": {
-          "stats": {
-            "people": 4,
-            "council": -3
-          }
-        }
-      }
-    },
-    "lines": [
-      {
-        "who": "总务干事",
-        "line": "名单按穿越前职称排的，技术骨干和长辈优先。"
-      },
-      {
-        "who": "年轻元老",
-        "line": "凭什么？就凭他工龄比我长？这不合理，我抗议。"
-      }
-    ]
-  },
-  {
-    "id": "CORE-004",
-    "pool": "core",
-    "series": "politics.council",
-    "type": "crisis",
-    "title": "程序问题",
-    "source": {
-      "kind": "force",
-      "id": "council",
-      "name": "元老院"
-    },
-    "tags": [
-      "会议",
-      "政治",
-      "合法性"
-    ],
-    "requires": [
-      {
-        "state": "core.pillar.council",
-        "lte": 45
-      }
-    ],
-    "excludes": [],
-    "weight": 30,
-    "options": {
-      "left": {
-        "id": "dangzhong_jiantao",
-        "label": "会上说明。",
-        "hint": "丢面子，保规矩",
-        "effects": {
-          "stats": {
-            "council": 5
-          },
-          "personal": {
-            "personal_pressure": 3
-          }
-        },
-        "followups": [
-          "CORE-012"
-        ]
-      },
-      "right": {
-        "id": "tuoyan_lengchu",
-        "label": "压下不议。",
-        "hint": "拖字诀。怨气不会自己散",
-        "effects": {
-          "stats": {
-            "council": -4
-          },
-          "personal": {
-            "faction_alarm": 3
-          }
-        },
-        "followups": [
-          "CORE-012"
-        ]
-      }
-    },
-    "lines": [
-      {
-        "who": "值班秘书",
-        "line": "十一位元老联署，说咱们几件大事没过大会，「擅专已甚」。带头的，是那位老工程师。"
-      }
-    ]
-  },
-  {
-    "id": "CORE-005",
-    "pool": "core",
-    "series": "politics.council",
-    "type": "daily",
-    "title": "案头的文件",
-    "source": {
-      "kind": "character",
-      "id": "any",
-      "name": "值班秘书"
-    },
-    "tags": [
-      "会议",
-      "民政"
-    ],
-    "requires": [],
-    "excludes": [],
-    "weight": 9,
-    "options": {
-      "left": {
-        "id": "she_mishuchu",
-        "label": "设文书房。",
-        "hint": "权力下移一分，案头清净一寸",
-        "effects": {
-          "stats": {
-            "council": 2,
-            "people": 1
-          },
-          "states": [
-            {
-              "id": "series.politics_council",
-              "op": "add",
-              "value": 1
-            }
-          ]
-        }
-      },
-      "right": {
-        "id": "ziye_piwen",
-        "label": "我连夜批。",
-        "hint": "批示一件件来，天亮再说",
-        "effects": {
-          "stats": {
-            "people": 1
-          },
-          "personal": {
-            "personal_pressure": 3
-          }
-        }
-      }
-    },
-    "lines": [
-      {
-        "who": "值班秘书",
-        "line": "博铺要冬衣，糖寮要铁锅，训练班要教习……都誊好了，就等您批。"
-      }
-    ]
-  },
-  {
-    "id": "CORE-006",
-    "pool": "core",
-    "series": "politics.council",
-    "type": "price",
-    "title": "大会要立章程",
-    "source": {
-      "kind": "force",
-      "id": "council",
-      "name": "元老院"
-    },
-    "tags": [
-      "会议",
-      "政治"
-    ],
-    "requires": [
-      {
-        "force": "council",
-        "metric": "influence",
-        "gte": 40
-      }
-    ],
-    "excludes": [],
-    "weight": 20,
-    "options": {
-      "left": {
-        "id": "jieshou_zhangcheng",
-        "label": "准了。",
-        "hint": "戴上笼头，换一个名正言顺",
-        "effects": {
-          "stats": {
-            "council": 4
-          },
-          "personal": {
-            "personal_pressure": 2,
-            "faction_alarm": -3
-          },
-          "forces": {
-            "council": {
-              "satisfaction": 5,
-              "influence": 3
-            }
-          }
-        }
-      },
-      "right": {
-        "id": "tui_shuojunwu",
-        "label": "缓议。",
-        "hint": "缓兵之计，用一次少一次",
-        "effects": {
-          "forces": {
-            "council": {
-              "influence": -2,
-              "hostility": 6
-            }
-          },
-          "personal": {
-            "faction_alarm": 3
-          }
-        }
-      }
-    },
-    "lines": [
-      {
-        "who": "常委代表",
-        "line": "条例草案在此：大宗物资、人事、外交，先经会核。您允了，大会跟您共担其责。"
-      }
-    ]
-  },
-  {
-    "id": "CORE-007",
-    "pool": "core",
-    "series": "politics.council",
-    "type": "key",
-    "title": "常任委员改选",
-    "source": {
-      "kind": "force",
-      "id": "council",
-      "name": "元老院"
-    },
-    "tags": [
-      "会议",
-      "政治",
-      "合法性"
-    ],
-    "requires": [
-      {
-        "state": "series.politics_council",
-        "gte": 2
-      }
-    ],
-    "excludes": [],
-    "weight": 25,
-    "options": {
-      "left": {
-        "id": "zengshe_chanwei",
-        "label": "照案通过。",
-        "hint": "制度化，也把山头摆上了台面",
-        "effects": {
-          "stats": {
-            "council": 5
-          },
-          "personal": {
-            "faction_alarm": 4
-          },
-          "forces": {
-            "council": {
-              "influence": 5,
-              "satisfaction": 4
-            }
-          },
-          "states": [
-            {
-              "id": "series.politics_council",
-              "op": "add",
-              "value": 1
-            }
-          ]
-        },
-        "followups": [
-          "CORE-014"
-        ]
-      },
-      "right": {
-        "id": "huanyi_cihuo",
-        "label": "人手紧，缓。",
-        "hint": "缓一缓。人心可等不了那么久",
-        "effects": {
-          "stats": {
-            "council": 1
-          },
-          "personal": {
-            "personal_pressure": 1,
-            "faction_alarm": 1
-          }
-        }
-      }
-    },
-    "lines": [
-      {
-        "who": "程序委员",
-        "line": "请设常任委员九人，分掌各口，月终述职。名单贴了三天，底下议论纷纷。"
-      }
-    ]
-  },
-  {
-    "id": "CORE-008",
-    "pool": "core",
-    "series": "politics.council",
-    "type": "crisis",
-    "title": "罢免案",
-    "source": {
-      "kind": "force",
-      "id": "council",
-      "name": "元老院"
-    },
-    "tags": [
-      "会议",
-      "政治",
-      "合法性"
-    ],
-    "requires": [
-      {
-        "state": "core.pillar.council",
-        "lte": 30
-      }
-    ],
-    "excludes": [],
-    "weight": 40,
-    "options": {
-      "left": {
-        "id": "rangxian_xiezui",
-        "label": "交印。",
-        "hint": "保全体面，退场",
-        "effects": {
-          "stats": {
-            "council": 8
-          },
-          "personal": {
-            "personal_pressure": 8,
-            "faction_alarm": -4
-          },
-          "states": [
-            {
-              "id": "fall.last_reason",
-              "op": "set",
-              "value": "impeach"
-            }
-          ],
-          "stepDown": true
-        }
-      },
-      "right": {
-        "id": "qiangli_yazhi",
-        "label": "散会。",
-        "hint": "赌一把。看他们敢不敢动真格",
-        "effects": {
-          "stats": {
-            "council": -6
-          },
-          "personal": {
-            "faction_alarm": 6,
-            "violence_risk": 3
-          }
-        }
-      }
-    },
-    "lines": [
-      {
-        "who": "提案人",
-        "line": "「罢免执政，另选贤能。」——提案宣读完毕。"
-      },
-      {
-        "who": "值班秘书",
-        "line": "（满场静得能听见文澜河的水声。几百双眼睛都在看您。）"
-      }
-    ]
-  },
-  {
-    "id": "CORE-009",
-    "pool": "core",
-    "series": "politics.council",
-    "type": "daily",
-    "title": "夜谈",
-    "source": {
-      "kind": "character",
-      "id": "any",
-      "name": "值班秘书"
-    },
-    "tags": [
-      "情报"
-    ],
-    "requires": [],
-    "excludes": [],
-    "weight": 8,
-    "options": {
-      "left": {
-        "id": "zhaozhang_banshi",
-        "label": "照章登记。",
-        "hint": "规矩是规矩",
-        "effects": {
-          "stats": {
-            "council": 1
-          }
-        }
-      },
-      "right": {
-        "id": "sidi_duowen",
-        "label": "坐下细说。",
-        "hint": "墙角的烟，比会议桌上的坦白",
-        "effects": {
-          "stats": {
-            "people": 1
-          },
-          "wind": 1,
-          "personal": {
-            "personal_pressure": 1
-          }
-        }
-      }
-    },
-    "lines": [
-      {
-        "who": "值班秘书",
-        "line": "首长，有句话，走正规渠道不好写——博铺海面有艘广货船，绕着码头转了三圈才走。"
-      }
-    ]
-  },
-  {
-    "id": "CORE-010",
-    "pool": "core",
-    "series": "politics.council",
-    "type": "cleanup",
-    "title": "交接箱里的旧账",
-    "source": {
-      "kind": "character",
-      "id": "any",
-      "name": "值班秘书"
-    },
-    "tags": [
-      "政治",
-      "继承"
-    ],
-    "requires": [
-      {
-        "state": "history.former_rulers",
-        "exists": true
-      }
-    ],
-    "excludes": [],
-    "weight": 30,
-    "options": {
-      "left": {
-        "id": "gongkai_qingsuan",
-        "label": "摊到会上。",
-        "hint": "立信，也结仇",
-        "effects": {
-          "stats": {
-            "people": 2,
-            "council": 2
-          },
-          "personal": {
-            "faction_alarm": -3,
-            "personal_pressure": 2
-          }
-        }
-      },
-      "right": {
-        "id": "mentou_chuli",
-        "label": "悄悄还清。",
-        "hint": "自家的难处，自家咽",
-        "effects": {
-          "stats": {
-            "people": 1
-          },
-          "personal": {
-            "personal_pressure": 5
-          }
-        }
-      }
-    },
-    "lines": [
-      {
-        "who": "老文书",
-        "line": "前任留了沓白条：赊糖的、许锅的、欠训练班粮的，都写着「暂支」。债主上门两回了。"
-      }
-    ]
-  },
-  {
-    "id": "CORE-011",
-    "pool": "core",
-    "series": "politics.council",
-    "type": "omen",
-    "title": "重新授权动议",
-    "source": {
-      "kind": "force",
-      "id": "council",
-      "name": "元老院"
-    },
-    "tags": [
-      "会议",
-      "政治",
-      "合法性"
-    ],
-    "requires": [
-      {
-        "state": "ruler.legitimacy",
-        "lte": 35
-      }
-    ],
-    "excludes": [],
-    "weight": 35,
-    "options": {
-      "left": {
-        "id": "zidong_qingshi",
-        "label": "主动请命。",
-        "hint": "低头，把位子坐稳",
-        "effects": {
-          "stats": {
-            "council": 3
-          },
-          "personal": {
-            "legitimacy": 8,
-            "faction_alarm": -3,
-            "personal_pressure": 2
-          }
-        }
-      },
-      "right": {
-        "id": "tuo_ziwei",
-        "label": "锁进抽屉。",
-        "hint": "锁得住纸，锁不住人心",
-        "effects": {
-          "personal": {
-            "legitimacy": -3,
-            "faction_alarm": 3
-          }
-        }
-      }
-    },
-    "lines": [
-      {
-        "who": "程序委员",
-        "line": "这份文书，建议对执政授权「重新加以确认」。……字很客气。您品品。"
-      }
-    ]
-  },
-  {
-    "id": "CORE-012",
-    "pool": "core",
-    "series": "politics.council",
-    "type": "key",
-    "title": "立法之争",
-    "source": {
-      "kind": "force",
-      "id": "council",
-      "name": "元老院"
-    },
-    "tags": [
-      "会议",
-      "政治",
-      "合法性"
-    ],
-    "requires": [
-      {
-        "used": "CORE-004"
-      }
-    ],
-    "excludes": [],
-    "weight": 30,
-    "options": {
-      "left": {
-        "id": "jieshiqu_gui_dahui",
-        "label": "归大会。",
-        "hint": "程序上无懈可击。往后每一步都有人在旁边念条文",
-        "effects": {
-          "stats": {
-            "council": 5
-          },
-          "personal": {
-            "faction_alarm": -2,
-            "personal_pressure": 2
-          }
-        },
-        "followups": [
-          "CORE-013"
-        ]
-      },
-      "right": {
-        "id": "jieshiqu_gui_zhengzhi",
-        "label": "归我。",
-        "hint": "办起事来利落。章程成了手里的刀",
-        "effects": {
-          "stats": {
-            "council": -4
-          },
-          "personal": {
-            "faction_alarm": 3,
-            "personal_pressure": 2
-          }
-        },
-        "followups": [
-          "CORE-013"
-        ]
-      }
-    },
-    "lines": [
-      {
-        "who": "常委委员",
-        "line": "章程就剩一条谈不拢——解释权归谁。归大会，还是归您？两边都引经据典。"
-      }
-    ]
-  },
-  {
-    "id": "CORE-013",
-    "pool": "core",
-    "series": "politics.council",
-    "type": "crisis",
-    "title": "第一次弹劾",
-    "source": {
-      "kind": "force",
-      "id": "council",
-      "name": "元老院"
-    },
-    "tags": [
-      "会议",
-      "政治",
-      "合法性"
-    ],
-    "requires": [
-      {
-        "used": "CORE-012"
-      },
-      {
-        "state": "series.politics_council",
-        "gte": 3
-      }
-    ],
-    "excludes": [],
-    "weight": 32,
-    "options": {
-      "left": {
-        "id": "jiao_dahui_gongshen",
-        "label": "公审。",
-        "hint": "规矩立住了。寒的是被弹劾者一系的心",
-        "effects": {
-          "stats": {
-            "council": 3,
-            "people": -1
-          },
-          "personal": {
-            "faction_alarm": -2
-          }
-        }
-      },
-      "right": {
-        "id": "leng_chuli",
-        "label": "冷处理。",
-        "hint": "当事人记住了。看懂的人也记住了",
-        "effects": {
-          "stats": {
-            "council": -3
-          },
-          "personal": {
-            "faction_alarm": 3,
-            "violence_risk": 1
-          }
-        }
-      }
-    },
-    "lines": [
-      {
-        "who": "值班秘书",
-        "line": "弹劾案到了，罪名「泄营中虚实于广商」。证据半真半假。章程刚立，这案必成先例。"
-      }
-    ]
-  },
-  {
-    "id": "CORE-014",
-    "pool": "core",
-    "series": "politics.council",
-    "type": "crisis",
-    "title": "第一次否决",
-    "source": {
-      "kind": "force",
-      "id": "council",
-      "name": "元老院"
-    },
-    "tags": [
-      "会议",
-      "政治",
-      "合法性"
-    ],
-    "requires": [
-      {
-        "used": "CORE-007"
-      },
-      {
-        "state": "series.politics_council",
-        "gte": 3
-      }
-    ],
-    "excludes": [],
-    "weight": 30,
-    "options": {
-      "left": {
-        "id": "rangbu_gaitiming",
-        "label": "让步换人。",
-        "hint": "程序赢了。你的提名从此都要先过会",
-        "effects": {
-          "stats": {
-            "council": 3
-          },
-          "personal": {
-            "personal_pressure": 2
-          }
-        }
-      },
-      "right": {
-        "id": "jianchi_yijian",
-        "label": "先斩后奏。",
-        "hint": "事情办成了。章程的裂缝也留下了",
-        "effects": {
-          "stats": {
-            "council": -4
-          },
-          "personal": {
-            "faction_alarm": 3
-          },
-          "forces": {
-            "planning": {
-              "satisfaction": 2
-            }
-          }
-        }
-      }
-    },
-    "lines": [
-      {
-        "who": "常委委员",
-        "line": "您提名的糖寮管事，会里否了，理由是资历不足。糖榨在即，这事等不起再议一轮。"
-      }
-    ]
-  },
-  {
-    "id": "CORE-015",
-    "pool": "core",
-    "series": "politics.council",
-    "type": "daily",
-    "title": "一封家书",
-    "source": {
-      "kind": "character",
-      "id": "any",
-      "name": "值班秘书"
-    },
-    "tags": [
-      "会议",
-      "人情"
-    ],
-    "requires": [],
-    "excludes": [],
-    "weight": 10,
-    "options": {
-      "left": {
-        "id": "da_hui_yifengxin",
-        "label": "代笔回信。",
-        "hint": "报得了平安，报不了别的",
-        "effects": {
-          "stats": {
-            "people": 1
-          },
-          "personal": {
-            "personal_pressure": 1
-          }
-        }
-      },
-      "right": {
-        "id": "buyu_zhiji",
-        "label": "谁也别提。",
-        "hint": "有些人夜里睡不着，白天照常开工",
-        "effects": {
-          "stats": {
-            "council": 1
-          }
-        }
-      }
-    },
-    "lines": [
-      {
-        "who": "亲随",
-        "line": "老爷，家书——走了小半年才到，问的还是穿越前那些事。……他看完，一个人在河滩坐到天黑。"
-      }
-    ]
-  },
-  {
-    "id": "CORE-016",
-    "pool": "core",
-    "series": "politics.council",
-    "type": "benefit",
-    "title": "大会的背书",
-    "source": {
-      "kind": "force",
-      "id": "council",
-      "name": "扩大会议"
-    },
-    "tags": [
-      "会议",
-      "政治"
-    ],
-    "requires": [
-      {
-        "force": "council",
-        "metric": "influence",
-        "gte": 50
-      },
-      {
-        "force": "council",
-        "metric": "satisfaction",
-        "gte": 55
-      }
-    ],
-    "excludes": [],
-    "weight": 20,
-    "lines": [
-      {
-        "who": "常委委员",
-        "line": "首长，大会刚议完——您提名的几个总办人选，全票通过。决议原文我带来了，落款盖着九个章。"
-      },
-      {
-        "who": "值班秘书",
-        "line": "九个章，一个都不缺。上回可没有这待遇。"
-      }
-    ],
-    "options": {
-      "left": {
-        "id": "shou_beishu",
-        "label": "收下，谢过。",
-        "hint": "背书到位，底气也到位",
-        "effects": {
-          "stats": {
-            "council": 4
-          },
-          "personal": {
-            "personal_pressure": -2
-          },
-          "forces": {
-            "council": {
-              "influence": 3,
-              "satisfaction": 3
-            }
-          }
-        }
-      },
-      "right": {
-        "id": "zhi_xie_bu_ling",
-        "label": "谢了，章照旧。",
-        "hint": "缰绳不松",
-        "effects": {
-          "stats": {
-            "council": 1
-          },
-          "forces": {
-            "council": {
-              "satisfaction": -2
-            }
-          }
-        }
-      }
+     ]
     }
-  },
-  {
-    "id": "CORE-017",
-    "pool": "core",
-    "series": "politics.council",
-    "type": "crisis",
-    "title": "廊下的私语",
-    "source": {
-      "kind": "character",
-      "id": "any",
-      "name": "值班秘书"
-    },
-    "tags": [
-      "会议",
-      "政治",
-      "前兆"
-    ],
-    "requires": [
+   },
+   "right": {
+    "id": "xian_zhua_yaowu",
+    "label": "先办事。",
+    "hint": "粮食、营防、土著，一件件来",
+    "effects": {
+     "stats": {
+      "military": 4,
+      "council": -2
+     },
+     "personal": {
+      "personal_pressure": 2,
+      "faction_alarm": 2
+     },
+     "states": [
       {
-        "state": "ruler.pressure_faction",
-        "gte": 40
+       "id": "series.politics_council",
+       "op": "add",
+       "value": 1
       }
-    ],
-    "excludes": [],
-    "weight": 30,
-    "lines": [
-      {
-        "who": "值班秘书",
-        "line": "首长，今天散会别走正门。几个委员在廊下说话，见我过去就收了声——我只听清半句：「再让他这么干下去……」"
-      }
-    ],
-    "options": {
-      "left": {
-        "id": "qiaoda_yihou",
-        "label": "点名敲打。",
-        "hint": "杀鸡儆猴，猴也记仇",
-        "effects": {
-          "personal": {
-            "faction_alarm": -3,
-            "violence_risk": 1
-          },
-          "stats": {
-            "council": -1
-          }
-        }
-      },
-      "right": {
-        "id": "jiajin_lalong",
-        "label": "挨个请喝茶。",
-        "hint": "化敌于无形，就是费茶",
-        "effects": {
-          "stats": {
-            "people": 1
-          },
-          "personal": {
-            "faction_alarm": -2
-          },
-          "forces": {
-            "council": {
-              "influence": 2
-            }
-          }
-        }
-      }
+     ]
     }
+   }
   },
-  {
-    "id": "CORE-018",
-    "pool": "core",
-    "series": "politics.council",
-    "type": "daily",
-    "title": "前任的信",
-    "source": {
-      "kind": "character",
-      "id": "any",
-      "name": "值班秘书"
-    },
-    "tags": [
-      "继承",
-      "人情"
-    ],
-    "requires": [
-      {
-        "state": "history.former_rulers",
-        "exists": true
-      }
-    ],
-    "excludes": [],
-    "weight": 14,
-    "lines": [
-      {
-        "who": "值班秘书",
-        "line": "首长，前任托盐商的船捎来一封信，没拆。信皮上就四个字——「旧部之事」。"
-      }
-    ],
-    "options": {
-      "left": {
-        "id": "chai_hui",
-        "label": "拆了，办了。",
-        "hint": "旧情难却，新账难算",
-        "effects": {
-          "stats": {
-            "people": 2
-          },
-          "personal": {
-            "faction_alarm": 2
-          }
-        }
-      },
-      "right": {
-        "id": "tui_hui",
-        "label": "原封退回。",
-        "hint": "立规矩：人走茶就凉",
-        "effects": {
-          "stats": {
-            "council": 1
-          },
-          "personal": {
-            "faction_alarm": -1
-          }
-        }
-      }
-    }
+  "lines": [
+   {
+    "who": "元老甲",
+    "line": "筑城要紧。没有棱堡，土匪一把火我们就散了。"
+   },
+   {
+    "who": "元老乙",
+    "line": "话不能这么说。人不吃饭，筑什么城？先开荒，先种地。"
+   },
+   {
+    "who": "军职元老",
+    "line": "都别争了。船才是命根子——能通澳门，我们才有外援。"
+   }
+  ]
+ },
+ {
+  "id": "CORE-002",
+  "pool": "core",
+  "series": "politics.council",
+  "type": "daily",
+  "title": "执委会例会",
+  "source": {
+   "kind": "force",
+   "id": "council",
+   "name": "执委会"
   },
-  {
-    "id": "CORE-019",
-    "pool": "core",
-    "series": "politics.council",
-    "type": "daily",
-    "title": "退守备忘录",
-    "source": {
-      "kind": "character",
-      "id": "any",
-      "name": "文书房"
-    },
-    "tags": [
-      "政治",
-      "继承"
-    ],
-    "requires": [
-      {
-        "state": "series.politics_council",
-        "gte": 1
-      }
-    ],
-    "excludes": [],
-    "weight": 12,
-    "lines": [
-      {
-        "who": "文书房文书",
-        "line": "首长，整理旧档翻出一份八年前的手稿——《退守备忘录》。当年写的：若临高不保，一退大员，二退吕宋。落款的名字，被墨涂了。"
-      },
-      {
-        "who": "值班秘书",
-        "line": "（写的人没署名。可全营谁不知道，那年主张往台湾去的，是哪一位。）"
-      }
-    ],
-    "options": {
-      "left": {
-        "id": "gui_dang",
-        "label": "归档。",
-        "hint": "纸压在箱底，念头压在心里",
-        "effects": {
-          "stats": {
-            "council": 1
-          }
-        }
-      },
-      "right": {
-        "id": "chongti_dahui",
-        "label": "会上重提。",
-        "hint": "有人会睡不着——八年前睡不着，现在还睡不着",
-        "effects": {
-          "stats": {
-            "council": -1
-          },
-          "personal": {
-            "faction_alarm": 2,
-            "personal_pressure": 1
-          }
-        }
-      }
+  "tags": [
+   "会议"
+  ],
+  "requires": [],
+  "excludes": [],
+  "weight": 10,
+  "options": {
+   "left": {
+    "id": "ge_da_50",
+    "label": "对半分。",
+    "hint": "今天能散会，明天接着吵",
+    "effects": {
+     "stats": {
+      "council": 1
+     },
+     "personal": {
+      "personal_pressure": 1
+     }
     }
+   },
+   "right": {
+    "id": "pai_ban_nong",
+    "label": "工地优先。",
+    "hint": "事情推得动，计委的排期表又得重画",
+    "effects": {
+     "stats": {
+      "people": 2,
+      "council": -2
+     }
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "农委会委员",
+    "line": "首长，柴油就这么一桶，抽水机等着灌渠。"
+   },
+   {
+    "who": "军工委员",
+    "line": "船坞也等着它。停工一天，就是白花花的银元。"
+   }
+  ]
+ },
+ {
+  "id": "CORE-003",
+  "pool": "core",
+  "series": "politics.council",
+  "type": "daily",
+  "title": "住房分配",
+  "source": {
+   "kind": "character",
+   "id": "any",
+   "name": "总务组"
+  },
+  "tags": [
+   "会议",
+   "民政"
+  ],
+  "requires": [],
+  "excludes": [],
+  "weight": 9,
+  "options": {
+   "left": {
+    "id": "an_gongxian",
+    "label": "照名单。",
+    "hint": "老同志们满意了",
+    "effects": {
+     "stats": {
+      "council": 3,
+      "people": -3
+     }
+    }
+   },
+   "right": {
+    "id": "chong_fen",
+    "label": "抓阄。",
+    "hint": "听天由命，谁也没话说",
+    "effects": {
+     "stats": {
+      "people": 4,
+      "council": -3
+     }
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "总务干事",
+    "line": "名单按穿越前职称排的，技术骨干和长辈优先。"
+   },
+   {
+    "who": "年轻元老",
+    "line": "凭什么？就凭他工龄比我长？这不合理，我抗议。"
+   }
+  ]
+ },
+ {
+  "id": "CORE-004",
+  "pool": "core",
+  "series": "politics.council",
+  "type": "crisis",
+  "title": "程序问题",
+  "source": {
+   "kind": "force",
+   "id": "council",
+   "name": "元老院"
+  },
+  "tags": [
+   "会议",
+   "政治",
+   "合法性"
+  ],
+  "requires": [
+   {
+    "state": "core.pillar.council",
+    "lte": 45
+   }
+  ],
+  "excludes": [],
+  "weight": 30,
+  "options": {
+   "left": {
+    "id": "dangzhong_jiantao",
+    "label": "会上说明。",
+    "hint": "丢面子，保规矩",
+    "effects": {
+     "stats": {
+      "council": 5
+     },
+     "personal": {
+      "personal_pressure": 3
+     }
+    },
+    "followups": [
+     "CORE-012"
+    ]
+   },
+   "right": {
+    "id": "tuoyan_lengchu",
+    "label": "压下不议。",
+    "hint": "拖字诀。怨气不会自己散",
+    "effects": {
+     "stats": {
+      "council": -4
+     },
+     "personal": {
+      "faction_alarm": 3
+     }
+    },
+    "followups": [
+     "CORE-012"
+    ]
+   }
+  },
+  "lines": [
+   {
+    "who": "值班秘书",
+    "line": "十一位元老联署，说咱们几件大事没过大会，「擅专已甚」。带头的，是那位老工程师。"
+   }
+  ]
+ },
+ {
+  "id": "CORE-005",
+  "pool": "core",
+  "series": "politics.council",
+  "type": "daily",
+  "title": "案头的文件",
+  "source": {
+   "kind": "character",
+   "id": "any",
+   "name": "值班秘书"
+  },
+  "tags": [
+   "会议",
+   "民政"
+  ],
+  "requires": [],
+  "excludes": [],
+  "weight": 9,
+  "options": {
+   "left": {
+    "id": "she_mishuchu",
+    "label": "设文书房。",
+    "hint": "权力下移一分，案头清净一寸",
+    "effects": {
+     "stats": {
+      "council": 2,
+      "people": 1
+     },
+     "states": [
+      {
+       "id": "series.politics_council",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "ziye_piwen",
+    "label": "我连夜批。",
+    "hint": "批示一件件来，天亮再说",
+    "effects": {
+     "stats": {
+      "people": 1
+     },
+     "personal": {
+      "personal_pressure": 3
+     }
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "值班秘书",
+    "line": "博铺要冬衣，糖寮要铁锅，训练班要教习……都誊好了，就等您批。"
+   }
+  ]
+ },
+ {
+  "id": "CORE-006",
+  "pool": "core",
+  "series": "politics.council",
+  "type": "price",
+  "title": "大会要立章程",
+  "source": {
+   "kind": "force",
+   "id": "council",
+   "name": "元老院"
+  },
+  "tags": [
+   "会议",
+   "政治"
+  ],
+  "requires": [
+   {
+    "force": "council",
+    "metric": "influence",
+    "gte": 40
+   }
+  ],
+  "excludes": [],
+  "weight": 20,
+  "options": {
+   "left": {
+    "id": "jieshou_zhangcheng",
+    "label": "准了。",
+    "hint": "戴上笼头，换一个名正言顺",
+    "effects": {
+     "stats": {
+      "council": 4
+     },
+     "personal": {
+      "personal_pressure": 2,
+      "faction_alarm": -3
+     },
+     "forces": {
+      "council": {
+       "satisfaction": 5,
+       "influence": 3
+      }
+     }
+    }
+   },
+   "right": {
+    "id": "tui_shuojunwu",
+    "label": "缓议。",
+    "hint": "缓兵之计，用一次少一次",
+    "effects": {
+     "forces": {
+      "council": {
+       "influence": -2,
+       "hostility": 6
+      }
+     },
+     "personal": {
+      "faction_alarm": 3
+     }
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "常委代表",
+    "line": "条例草案在此：大宗物资、人事、外交，先经会核。您允了，大会跟您共担其责。"
+   }
+  ]
+ },
+ {
+  "id": "CORE-007",
+  "pool": "core",
+  "series": "politics.council",
+  "type": "key",
+  "title": "常任委员改选",
+  "source": {
+   "kind": "force",
+   "id": "council",
+   "name": "元老院"
+  },
+  "tags": [
+   "会议",
+   "政治",
+   "合法性"
+  ],
+  "requires": [
+   {
+    "state": "series.politics_council",
+    "gte": 2
+   }
+  ],
+  "excludes": [],
+  "weight": 25,
+  "options": {
+   "left": {
+    "id": "zengshe_chanwei",
+    "label": "照案通过。",
+    "hint": "制度化，也把山头摆上了台面",
+    "effects": {
+     "stats": {
+      "council": 5
+     },
+     "personal": {
+      "faction_alarm": 4
+     },
+     "forces": {
+      "council": {
+       "influence": 5,
+       "satisfaction": 4
+      }
+     },
+     "states": [
+      {
+       "id": "series.politics_council",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "CORE-014"
+    ]
+   },
+   "right": {
+    "id": "huanyi_cihuo",
+    "label": "人手紧，缓。",
+    "hint": "缓一缓。人心可等不了那么久",
+    "effects": {
+     "stats": {
+      "council": 1
+     },
+     "personal": {
+      "personal_pressure": 1,
+      "faction_alarm": 1
+     }
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "程序委员",
+    "line": "请设常任委员九人，分掌各口，月终述职。名单贴了三天，底下议论纷纷。"
+   }
+  ]
+ },
+ {
+  "id": "CORE-008",
+  "pool": "core",
+  "series": "politics.council",
+  "type": "crisis",
+  "title": "罢免案",
+  "source": {
+   "kind": "force",
+   "id": "council",
+   "name": "元老院"
+  },
+  "tags": [
+   "会议",
+   "政治",
+   "合法性"
+  ],
+  "requires": [
+   {
+    "state": "core.pillar.council",
+    "lte": 30
+   }
+  ],
+  "excludes": [],
+  "weight": 40,
+  "options": {
+   "left": {
+    "id": "rangxian_xiezui",
+    "label": "交印。",
+    "hint": "保全体面，退场",
+    "effects": {
+     "stats": {
+      "council": 8
+     },
+     "personal": {
+      "personal_pressure": 8,
+      "faction_alarm": -4
+     },
+     "states": [
+      {
+       "id": "fall.last_reason",
+       "op": "set",
+       "value": "impeach"
+      }
+     ],
+     "stepDown": true
+    }
+   },
+   "right": {
+    "id": "qiangli_yazhi",
+    "label": "散会。",
+    "hint": "赌一把。看他们敢不敢动真格",
+    "effects": {
+     "stats": {
+      "council": -6
+     },
+     "personal": {
+      "faction_alarm": 6,
+      "violence_risk": 3
+     }
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "提案人",
+    "line": "「罢免执政，另选贤能。」——提案宣读完毕。"
+   },
+   {
+    "who": "值班秘书",
+    "line": "（满场静得能听见文澜河的水声。几百双眼睛都在看您。）"
+   }
+  ]
+ },
+ {
+  "id": "CORE-009",
+  "pool": "core",
+  "series": "politics.council",
+  "type": "daily",
+  "title": "夜谈",
+  "source": {
+   "kind": "character",
+   "id": "any",
+   "name": "值班秘书"
+  },
+  "tags": [
+   "情报"
+  ],
+  "requires": [],
+  "excludes": [],
+  "weight": 8,
+  "options": {
+   "left": {
+    "id": "zhaozhang_banshi",
+    "label": "照章登记。",
+    "hint": "规矩是规矩",
+    "effects": {
+     "stats": {
+      "council": 1
+     }
+    }
+   },
+   "right": {
+    "id": "sidi_duowen",
+    "label": "坐下细说。",
+    "hint": "墙角的烟，比会议桌上的坦白",
+    "effects": {
+     "stats": {
+      "people": 1
+     },
+     "wind": 1,
+     "personal": {
+      "personal_pressure": 1
+     }
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "值班秘书",
+    "line": "首长，有句话，走正规渠道不好写——博铺海面有艘广货船，绕着码头转了三圈才走。"
+   }
+  ]
+ },
+ {
+  "id": "CORE-010",
+  "pool": "core",
+  "series": "politics.council",
+  "type": "cleanup",
+  "title": "交接箱里的旧账",
+  "source": {
+   "kind": "character",
+   "id": "any",
+   "name": "值班秘书"
+  },
+  "tags": [
+   "政治",
+   "继承"
+  ],
+  "requires": [
+   {
+    "state": "history.former_rulers",
+    "exists": true
+   }
+  ],
+  "excludes": [],
+  "weight": 30,
+  "options": {
+   "left": {
+    "id": "gongkai_qingsuan",
+    "label": "摊到会上。",
+    "hint": "立信，也结仇",
+    "effects": {
+     "stats": {
+      "people": 2,
+      "council": 2
+     },
+     "personal": {
+      "faction_alarm": -3,
+      "personal_pressure": 2
+     }
+    }
+   },
+   "right": {
+    "id": "mentou_chuli",
+    "label": "悄悄还清。",
+    "hint": "自家的难处，自家咽",
+    "effects": {
+     "stats": {
+      "people": 1
+     },
+     "personal": {
+      "personal_pressure": 5
+     }
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "老文书",
+    "line": "前任留了沓白条：赊糖的、许锅的、欠训练班粮的，都写着「暂支」。债主上门两回了。"
+   }
+  ]
+ },
+ {
+  "id": "CORE-011",
+  "pool": "core",
+  "series": "politics.council",
+  "type": "omen",
+  "title": "重新授权动议",
+  "source": {
+   "kind": "force",
+   "id": "council",
+   "name": "元老院"
+  },
+  "tags": [
+   "会议",
+   "政治",
+   "合法性"
+  ],
+  "requires": [
+   {
+    "state": "ruler.legitimacy",
+    "lte": 35
+   }
+  ],
+  "excludes": [],
+  "weight": 35,
+  "options": {
+   "left": {
+    "id": "zidong_qingshi",
+    "label": "主动请命。",
+    "hint": "低头，把位子坐稳",
+    "effects": {
+     "stats": {
+      "council": 3
+     },
+     "personal": {
+      "legitimacy": 8,
+      "faction_alarm": -3,
+      "personal_pressure": 2
+     }
+    }
+   },
+   "right": {
+    "id": "tuo_ziwei",
+    "label": "锁进抽屉。",
+    "hint": "锁得住纸，锁不住人心",
+    "effects": {
+     "personal": {
+      "legitimacy": -3,
+      "faction_alarm": 3
+     }
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "程序委员",
+    "line": "这份文书，建议对执政授权「重新加以确认」。……字很客气。您品品。"
+   }
+  ]
+ },
+ {
+  "id": "CORE-012",
+  "pool": "core",
+  "series": "politics.council",
+  "type": "key",
+  "title": "立法之争",
+  "source": {
+   "kind": "force",
+   "id": "council",
+   "name": "元老院"
+  },
+  "tags": [
+   "会议",
+   "政治",
+   "合法性"
+  ],
+  "requires": [
+   {
+    "used": "CORE-004"
+   }
+  ],
+  "excludes": [],
+  "weight": 30,
+  "options": {
+   "left": {
+    "id": "jieshiqu_gui_dahui",
+    "label": "归大会。",
+    "hint": "程序上无懈可击。往后每一步都有人在旁边念条文",
+    "effects": {
+     "stats": {
+      "council": 5
+     },
+     "personal": {
+      "faction_alarm": -2,
+      "personal_pressure": 2
+     }
+    },
+    "followups": [
+     "CORE-013"
+    ]
+   },
+   "right": {
+    "id": "jieshiqu_gui_zhengzhi",
+    "label": "归我。",
+    "hint": "办起事来利落。章程成了手里的刀",
+    "effects": {
+     "stats": {
+      "council": -4
+     },
+     "personal": {
+      "faction_alarm": 3,
+      "personal_pressure": 2
+     }
+    },
+    "followups": [
+     "CORE-013"
+    ]
+   }
+  },
+  "lines": [
+   {
+    "who": "常委委员",
+    "line": "章程就剩一条谈不拢——解释权归谁。归大会，还是归您？两边都引经据典。"
+   }
+  ]
+ },
+ {
+  "id": "CORE-013",
+  "pool": "core",
+  "series": "politics.council",
+  "type": "crisis",
+  "title": "第一次弹劾",
+  "source": {
+   "kind": "force",
+   "id": "council",
+   "name": "元老院"
+  },
+  "tags": [
+   "会议",
+   "政治",
+   "合法性"
+  ],
+  "requires": [
+   {
+    "used": "CORE-012"
+   },
+   {
+    "state": "series.politics_council",
+    "gte": 3
+   }
+  ],
+  "excludes": [],
+  "weight": 32,
+  "options": {
+   "left": {
+    "id": "jiao_dahui_gongshen",
+    "label": "公审。",
+    "hint": "规矩立住了。寒的是被弹劾者一系的心",
+    "effects": {
+     "stats": {
+      "council": 3,
+      "people": -1
+     },
+     "personal": {
+      "faction_alarm": -2
+     }
+    }
+   },
+   "right": {
+    "id": "leng_chuli",
+    "label": "冷处理。",
+    "hint": "当事人记住了。看懂的人也记住了",
+    "effects": {
+     "stats": {
+      "council": -3
+     },
+     "personal": {
+      "faction_alarm": 3,
+      "violence_risk": 1
+     }
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "值班秘书",
+    "line": "弹劾案到了，罪名「泄营中虚实于广商」。证据半真半假。章程刚立，这案必成先例。"
+   }
+  ]
+ },
+ {
+  "id": "CORE-014",
+  "pool": "core",
+  "series": "politics.council",
+  "type": "crisis",
+  "title": "第一次否决",
+  "source": {
+   "kind": "force",
+   "id": "council",
+   "name": "元老院"
+  },
+  "tags": [
+   "会议",
+   "政治",
+   "合法性"
+  ],
+  "requires": [
+   {
+    "used": "CORE-007"
+   },
+   {
+    "state": "series.politics_council",
+    "gte": 3
+   }
+  ],
+  "excludes": [],
+  "weight": 30,
+  "options": {
+   "left": {
+    "id": "rangbu_gaitiming",
+    "label": "让步换人。",
+    "hint": "程序赢了。你的提名从此都要先过会",
+    "effects": {
+     "stats": {
+      "council": 3
+     },
+     "personal": {
+      "personal_pressure": 2
+     }
+    }
+   },
+   "right": {
+    "id": "jianchi_yijian",
+    "label": "先斩后奏。",
+    "hint": "事情办成了。章程的裂缝也留下了",
+    "effects": {
+     "stats": {
+      "council": -4
+     },
+     "personal": {
+      "faction_alarm": 3
+     },
+     "forces": {
+      "planning": {
+       "satisfaction": 2
+      }
+     }
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "常委委员",
+    "line": "您提名的糖寮管事，会里否了，理由是资历不足。糖榨在即，这事等不起再议一轮。"
+   }
+  ]
+ },
+ {
+  "id": "CORE-015",
+  "pool": "core",
+  "series": "politics.council",
+  "type": "daily",
+  "title": "一封家书",
+  "source": {
+   "kind": "character",
+   "id": "any",
+   "name": "值班秘书"
+  },
+  "tags": [
+   "会议",
+   "人情"
+  ],
+  "requires": [],
+  "excludes": [],
+  "weight": 10,
+  "options": {
+   "left": {
+    "id": "da_hui_yifengxin",
+    "label": "代笔回信。",
+    "hint": "报得了平安，报不了别的",
+    "effects": {
+     "stats": {
+      "people": 1
+     },
+     "personal": {
+      "personal_pressure": 1
+     }
+    }
+   },
+   "right": {
+    "id": "buyu_zhiji",
+    "label": "谁也别提。",
+    "hint": "有些人夜里睡不着，白天照常开工",
+    "effects": {
+     "stats": {
+      "council": 1
+     }
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "亲随",
+    "line": "老爷，家书——走了小半年才到，问的还是穿越前那些事。……他看完，一个人在河滩坐到天黑。"
+   }
+  ]
+ },
+ {
+  "id": "CORE-016",
+  "pool": "core",
+  "series": "politics.council",
+  "type": "benefit",
+  "title": "大会的背书",
+  "source": {
+   "kind": "force",
+   "id": "council",
+   "name": "扩大会议"
+  },
+  "tags": [
+   "会议",
+   "政治"
+  ],
+  "requires": [
+   {
+    "force": "council",
+    "metric": "influence",
+    "gte": 50
+   },
+   {
+    "force": "council",
+    "metric": "satisfaction",
+    "gte": 55
+   }
+  ],
+  "excludes": [],
+  "weight": 20,
+  "lines": [
+   {
+    "who": "常委委员",
+    "line": "首长，大会刚议完——您提名的几个总办人选，全票通过。决议原文我带来了，落款盖着九个章。"
+   },
+   {
+    "who": "值班秘书",
+    "line": "九个章，一个都不缺。上回可没有这待遇。"
+   }
+  ],
+  "options": {
+   "left": {
+    "id": "shou_beishu",
+    "label": "收下，谢过。",
+    "hint": "背书到位，底气也到位",
+    "effects": {
+     "stats": {
+      "council": 4
+     },
+     "personal": {
+      "personal_pressure": -2
+     },
+     "forces": {
+      "council": {
+       "influence": 3,
+       "satisfaction": 3
+      }
+     }
+    }
+   },
+   "right": {
+    "id": "zhi_xie_bu_ling",
+    "label": "谢了，章照旧。",
+    "hint": "缰绳不松",
+    "effects": {
+     "stats": {
+      "council": 1
+     },
+     "forces": {
+      "council": {
+       "satisfaction": -2
+      }
+     }
+    }
+   }
   }
+ },
+ {
+  "id": "CORE-017",
+  "pool": "core",
+  "series": "politics.council",
+  "type": "crisis",
+  "title": "廊下的私语",
+  "source": {
+   "kind": "character",
+   "id": "any",
+   "name": "值班秘书"
+  },
+  "tags": [
+   "会议",
+   "政治",
+   "前兆"
+  ],
+  "requires": [
+   {
+    "state": "ruler.pressure_faction",
+    "gte": 40
+   }
+  ],
+  "excludes": [],
+  "weight": 30,
+  "lines": [
+   {
+    "who": "值班秘书",
+    "line": "首长，今天散会别走正门。几个委员在廊下说话，见我过去就收了声——我只听清半句：「再让他这么干下去……」"
+   }
+  ],
+  "options": {
+   "left": {
+    "id": "qiaoda_yihou",
+    "label": "点名敲打。",
+    "hint": "杀鸡儆猴，猴也记仇",
+    "effects": {
+     "personal": {
+      "faction_alarm": -3,
+      "violence_risk": 1
+     },
+     "stats": {
+      "council": -1
+     }
+    }
+   },
+   "right": {
+    "id": "jiajin_lalong",
+    "label": "挨个请喝茶。",
+    "hint": "化敌于无形，就是费茶",
+    "effects": {
+     "stats": {
+      "people": 1
+     },
+     "personal": {
+      "faction_alarm": -2
+     },
+     "forces": {
+      "council": {
+       "influence": 2
+      }
+     }
+    }
+   }
+  }
+ },
+ {
+  "id": "CORE-018",
+  "pool": "core",
+  "series": "politics.council",
+  "type": "daily",
+  "title": "前任的信",
+  "source": {
+   "kind": "character",
+   "id": "any",
+   "name": "值班秘书"
+  },
+  "tags": [
+   "继承",
+   "人情"
+  ],
+  "requires": [
+   {
+    "state": "history.former_rulers",
+    "exists": true
+   }
+  ],
+  "excludes": [],
+  "weight": 14,
+  "lines": [
+   {
+    "who": "值班秘书",
+    "line": "首长，前任托盐商的船捎来一封信，没拆。信皮上就四个字——「旧部之事」。"
+   }
+  ],
+  "options": {
+   "left": {
+    "id": "chai_hui",
+    "label": "拆了，办了。",
+    "hint": "旧情难却，新账难算",
+    "effects": {
+     "stats": {
+      "people": 2
+     },
+     "personal": {
+      "faction_alarm": 2
+     }
+    }
+   },
+   "right": {
+    "id": "tui_hui",
+    "label": "原封退回。",
+    "hint": "立规矩：人走茶就凉",
+    "effects": {
+     "stats": {
+      "council": 1
+     },
+     "personal": {
+      "faction_alarm": -1
+     }
+    }
+   }
+  }
+ },
+ {
+  "id": "CORE-019",
+  "pool": "core",
+  "series": "politics.council",
+  "type": "daily",
+  "title": "退守备忘录",
+  "source": {
+   "kind": "character",
+   "id": "any",
+   "name": "文书房"
+  },
+  "tags": [
+   "政治",
+   "继承"
+  ],
+  "requires": [
+   {
+    "state": "series.politics_council",
+    "gte": 1
+   }
+  ],
+  "excludes": [],
+  "weight": 12,
+  "lines": [
+   {
+    "who": "文书房文书",
+    "line": "首长，整理旧档翻出一份八年前的手稿——《退守备忘录》。当年写的：若临高不保，一退大员，二退吕宋。落款的名字，被墨涂了。"
+   },
+   {
+    "who": "值班秘书",
+    "line": "（写的人没署名。可全营谁不知道，那年主张往台湾去的，是哪一位。）"
+   }
+  ],
+  "options": {
+   "left": {
+    "id": "gui_dang",
+    "label": "归档。",
+    "hint": "纸压在箱底，念头压在心里",
+    "effects": {
+     "stats": {
+      "council": 1
+     }
+    }
+   },
+   "right": {
+    "id": "chongti_dahui",
+    "label": "会上重提。",
+    "hint": "有人会睡不着——八年前睡不着，现在还睡不着",
+    "effects": {
+     "stats": {
+      "council": -1
+     },
+     "personal": {
+      "faction_alarm": 2,
+      "personal_pressure": 1
+     }
+    }
+   }
+  }
+ },
+ {
+  "id": "CORE-020",
+  "pool": "core",
+  "series": "govern.clean",
+  "type": "key",
+  "title": "政治保卫局立案",
+  "source": {
+   "kind": "force",
+   "id": "council",
+   "name": "扩大会议"
+  },
+  "tags": [
+   "政治",
+   "保卫"
+  ],
+  "requires": [
+   {
+    "state": "trade.dongmen_established",
+    "equals": true
+   },
+   {
+    "day": {
+     "gte": 25
+    }
+   }
+  ],
+  "excludes": [],
+  "weight": 26,
+  "options": {
+   "left": {
+    "id": "ligui",
+    "label": "立。",
+    "hint": "眼睛放进暗处，耳朵挂在墙上",
+    "effects": {
+     "stats": {
+      "council": 3,
+      "people": -2
+     },
+     "wind": -2,
+     "personal": {
+      "faction_alarm": 3
+     },
+     "states": [
+      {
+       "id": "polbur.established",
+       "op": "set",
+       "value": true
+      },
+      {
+       "id": "series.govern_clean",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "buli",
+    "label": "不立。",
+    "hint": "大白天底下办事，夜里也睡得着",
+    "effects": {
+     "stats": {
+      "council": -2
+     },
+     "states": [
+      {
+       "id": "series.govern_clean",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "值班秘书",
+    "line": "有首长提议：设一个政治保卫局，专查内外细作、账目亏空、结党营私——直属于您，不经大会。"
+   },
+   {
+    "who": "值班秘书",
+    "line": "反对的条子也有一叠：这机构立起来，先查谁？会不会先查递条子的人？"
+   }
+  ]
+ },
+ {
+  "id": "CORE-021",
+  "pool": "core",
+  "series": "govern.clean",
+  "type": "omen",
+  "title": "东门市账房亏空",
+  "source": {
+   "kind": "force",
+   "id": "trade",
+   "name": "商贸网络"
+  },
+  "tags": [
+   "贪腐",
+   "账目"
+  ],
+  "requires": [
+   {
+    "state": "trade.dongmen_established",
+    "equals": true
+   },
+   {
+    "day": {
+     "gte": 30
+    }
+   }
+  ],
+  "excludes": [],
+  "weight": 22,
+  "options": {
+   "left": {
+    "id": "panzhang",
+    "label": "连夜盘账。",
+    "hint": "账上的洞，越早看见越小",
+    "effects": {
+     "stats": {
+      "livelihood": -1
+     },
+     "states": [
+      {
+       "id": "corruption.case",
+       "op": "set",
+       "value": "open"
+      },
+      {
+       "id": "series.govern_clean",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "CORE-022"
+    ]
+   },
+   "right": {
+    "id": "yanhou",
+    "label": "先放着。",
+    "hint": "兴许是账房的笔误",
+    "effects": {
+     "stats": {
+      "livelihood": -2
+     },
+     "states": [
+      {
+       "id": "corruption.case",
+       "op": "set",
+       "value": "open"
+      },
+      {
+       "id": "series.govern_clean",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "值班秘书",
+    "line": "东门市季账呈上来了。对了两遍——市面上的流水，和账房入库的数，差着四百六十两。经手的，是第一批归化民账房。"
+   }
+  ]
+ },
+ {
+  "id": "CORE-022",
+  "pool": "core",
+  "series": "govern.clean",
+  "type": "crisis",
+  "title": "串案越挖越大",
+  "source": {
+   "kind": "force",
+   "id": "council",
+   "name": "扩大会议"
+  },
+  "tags": [
+   "贪腐",
+   "审判"
+  ],
+  "requires": [
+   {
+    "state": "corruption.case",
+    "equals": "open"
+   }
+  ],
+  "excludes": [],
+  "weight": 26,
+  "options": {
+   "left": {
+    "id": "checha",
+    "label": "一查到底。",
+    "hint": "挖出萝卜带出泥，泥里还有萝卜",
+    "effects": {
+     "stats": {
+      "council": 3,
+      "people": 2,
+      "livelihood": -2
+     },
+     "wind": 2,
+     "days": 2,
+     "states": [
+      {
+       "id": "corruption.case",
+       "op": "set",
+       "value": "purged"
+      },
+      {
+       "id": "series.govern_clean",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "CORE-023"
+    ]
+   },
+   "right": {
+    "id": "shache",
+    "label": "掐头去尾。",
+    "hint": "退赃的留用，首恶的示众",
+    "effects": {
+     "stats": {
+      "council": -2,
+      "people": 1
+     },
+     "personal": {
+      "faction_alarm": -1
+     },
+     "states": [
+      {
+       "id": "corruption.case",
+       "op": "set",
+       "value": "settled"
+      },
+      {
+       "id": "series.govern_clean",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "值班秘书",
+    "line": "查下去了。四百六十两只是明账——仓里的糖、灶上的油、码头的力钱，处处有洞。归化民骨干里，怕是要动一批。"
+   },
+   {
+    "who": "值班秘书",
+    "line": "有人递话：查到这一层就够了，再查，各口的脸都没处搁。"
+   }
+  ]
+ },
+ {
+  "id": "CORE-023",
+  "pool": "core",
+  "series": "govern.clean",
+  "type": "backlash",
+  "title": "株连的边界",
+  "source": {
+   "kind": "force",
+   "id": "naturalized",
+   "name": "归化民组织"
+  },
+  "tags": [
+   "贪腐",
+   "人心"
+  ],
+  "requires": [
+   {
+    "state": "corruption.case",
+    "equals": "purged"
+   }
+  ],
+  "excludes": [],
+  "weight": 22,
+  "options": {
+   "left": {
+    "id": "shousuo",
+    "label": "就此收手。",
+    "hint": "再查下去，营里没人敢管账了",
+    "effects": {
+     "stats": {
+      "people": 1,
+      "council": 1
+     },
+     "forces": {
+      "naturalized": {
+       "satisfaction": 2
+      }
+     },
+     "states": [
+      {
+       "id": "corruption.case",
+       "op": "set",
+       "value": "closed"
+      },
+      {
+       "id": "series.govern_clean",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "jixu",
+    "label": "穷追。",
+    "hint": "割毒疮，就得连肉割",
+    "effects": {
+     "stats": {
+      "people": -3,
+      "council": 2
+     },
+     "wind": 2,
+     "forces": {
+      "naturalized": {
+       "satisfaction": -5
+      }
+     },
+     "personal": {
+      "faction_alarm": 2
+     },
+     "states": [
+      {
+       "id": "series.govern_clean",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "管民政的首长",
+    "line": "首长，案子牵到芳草地的毕业生头上了——两个，都是各口刚用顺手的。归化民里已经有人夜里收拾包袱：不知道明天查到谁。"
+   }
+  ]
+ },
+ {
+  "id": "CORE-024",
+  "pool": "core",
+  "series": "govern.clean",
+  "type": "daily",
+  "title": "检举箱",
+  "source": {
+   "kind": "force",
+   "id": "council",
+   "name": "扩大会议"
+  },
+  "tags": [
+   "廉政"
+  ],
+  "requires": [
+   {
+    "state": "series.govern_clean",
+    "gte": 2
+   }
+  ],
+  "excludes": [],
+  "weight": 14,
+  "options": {
+   "left": {
+    "id": "shexiang",
+    "label": "四门设箱。",
+    "hint": "东门市、码头、灶房、学堂，各挂一只",
+    "effects": {
+     "stats": {
+      "people": 2,
+      "council": 1
+     },
+     "wind": 1,
+     "states": [
+      {
+       "id": "series.govern_clean",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "gongkai",
+    "label": "只留公开呈文。",
+    "hint": "背后递话的风气，不能开",
+    "effects": {
+     "stats": {
+      "council": 1
+     },
+     "personal": {
+      "faction_alarm": -1
+     }
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "值班秘书",
+    "line": "有人提议在四门挂检举箱，钥匙只您一把。也有人拍案：这是教人背后咬人——咬着咬着，就咬到自己人头上了。"
+   }
+  ]
+ },
+ {
+  "id": "CORE-025",
+  "pool": "core",
+  "series": "govern.clean",
+  "type": "key",
+  "title": "《临高时报》创刊",
+  "source": {
+   "kind": "force",
+   "id": "council",
+   "name": "扩大会议"
+  },
+  "tags": [
+   "宣传",
+   "报纸"
+  ],
+  "requires": [
+   {
+    "state": "industry.workshop_level",
+    "gte": 2
+   },
+   {
+    "state": "series.govern_clean",
+    "gte": 1
+   }
+  ],
+  "excludes": [],
+  "weight": 22,
+  "options": {
+   "left": {
+    "id": "bankan",
+    "label": "办起来。",
+    "hint": "笔杆子定了调，喇叭才长嘴",
+    "effects": {
+     "stats": {
+      "people": 4,
+      "council": -1
+     },
+     "wind": 1,
+     "states": [
+      {
+       "id": "times.established",
+       "op": "set",
+       "value": true
+      },
+      {
+       "id": "series.govern_clean",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "neican",
+    "label": "只出内参。",
+    "hint": "各口首长传阅，不出营地",
+    "effects": {
+     "stats": {
+      "council": 2
+     },
+     "states": [
+      {
+       "id": "series.govern_clean",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "管文宣的首长",
+    "line": "印书坊的活字闲着也是闲着。想办张报：市价、政令、战报，再登点归化民的新人新事——名字都想好了，《临高时报》。"
+   },
+   {
+    "who": "管文宣的首长",
+    "line": "头一期的社论，谁来写？"
+   }
+  ]
+ },
+ {
+  "id": "CORE-026",
+  "pool": "core",
+  "series": "govern.clean",
+  "type": "daily",
+  "title": "紫明楼开张",
+  "source": {
+   "kind": "force",
+   "id": "trade",
+   "name": "商贸网络"
+  },
+  "tags": [
+   "商贸",
+   "情报"
+  ],
+  "requires": [
+   {
+    "state": "trade.dongmen_established",
+    "equals": true
+   },
+   {
+    "state": "series.govern_clean",
+    "gte": 1
+   }
+  ],
+  "excludes": [],
+  "weight": 16,
+  "options": {
+   "left": {
+    "id": "kaizhang",
+    "label": "开张。",
+    "hint": "一桌酒钱，买十句真话",
+    "effects": {
+     "stats": {
+      "livelihood": 3,
+      "people": -1
+     },
+     "wind": -1,
+     "forces": {
+      "trade": {
+       "influence": 3
+      }
+     },
+     "states": [
+      {
+       "id": "ziminglou.open",
+       "op": "set",
+       "value": true
+      },
+      {
+       "id": "series.govern_clean",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "zanhuan",
+    "label": "缓一缓。",
+    "hint": "县里的眼睛还没喂熟",
+    "effects": {
+     "stats": {
+      "livelihood": 1
+     },
+     "wind": 1
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "广商的代表",
+    "line": "临高县城的铺面盘好了，三层楼，字号「紫明楼」。明面上是酒楼——广商、行商、官面上的人，酒过三巡，什么话都往外漏。"
+   },
+   {
+    "who": "广商的代表",
+    "line": "就等首长一句话开张。掌柜的、跑堂的，都是挑过的人。"
+   }
+  ]
+ },
+ {
+  "id": "CORE-027",
+  "pool": "core",
+  "series": "govern.clean",
+  "type": "crisis",
+  "title": "南下还是北上",
+  "source": {
+   "kind": "force",
+   "id": "council",
+   "name": "扩大会议"
+  },
+  "tags": [
+   "政治",
+   "路线"
+  ],
+  "requires": [
+   {
+    "state": "series.govern_clean",
+    "gte": 2
+   },
+   {
+    "day": {
+     "gte": 40
+    }
+   }
+  ],
+  "excludes": [],
+  "weight": 26,
+  "options": {
+   "left": {
+    "id": "nanxia",
+    "label": "深耕海南。",
+    "hint": "把琼州一岛，做成铁桶",
+    "effects": {
+     "stats": {
+      "council": 3,
+      "livelihood": 2
+     },
+     "wind": -2,
+     "personal": {
+      "faction_alarm": -2
+     },
+     "states": [
+      {
+       "id": "series.govern_clean",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "beishang",
+    "label": "谋大陆。",
+    "hint": "琼州是跳板，两广才是棋盘",
+    "effects": {
+     "stats": {
+      "council": -2,
+      "military": 3
+     },
+     "wind": 4,
+     "personal": {
+      "faction_alarm": 3
+     },
+     "states": [
+      {
+       "id": "series.govern_clean",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "值班秘书",
+    "line": "大会吵翻了一整晚。一派说：立足海南，农工商都起不来，北上就是找死。一派说：困在岛上，等官军缓过劲来，就是等死。"
+   },
+   {
+    "who": "值班秘书",
+    "line": "两边都在等您表态。"
+   }
+  ]
+ }
 ]

@@ -1,1628 +1,2712 @@
 [
-  {
-    "id": "EXT-001",
-    "pool": "external",
-    "series": "external.locals",
-    "type": "key",
-    "title": "海滩外的炊烟",
-    "source": {
-      "kind": "character",
-      "id": "any",
-      "name": "侦察排"
-    },
-    "tags": [
-      "本地人",
-      "外交"
-    ],
-    "requires": [
-      {
-        "state": "contact.locals",
-        "equals": false
-      }
-    ],
-    "excludes": [],
-    "weight": 100,
-    "options": {
-      "left": {
-        "id": "zhudong_jiechu",
-        "label": "带礼登门。",
-        "hint": "先把买卖的口子开一条缝",
-        "effects": {
-          "stats": {
-            "people": 2
-          },
-          "wind": 3,
-          "states": [
-            {
-              "id": "contact.locals",
-              "op": "set",
-              "value": true
-            },
-            {
-              "id": "history.known_forces",
-              "op": "addToSet",
-              "value": "locals"
-            },
-            {
-              "id": "series.external_locals",
-              "op": "add",
-              "value": 2
-            }
-          ]
-        },
-        "followups": [
-          "EXT-002"
-        ]
-      },
-      "right": {
-        "id": "xian_ding_santian",
-        "label": "再盯三天。",
-        "hint": "稳是稳，就是慢",
-        "effects": {
-          "stats": {
-            "military": 2
-          },
-          "wind": 1,
-          "states": [
-            {
-              "id": "series.external_locals",
-              "op": "add",
-              "value": 1
-            }
-          ]
-        }
-      }
-    },
-    "lines": [
-      {
-        "who": "侦察兵",
-        "line": "首长，东边海滩三缕炊烟，不是咱们的灶。摸过去看看，还是当没看见？"
-      }
-    ]
+ {
+  "id": "EXT-001",
+  "pool": "external",
+  "series": "external.locals",
+  "type": "key",
+  "title": "海滩外的炊烟",
+  "source": {
+   "kind": "character",
+   "id": "any",
+   "name": "侦察排"
   },
-  {
-    "id": "EXT-002",
-    "pool": "external",
-    "series": "external.locals",
-    "type": "daily",
-    "title": "村里来了个老人",
-    "source": {
-      "kind": "force",
-      "id": "locals",
-      "name": "本地村社"
-    },
-    "tags": [
-      "本地人",
-      "村社"
-    ],
-    "requires": [
+  "tags": [
+   "本地人",
+   "外交"
+  ],
+  "requires": [
+   {
+    "state": "contact.locals",
+    "equals": false
+   }
+  ],
+  "excludes": [],
+  "weight": 100,
+  "options": {
+   "left": {
+    "id": "zhudong_jiechu",
+    "label": "带礼登门。",
+    "hint": "先把买卖的口子开一条缝",
+    "effects": {
+     "stats": {
+      "people": 2
+     },
+     "wind": 3,
+     "states": [
       {
-        "state": "contact.locals",
-        "equals": true
-      }
-    ],
-    "excludes": [],
-    "weight": 10,
-    "options": {
-      "left": {
-        "id": "yili_xiangdai",
-        "label": "请进，上茶。",
-        "hint": "糖水在琼州是待客的上礼",
-        "effects": {
-          "stats": {
-            "people": 2
-          },
-          "forces": {
-            "locals": {
-              "satisfaction": 6,
-              "influence": 3
-            }
-          }
-        },
-        "followups": [
-          "EXT-004"
-        ]
-      },
-      "right": {
-        "id": "gongshi_gongban",
-        "label": "门房接待。",
-        "hint": "买卖归买卖，交情另说",
-        "effects": {
-          "stats": {
-            "military": 1
-          },
-          "forces": {
-            "locals": {
-              "satisfaction": -2
-            }
-          }
-        },
-        "followups": [
-          "EXT-004"
-        ]
-      }
-    },
-    "lines": [
-      {
-        "who": "符姓老汉",
-        "line": "首长，我是前头村的。族老们叫我来问问——你们短毛爷，收不收山货？"
+       "id": "contact.locals",
+       "op": "set",
+       "value": true
       },
       {
-        "who": "侦察兵",
-        "line": "他临走时，在伙房的大铁锅前站了半天，眼都直了。"
+       "id": "history.known_forces",
+       "op": "addToSet",
+       "value": "locals"
+      },
+      {
+       "id": "series.external_locals",
+       "op": "add",
+       "value": 2
       }
+     ]
+    },
+    "followups": [
+     "EXT-002"
     ]
-  },
-  {
-    "id": "EXT-003",
-    "pool": "external",
-    "series": "external.locals",
-    "type": "crisis",
-    "title": "标桩插进了人家的田",
-    "source": {
-      "kind": "force",
-      "id": "locals",
-      "name": "本地村社"
-    },
-    "tags": [
-      "本地人",
-      "冲突"
-    ],
-    "requires": [
+   },
+   "right": {
+    "id": "xian_ding_santian",
+    "label": "再盯三天。",
+    "hint": "稳是稳，就是慢",
+    "effects": {
+     "stats": {
+      "military": 2
+     },
+     "wind": 1,
+     "states": [
       {
-        "state": "contact.locals",
-        "equals": true
+       "id": "series.external_locals",
+       "op": "add",
+       "value": 1
       }
-    ],
-    "excludes": [],
-    "weight": 30,
-    "options": {
-      "left": {
-        "id": "pei_liang_peili",
-        "label": "拔桩赔粮。",
-        "hint": "破财消灾。粮是从自家口粮里匀",
-        "effects": {
-          "stats": {
-            "people": 3,
-            "livelihood": -2
-          },
-          "wind": -1,
-          "forces": {
-            "locals": {
-              "satisfaction": 4,
-              "hostility": -4
-            }
-          }
-        },
-        "followups": [
-          "EXT-018"
-        ]
-      },
-      "right": {
-        "id": "qiangying_quli",
-        "label": "派兵护桩。",
-        "hint": "快刀。但从今天起村里见了短毛就关鸡叫狗",
-        "effects": {
-          "stats": {
-            "military": 3
-          },
-          "wind": 2,
-          "personal": {
-            "violence_risk": 2
-          },
-          "forces": {
-            "locals": {
-              "hostility": 8,
-              "satisfaction": -4
-            }
-          },
-          "states": [
-            {
-              "id": "external.threat",
-              "op": "set",
-              "value": true
-            }
-          ]
-        }
-      }
-    },
-    "lines": [
-      {
-        "who": "陈家族老",
-        "line": "爷！这是陈家三百年的祭田。你们图上写荒地——荒地里能长出秧苗吗？"
-      },
-      {
-        "who": "年轻后生",
-        "line": "讲不通就不讲了！锄头都带来了，还怕你短毛不成？"
-      }
-    ]
-  },
-  {
-    "id": "EXT-004",
-    "pool": "external",
-    "series": "external.locals",
-    "type": "key",
-    "title": "铁锅换谷子",
-    "source": {
-      "kind": "force",
-      "id": "locals",
-      "name": "本地村社"
-    },
-    "tags": [
-      "本地人",
-      "商贸"
-    ],
-    "requires": [
-      {
-        "state": "contact.locals",
-        "equals": true
-      }
-    ],
-    "excludes": [
-      {
-        "state": "trade.contact",
-        "equals": true
-      }
-    ],
-    "weight": 25,
-    "options": {
-      "left": {
-        "id": "dingdian_kai_xiaoshi",
-        "label": "立官市。",
-        "hint": "货栈、牙人、秤，都立起来",
-        "effects": {
-          "stats": {
-            "people": 2
-          },
-          "wind": 2,
-          "forces": {
-            "locals": {
-              "influence": 3,
-              "satisfaction": 3
-            }
-          },
-          "states": [
-            {
-              "id": "trade.contact",
-              "op": "set",
-              "value": true
-            }
-          ]
-        }
-      },
-      "right": {
-        "id": "bao_weizu_guanzhi",
-        "label": "哨兵看管。",
-        "hint": "安全第一。买卖萧条些",
-        "effects": {
-          "stats": {
-            "military": 2,
-            "people": -1
-          },
-          "wind": 1,
-          "states": [
-            {
-              "id": "trade.contact",
-              "op": "set",
-              "value": true
-            }
-          ]
-        }
-      }
-    },
-    "lines": [
-      {
-        "who": "管事的",
-        "line": "首长，外头天天有人挑着鸡鸭来换铁锅，县城的太太们还托人问玻璃镜子。这买卖，管不管？"
-      }
-    ]
-  },
-  {
-    "id": "EXT-005",
-    "pool": "external",
-    "series": "external.locals",
-    "type": "key",
-    "title": "族老们的章程",
-    "source": {
-      "kind": "force",
-      "id": "locals",
-      "name": "本地村社"
-    },
-    "tags": [
-      "本地人",
-      "村社",
-      "外交"
-    ],
-    "requires": [
-      {
-        "state": "contact.locals",
-        "equals": true
-      },
-      {
-        "state": "series.external_locals",
-        "gte": 2
-      }
-    ],
-    "excludes": [],
-    "weight": 22,
-    "options": {
-      "left": {
-        "id": "xueliu_mengyue",
-        "label": "折箭为誓。",
-        "hint": "得一股助力，背一份人情",
-        "effects": {
-          "stats": {
-            "people": 3,
-            "council": -2
-          },
-          "forces": {
-            "locals": {
-              "influence": 6,
-              "satisfaction": 6
-            }
-          },
-          "states": [
-            {
-              "id": "series.external_locals",
-              "op": "add",
-              "value": 1
-            }
-          ]
-        },
-        "followups": [
-          "EXT-016"
-        ]
-      },
-      "right": {
-        "id": "zhitan_bushengmeng",
-        "label": "只谈买卖。",
-        "hint": "缰绳不交出去",
-        "effects": {
-          "wind": 1,
-          "forces": {
-            "locals": {
-              "influence": 2,
-              "satisfaction": -2
-            }
-          }
-        }
-      }
-    },
-    "lines": [
-      {
-        "who": "陈家族老",
-        "line": "章程在此：村里出人出粮，你们出铁器出庇护。就一条——官府问罪的时候，髡人不许弃村而走。"
-      }
-    ]
-  },
-  {
-    "id": "EXT-006",
-    "pool": "external",
-    "series": "external.locals",
-    "type": "crisis",
-    "title": "两个操外地口音的人",
-    "source": {
-      "kind": "character",
-      "id": "any",
-      "name": "侦察排"
-    },
-    "tags": [
-      "本地人",
-      "军务",
-      "外部"
-    ],
-    "requires": [
-      {
-        "state": "contact.locals",
-        "equals": true
-      }
-    ],
-    "excludes": [],
-    "weight": 28,
-    "options": {
-      "left": {
-        "id": "zhuqila_shenwen",
-        "label": "连夜审。",
-        "hint": "嘴会撬开，事也会传开",
-        "effects": {
-          "stats": {
-            "military": 2
-          },
-          "wind": 3,
-          "personal": {
-            "violence_risk": 3
-          },
-          "states": [
-            {
-              "id": "external.threat",
-              "op": "set",
-              "value": true
-            }
-          ]
-        }
-      },
-      "right": {
-        "id": "fanghui_daihua",
-        "label": "放人递糖。",
-        "hint": "先递话，再递糖",
-        "effects": {
-          "stats": {
-            "people": 1
-          },
-          "wind": -3,
-          "states": [
-            {
-              "id": "external.threat",
-              "op": "set",
-              "value": true
-            }
-          ]
-        }
-      }
-    },
-    "lines": [
-      {
-        "who": "侦察兵",
-        "line": "首长，北面山口拿了两个操雷州口音的。身上搜出县衙路引，还有半张营地图——连马厩都画上了，写着「髡营」二字。"
-      }
-    ]
-  },
-  {
-    "id": "EXT-007",
-    "pool": "external",
-    "series": "external.locals",
-    "type": "price",
-    "title": "村里送来一张礼单",
-    "source": {
-      "kind": "force",
-      "id": "locals",
-      "name": "本地村社"
-    },
-    "tags": [
-      "本地人",
-      "村社"
-    ],
-    "requires": [
-      {
-        "force": "locals",
-        "metric": "influence",
-        "gte": 45
-      }
-    ],
-    "excludes": [],
-    "weight": 22,
-    "options": {
-      "left": {
-        "id": "fen_yanyin",
-        "label": "照单应下。",
-        "hint": "喂饱了，绑得也紧了",
-        "effects": {
-          "stats": {
-            "livelihood": -2,
-            "council": -2
-          },
-          "forces": {
-            "locals": {
-              "satisfaction": 6,
-              "influence": 4
-            }
-          }
-        }
-      },
-      "right": {
-        "id": "wanju",
-        "label": "回礼婉拒。",
-        "hint": "家底要紧。村口的怨气也攒下了",
-        "effects": {
-          "forces": {
-            "locals": {
-              "hostility": 7
-            }
-          }
-        }
-      }
-    },
-    "lines": [
-      {
-        "who": "族老",
-        "line": "爷，礼单在此：占田要补租，迁坟要安银，学堂要添本村名额，差事也要优先……乡里乡亲，不敢白受恩呐。"
-      }
-    ]
-  },
-  {
-    "id": "EXT-008",
-    "pool": "external",
-    "series": "external.locals",
-    "type": "key",
-    "title": "马袅盐场的差事",
-    "source": {
-      "kind": "force",
-      "id": "locals",
-      "name": "本地村社"
-    },
-    "tags": [
-      "本地人",
-      "民政",
-      "盐场"
-    ],
-    "requires": [
-      {
-        "state": "contact.locals",
-        "equals": true
-      },
-      {
-        "state": "series.external_locals",
-        "gte": 3
-      }
-    ],
-    "excludes": [],
-    "weight": 20,
-    "options": {
-      "left": {
-        "id": "jieguan_yanchang",
-        "label": "接。编灶户。",
-        "hint": "白花花的盐，就是白花花的银子",
-        "effects": {
-          "stats": {
-            "people": 2,
-            "livelihood": 2
-          },
-          "wind": 2,
-          "forces": {
-            "locals": {
-              "influence": 4,
-              "satisfaction": 4
-            }
-          },
-          "states": [
-            {
-              "id": "series.external_locals",
-              "op": "add",
-              "value": 1
-            }
-          ]
-        },
-        "followups": [
-          "EXT-017"
-        ]
-      },
-      "right": {
-        "id": "weichi_yuanzhuang",
-        "label": "不碰官产。",
-        "hint": "盐照买，官身不碰",
-        "effects": {
-          "stats": {
-            "council": 1
-          },
-          "forces": {
-            "locals": {
-              "satisfaction": 2
-            }
-          }
-        }
-      }
-    },
-    "lines": [
-      {
-        "who": "灶户代表",
-        "line": "首长，我们全村愿归短毛爷管，只求两条：盐照旧煮，课税别加。官老爷一年到头也难得来一回啊。"
-      }
-    ]
-  },
-  {
-    "id": "EXT-009",
-    "pool": "external",
-    "series": "external.locals",
-    "type": "crisis",
-    "title": "台风",
-    "source": {
-      "kind": "character",
-      "id": "any",
-      "name": "气象员"
-    },
-    "tags": [
-      "天灾",
-      "危机"
-    ],
-    "requires": [
-      {
-        "day": {
-          "gte": 6
-        }
-      }
-    ],
-    "excludes": [],
-    "weight": 32,
-    "options": {
-      "left": {
-        "id": "quanli_bifeng",
-        "label": "信他，抢收。",
-        "hint": "停工三天，账面难看",
-        "effects": {
-          "stats": {
-            "livelihood": 2,
-            "people": 3
-          },
-          "days": 2,
-          "forces": {
-            "locals": {
-              "satisfaction": 4
-            }
-          },
-          "states": [
-            {
-              "id": "core.wind",
-              "op": "add",
-              "value": -2
-            },
-            {
-              "id": "typhoon.prepared",
-              "op": "set",
-              "value": true
-            }
-          ]
-        },
-        "followups": [
-          "EXT-013",
-          "EXT-014"
-        ]
-      },
-      "right": {
-        "id": "tingtian_anming",
-        "label": "工地不停。",
-        "hint": "赌一把。琼州的台风可不给面子",
-        "effects": {
-          "stats": {
-            "livelihood": -7,
-            "people": -4,
-            "military": -2
-          },
-          "forces": {
-            "locals": {
-              "satisfaction": -5
-            }
-          }
-        },
-        "followups": [
-          "EXT-013",
-          "EXT-014"
-        ]
-      }
-    },
-    "variants": [
-      {
-        "id": "laomin_jingyan",
-        "kind": "history",
-        "when": {
-          "conditions": [
-            {
-              "state": "history.former_rulers",
-              "exists": true
-            }
-          ]
-        },
-        "extraHint": "文书房翻出旧档：前任任上遭过一次风灾，折了三间工棚——档案里都记着账。"
-      }
-    ],
-    "lines": [
-      {
-        "who": "老船工",
-        "line": "首长，鱼浮头，蚂蚁搬家，燕子贴地飞。老辈人说，这是「做风」了——三五日内必有大风！"
-      },
-      {
-        "who": "气象员",
-        "line": "气压计也在往下掉。他没读过书，但这次他说得对。"
-      }
-    ]
-  },
-  {
-    "id": "EXT-010",
-    "pool": "external",
-    "series": "external.locals",
-    "type": "crisis",
-    "title": "打摆子",
-    "source": {
-      "kind": "character",
-      "id": "any",
-      "name": "医务所"
-    },
-    "tags": [
-      "疫病",
-      "危机"
-    ],
-    "requires": [
-      {
-        "day": {
-          "gte": 8
-        }
-      }
-    ],
-    "excludes": [],
-    "weight": 30,
-    "options": {
-      "left": {
-        "id": "yiyao_quanli",
-        "label": "药先紧病人。",
-        "hint": "药和帐都不够，先紧着人",
-        "effects": {
-          "stats": {
-            "people": 4,
-            "livelihood": -3
-          },
-          "days": 2
-        },
-        "followups": [
-          "EXT-015"
-        ]
-      },
-      "right": {
-        "id": "ge_li_bingren",
-        "label": "隔离，赶工。",
-        "hint": "进度保住了。人心散没散不好说",
-        "effects": {
-          "stats": {
-            "people": -4,
-            "livelihood": -1
-          },
-          "personal": {
-            "faction_alarm": 2
-          }
-        },
-        "followups": [
-          "EXT-015"
-        ]
-      }
-    },
-    "lines": [
-      {
-        "who": "医务所长",
-        "line": "首长，三天倒了十七个，寒热往来，隔日一发——是打摆子。金鸡纳霜只剩两罐，蚊帐缺一大半。"
-      }
-    ]
-  },
-  {
-    "id": "EXT-011",
-    "pool": "external",
-    "series": "external.locals",
-    "type": "key",
-    "title": "黎峒来人",
-    "source": {
-      "kind": "force",
-      "id": "locals",
-      "name": "本地村社"
-    },
-    "tags": [
-      "黎人",
-      "商贸"
-    ],
-    "requires": [
-      {
-        "state": "contact.locals",
-        "equals": true
-      },
-      {
-        "state": "series.external_locals",
-        "gte": 2
-      }
-    ],
-    "excludes": [],
-    "weight": 20,
-    "options": {
-      "left": {
-        "id": "jinshan_chijiu",
-        "label": "进山吃酒。",
-        "hint": "黎人的路不好走，交情却值钱",
-        "effects": {
-          "stats": {
-            "livelihood": 2,
-            "people": 1
-          },
-          "wind": 1,
-          "days": 2,
-          "forces": {
-            "locals": {
-              "influence": 3
-            }
-          },
-          "states": [
-            {
-              "id": "series.external_locals",
-              "op": "add",
-              "value": 1
-            }
-          ]
-        }
-      },
-      "right": {
-        "id": "qing_daoyingnei",
-        "label": "请到东门。",
-        "hint": "不出营地，买卖照做",
-        "effects": {
-          "stats": {
-            "livelihood": 1
-          },
-          "forces": {
-            "locals": {
-              "satisfaction": -1
-            }
-          }
-        }
-      }
-    },
-    "lines": [
-      {
-        "who": "峒丁",
-        "line": "首长，我们峒主请你们过寨吃酒。牛、槟榔、熊皮，随便挑——就求你们卖口铁锅。"
-      }
-    ]
-  },
-  {
-    "id": "EXT-012",
-    "pool": "external",
-    "series": "external.locals",
-    "type": "daily",
-    "title": "疍家的船",
-    "source": {
-      "kind": "character",
-      "id": "any",
-      "name": "总务组"
-    },
-    "tags": [
-      "本地人",
-      "民政"
-    ],
-    "requires": [
-      {
-        "state": "contact.locals",
-        "equals": true
-      }
-    ],
-    "excludes": [],
-    "weight": 10,
-    "options": {
-      "left": {
-        "id": "gu_gengchuan",
-        "label": "雇下船。",
-        "hint": "水上眼睛，比哨塔看得远",
-        "effects": {
-          "stats": {
-            "livelihood": 1,
-            "military": 1,
-            "people": 1
-          }
-        }
-      },
-      "right": {
-        "id": "yiliao_weizhu",
-        "label": "只买鱼。",
-        "hint": "省口粮，也不沾因果",
-        "effects": {
-          "stats": {
-            "livelihood": 1,
-            "people": -1
-          }
-        }
-      }
-    },
-    "lines": [
-      {
-        "who": "疍家妇人",
-        "line": "老爷，鲜鱼换糙米呀。我们还会补帆、洗衣裳，工钱您赏几个都行。"
-      }
-    ]
-  },
-  {
-    "id": "EXT-013",
-    "pool": "external",
-    "series": "external.locals",
-    "type": "cleanup",
-    "title": "风过之后",
-    "source": {
-      "kind": "character",
-      "id": "any",
-      "name": "值班秘书"
-    },
-    "tags": [
-      "天灾",
-      "善后"
-    ],
-    "requires": [
-      {
-        "state": "typhoon.prepared",
-        "equals": true
-      }
-    ],
-    "excludes": [],
-    "weight": 35,
-    "options": {
-      "left": {
-        "id": "jiu_zai_yang_li",
-        "label": "开仓赈济。",
-        "hint": "粮出自己的仓，买的是十里八乡的人心",
-        "effects": {
-          "stats": {
-            "livelihood": -3,
-            "people": 4
-          },
-          "forces": {
-            "locals": {
-              "satisfaction": 6,
-              "influence": 3
-            },
-            "farm": {
-              "satisfaction": -2
-            }
-          }
-        }
-      },
-      "right": {
-        "id": "bimen_zihao",
-        "label": "闭门自保。",
-        "hint": "省下粮食。村口的眼神也冷了下来",
-        "effects": {
-          "stats": {
-            "people": -2
-          },
-          "forces": {
-            "locals": {
-              "hostility": 5,
-              "satisfaction": -3
-            }
-          }
-        }
-      }
-    },
-    "lines": [
-      {
-        "who": "符家管事",
-        "line": "首长，咱营没大碍。可邻村屋顶掀了几十户，已经有人来讨口粮了——给，还是不给？"
-      }
-    ]
-  },
-  {
-    "id": "EXT-014",
-    "pool": "external",
-    "series": "external.locals",
-    "type": "crisis",
-    "title": "风灾之后",
-    "source": {
-      "kind": "character",
-      "id": "any",
-      "name": "值班秘书"
-    },
-    "tags": [
-      "天灾",
-      "危机"
-    ],
-    "requires": [
-      {
-        "used": "EXT-009"
-      },
-      {
-        "state": "typhoon.prepared",
-        "equals": false
-      }
-    ],
-    "excludes": [],
-    "weight": 40,
-    "options": {
-      "left": {
-        "id": "quanli_jiuzai",
-        "label": "停工救灾。",
-        "hint": "人回来了，工期没了",
-        "effects": {
-          "stats": {
-            "livelihood": -3,
-            "people": 4
-          },
-          "days": 2,
-          "forces": {
-            "locals": {
-              "satisfaction": 5
-            }
-          }
-        }
-      },
-      "right": {
-        "id": "xian_baowuzhi",
-        "label": "先保糖寮。",
-        "hint": "家当保住了。人心呢？",
-        "effects": {
-          "stats": {
-            "livelihood": 1,
-            "people": -4
-          },
-          "personal": {
-            "faction_alarm": 2
-          }
-        }
-      }
-    },
-    "lines": [
-      {
-        "who": "管工",
-        "line": "首长，工棚塌了小半，糖寮进了水。归化民跑了一大半，说回去看屋顶……路上都是哭声。"
-      }
-    ]
-  },
-  {
-    "id": "EXT-015",
-    "pool": "external",
-    "series": "external.locals",
-    "type": "crisis",
-    "title": "药材商的金鸡纳霜",
-    "source": {
-      "kind": "character",
-      "id": "any",
-      "name": "医务所"
-    },
-    "tags": [
-      "疫病",
-      "危机"
-    ],
-    "requires": [
-      {
-        "used": "EXT-010"
-      }
-    ],
-    "excludes": [],
-    "weight": 32,
-    "options": {
-      "left": {
-        "id": "gaojia_maiduan",
-        "label": "咬牙买断。",
-        "hint": "贵。但下回摆子来，营里有底气",
-        "effects": {
-          "stats": {
-            "livelihood": -4,
-            "people": 3
-          },
-          "forces": {
-            "trade": {
-              "satisfaction": 3,
-              "influence": 2
-            }
-          }
-        }
-      },
-      "right": {
-        "id": "pai_renzhou_xunyao",
-        "label": "自己寻药。",
-        "hint": "省下银子，赌的是时间",
-        "effects": {
-          "stats": {
-            "people": -1,
-            "livelihood": -1
-          },
-          "wind": 1,
-          "days": 2
-        }
-      }
-    },
-    "lines": [
-      {
-        "who": "雷州药商",
-        "line": "首长，金鸡纳霜，市价三倍——看您急，我再让一成，蔗糖抵账也行。买不买？"
-      },
-      {
-        "who": "医务所长",
-        "line": "没有这味药，下场摆子只能硬扛。"
-      }
-    ]
-  },
-  {
-    "id": "EXT-016",
-    "pool": "external",
-    "series": "external.locals",
-    "type": "crisis",
-    "title": "盟约的考验",
-    "source": {
-      "kind": "force",
-      "id": "locals",
-      "name": "本地村社"
-    },
-    "tags": [
-      "本地人",
-      "村社",
-      "冲突"
-    ],
-    "requires": [
-      {
-        "used": "EXT-005"
-      },
-      {
-        "force": "locals",
-        "metric": "influence",
-        "gte": 30
-      }
-    ],
-    "excludes": [],
-    "weight": 30,
-    "options": {
-      "left": {
-        "id": "chubing_yanya",
-        "label": "出兵压场。",
-        "hint": "盟约是盟约了。别的村看在眼里",
-        "effects": {
-          "stats": {
-            "military": 2,
-            "council": -3
-          },
-          "personal": {
-            "violence_risk": 2
-          },
-          "forces": {
-            "locals": {
-              "influence": 5,
-              "satisfaction": 4,
-              "hostility": 2
-            }
-          }
-        }
-      },
-      "right": {
-        "id": "zuo_he_touren",
-        "label": "只做和头。",
-        "hint": "不失公道。可陈家觉得亏了",
-        "effects": {
-          "stats": {
-            "people": 2
-          },
-          "wind": -1,
-          "forces": {
-            "locals": {
-              "satisfaction": -3,
-              "influence": 1
-            }
-          }
-        }
-      }
-    },
-    "lines": [
-      {
-        "who": "陈家族老",
-        "line": "爷，坟山的事见血了！按老例，帮兄弟这场，盟约才算数。酒，我亲手抬来的。"
-      }
-    ]
-  },
-  {
-    "id": "EXT-017",
-    "pool": "external",
-    "series": "external.locals",
-    "type": "crisis",
-    "title": "盐课司来人了",
-    "source": {
-      "kind": "character",
-      "id": "any",
-      "name": "盐课司大使"
-    },
-    "tags": [
-      "本地人",
-      "盐场",
-      "外部"
-    ],
-    "requires": [
-      {
-        "used": "EXT-008"
-      }
-    ],
-    "excludes": [],
-    "weight": 32,
-    "options": {
-      "left": {
-        "id": "liang_bingwei_songsong",
-        "label": "列队送客。",
-        "hint": "兵威一亮，官府面子上过不去。风声也传出去了",
-        "effects": {
-          "stats": {
-            "military": 3
-          },
-          "wind": 4,
-          "personal": {
-            "violence_risk": 2
-          },
-          "forces": {
-            "locals": {
-              "satisfaction": 5
-            }
-          },
-          "states": [
-            {
-              "id": "external.threat",
-              "op": "set",
-              "value": true
-            }
-          ]
-        }
-      },
-      "right": {
-        "id": "shi_yinzi_zou_menlu",
-        "label": "银子开路。",
-        "hint": "给大使一份「茶资」，给师爷两坛糖",
-        "effects": {
-          "stats": {
-            "livelihood": -3,
-            "council": -2
-          },
-          "wind": -2,
-          "forces": {
-            "locals": {
-              "satisfaction": 3
-            }
-          }
-        }
-      }
-    },
-    "lines": [
-      {
-        "who": "盐课司大使",
-        "line": "奉县衙谕：灶户私附髡人，按律当锁。把三个领头的灶长交出来，本官既往不咎。"
-      }
-    ]
-  },
-  {
-    "id": "EXT-018",
-    "pool": "external",
-    "series": "external.locals",
-    "type": "cleanup",
-    "title": "陈家送来一块匾",
-    "source": {
-      "kind": "force",
-      "id": "locals",
-      "name": "本地村社"
-    },
-    "tags": [
-      "本地人",
-      "村社"
-    ],
-    "requires": [
-      {
-        "used": "EXT-003"
-      },
-      {
-        "force": "locals",
-        "metric": "satisfaction",
-        "gte": 45
-      }
-    ],
-    "excludes": [],
-    "weight": 30,
-    "options": {
-      "left": {
-        "id": "gua_zai_yingmen",
-        "label": "接匾。",
-        "hint": "十里八乡都看得见",
-        "effects": {
-          "stats": {
-            "people": 2,
-            "council": -1
-          },
-          "forces": {
-            "locals": {
-              "satisfaction": 3,
-              "influence": 2
-            }
-          }
-        }
-      },
-      "right": {
-        "id": "xie_er_bushou",
-        "label": "厚赏退匾。",
-        "hint": "「名不敢居」。族老的脸有点挂不住",
-        "effects": {
-          "stats": {
-            "council": 2
-          },
-          "forces": {
-            "locals": {
-              "satisfaction": -2
-            }
-          }
-        }
-      }
-    },
-    "lines": [
-      {
-        "who": "陈家族老",
-        "line": "鼓乐已到门外！「保障地方」四个字，全村凑钱刻的，请首长接匾。"
-      }
-    ]
-  },
-  {
-    "id": "EXT-019",
-    "pool": "external",
-    "series": "external.locals",
-    "type": "daily",
-    "title": "圩日的赌摊",
-    "source": {
-      "kind": "character",
-      "id": "any",
-      "name": "民政委员会"
-    },
-    "tags": [
-      "本地人",
-      "治安"
-    ],
-    "requires": [
-      {
-        "state": "contact.locals",
-        "equals": true
-      }
-    ],
-    "excludes": [],
-    "weight": 12,
-    "options": {
-      "left": {
-        "id": "qu_san_litang",
-        "label": "立章程管。",
-        "hint": "赌风不可长",
-        "effects": {
-          "stats": {
-            "military": 1,
-            "people": -1
-          }
-        }
-      },
-      "right": {
-        "id": "li_zhang_shou_guan",
-        "label": "驱散了事。",
-        "hint": "禁不如疏。工票转起来，市面也热闹",
-        "effects": {
-          "stats": {
-            "people": 1,
-            "livelihood": 1
-          },
-          "forces": {
-            "trade": {
-              "satisfaction": 2
-            }
-          }
-        }
-      }
-    },
-    "lines": [
-      {
-        "who": "民政干事",
-        "line": "首长，东门外支了骰子摊，工票全往里流，还有人赊账。抓了主家，还是立章程管起来？"
-      }
-    ]
-  },
-  {
-    "id": "EXT-020",
-    "pool": "external",
-    "series": "external.locals",
-    "type": "key",
-    "title": "黎峒的委屈",
-    "source": {
-      "kind": "character",
-      "id": "any",
-      "name": "峒丁"
-    },
-    "tags": [
-      "本地人",
-      "黎人",
-      "冲突"
-    ],
-    "requires": [
-      {
-        "used": "EXT-011"
-      },
-      {
-        "state": "contact.locals",
-        "equals": true
-      }
-    ],
-    "excludes": [],
-    "weight": 30,
-    "lines": [
-      {
-        "who": "峒丁",
-        "line": "首长，汉商勾着土司的人打我们，牛羊抢走几十头，还伤了两个后生。"
-      },
-      {
-        "who": "峒丁",
-        "line": "峒主说了——短毛的铳借我们使一回，往后黎山的货，全走你们的路。"
-      }
-    ],
-    "options": {
-      "left": {
-        "id": "jie_chong_jiao_guan",
-        "label": "借铳助阵。",
-        "hint": "黎山的门彻底打开了，官府的眼睛也睁开了",
-        "effects": {
-          "stats": {
-            "military": 3
-          },
-          "wind": 2,
-          "days": 2,
-          "forces": {
-            "locals": {
-              "influence": 4,
-              "satisfaction": 5
-            }
-          },
-          "states": [
-            {
-              "id": "external.threat",
-              "op": "set",
-              "value": true
-            }
-          ]
-        }
-      },
-      "right": {
-        "id": "song_liang_song_yao",
-        "label": "送粮说和。",
-        "hint": "仁义做全，峒主脸上却挂不住",
-        "effects": {
-          "stats": {
-            "people": 2
-          },
-          "forces": {
-            "locals": {
-              "satisfaction": 3,
-              "influence": 1
-            }
-          }
-        }
-      }
+     ]
     }
+   }
   },
-  {
-    "id": "EXT-021",
-    "pool": "external",
-    "series": "external.locals",
-    "type": "key",
-    "title": "黎山马帮",
-    "source": {
-      "kind": "force",
-      "id": "locals",
-      "name": "本地村社"
-    },
-    "tags": [
-      "本地人",
-      "黎人",
-      "商贸"
-    ],
-    "requires": [
-      {
-        "used": "EXT-020"
-      }
-    ],
-    "excludes": [],
-    "weight": 30,
-    "lines": [
-      {
-        "who": "马帮头领",
-        "line": "首长，黎山的牛马、槟榔、药材、藤条，往后全从你们的路上走。孝敬按月算——就求一件事，路上出了事，你们得管。"
-      }
-    ],
-    "options": {
-      "left": {
-        "id": "she_li_shi",
-        "label": "设黎市。",
-        "hint": "山货与铁器对流，官府侧目",
-        "effects": {
-          "stats": {
-            "people": 2,
-            "livelihood": 2
-          },
-          "wind": 2,
-          "forces": {
-            "locals": {
-              "influence": 3,
-              "satisfaction": 4
-            }
-          },
-          "states": [
-            {
-              "id": "series.external_locals",
-              "op": "add",
-              "value": 1
-            }
-          ]
-        }
-      },
-      "right": {
-        "id": "chou_shui_hu_lu",
-        "label": "照章抽税。",
-        "hint": "实惠。马帮嘴上不说，心里记账",
-        "effects": {
-          "stats": {
-            "livelihood": 3,
-            "council": 1
-          },
-          "forces": {
-            "locals": {
-              "satisfaction": -2
-            },
-            "trade": {
-              "influence": 2
-            }
-          }
-        }
-      }
-    }
+  "lines": [
+   {
+    "who": "侦察兵",
+    "line": "首长，东边海滩三缕炊烟，不是咱们的灶。摸过去看看，还是当没看见？"
+   }
+  ]
+ },
+ {
+  "id": "EXT-002",
+  "pool": "external",
+  "series": "external.locals",
+  "type": "daily",
+  "title": "村里来了个老人",
+  "source": {
+   "kind": "force",
+   "id": "locals",
+   "name": "本地村社"
   },
-  {
-    "id": "EXT-022",
-    "pool": "external",
-    "series": "external.locals",
-    "type": "key",
-    "title": "大员来的通事",
-    "source": {
-      "kind": "character",
-      "id": "any",
-      "name": "红毛商馆通事"
+  "tags": [
+   "本地人",
+   "村社"
+  ],
+  "requires": [
+   {
+    "state": "contact.locals",
+    "equals": true
+   }
+  ],
+  "excludes": [],
+  "weight": 10,
+  "options": {
+   "left": {
+    "id": "yili_xiangdai",
+    "label": "请进，上茶。",
+    "hint": "糖水在琼州是待客的上礼",
+    "effects": {
+     "stats": {
+      "people": 2
+     },
+     "forces": {
+      "locals": {
+       "satisfaction": 6,
+       "influence": 3
+      }
+     }
     },
-    "tags": [
-      "外部",
-      "商贸"
-    ],
-    "requires": [
-      {
-        "state": "contact.locals",
-        "equals": true
-      },
-      {
-        "state": "core.wind",
-        "gte": 8
-      },
-      {
-        "state": "core.wind",
-        "lte": 45
+    "followups": [
+     "EXT-004"
+    ]
+   },
+   "right": {
+    "id": "gongshi_gongban",
+    "label": "门房接待。",
+    "hint": "买卖归买卖，交情另说",
+    "effects": {
+     "stats": {
+      "military": 1
+     },
+     "forces": {
+      "locals": {
+       "satisfaction": -2
       }
-    ],
-    "excludes": [],
-    "weight": 18,
-    "lines": [
-      {
-        "who": "红毛通事",
-        "line": "（生硬的官话）大员的总督阁下，想跟临高的首长们做买卖——糖、铁器，要多少有多少价钱。阁下……交个朋友？"
-      },
-      {
-        "who": "侦察兵",
-        "line": "他的护卫一人一杆火绳铳。船是双桅的，吃水比我们所有的船都深。"
+     }
+    },
+    "followups": [
+     "EXT-004"
+    ]
+   }
+  },
+  "lines": [
+   {
+    "who": "符姓老汉",
+    "line": "首长，我是前头村的。族老们叫我来问问——你们短毛爷，收不收山货？"
+   },
+   {
+    "who": "侦察兵",
+    "line": "他临走时，在伙房的大铁锅前站了半天，眼都直了。"
+   }
+  ]
+ },
+ {
+  "id": "EXT-003",
+  "pool": "external",
+  "series": "external.locals",
+  "type": "crisis",
+  "title": "标桩插进了人家的田",
+  "source": {
+   "kind": "force",
+   "id": "locals",
+   "name": "本地村社"
+  },
+  "tags": [
+   "本地人",
+   "冲突"
+  ],
+  "requires": [
+   {
+    "state": "contact.locals",
+    "equals": true
+   }
+  ],
+  "excludes": [],
+  "weight": 30,
+  "options": {
+   "left": {
+    "id": "pei_liang_peili",
+    "label": "拔桩赔粮。",
+    "hint": "破财消灾。粮是从自家口粮里匀",
+    "effects": {
+     "stats": {
+      "people": 3,
+      "livelihood": -2
+     },
+     "wind": -1,
+     "forces": {
+      "locals": {
+       "satisfaction": 4,
+       "hostility": -4
       }
-    ],
-    "options": {
-      "left": {
-        "id": "tong_hongmao",
-        "label": "通商，加岗。",
-        "hint": "跟红毛人做买卖——风声也跟着来了",
-        "effects": {
-          "stats": {
-            "livelihood": 2
-          },
-          "wind": 3,
-          "states": [
-            {
-              "id": "trade.contact",
-              "op": "set",
-              "value": true
-            }
-          ]
-        },
-        "followups": [
-          "TRADE-001"
-        ]
-      },
-      "right": {
-        "id": "juzhi_menwai",
-        "label": "礼送出境。",
-        "hint": "少个买家，多个记恨的红毛人",
-        "effects": {
-          "stats": {
-            "military": 1
-          },
-          "wind": -1,
-          "forces": {
-            "trade": {
-              "satisfaction": -2
-            }
-          }
-        }
+     }
+    },
+    "followups": [
+     "EXT-018"
+    ]
+   },
+   "right": {
+    "id": "qiangying_quli",
+    "label": "派兵护桩。",
+    "hint": "快刀。但从今天起村里见了短毛就关鸡叫狗",
+    "effects": {
+     "stats": {
+      "military": 3
+     },
+     "wind": 2,
+     "personal": {
+      "violence_risk": 2
+     },
+     "forces": {
+      "locals": {
+       "hostility": 8,
+       "satisfaction": -4
       }
+     },
+     "states": [
+      {
+       "id": "external.threat",
+       "op": "set",
+       "value": true
+      }
+     ]
     }
+   }
+  },
+  "lines": [
+   {
+    "who": "陈家族老",
+    "line": "爷！这是陈家三百年的祭田。你们图上写荒地——荒地里能长出秧苗吗？"
+   },
+   {
+    "who": "年轻后生",
+    "line": "讲不通就不讲了！锄头都带来了，还怕你短毛不成？"
+   }
+  ]
+ },
+ {
+  "id": "EXT-004",
+  "pool": "external",
+  "series": "external.locals",
+  "type": "key",
+  "title": "铁锅换谷子",
+  "source": {
+   "kind": "force",
+   "id": "locals",
+   "name": "本地村社"
+  },
+  "tags": [
+   "本地人",
+   "商贸"
+  ],
+  "requires": [
+   {
+    "state": "contact.locals",
+    "equals": true
+   }
+  ],
+  "excludes": [
+   {
+    "state": "trade.contact",
+    "equals": true
+   }
+  ],
+  "weight": 25,
+  "options": {
+   "left": {
+    "id": "dingdian_kai_xiaoshi",
+    "label": "立官市。",
+    "hint": "货栈、牙人、秤，都立起来",
+    "effects": {
+     "stats": {
+      "people": 2
+     },
+     "wind": 2,
+     "forces": {
+      "locals": {
+       "influence": 3,
+       "satisfaction": 3
+      }
+     },
+     "states": [
+      {
+       "id": "trade.contact",
+       "op": "set",
+       "value": true
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "bao_weizu_guanzhi",
+    "label": "哨兵看管。",
+    "hint": "安全第一。买卖萧条些",
+    "effects": {
+     "stats": {
+      "military": 2,
+      "people": -1
+     },
+     "wind": 1,
+     "states": [
+      {
+       "id": "trade.contact",
+       "op": "set",
+       "value": true
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "管事的",
+    "line": "首长，外头天天有人挑着鸡鸭来换铁锅，县城的太太们还托人问玻璃镜子。这买卖，管不管？"
+   }
+  ]
+ },
+ {
+  "id": "EXT-005",
+  "pool": "external",
+  "series": "external.locals",
+  "type": "key",
+  "title": "族老们的章程",
+  "source": {
+   "kind": "force",
+   "id": "locals",
+   "name": "本地村社"
+  },
+  "tags": [
+   "本地人",
+   "村社",
+   "外交"
+  ],
+  "requires": [
+   {
+    "state": "contact.locals",
+    "equals": true
+   },
+   {
+    "state": "series.external_locals",
+    "gte": 2
+   }
+  ],
+  "excludes": [],
+  "weight": 22,
+  "options": {
+   "left": {
+    "id": "xueliu_mengyue",
+    "label": "折箭为誓。",
+    "hint": "得一股助力，背一份人情",
+    "effects": {
+     "stats": {
+      "people": 3,
+      "council": -2
+     },
+     "forces": {
+      "locals": {
+       "influence": 6,
+       "satisfaction": 6
+      }
+     },
+     "states": [
+      {
+       "id": "series.external_locals",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "EXT-016"
+    ]
+   },
+   "right": {
+    "id": "zhitan_bushengmeng",
+    "label": "只谈买卖。",
+    "hint": "缰绳不交出去",
+    "effects": {
+     "wind": 1,
+     "forces": {
+      "locals": {
+       "influence": 2,
+       "satisfaction": -2
+      }
+     }
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "陈家族老",
+    "line": "章程在此：村里出人出粮，你们出铁器出庇护。就一条——官府问罪的时候，髡人不许弃村而走。"
+   }
+  ]
+ },
+ {
+  "id": "EXT-006",
+  "pool": "external",
+  "series": "external.locals",
+  "type": "crisis",
+  "title": "两个操外地口音的人",
+  "source": {
+   "kind": "character",
+   "id": "any",
+   "name": "侦察排"
+  },
+  "tags": [
+   "本地人",
+   "军务",
+   "外部"
+  ],
+  "requires": [
+   {
+    "state": "contact.locals",
+    "equals": true
+   }
+  ],
+  "excludes": [],
+  "weight": 28,
+  "options": {
+   "left": {
+    "id": "zhuqila_shenwen",
+    "label": "连夜审。",
+    "hint": "嘴会撬开，事也会传开",
+    "effects": {
+     "stats": {
+      "military": 2
+     },
+     "wind": 3,
+     "personal": {
+      "violence_risk": 3
+     },
+     "states": [
+      {
+       "id": "external.threat",
+       "op": "set",
+       "value": true
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "fanghui_daihua",
+    "label": "放人递糖。",
+    "hint": "先递话，再递糖",
+    "effects": {
+     "stats": {
+      "people": 1
+     },
+     "wind": -3,
+     "states": [
+      {
+       "id": "external.threat",
+       "op": "set",
+       "value": true
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "侦察兵",
+    "line": "首长，北面山口拿了两个操雷州口音的。身上搜出县衙路引，还有半张营地图——连马厩都画上了，写着「髡营」二字。"
+   }
+  ]
+ },
+ {
+  "id": "EXT-007",
+  "pool": "external",
+  "series": "external.locals",
+  "type": "price",
+  "title": "村里送来一张礼单",
+  "source": {
+   "kind": "force",
+   "id": "locals",
+   "name": "本地村社"
+  },
+  "tags": [
+   "本地人",
+   "村社"
+  ],
+  "requires": [
+   {
+    "force": "locals",
+    "metric": "influence",
+    "gte": 45
+   }
+  ],
+  "excludes": [],
+  "weight": 22,
+  "options": {
+   "left": {
+    "id": "fen_yanyin",
+    "label": "照单应下。",
+    "hint": "喂饱了，绑得也紧了",
+    "effects": {
+     "stats": {
+      "livelihood": -2,
+      "council": -2
+     },
+     "forces": {
+      "locals": {
+       "satisfaction": 6,
+       "influence": 4
+      }
+     }
+    }
+   },
+   "right": {
+    "id": "wanju",
+    "label": "回礼婉拒。",
+    "hint": "家底要紧。村口的怨气也攒下了",
+    "effects": {
+     "forces": {
+      "locals": {
+       "hostility": 7
+      }
+     }
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "族老",
+    "line": "爷，礼单在此：占田要补租，迁坟要安银，学堂要添本村名额，差事也要优先……乡里乡亲，不敢白受恩呐。"
+   }
+  ]
+ },
+ {
+  "id": "EXT-008",
+  "pool": "external",
+  "series": "external.locals",
+  "type": "key",
+  "title": "马袅盐场的差事",
+  "source": {
+   "kind": "force",
+   "id": "locals",
+   "name": "本地村社"
+  },
+  "tags": [
+   "本地人",
+   "民政",
+   "盐场"
+  ],
+  "requires": [
+   {
+    "state": "contact.locals",
+    "equals": true
+   },
+   {
+    "state": "series.external_locals",
+    "gte": 3
+   }
+  ],
+  "excludes": [],
+  "weight": 20,
+  "options": {
+   "left": {
+    "id": "jieguan_yanchang",
+    "label": "接。编灶户。",
+    "hint": "白花花的盐，就是白花花的银子",
+    "effects": {
+     "stats": {
+      "people": 2,
+      "livelihood": 2
+     },
+     "wind": 2,
+     "forces": {
+      "locals": {
+       "influence": 4,
+       "satisfaction": 4
+      }
+     },
+     "states": [
+      {
+       "id": "series.external_locals",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "EXT-017"
+    ]
+   },
+   "right": {
+    "id": "weichi_yuanzhuang",
+    "label": "不碰官产。",
+    "hint": "盐照买，官身不碰",
+    "effects": {
+     "stats": {
+      "council": 1
+     },
+     "forces": {
+      "locals": {
+       "satisfaction": 2
+      }
+     }
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "灶户代表",
+    "line": "首长，我们全村愿归短毛爷管，只求两条：盐照旧煮，课税别加。官老爷一年到头也难得来一回啊。"
+   }
+  ]
+ },
+ {
+  "id": "EXT-009",
+  "pool": "external",
+  "series": "external.locals",
+  "type": "crisis",
+  "title": "台风",
+  "source": {
+   "kind": "character",
+   "id": "any",
+   "name": "气象员"
+  },
+  "tags": [
+   "天灾",
+   "危机"
+  ],
+  "requires": [
+   {
+    "day": {
+     "gte": 6
+    }
+   }
+  ],
+  "excludes": [],
+  "weight": 32,
+  "options": {
+   "left": {
+    "id": "quanli_bifeng",
+    "label": "信他，抢收。",
+    "hint": "停工三天，账面难看",
+    "effects": {
+     "stats": {
+      "livelihood": 2,
+      "people": 3
+     },
+     "days": 2,
+     "forces": {
+      "locals": {
+       "satisfaction": 4
+      }
+     },
+     "states": [
+      {
+       "id": "core.wind",
+       "op": "add",
+       "value": -2
+      },
+      {
+       "id": "typhoon.prepared",
+       "op": "set",
+       "value": true
+      }
+     ]
+    },
+    "followups": [
+     "EXT-013",
+     "EXT-014"
+    ]
+   },
+   "right": {
+    "id": "tingtian_anming",
+    "label": "工地不停。",
+    "hint": "赌一把。琼州的台风可不给面子",
+    "effects": {
+     "stats": {
+      "livelihood": -7,
+      "people": -4,
+      "military": -2
+     },
+     "forces": {
+      "locals": {
+       "satisfaction": -5
+      }
+     }
+    },
+    "followups": [
+     "EXT-013",
+     "EXT-014"
+    ]
+   }
+  },
+  "variants": [
+   {
+    "id": "laomin_jingyan",
+    "kind": "history",
+    "when": {
+     "conditions": [
+      {
+       "state": "history.former_rulers",
+       "exists": true
+      }
+     ]
+    },
+    "extraHint": "文书房翻出旧档：前任任上遭过一次风灾，折了三间工棚——档案里都记着账。"
+   }
+  ],
+  "lines": [
+   {
+    "who": "老船工",
+    "line": "首长，鱼浮头，蚂蚁搬家，燕子贴地飞。老辈人说，这是「做风」了——三五日内必有大风！"
+   },
+   {
+    "who": "气象员",
+    "line": "气压计也在往下掉。他没读过书，但这次他说得对。"
+   }
+  ]
+ },
+ {
+  "id": "EXT-010",
+  "pool": "external",
+  "series": "external.locals",
+  "type": "crisis",
+  "title": "打摆子",
+  "source": {
+   "kind": "character",
+   "id": "any",
+   "name": "医务所"
+  },
+  "tags": [
+   "疫病",
+   "危机"
+  ],
+  "requires": [
+   {
+    "day": {
+     "gte": 8
+    }
+   }
+  ],
+  "excludes": [],
+  "weight": 30,
+  "options": {
+   "left": {
+    "id": "yiyao_quanli",
+    "label": "药先紧病人。",
+    "hint": "药和帐都不够，先紧着人",
+    "effects": {
+     "stats": {
+      "people": 4,
+      "livelihood": -3
+     },
+     "days": 2
+    },
+    "followups": [
+     "EXT-015"
+    ]
+   },
+   "right": {
+    "id": "ge_li_bingren",
+    "label": "隔离，赶工。",
+    "hint": "进度保住了。人心散没散不好说",
+    "effects": {
+     "stats": {
+      "people": -4,
+      "livelihood": -1
+     },
+     "personal": {
+      "faction_alarm": 2
+     }
+    },
+    "followups": [
+     "EXT-015"
+    ]
+   }
+  },
+  "lines": [
+   {
+    "who": "医务所长",
+    "line": "首长，三天倒了十七个，寒热往来，隔日一发——是打摆子。金鸡纳霜只剩两罐，蚊帐缺一大半。"
+   }
+  ]
+ },
+ {
+  "id": "EXT-011",
+  "pool": "external",
+  "series": "external.locals",
+  "type": "key",
+  "title": "黎峒来人",
+  "source": {
+   "kind": "force",
+   "id": "locals",
+   "name": "本地村社"
+  },
+  "tags": [
+   "黎人",
+   "商贸"
+  ],
+  "requires": [
+   {
+    "state": "contact.locals",
+    "equals": true
+   },
+   {
+    "state": "series.external_locals",
+    "gte": 2
+   }
+  ],
+  "excludes": [],
+  "weight": 20,
+  "options": {
+   "left": {
+    "id": "jinshan_chijiu",
+    "label": "进山吃酒。",
+    "hint": "黎人的路不好走，交情却值钱",
+    "effects": {
+     "stats": {
+      "livelihood": 2,
+      "people": 1
+     },
+     "wind": 1,
+     "days": 2,
+     "forces": {
+      "locals": {
+       "influence": 3
+      }
+     },
+     "states": [
+      {
+       "id": "series.external_locals",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "qing_daoyingnei",
+    "label": "请到东门。",
+    "hint": "不出营地，买卖照做",
+    "effects": {
+     "stats": {
+      "livelihood": 1
+     },
+     "forces": {
+      "locals": {
+       "satisfaction": -1
+      }
+     }
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "峒丁",
+    "line": "首长，我们峒主请你们过寨吃酒。牛、槟榔、熊皮，随便挑——就求你们卖口铁锅。"
+   }
+  ]
+ },
+ {
+  "id": "EXT-012",
+  "pool": "external",
+  "series": "external.locals",
+  "type": "daily",
+  "title": "疍家的船",
+  "source": {
+   "kind": "character",
+   "id": "any",
+   "name": "总务组"
+  },
+  "tags": [
+   "本地人",
+   "民政"
+  ],
+  "requires": [
+   {
+    "state": "contact.locals",
+    "equals": true
+   }
+  ],
+  "excludes": [],
+  "weight": 10,
+  "options": {
+   "left": {
+    "id": "gu_gengchuan",
+    "label": "雇下船。",
+    "hint": "水上眼睛，比哨塔看得远",
+    "effects": {
+     "stats": {
+      "livelihood": 1,
+      "military": 1,
+      "people": 1
+     }
+    }
+   },
+   "right": {
+    "id": "yiliao_weizhu",
+    "label": "只买鱼。",
+    "hint": "省口粮，也不沾因果",
+    "effects": {
+     "stats": {
+      "livelihood": 1,
+      "people": -1
+     }
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "疍家妇人",
+    "line": "老爷，鲜鱼换糙米呀。我们还会补帆、洗衣裳，工钱您赏几个都行。"
+   }
+  ]
+ },
+ {
+  "id": "EXT-013",
+  "pool": "external",
+  "series": "external.locals",
+  "type": "cleanup",
+  "title": "风过之后",
+  "source": {
+   "kind": "character",
+   "id": "any",
+   "name": "值班秘书"
+  },
+  "tags": [
+   "天灾",
+   "善后"
+  ],
+  "requires": [
+   {
+    "state": "typhoon.prepared",
+    "equals": true
+   }
+  ],
+  "excludes": [],
+  "weight": 35,
+  "options": {
+   "left": {
+    "id": "jiu_zai_yang_li",
+    "label": "开仓赈济。",
+    "hint": "粮出自己的仓，买的是十里八乡的人心",
+    "effects": {
+     "stats": {
+      "livelihood": -3,
+      "people": 4
+     },
+     "forces": {
+      "locals": {
+       "satisfaction": 6,
+       "influence": 3
+      },
+      "farm": {
+       "satisfaction": -2
+      }
+     }
+    }
+   },
+   "right": {
+    "id": "bimen_zihao",
+    "label": "闭门自保。",
+    "hint": "省下粮食。村口的眼神也冷了下来",
+    "effects": {
+     "stats": {
+      "people": -2
+     },
+     "forces": {
+      "locals": {
+       "hostility": 5,
+       "satisfaction": -3
+      }
+     }
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "符家管事",
+    "line": "首长，咱营没大碍。可邻村屋顶掀了几十户，已经有人来讨口粮了——给，还是不给？"
+   }
+  ]
+ },
+ {
+  "id": "EXT-014",
+  "pool": "external",
+  "series": "external.locals",
+  "type": "crisis",
+  "title": "风灾之后",
+  "source": {
+   "kind": "character",
+   "id": "any",
+   "name": "值班秘书"
+  },
+  "tags": [
+   "天灾",
+   "危机"
+  ],
+  "requires": [
+   {
+    "used": "EXT-009"
+   },
+   {
+    "state": "typhoon.prepared",
+    "equals": false
+   }
+  ],
+  "excludes": [],
+  "weight": 40,
+  "options": {
+   "left": {
+    "id": "quanli_jiuzai",
+    "label": "停工救灾。",
+    "hint": "人回来了，工期没了",
+    "effects": {
+     "stats": {
+      "livelihood": -3,
+      "people": 4
+     },
+     "days": 2,
+     "forces": {
+      "locals": {
+       "satisfaction": 5
+      }
+     }
+    }
+   },
+   "right": {
+    "id": "xian_baowuzhi",
+    "label": "先保糖寮。",
+    "hint": "家当保住了。人心呢？",
+    "effects": {
+     "stats": {
+      "livelihood": 1,
+      "people": -4
+     },
+     "personal": {
+      "faction_alarm": 2
+     }
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "管工",
+    "line": "首长，工棚塌了小半，糖寮进了水。归化民跑了一大半，说回去看屋顶……路上都是哭声。"
+   }
+  ]
+ },
+ {
+  "id": "EXT-015",
+  "pool": "external",
+  "series": "external.locals",
+  "type": "crisis",
+  "title": "药材商的金鸡纳霜",
+  "source": {
+   "kind": "character",
+   "id": "any",
+   "name": "医务所"
+  },
+  "tags": [
+   "疫病",
+   "危机"
+  ],
+  "requires": [
+   {
+    "used": "EXT-010"
+   }
+  ],
+  "excludes": [],
+  "weight": 32,
+  "options": {
+   "left": {
+    "id": "gaojia_maiduan",
+    "label": "咬牙买断。",
+    "hint": "贵。但下回摆子来，营里有底气",
+    "effects": {
+     "stats": {
+      "livelihood": -4,
+      "people": 3
+     },
+     "forces": {
+      "trade": {
+       "satisfaction": 3,
+       "influence": 2
+      }
+     }
+    }
+   },
+   "right": {
+    "id": "pai_renzhou_xunyao",
+    "label": "自己寻药。",
+    "hint": "省下银子，赌的是时间",
+    "effects": {
+     "stats": {
+      "people": -1,
+      "livelihood": -1
+     },
+     "wind": 1,
+     "days": 2
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "雷州药商",
+    "line": "首长，金鸡纳霜，市价三倍——看您急，我再让一成，蔗糖抵账也行。买不买？"
+   },
+   {
+    "who": "医务所长",
+    "line": "没有这味药，下场摆子只能硬扛。"
+   }
+  ]
+ },
+ {
+  "id": "EXT-016",
+  "pool": "external",
+  "series": "external.locals",
+  "type": "crisis",
+  "title": "盟约的考验",
+  "source": {
+   "kind": "force",
+   "id": "locals",
+   "name": "本地村社"
+  },
+  "tags": [
+   "本地人",
+   "村社",
+   "冲突"
+  ],
+  "requires": [
+   {
+    "used": "EXT-005"
+   },
+   {
+    "force": "locals",
+    "metric": "influence",
+    "gte": 30
+   }
+  ],
+  "excludes": [],
+  "weight": 30,
+  "options": {
+   "left": {
+    "id": "chubing_yanya",
+    "label": "出兵压场。",
+    "hint": "盟约是盟约了。别的村看在眼里",
+    "effects": {
+     "stats": {
+      "military": 2,
+      "council": -3
+     },
+     "personal": {
+      "violence_risk": 2
+     },
+     "forces": {
+      "locals": {
+       "influence": 5,
+       "satisfaction": 4,
+       "hostility": 2
+      }
+     }
+    }
+   },
+   "right": {
+    "id": "zuo_he_touren",
+    "label": "只做和头。",
+    "hint": "不失公道。可陈家觉得亏了",
+    "effects": {
+     "stats": {
+      "people": 2
+     },
+     "wind": -1,
+     "forces": {
+      "locals": {
+       "satisfaction": -3,
+       "influence": 1
+      }
+     }
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "陈家族老",
+    "line": "爷，坟山的事见血了！按老例，帮兄弟这场，盟约才算数。酒，我亲手抬来的。"
+   }
+  ]
+ },
+ {
+  "id": "EXT-017",
+  "pool": "external",
+  "series": "external.locals",
+  "type": "crisis",
+  "title": "盐课司来人了",
+  "source": {
+   "kind": "character",
+   "id": "any",
+   "name": "盐课司大使"
+  },
+  "tags": [
+   "本地人",
+   "盐场",
+   "外部"
+  ],
+  "requires": [
+   {
+    "used": "EXT-008"
+   }
+  ],
+  "excludes": [],
+  "weight": 32,
+  "options": {
+   "left": {
+    "id": "liang_bingwei_songsong",
+    "label": "列队送客。",
+    "hint": "兵威一亮，官府面子上过不去。风声也传出去了",
+    "effects": {
+     "stats": {
+      "military": 3
+     },
+     "wind": 4,
+     "personal": {
+      "violence_risk": 2
+     },
+     "forces": {
+      "locals": {
+       "satisfaction": 5
+      }
+     },
+     "states": [
+      {
+       "id": "external.threat",
+       "op": "set",
+       "value": true
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "shi_yinzi_zou_menlu",
+    "label": "银子开路。",
+    "hint": "给大使一份「茶资」，给师爷两坛糖",
+    "effects": {
+     "stats": {
+      "livelihood": -3,
+      "council": -2
+     },
+     "wind": -2,
+     "forces": {
+      "locals": {
+       "satisfaction": 3
+      }
+     }
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "盐课司大使",
+    "line": "奉县衙谕：灶户私附髡人，按律当锁。把三个领头的灶长交出来，本官既往不咎。"
+   }
+  ]
+ },
+ {
+  "id": "EXT-018",
+  "pool": "external",
+  "series": "external.locals",
+  "type": "cleanup",
+  "title": "陈家送来一块匾",
+  "source": {
+   "kind": "force",
+   "id": "locals",
+   "name": "本地村社"
+  },
+  "tags": [
+   "本地人",
+   "村社"
+  ],
+  "requires": [
+   {
+    "used": "EXT-003"
+   },
+   {
+    "force": "locals",
+    "metric": "satisfaction",
+    "gte": 45
+   }
+  ],
+  "excludes": [],
+  "weight": 30,
+  "options": {
+   "left": {
+    "id": "gua_zai_yingmen",
+    "label": "接匾。",
+    "hint": "十里八乡都看得见",
+    "effects": {
+     "stats": {
+      "people": 2,
+      "council": -1
+     },
+     "forces": {
+      "locals": {
+       "satisfaction": 3,
+       "influence": 2
+      }
+     }
+    }
+   },
+   "right": {
+    "id": "xie_er_bushou",
+    "label": "厚赏退匾。",
+    "hint": "「名不敢居」。族老的脸有点挂不住",
+    "effects": {
+     "stats": {
+      "council": 2
+     },
+     "forces": {
+      "locals": {
+       "satisfaction": -2
+      }
+     }
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "陈家族老",
+    "line": "鼓乐已到门外！「保障地方」四个字，全村凑钱刻的，请首长接匾。"
+   }
+  ]
+ },
+ {
+  "id": "EXT-019",
+  "pool": "external",
+  "series": "external.locals",
+  "type": "daily",
+  "title": "圩日的赌摊",
+  "source": {
+   "kind": "character",
+   "id": "any",
+   "name": "民政委员会"
+  },
+  "tags": [
+   "本地人",
+   "治安"
+  ],
+  "requires": [
+   {
+    "state": "contact.locals",
+    "equals": true
+   }
+  ],
+  "excludes": [],
+  "weight": 12,
+  "options": {
+   "left": {
+    "id": "qu_san_litang",
+    "label": "立章程管。",
+    "hint": "赌风不可长",
+    "effects": {
+     "stats": {
+      "military": 1,
+      "people": -1
+     }
+    }
+   },
+   "right": {
+    "id": "li_zhang_shou_guan",
+    "label": "驱散了事。",
+    "hint": "禁不如疏。工票转起来，市面也热闹",
+    "effects": {
+     "stats": {
+      "people": 1,
+      "livelihood": 1
+     },
+     "forces": {
+      "trade": {
+       "satisfaction": 2
+      }
+     }
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "民政干事",
+    "line": "首长，东门外支了骰子摊，工票全往里流，还有人赊账。抓了主家，还是立章程管起来？"
+   }
+  ]
+ },
+ {
+  "id": "EXT-020",
+  "pool": "external",
+  "series": "external.locals",
+  "type": "key",
+  "title": "黎峒的委屈",
+  "source": {
+   "kind": "character",
+   "id": "any",
+   "name": "峒丁"
+  },
+  "tags": [
+   "本地人",
+   "黎人",
+   "冲突"
+  ],
+  "requires": [
+   {
+    "used": "EXT-011"
+   },
+   {
+    "state": "contact.locals",
+    "equals": true
+   }
+  ],
+  "excludes": [],
+  "weight": 30,
+  "lines": [
+   {
+    "who": "峒丁",
+    "line": "首长，汉商勾着土司的人打我们，牛羊抢走几十头，还伤了两个后生。"
+   },
+   {
+    "who": "峒丁",
+    "line": "峒主说了——短毛的铳借我们使一回，往后黎山的货，全走你们的路。"
+   }
+  ],
+  "options": {
+   "left": {
+    "id": "jie_chong_jiao_guan",
+    "label": "借铳助阵。",
+    "hint": "黎山的门彻底打开了，官府的眼睛也睁开了",
+    "effects": {
+     "stats": {
+      "military": 3
+     },
+     "wind": 2,
+     "days": 2,
+     "forces": {
+      "locals": {
+       "influence": 4,
+       "satisfaction": 5
+      }
+     },
+     "states": [
+      {
+       "id": "external.threat",
+       "op": "set",
+       "value": true
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "song_liang_song_yao",
+    "label": "送粮说和。",
+    "hint": "仁义做全，峒主脸上却挂不住",
+    "effects": {
+     "stats": {
+      "people": 2
+     },
+     "forces": {
+      "locals": {
+       "satisfaction": 3,
+       "influence": 1
+      }
+     }
+    }
+   }
   }
+ },
+ {
+  "id": "EXT-021",
+  "pool": "external",
+  "series": "external.locals",
+  "type": "key",
+  "title": "黎山马帮",
+  "source": {
+   "kind": "force",
+   "id": "locals",
+   "name": "本地村社"
+  },
+  "tags": [
+   "本地人",
+   "黎人",
+   "商贸"
+  ],
+  "requires": [
+   {
+    "used": "EXT-020"
+   }
+  ],
+  "excludes": [],
+  "weight": 30,
+  "lines": [
+   {
+    "who": "马帮头领",
+    "line": "首长，黎山的牛马、槟榔、药材、藤条，往后全从你们的路上走。孝敬按月算——就求一件事，路上出了事，你们得管。"
+   }
+  ],
+  "options": {
+   "left": {
+    "id": "she_li_shi",
+    "label": "设黎市。",
+    "hint": "山货与铁器对流，官府侧目",
+    "effects": {
+     "stats": {
+      "people": 2,
+      "livelihood": 2
+     },
+     "wind": 2,
+     "forces": {
+      "locals": {
+       "influence": 3,
+       "satisfaction": 4
+      }
+     },
+     "states": [
+      {
+       "id": "series.external_locals",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "chou_shui_hu_lu",
+    "label": "照章抽税。",
+    "hint": "实惠。马帮嘴上不说，心里记账",
+    "effects": {
+     "stats": {
+      "livelihood": 3,
+      "council": 1
+     },
+     "forces": {
+      "locals": {
+       "satisfaction": -2
+      },
+      "trade": {
+       "influence": 2
+      }
+     }
+    }
+   }
+  }
+ },
+ {
+  "id": "EXT-022",
+  "pool": "external",
+  "series": "external.locals",
+  "type": "key",
+  "title": "大员来的通事",
+  "source": {
+   "kind": "character",
+   "id": "any",
+   "name": "红毛商馆通事"
+  },
+  "tags": [
+   "外部",
+   "商贸"
+  ],
+  "requires": [
+   {
+    "state": "contact.locals",
+    "equals": true
+   },
+   {
+    "state": "core.wind",
+    "gte": 8
+   },
+   {
+    "state": "core.wind",
+    "lte": 45
+   }
+  ],
+  "excludes": [],
+  "weight": 18,
+  "lines": [
+   {
+    "who": "红毛通事",
+    "line": "（生硬的官话）大员的总督阁下，想跟临高的首长们做买卖——糖、铁器，要多少有多少价钱。阁下……交个朋友？"
+   },
+   {
+    "who": "侦察兵",
+    "line": "他的护卫一人一杆火绳铳。船是双桅的，吃水比我们所有的船都深。"
+   }
+  ],
+  "options": {
+   "left": {
+    "id": "tong_hongmao",
+    "label": "通商，加岗。",
+    "hint": "跟红毛人做买卖——风声也跟着来了",
+    "effects": {
+     "stats": {
+      "livelihood": 2
+     },
+     "wind": 3,
+     "states": [
+      {
+       "id": "trade.contact",
+       "op": "set",
+       "value": true
+      }
+     ]
+    },
+    "followups": [
+     "TRADE-001"
+    ]
+   },
+   "right": {
+    "id": "juzhi_menwai",
+    "label": "礼送出境。",
+    "hint": "少个买家，多个记恨的红毛人",
+    "effects": {
+     "stats": {
+      "military": 1
+     },
+     "wind": -1,
+     "forces": {
+      "trade": {
+       "satisfaction": -2
+      }
+     }
+    }
+   }
+  }
+ },
+ {
+  "id": "EXT-023",
+  "pool": "external",
+  "series": "sea.raiders",
+  "type": "key",
+  "title": "刘香的使船",
+  "source": {
+   "kind": "force",
+   "id": "trade",
+   "name": "商贸网络"
+  },
+  "tags": [
+   "海寇",
+   "外交"
+  ],
+  "requires": [
+   {
+    "state": "trade.contact",
+    "equals": true
+   }
+  ],
+  "excludes": [],
+  "weight": 28,
+  "options": {
+   "left": {
+    "id": "nagong",
+    "label": "给他面子。",
+    "hint": "买三个月太平，买出别人的胃口",
+    "effects": {
+     "stats": {
+      "livelihood": -3,
+      "military": 1
+     },
+     "wind": -2,
+     "days": 1,
+     "forces": {
+      "trade": {
+       "satisfaction": -2
+      }
+     },
+     "states": [
+      {
+       "id": "pirate.liuxiang_contact",
+       "op": "set",
+       "value": true
+      },
+      {
+       "id": "series.sea_raiders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "huijue",
+    "label": "回绝。",
+    "hint": "海图上没有他，礁石上才有",
+    "effects": {
+     "stats": {
+      "military": 2,
+      "livelihood": -1
+     },
+     "wind": 4,
+     "states": [
+      {
+       "id": "pirate.hostile",
+       "op": "set",
+       "value": true
+      },
+      {
+       "id": "series.sea_raiders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "EXT-024"
+    ]
+   }
+  },
+  "lines": [
+   {
+    "who": "澳门通事",
+    "line": "首长，外海来了一条三桅船，打的是刘香的旗。来使递话：这片海的『规矩』，每月两千两、糖一百篓，买船队的平安。"
+   },
+   {
+    "who": "澳门通事",
+    "line": "刘香是谁？粤海上除了郑家，就数他的船多、刀快。"
+   }
+  ]
+ },
+ {
+  "id": "EXT-024",
+  "pool": "external",
+  "series": "sea.raiders",
+  "type": "crisis",
+  "title": "疍家渔船遇劫",
+  "source": {
+   "kind": "force",
+   "id": "locals",
+   "name": "本地村社"
+  },
+  "tags": [
+   "海寇",
+   "疍家"
+  ],
+  "requires": [
+   {
+    "state": "pirate.hostile",
+    "equals": true
+   },
+   {
+    "state": "series.sea_raiders",
+    "gte": 1
+   }
+  ],
+  "excludes": [],
+  "weight": 24,
+  "options": {
+   "left": {
+    "id": "chujiao",
+    "label": "出兵追。",
+    "hint": "海口的账，海上讨回来",
+    "effects": {
+     "stats": {
+      "military": 3,
+      "people": 3
+     },
+     "wind": 2,
+     "days": 2,
+     "forces": {
+      "guard": {
+       "influence": 4
+      }
+     },
+     "states": [
+      {
+       "id": "series.sea_raiders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    },
+    "followups": [
+     "EXT-034"
+    ]
+   },
+   "right": {
+    "id": "fuzhou",
+    "label": "抚恤了事。",
+    "hint": "船补钱、人养伤，风头过去再说",
+    "effects": {
+     "stats": {
+      "people": -3,
+      "livelihood": -2
+     },
+     "forces": {
+      "guard": {
+       "satisfaction": -3
+      }
+     },
+     "states": [
+      {
+       "id": "series.sea_raiders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "疍家老船主",
+    "line": "首长！文澜江口三条渔船被劫了，人砍了两个，鱼货抢空。他们冲着咱们的旗来的——船帮上，明晃晃刻着髡贼两个字。"
+   }
+  ]
+ },
+ {
+  "id": "EXT-025",
+  "pool": "external",
+  "series": "sea.raiders",
+  "type": "daily",
+  "title": "李魁奇的行踪",
+  "source": {
+   "kind": "force",
+   "id": "trade",
+   "name": "商贸网络"
+  },
+  "tags": [
+   "海寇",
+   "情报"
+  ],
+  "requires": [
+   {
+    "state": "series.sea_raiders",
+    "gte": 2
+   }
+  ],
+  "excludes": [],
+  "weight": 14,
+  "options": {
+   "left": {
+    "id": "ancha",
+    "label": "撒银子盯住。",
+    "hint": "他的船去哪，咱们的糖船就绕哪",
+    "effects": {
+     "stats": {
+      "livelihood": -1,
+      "military": 2
+     },
+     "states": [
+      {
+       "id": "series.sea_raiders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "buguan",
+    "label": "不追。",
+    "hint": "海寇的事海寇了",
+    "effects": {
+     "stats": {
+      "military": -1
+     },
+     "wind": 1
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "澳门通事",
+    "line": "细作回报：李魁奇部二十多条船在琼州海峡北口游弋，似与郑家的人马不睦。广商的船，这个月都不敢过海峡。"
+   }
+  ]
+ },
+ {
+  "id": "EXT-026",
+  "pool": "external",
+  "series": "sea.raiders",
+  "type": "key",
+  "title": "郑氏的令旗",
+  "source": {
+   "kind": "force",
+   "id": "trade",
+   "name": "商贸网络"
+  },
+  "tags": [
+   "海寇",
+   "郑氏"
+  ],
+  "requires": [
+   {
+    "state": "series.sea_raiders",
+    "gte": 2
+   },
+   {
+    "state": "official.accepted",
+    "equals": true
+   }
+  ],
+  "excludes": [],
+  "weight": 22,
+  "options": {
+   "left": {
+    "id": "maiqi",
+    "label": "买旗。",
+    "hint": "旗到之处，郑家的船就是护身符",
+    "effects": {
+     "stats": {
+      "livelihood": 3,
+      "council": -3
+     },
+     "wind": -3,
+     "forces": {
+      "trade": {
+       "influence": 4
+      }
+     },
+     "states": [
+      {
+       "id": "zheng.flag",
+       "op": "set",
+       "value": true
+      },
+      {
+       "id": "series.sea_raiders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "bumai",
+    "label": "不买。",
+    "hint": "旗是别人的，海得是自己的",
+    "effects": {
+     "stats": {
+      "council": 2,
+      "military": 1
+     },
+     "wind": 2,
+     "states": [
+      {
+       "id": "series.sea_raiders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "广商的代表",
+    "line": "首长，郑芝龙受了朝廷的抚，如今粤海的规矩是他的令旗。一年三万两，糖船盐船插旗通行，海寇不犯——您说，这旗咱们插不插？"
+   },
+   {
+    "who": "广商的代表",
+    "line": "不插旗的话……郑家默许之下，刘香也会来『讲规矩』。"
+   }
+  ]
+ },
+ {
+  "id": "EXT-027",
+  "pool": "external",
+  "series": "sea.raiders",
+  "type": "key",
+  "title": "澳门佛郎机商船",
+  "source": {
+   "kind": "force",
+   "id": "trade",
+   "name": "商贸网络"
+  },
+  "tags": [
+   "外番",
+   "澳门"
+  ],
+  "requires": [
+   {
+    "state": "trade.dongmen_established",
+    "equals": true
+   },
+   {
+    "state": "series.sea_raiders",
+    "gte": 1
+   }
+  ],
+  "excludes": [],
+  "weight": 22,
+  "options": {
+   "left": {
+    "id": "hushi",
+    "label": "开关互市。",
+    "hint": "望远镜、火炮、钟表，都是隔海的师傅",
+    "effects": {
+     "stats": {
+      "livelihood": 4,
+      "council": 1
+     },
+     "wind": 2,
+     "days": 1,
+     "forces": {
+      "trade": {
+       "influence": 5
+      }
+     },
+     "states": [
+      {
+       "id": "macao.trade",
+       "op": "set",
+       "value": true
+      },
+      {
+       "id": "series.sea_raiders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "jiaoyi",
+    "label": "只私下交易。",
+    "hint": "官面上不认，银子底下走",
+    "effects": {
+     "stats": {
+      "livelihood": 2
+     },
+     "wind": 1,
+     "forces": {
+      "trade": {
+       "satisfaction": 2
+      }
+     },
+     "states": [
+      {
+       "id": "macao.trade",
+       "op": "set",
+       "value": true
+      },
+      {
+       "id": "series.sea_raiders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "澳门通事",
+    "line": "首长，澳门的佛郎机船到了，甲板上摆着望远镜、自鸣钟、西洋火炮。神父说，他们只认两样东西：白银，和诚实的秤。"
+   }
+  ]
+ },
+ {
+  "id": "EXT-028",
+  "pool": "external",
+  "series": "sea.raiders",
+  "type": "daily",
+  "title": "佛郎机炮匠应聘",
+  "source": {
+   "kind": "force",
+   "id": "guard",
+   "name": "保卫系统"
+  },
+  "tags": [
+   "外番",
+   "军械"
+  ],
+  "requires": [
+   {
+    "state": "macao.trade",
+    "equals": true
+   }
+  ],
+  "excludes": [],
+  "weight": 16,
+  "options": {
+   "left": {
+    "id": "yong",
+    "label": "重金聘用。",
+    "hint": "铸炮的巧手，多少银子都值",
+    "effects": {
+     "stats": {
+      "military": 5,
+      "livelihood": -2
+     },
+     "wind": 2,
+     "forces": {
+      "guard": {
+       "influence": 4
+      }
+     },
+     "states": [
+      {
+       "id": "series.sea_raiders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "xiejian",
+    "label": "只买炮。",
+    "hint": "匠人不进门，省得人多眼杂",
+    "effects": {
+     "stats": {
+      "military": 3,
+      "livelihood": -1
+     },
+     "states": [
+      {
+       "id": "series.sea_raiders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "管军械的首长",
+    "line": "澳门船上的炮匠愿意留下——铸过红夷大炮的葡萄牙人。工钱一月三十两，还要葡萄酒管够。有人嘀咕：夷人进营，成何体统。"
+   }
+  ]
+ },
+ {
+  "id": "EXT-029",
+  "pool": "external",
+  "series": "sea.raiders",
+  "type": "omen",
+  "title": "大员港的红毛人",
+  "source": {
+   "kind": "force",
+   "id": "trade",
+   "name": "商贸网络"
+  },
+  "tags": [
+   "外番",
+   "红毛"
+  ],
+  "requires": [
+   {
+    "state": "macao.trade",
+    "equals": true
+   }
+  ],
+  "excludes": [],
+  "weight": 16,
+  "options": {
+   "left": {
+    "id": "zhuiwen",
+    "label": "细作探查。",
+    "hint": "把红毛人的底摸清，迟早要用",
+    "effects": {
+     "stats": {
+      "livelihood": -1,
+      "military": 1
+     },
+     "wind": 1,
+     "states": [
+      {
+       "id": "dutch.heard",
+       "op": "set",
+       "value": true
+      },
+      {
+       "id": "series.sea_raiders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "zhi_ruowangwen",
+    "label": "只当传闻。",
+    "hint": "海太大，先顾眼前",
+    "effects": {
+     "wind": 1
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "澳门通事",
+    "line": "佛郎机人酒后吐话：大员港——他们叫台湾——来了红毛人，筑城、买鹿皮、揽转口。闽海以南，快没有闲海了。"
+   },
+   {
+    "who": "澳门通事",
+    "line": "他们忌惮红毛人的炮，比忌惮郑家还甚。"
+   }
+  ]
+ },
+ {
+  "id": "EXT-030",
+  "pool": "external",
+  "series": "sea.raiders",
+  "type": "daily",
+  "title": "琼州海峡的走私网",
+  "source": {
+   "kind": "force",
+   "id": "trade",
+   "name": "商贸网络"
+  },
+  "tags": [
+   "走私",
+   "商贸"
+  ],
+  "requires": [
+   {
+    "state": "series.sea_raiders",
+    "gte": 2
+   }
+  ],
+  "excludes": [],
+  "weight": 16,
+  "options": {
+   "left": {
+    "id": "shouyong",
+    "label": "收为己用。",
+    "hint": "私港、快船、眼线，白得一套",
+    "effects": {
+     "stats": {
+      "livelihood": 3,
+      "council": -2
+     },
+     "wind": -1,
+     "forces": {
+      "trade": {
+       "influence": 4
+      }
+     },
+     "states": [
+      {
+       "id": "series.sea_raiders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "qudi",
+    "label": "取缔。",
+    "hint": "不干净的口子，漏风也漏刀",
+    "effects": {
+     "stats": {
+      "livelihood": -2,
+      "people": 1
+     },
+     "wind": -2,
+     "forces": {
+      "trade": {
+       "satisfaction": -3
+      }
+     }
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "广商的代表",
+    "line": "海峡北岸有条走私网：白日运炭，夜里什么都运。幕后的东家想投咱们——也只想投咱们，因为官府要他们的头。"
+   }
+  ]
+ },
+ {
+  "id": "EXT-031",
+  "pool": "external",
+  "series": "sea.raiders",
+  "type": "daily",
+  "title": "雷州焦炭船",
+  "source": {
+   "kind": "force",
+   "id": "planning",
+   "name": "计划委员会"
+  },
+  "tags": [
+   "外番",
+   "物料"
+  ],
+  "requires": [
+   {
+    "state": "industry.workshop_level",
+    "gte": 1
+   }
+  ],
+  "excludes": [],
+  "weight": 14,
+  "options": {
+   "left": {
+    "id": "changxie",
+    "label": "签长契。",
+    "hint": "炉子不等人，契长约住船期",
+    "effects": {
+     "stats": {
+      "livelihood": -1,
+      "military": 2
+     },
+     "states": [
+      {
+       "id": "series.sea_raiders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "xianshi",
+    "label": "现用现买。",
+    "hint": "价钱随行就市，不下死契",
+    "effects": {
+     "stats": {
+      "livelihood": 1
+     },
+     "wind": 1,
+     "personal": {
+      "faction_alarm": 1
+     }
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "管工业的首长",
+    "line": "雷州炭商递了契：每月三条船的焦炭，要长约。坩埚炉和锅驼机都是吃炭的老虎——断一天，炉子就凉一炉。"
+   }
+  ]
+ },
+ {
+  "id": "EXT-032",
+  "pool": "external",
+  "series": "sea.raiders",
+  "type": "daily",
+  "title": "海图与引水",
+  "source": {
+   "kind": "force",
+   "id": "locals",
+   "name": "本地村社"
+  },
+  "tags": [
+   "疍家",
+   "航海"
+  ],
+  "requires": [
+   {
+    "state": "series.sea_raiders",
+    "gte": 2
+   }
+  ],
+  "excludes": [],
+  "weight": 14,
+  "options": {
+   "left": {
+    "id": "gaumu",
+    "label": "重金收海图。",
+    "hint": "哪片海有暗礁，全在纸上",
+    "effects": {
+     "stats": {
+      "military": 3,
+      "livelihood": -1
+     },
+     "forces": {
+      "guard": {
+       "influence": 2
+      }
+     },
+     "states": [
+      {
+       "id": "series.sea_raiders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "linglei",
+    "label": "以礼相待。",
+    "hint": "疍家认人，不认钱",
+    "effects": {
+     "stats": {
+      "people": 2,
+      "military": 1
+     },
+     "forces": {
+      "locals": {
+       "satisfaction": 4
+      }
+     },
+     "states": [
+      {
+       "id": "series.sea_raiders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "疍家老船主",
+    "line": "首长，我们疍家几代人跑这片海，哪块礁几时淹水，心里都有数。您要海图，我们带着兄弟们给您画——只求一件事，往后疍家的船，别再受人欺负。"
+   }
+  ]
+ },
+ {
+  "id": "EXT-033",
+  "pool": "external",
+  "series": "sea.raiders",
+  "type": "daily",
+  "title": "江口沉船打捞",
+  "source": {
+   "kind": "force",
+   "id": "trade",
+   "name": "商贸网络"
+  },
+  "tags": [
+   "打捞",
+   "外番"
+  ],
+  "requires": [
+   {
+    "state": "series.sea_raiders",
+    "gte": 3
+   }
+  ],
+  "excludes": [],
+  "weight": 12,
+  "options": {
+   "left": {
+    "id": "dalao",
+    "label": "雇人打捞。",
+    "hint": "一船番银，抵半年税费",
+    "effects": {
+     "stats": {
+      "livelihood": 3,
+      "council": 1
+     },
+     "wind": 1,
+     "days": 2,
+     "forces": {
+      "trade": {
+       "influence": 3
+      }
+     },
+     "states": [
+      {
+       "id": "series.sea_raiders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "bulao",
+    "label": "不碰。",
+    "hint": "沉船之乡，是非之地",
+    "effects": {
+     "wind": -1
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "澳门通事",
+    "line": "佛郎机人的旧档里记着：万历年有条西洋大船沉在文澜江口外，压舱的白银没来得及搬。疍家的水鬼说，退大潮时桅杆尖还能看见。"
+   }
+  ]
+ },
+ {
+  "id": "EXT-034",
+  "pool": "external",
+  "series": "sea.raiders",
+  "type": "backlash",
+  "title": "海寇的报复",
+  "source": {
+   "kind": "force",
+   "id": "guard",
+   "name": "保卫系统"
+  },
+  "tags": [
+   "海寇",
+   "战事"
+  ],
+  "requires": [
+   {
+    "state": "pirate.hostile",
+    "equals": true
+   },
+   {
+    "state": "series.sea_raiders",
+    "gte": 4
+   }
+  ],
+  "excludes": [],
+  "weight": 26,
+  "options": {
+   "left": {
+    "id": "jiaozhan",
+    "label": "海口决战。",
+    "hint": "把刘香的爪子，斩在滩头",
+    "effects": {
+     "stats": {
+      "military": 6,
+      "people": -2,
+      "livelihood": -2
+     },
+     "wind": -3,
+     "days": 3,
+     "forces": {
+      "guard": {
+       "influence": 6
+      }
+     },
+     "states": [
+      {
+       "id": "series.sea_raiders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "suoshou",
+    "label": "锁港死守。",
+    "hint": "船不出港，寇不敢深入",
+    "effects": {
+     "stats": {
+      "military": 1,
+      "livelihood": -4
+     },
+     "wind": 1,
+     "forces": {
+      "trade": {
+       "satisfaction": -4
+      }
+     },
+     "states": [
+      {
+       "id": "series.sea_raiders",
+       "op": "add",
+       "value": 1
+      }
+     ]
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "管海防的首长",
+    "line": "刘香的船队到了外海，八条快船，两条大夹板。探马报：他们在等夜潮。博铺的盐船和糖船，全堵在港里。"
+   }
+  ]
+ },
+ {
+  "id": "EXT-035",
+  "pool": "external",
+  "series": "external.locals",
+  "type": "crisis",
+  "title": "脚气病",
+  "source": {
+   "kind": "force",
+   "id": "naturalized",
+   "name": "归化民组织"
+  },
+  "tags": [
+   "疫病",
+   "伙食"
+  ],
+  "requires": [
+   {
+    "state": "civil.captives_arrived",
+    "equals": true
+   },
+   {
+    "day": {
+     "gte": 35
+    }
+   }
+  ],
+  "excludes": [],
+  "weight": 18,
+  "options": {
+   "left": {
+    "id": "caomi",
+    "label": "换糙米。",
+    "hint": "米糠里有救命的玩意",
+    "effects": {
+     "stats": {
+      "people": 2,
+      "livelihood": -1
+     },
+     "days": 1,
+     "forces": {
+      "naturalized": {
+       "satisfaction": 2
+      }
+     },
+     "states": [
+      {
+       "id": "health.beriberi",
+       "op": "set",
+       "value": true
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "jingmi",
+    "label": "再看看。",
+    "hint": "许是天热，歇歇就好",
+    "effects": {
+     "stats": {
+      "people": -4,
+      "livelihood": 1
+     },
+     "forces": {
+      "naturalized": {
+       "satisfaction": -3
+      }
+     }
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "医务所的医生",
+    "line": "营里病倒二十多人，脚肿得发亮，走不了路。这不是瘴气——是白米饭吃出来的病。米碾得太白，把身体要的东西碾掉了。"
+   },
+   {
+    "who": "医务所的医生",
+    "line": "糙米、豆子、糠麸掺着吃，半月就好。只是……糙米拉嗓子，怕有人骂。"
+   }
+  ]
+ },
+ {
+  "id": "EXT-036",
+  "pool": "external",
+  "series": "external.locals",
+  "type": "crisis",
+  "title": "种痘",
+  "source": {
+   "kind": "force",
+   "id": "locals",
+   "name": "本地村社"
+  },
+  "tags": [
+   "疫病",
+   "种痘"
+  ],
+  "requires": [
+   {
+    "state": "school.established",
+    "equals": true
+   },
+   {
+    "day": {
+     "gte": 45
+    }
+   }
+  ],
+  "excludes": [],
+  "weight": 18,
+  "options": {
+   "left": {
+    "id": "zhongdou",
+    "label": "全营种痘。",
+    "hint": "天花开不了口，人活得下来",
+    "effects": {
+     "stats": {
+      "people": 4,
+      "livelihood": -1
+     },
+     "days": 2,
+     "forces": {
+      "locals": {
+       "satisfaction": 3
+      }
+     },
+     "states": [
+      {
+       "id": "health.vaccinated",
+       "op": "set",
+       "value": true
+      }
+     ]
+    }
+   },
+   "right": {
+    "id": "ziyuan",
+    "label": "由他们。",
+    "hint": "牛痘是洋法子，村里不敢信",
+    "effects": {
+     "stats": {
+      "people": -2
+     },
+     "wind": 1
+    }
+   }
+  },
+  "lines": [
+   {
+    "who": "医务所的医生",
+    "line": "邻村出了天花，一家死了三个娃。咱们的人胳膊上种的牛痘都验过了，一个没染。村里人跪在医务所门口，求给娃也种一个。"
+   }
+  ]
+ }
 ]
