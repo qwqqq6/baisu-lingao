@@ -41,7 +41,7 @@
 - **走向未来结局**：requires 支持 `{"usedRatio": {"gte": 0.6}}`（叙事池消耗比=已批常规卡/常规池总量，opening/succession/downfall 不计）；CORE-028《案头薄了》据此在叙事将尽时呈上，批「未完待续」触发 `ending: "future"`（ENDING_TEXTS.future + 专属朝阳背景 end-future.png），批「合卷」则继续游玩（一次性卡）。卡池扩充后该阈值自动伸缩，无需改数。
 - 变体 `when` 支持 `ruler`、`chance`、`tagsAny`、`conditions`（通用条件数组），kind 分 character/force/stage/history 四类；一次只应用一个变体。
 - followups 写在选项层（不是 effects 内），结算后注入待处理队列；队列 FIFO，下一回合优先弹出（这是链式事件弧的实现方式：前因卡选完，后果卡立即顶上）；出队时重新校验 requires，且已消耗的非日常卡不重复出队。
-- 抽卡防重复三件套：每张卡记录出现次数（cardSeen，出现越多权重越低，除数 1+0.6×次数）、recentCards 冷却窗 8 张、相邻两张必不重复（lastDrawnCardId）。三者都随存档序列化。
+- 抽卡防重复（全部随存档序列化）：每张卡记录出现次数（cardSeen，出现越多权重越低；消耗卡除数 1+0.6×次数、日常卡 1+1.5×次数——日常可重出所以衰减更狠）、recentCards 冷却窗 18 张（日常卡近期出过的先剔除；系列内全被剔则该系列本轮轮空，只有全池所有系列都枯竭时才 relaxWindow 降级放行防死局）、相邻两张必不重复（lastDrawnCardId）、同系列连出 2 次后本轮硬排除（drawFromSeries 三级回退：排连出→不排→relax）。
 - 选项导致 boolean/set/immutable/terminal/enum/level 状态变化时，自动写「【此后】×××」进纪事（counter 不记，避免泄露隐藏压力）；这是"后果可见"的兜底机制，优先用 followup 链卡表达后果。
 - 公用卡只保留左右二选一；人物专属内容通过变体替换其中一侧或加提示（type=exclusive 的整卡专属为辅助手段）。
 - **批牍体是硬性文风**：卡面 text 一律是各口递上的呈文短笺（「呈：……请示下」「急呈：……」，两三行为止，禁止长篇叙事）；选项 label 是首长的批复指令（短促、可执行）；结算反馈 = 「照批」+ 四柱增减 + 至多两条隐晦注脚，长反馈只进纪事。改文案时保持这个体例。

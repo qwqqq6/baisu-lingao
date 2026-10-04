@@ -28,10 +28,10 @@ import { buildReport } from "./report.js";
 // 兼容再导出：UI 与测试从 game.js 取结局文案
 export { FALL_REASONS, ENDING_TEXTS, COLLAPSE_TEXTS };
 
-/** 日常卡冷却窗（最近 N 张不重复）。 */
-const RECENT_CARDS_LIMIT = 8;
+/** 日常卡冷却窗（最近 N 张不重复；小卡池保底见 pickCardInSeries 的降级过滤）。 */
+const RECENT_CARDS_LIMIT = 18;
 /** 近期系列降权窗。 */
-const RECENT_SERIES_LIMIT = 4;
+const RECENT_SERIES_LIMIT = 6;
 /** 阶段报告间隔（天）。 */
 const REPORT_INTERVAL = 10;
 /** 纪事上限。 */
@@ -295,14 +295,25 @@ export class Game {
    */
   drawFromSeries(ctx) {
     const runtime = this.runtimeForDraw();
-    const weighted = [];
-    for (const series of availableSeries(this.content.series, ctx)) {
-      const card = pickCardInSeries(series, this.content.cards, ctx, runtime);
-      if (!card) continue;
-      const { weight } = applySeriesWeight(series, ctx, runtime);
-      weighted.push({ series, card, weight });
-    }
-    const picked = weightedPick(weighted);
+    // 已连出两次的系列本轮硬排除（避免同主题连环霸场）
+    const streakSeries = this.recentSeries[0] != null && this.recentSeries[0] === this.recentSeries[1]
+      ? this.recentSeries[0]
+      : null;
+    const collect = (filterStreak, relaxWindow) => {
+      const weighted = [];
+      for (const series of availableSeries(this.content.series, ctx)) {
+        if (filterStreak && series.id === streakSeries) continue;
+        const card = pickCardInSeries(series, this.content.cards, ctx, runtime, { relaxWindow });
+        if (!card) continue;
+        const { weight } = applySeriesWeight(series, ctx, runtime);
+        weighted.push({ series, card, weight });
+      }
+      return weighted;
+    };
+    // 三级回退：排除连出系列 → 不排除 → 全池枯竭时放宽冷却窗（防死局）
+    const picked = weightedPick(collect(true, false))
+      || weightedPick(collect(false, false))
+      || weightedPick(collect(false, true));
     if (!picked) {
       this.pushLog("各处暂时风平浪静……", "system");
       return false;

@@ -132,7 +132,7 @@ export function applySeriesWeight(series, ctx, runtime) {
   if (stall !== undefined && stall >= 6) weight += 4;
 
   // 近期重复系列降权
-  if ((runtime.recentSeries || []).includes(series.id)) weight -= 8;
+  if ((runtime.recentSeries || []).includes(series.id)) weight -= 14;
 
   return { series, weight: Math.max(1, weight) };
 }
@@ -144,25 +144,35 @@ export function applySeriesWeight(series, ctx, runtime) {
  * @param {Array<*>} cards
  * @param {DrawContext} ctx
  * @param {DrawRuntime} runtime
+ * @param {{relaxWindow?: boolean}} [opts] relaxWindow=true 时忽略冷却窗
+ *        （仅在全池所有系列都无新鲜卡、面临空转时由调用方启用）
  * @returns {*} 被选中的卡；系列内无可用卡为 null
  */
-export function pickCardInSeries(series, cards, ctx, runtime) {
-  const candidates = cards.filter((card) => {
+export function pickCardInSeries(series, cards, ctx, runtime, opts = {}) {
+  const base = cards.filter((card) => {
     if (card.series !== series.id) return false;
     if (FORCED_TYPES.has(card.type)) return false;
     if (isConsumable(card) && runtime.usedCards.has(card.id)) return false;
-    if (!isConsumable(card) && (runtime.recentCards || []).includes(card.id)) return false;
     if (runtime.lastCardId && card.id === runtime.lastCardId) return false;
     if (!(card.requires || []).every((c) => matchesWithContext(c, ctx))) return false;
     if ((card.excludes || []).some((c) => matchesWithContext(c, ctx))) return false;
     return true;
   });
+  if (!base.length) return null;
+  // 冷却窗：日常卡近期出过的剔除；系列内全被剔则本轮轮空（return null），
+  // 是否放宽由调用方在"全池枯竭"时统一决定
+  const window = runtime.recentCards || [];
+  const candidates = opts.relaxWindow
+    ? base
+    : base.filter((c) => isConsumable(c) || !window.includes(c.id));
   if (!candidates.length) return null;
   const topPriority = Math.min(...candidates.map(priorityOf));
   const group = candidates.filter((c) => priorityOf(c) === topPriority);
   const weighted = group.map((card) => {
     const seen = (runtime.cardSeen && runtime.cardSeen[card.id]) || 0;
-    return { card, weight: (card.weight || 1) / (1 + 0.6 * seen) };
+    // 日常卡会反复进入牌桌，出现越多衰减越狠，避免高权重日常卡霸场
+    const decay = isConsumable(card) ? 0.6 : 1.5;
+    return { card, weight: (card.weight || 1) / (1 + decay * seen) };
   });
   const picked = weightedPick(weighted);
   return picked ? picked.card : null;

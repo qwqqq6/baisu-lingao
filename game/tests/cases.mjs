@@ -188,6 +188,49 @@ export function registerTests(t) {
     }
   });
 
+  t("抽卡：冷却窗内日常卡轮空，relaxWindow 降级放行", () => {
+    const fx = makeFixture();
+    const s = new StateManager();
+    s.loadDefinitions(fx.states);
+    s.set("core.pillar.council", 40); // 危机卡条件不满足
+    const forces = new ForcesManager();
+    forces.loadDefinitions(fx.forces);
+    const used = new Set(["T-KEY"]);
+    const ctx = buildDrawContext({ state: s, forces, day: 5, usedCards: used });
+    const series = fx.series[0];
+    const mkRuntime = () => ({ usedCards: used, recentCards: ["T-DAILY", "T-DAILY-2"], recentSeries: [], seriesStall: {}, forces, characterManager: new CharacterManager() });
+    // 全部日常卡都在冷却窗内：正常模式返回 null（系列轮空，交由别的系列顶上）
+    assert.equal(pickCardInSeries(series, fx.cards, ctx, mkRuntime()), null, "窗内日常卡应轮空");
+    // relaxWindow（全池枯竭时的降级）：放行，且仍排除已消耗卡
+    for (let i = 0; i < 50; i++) {
+      const relaxed = pickCardInSeries(series, fx.cards, ctx, mkRuntime(), { relaxWindow: true });
+      assert.ok(relaxed, "relaxWindow 下必须能抽到");
+      assert.ok(relaxed.type === "daily", "只能抽到未消耗的日常卡，实际抽到 " + relaxed.id);
+    }
+  });
+
+  t("抽卡：日常卡出现次数衰减权重（cardSeen 越多越难再出）", () => {
+    const fx = makeFixture();
+    const s = new StateManager();
+    s.loadDefinitions(fx.states);
+    s.set("core.pillar.council", 40); // 危机卡条件不满足；key 已消耗 → 候选只剩两张同权重日常卡
+    const forces = new ForcesManager();
+    forces.loadDefinitions(fx.forces);
+    const used = new Set(["T-KEY"]);
+    const ctx = buildDrawContext({ state: s, forces, day: 5, usedCards: used });
+    const series = fx.series[0];
+    const mk = (seen) => ({ usedCards: used, recentCards: [], recentSeries: [], seriesStall: {}, forces, characterManager: new CharacterManager(), cardSeen: seen });
+    const fresh = mk({});
+    const seen5 = mk({ "T-DAILY": 5 }); // 衰减 12/(1+1.5*5)≈1.4，远低于 T-DAILY-2 的 12
+    let freshHit = 0, seenHit = 0;
+    for (let i = 0; i < 300; i++) {
+      if (pickCardInSeries(series, fx.cards, ctx, fresh)?.id === "T-DAILY") freshHit += 1;
+      if (pickCardInSeries(series, fx.cards, ctx, seen5)?.id === "T-DAILY") seenHit += 1;
+    }
+    assert.ok(freshHit > 120, `无衰减时两卡应约各半（实际 ${freshHit}/300）`);
+    assert.ok(seenHit < 80, `衰减 5 次后中率应压到三成以下（实际 ${seenHit}/300）`);
+  });
+
   t("变体：人物变体按 chance/replaceOption 生效", () => {
     const fx = makeFixture();
     const s = new StateManager();
